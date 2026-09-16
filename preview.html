@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antonio Calero — Portfolio 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Special+Gothic:wght@700&family=Special+Gothic+Expanded+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-background: #FAFAFA;
+      --color-foreground: #1A1A1A;
+      --color-border: #E0E0E0;
+      --color-muted: #E5E5E5;
+      --color-muted-foreground: #666666;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar { display: none; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FAFAFA;
+      color: #1A1A1A;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    .space-mono {
+      font-family: "Space Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #666666;
+      line-height: 1.5;
+    }
+    .home-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 80px;
+      background-color: #FAFAFA;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .home-nav.scrolled {
+      border-bottom: 1px solid #E0E0E0;
+    }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-link {
+      position: relative;
+      text-decoration: none;
+      font-family: "Space Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #666666;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background-color: #1A1A1A;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .masthead-pad {
+      padding-top: 88px;
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+    .title-banner-wrap {
+      width: 100%;
+      overflow: hidden;
+    }
+    .title-banner {
+      font-family: "Special Gothic Expanded One", sans-serif;
+      font-weight: 400;
+      font-size: clamp(48px, 9.8vw, 136px);
+      letter-spacing: -0.01em;
+      line-height: 0.88;
+      color: #111111;
+      display: block;
+      white-space: nowrap;
+      margin: 8px 0 16px 0;
+      text-align: center;
+    }
+    .infobar {
+      border-top: 1px solid #111111;
+      border-bottom: 1px solid #111111;
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      align-items: center;
+    }
+    .infobar-col {
+      padding: 10px 0;
+      border-right: 1px solid #E0E0E0;
+      padding-right: 20px;
+    }
+    .infobar-col.second {
+      padding-left: 20px;
+    }
+    .news-grid-section {
+      padding: 40px 80px 96px;
+    }
+    .news-row-a {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0 32px;
+      margin-bottom: 48px;
+    }
+    .news-row-b {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0 32px;
+    }
+    .story-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      cursor: pointer;
+    }
+    .story-card-img-wrap {
+      overflow: hidden;
+      background-color: #E5E5E5;
+      margin-bottom: 16px;
+    }
+    .story-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(12%) contrast(1.04);
+      transition: filter 0.5s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .story-card:hover .story-card-img {
+      filter: grayscale(0%) contrast(1.04);
+      transform: scale(1.04);
+    }
+    .story-card-meta {
+      padding-top: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .story-card-title {
+      font-family: "Special Gothic", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: #111111;
+      display: inline-block;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 1px;
+      transition: border-color 0.25s ease;
+    }
+    .story-card:hover .story-card-title {
+      border-bottom-color: #111111;
+    }
+    .arrow-hover {
+      margin-left: 8px;
+      opacity: 0;
+      transform: translateX(-4px);
+      display: inline-block;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .story-card:hover .arrow-hover {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .cta-pad {
+      background-color: #111111;
+      padding: 96px 80px;
+    }
+    .cta-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .cta-heading {
+      font-family: "Special Gothic Expanded One", sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 5.5vw, 88px);
+      letter-spacing: -0.01em;
+      line-height: 0.92;
+      color: #FAFAFA;
+      display: block;
+      white-space: nowrap;
+    }
+    .cta-btn {
+      width: 72px;
+      height: 72px;
+      border: 1px solid #333333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FAFAFA;
+      font-size: 28px;
+      text-decoration: none;
+      flex-shrink: 0;
+      margin-bottom: 8px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .cta-btn:hover {
+      background-color: #FAFAFA;
+      color: #111111;
+    }
+    .footer-bar {
+      padding: 20px 80px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #E0E0E0;
+    }
+
+    /* Intro Overlay */
+    #introOverlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background-color: #FAFAFA;
+      user-select: none;
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #counterBox {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #introTitleBox {
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      transform: translateY(-50%);
+      display: flex; justify-content: center; align-items: center;
+      padding-top: 0;
+      will-change: top, transform;
+    }
+    #scrollHint {
+      position: absolute; bottom: 8vh; left: 0; right: 0;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .bounce-arrow {
+      animation: bounceY 1.6s ease-in-out infinite;
+    }
+    @keyframes bounceY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    @media (max-width: 768px) {
+      .home-nav, .masthead-pad, .news-grid-section, .cta-pad, .footer-bar {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+      }
+      .infobar {
+        grid-template-columns: 1fr;
+      }
+      .infobar-col {
+        border-right: none;
+        border-bottom: 1px solid #E0E0E0;
+        padding-left: 0 !important;
+      }
+      .news-row-a, .news-row-b {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+      .story-card {
+        grid-column: span 12 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Screen Overlay -->
+  <div id="introOverlay">
+    <!-- 0-100% Counter -->
+    <div id="counterBox">
+      <span id="counterText" class="space-mono" style="font-size: 11px; letter-spacing: 0.06em; color: #111111;">000%</span>
+    </div>
+
+    <!-- 100% Centered Title -->
+    <div id="introTitleBox" class="masthead-pad" style="display: none;">
+      <span class="title-banner" style="width: 100%; text-align: center;">ANTONIO CALERO</span>
+    </div>
+
+    <!-- Scroll Hint -->
+    <div id="scrollHint">
+      <span class="space-mono" style="font-size: 10px; letter-spacing: 0.12em; color: #AAAAAA;">SCROLL</span>
+      <span class="bounce-arrow" style="color: #AAAAAA; fontSize: 14px;">↓</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="home-nav" id="mainNav">
+    <span class="space-mono" style="color: #111111;">Portfolio 2026</span>
+    <div class="nav-links">
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Masthead -->
+    <header class="masthead-pad">
+      <div style="border-top: 2px solid #111111; padding-top: 12px; margin-bottom: 8px;">
+        <span class="space-mono" style="color: #AAAAAA;">Est. 2020</span>
+      </div>
+      <div class="title-banner-wrap">
+        <h1 id="homeTitle" class="title-banner">ANTONIO CALERO</h1>
+      </div>
+      <div class="infobar">
+        <div class="infobar-col">
+          <span class="space-mono">UI/UX & Product Designer</span>
+        </div>
+        <div class="infobar-col second">
+          <span class="space-mono">Madrid, España</span>
+        </div>
+        <a href="#contact" style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #111111; text-decoration: none; padding: 10px 0 10px 20px; display: flex; align-items: center; gap: 6px;">
+          Contacto →
+        </a>
+      </div>
+    </header>
+
+    <!-- News Grid / Projects -->
+    <section id="work" class="news-grid-section">
+      <div class="news-row-a">
+        <!-- Project 001 -->
+        <article class="story-card" style="grid-column: span 7;">
+          <div class="story-card-img-wrap" style="height: 440px;">
+            <img class="story-card-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&h=600&fit=crop&auto=format" alt="Agora">
+          </div>
+          <div class="story-card-meta">
+            <span class="space-mono" style="color: #CCCCCC;">001</span>
+            <div style="display: flex; gap: 12px;">
+              <span class="space-mono">Product Design</span>
+              <span class="space-mono">Web & Mobile</span>
+              <span class="space-mono" style="color: #CCCCCC;">2026</span>
+            </div>
+          </div>
+          <span class="story-card-title" style="font-size: clamp(28px, 3vw, 48px);">
+            Agora <span class="arrow-hover">→</span>
+          </span>
+        </article>
+
+        <!-- Project 002 -->
+        <article class="story-card" style="grid-column: span 5;">
+          <div class="story-card-img-wrap" style="height: 440px;">
+            <img class="story-card-img" src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=700&h=600&fit=crop&auto=format" alt="Lavandería Bizkaia">
+          </div>
+          <div class="story-card-meta">
+            <span class="space-mono" style="color: #CCCCCC;">002</span>
+            <div style="display: flex; gap: 12px;">
+              <span class="space-mono">Brand Identity</span>
+              <span class="space-mono">Signage</span>
+              <span class="space-mono" style="color: #CCCCCC;">2025</span>
+            </div>
+          </div>
+          <span class="story-card-title" style="font-size: clamp(28px, 3vw, 48px);">
+            Lavandería Bizkaia <span class="arrow-hover">→</span>
+          </span>
+        </article>
+      </div>
+
+      <div class="news-row-b">
+        <!-- Project 003 -->
+        <article class="story-card" style="grid-column: span 4;">
+          <div class="story-card-img-wrap" style="height: 300px;">
+            <img class="story-card-img" src="https://images.unsplash.com/photo-1759563874672-e7dfb1ca3f73?w=600&h=440&fit=crop&auto=format" alt="Palomar Studio">
+          </div>
+          <div class="story-card-meta">
+            <span class="space-mono" style="color: #CCCCCC;">003</span>
+            <div style="display: flex; gap: 12px;">
+              <span class="space-mono">Brand</span>
+              <span class="space-mono">Packaging</span>
+              <span class="space-mono" style="color: #CCCCCC;">2023</span>
+            </div>
+          </div>
+          <span class="story-card-title" style="font-size: clamp(20px, 2vw, 30px);">
+            Palomar Studio <span class="arrow-hover">→</span>
+          </span>
+          <p class="space-mono" style="color: #CCCCCC; margin-top: 8px; font-size: 10px;">Próximamente</p>
+        </article>
+
+        <!-- Project 004 -->
+        <article class="story-card" style="grid-column: span 4;">
+          <div class="story-card-img-wrap" style="height: 300px;">
+            <img class="story-card-img" src="https://images.unsplash.com/photo-1558655146-6c222b05fce4?w=600&h=440&fit=crop&auto=format" alt="Módulo App">
+          </div>
+          <div class="story-card-meta">
+            <span class="space-mono" style="color: #CCCCCC;">004</span>
+            <div style="display: flex; gap: 12px;">
+              <span class="space-mono">Product</span>
+              <span class="space-mono">UI/UX</span>
+              <span class="space-mono" style="color: #CCCCCC;">2024</span>
+            </div>
+          </div>
+          <span class="story-card-title" style="font-size: clamp(20px, 2vw, 30px);">
+            Módulo App <span class="arrow-hover">→</span>
+          </span>
+          <p class="space-mono" style="color: #CCCCCC; margin-top: 8px; font-size: 10px;">Próximamente</p>
+        </article>
+
+        <!-- Project 005 -->
+        <article class="story-card" style="grid-column: span 4;">
+          <div class="story-card-img-wrap" style="height: 300px;">
+            <img class="story-card-img" src="https://images.unsplash.com/photo-1658863025658-4a259cc68fc9?w=600&h=440&fit=crop&auto=format" alt="Tipo Libre">
+          </div>
+          <div class="story-card-meta">
+            <span class="space-mono" style="color: #CCCCCC;">005</span>
+            <div style="display: flex; gap: 12px;">
+              <span class="space-mono">Editorial</span>
+              <span class="space-mono">Typography</span>
+              <span class="space-mono" style="color: #CCCCCC;">2024</span>
+            </div>
+          </div>
+          <span class="story-card-title" style="font-size: clamp(20px, 2vw, 30px);">
+            Tipo Libre <span class="arrow-hover">→</span>
+          </span>
+          <p class="space-mono" style="color: #CCCCCC; margin-top: 8px; font-size: 10px;">Próximamente</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" style="border-top: 1px solid #E0E0E0;">
+      <div class="cta-pad">
+        <div class="cta-inner">
+          <div>
+            <p class="space-mono" style="color: #555555; margin-bottom: 28px;">Hablemos</p>
+            <span class="cta-heading">TRABAJEMOS JUNTOS</span>
+          </div>
+          <a href="#contact" class="cta-btn" aria-label="Ir a contacto">→</a>
+        </div>
+        <div style="margin-top: 64px; padding-top: 24px; border-top: 1px solid #222222; display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div style="display: flex; gap: 24px;">
+            <a href="https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/" target="_blank" class="nav-link" style="color: #555555;">LinkedIn</a>
+            <a href="https://www.behance.net/antoniocalero" target="_blank" class="nav-link" style="color: #555555;">Behance</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span class="space-mono">Madrid, España 2026</span>
+        <span class="space-mono">Antonio Calero Portfolio</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const introOverlay = document.getElementById('introOverlay');
+    const counterBox = document.getElementById('counterBox');
+    const counterText = document.getElementById('counterText');
+    const introTitleBox = document.getElementById('introTitleBox');
+    const scrollHint = document.getElementById('scrollHint');
+    const homeTitle = document.getElementById('homeTitle');
+
+    // Prevent scroll during intro
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
+
+    // 1. Counter 0 -> 100%
+    let start = null;
+    const duration = 1100;
+    function tick(ts) {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const pct = Math.floor(eased * 100);
+      counterText.textContent = String(pct).padStart(3, ' ') + '%';
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        counterText.textContent = '100%';
+        setTimeout(showCenteredName, 200);
+      }
+    }
+    requestAnimationFrame(tick);
+
+    // 2. Show 100% dead-centered name & scroll hint
+    function showCenteredName() {
+      counterBox.style.display = 'none';
+      introTitleBox.style.display = 'flex';
+      scrollHint.style.opacity = '1';
+
+      const onScroll = () => {
+        window.removeEventListener('wheel', onScroll);
+        window.removeEventListener('touchmove', onScroll);
+        window.removeEventListener('keydown', onScroll);
+        glideUpToMasthead();
+      };
+      window.addEventListener('wheel', onScroll, { passive: true, once: true });
+      window.addEventListener('touchmove', onScroll, { passive: true, once: true });
+      window.addEventListener('keydown', onScroll, { once: true });
+    }
+
+    // 3. Smooth glide into the exact masthead position
+    function glideUpToMasthead() {
+      scrollHint.style.opacity = '0';
+
+      // Measure target position
+      let targetY = 127;
+      if (homeTitle) {
+        const rect = homeTitle.getBoundingClientRect();
+        if (rect.top > 0) targetY = rect.top;
+      }
+
+      // Animate top and transform smoothly
+      introTitleBox.style.transition = 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      introTitleBox.style.top = targetY + 'px';
+      introTitleBox.style.transform = 'translateY(0%)';
+
+      // Fade overlay smoothly to reveal the home
+      setTimeout(() => {
+        introOverlay.style.opacity = '0';
+      }, 550);
+
+      // Clean up
+      setTimeout(() => {
+        document.body.style.overflow = '';
+        introOverlay.remove();
+      }, 1250);
+    }
+  </script>
+</body>
+</html>
