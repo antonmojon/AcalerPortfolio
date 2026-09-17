@@ -63,7 +63,7 @@ function AgoraNav() {
       >
         {t('nav.back')}
       </Link>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+      <div className="agora-nav-links" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         {[
           { label: t('nav.projects'), href: '/#work' },
           { label: t('nav.about'), href: '/about' },
@@ -72,7 +72,7 @@ function AgoraNav() {
           <Link
             key={label}
             to={href}
-            className="nav-link"
+            className="nav-link agora-nav-item"
             style={{
               fontFamily: '"Space Mono", monospace',
               fontSize: '12px',
@@ -95,7 +95,7 @@ function AgoraHero() {
   const { t } = useLanguage();
   return (
     <section
-      className="section-pad w-full"
+      className="section-pad w-full agora-hero-section"
       style={{
         paddingTop: '120px',
         paddingLeft: '80px',
@@ -158,11 +158,11 @@ function AgoraOverview() {
       }}
     >
       <div
-        className="editorial-grid grid w-full"
+        className="editorial-grid grid w-full agora-overview-grid"
         style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px' }}
       >
         {/* Left: 4 cols — metadata */}
-        <div className="reveal-left" style={{ gridColumn: 'span 4' }}>
+        <div className="reveal-left agora-overview-meta" style={{ gridColumn: 'span 4' }}>
           <div style={{ paddingTop: '6px' }}>
             <p
               className="mb-8"
@@ -226,7 +226,7 @@ function AgoraOverview() {
 
         {/* Right: 8 cols — headline & executive brief */}
         <div
-          className="reveal stagger-children"
+          className="reveal stagger-children agora-overview-headline"
           style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '20px' }}
         >
           <p
@@ -371,7 +371,7 @@ function AgoraProblemSection() {
             loading="lazy"
           />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px', flexWrap: 'wrap', gap: '8px' }}>
           <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
             {block.caption || '001 · Espacio de Trabajo Web Desktop'}
           </span>
@@ -481,7 +481,7 @@ function AgoraResearchSection() {
             {/* Insights contrapuestos en lista editorial suiza sin líneas */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '8px' }}>
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px', flexWrap: 'wrap', gap: '8px' }}>
                   <span style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
                     {researchInsights.facultyTitle}
                   </span>
@@ -495,7 +495,7 @@ function AgoraResearchSection() {
               </div>
 
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px', flexWrap: 'wrap', gap: '8px' }}>
                   <span style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
                     {researchInsights.studentsTitle}
                   </span>
@@ -530,7 +530,7 @@ function AgoraResearchSection() {
                 loading="lazy"
               />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', flexWrap: 'wrap', gap: '8px' }}>
               <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
                 {block.caption || '002 · Arquitectura UX & Flujo de Entregas'}
               </span>
@@ -641,7 +641,7 @@ function AgoraSolutionSection() {
 
       {/* Demostración en Vídeo 16:9 integrada directamente en la solución */}
       <div className="reveal" style={{ marginTop: '36px', marginBottom: '64px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
           <span
             style={{
               fontFamily: '"Special Gothic", sans-serif',
@@ -723,7 +723,7 @@ function AgoraSolutionSection() {
             loading="lazy"
           />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px', flexWrap: 'wrap', gap: '8px' }}>
           <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
             {block.caption || '003 · Tokens de Diseño & UI Kit Minimalista'}
           </span>
@@ -779,6 +779,8 @@ function AgoraContinuousReelSection() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '12px',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -1003,8 +1005,8 @@ function AgoraLearningsSection() {
 
       {/* Pantalla doble en paralelo (2-up) */}
       <div
-        className="grid w-full mb-16"
-        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}
+        className="grid w-full mb-16 agora-2up-grid"
+        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '32px' }}
       >
         {[cardA, cardB].map((card) => (
           <div key={card.label} className="reveal">
@@ -1026,7 +1028,7 @@ function AgoraLearningsSection() {
                 loading="lazy"
               />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px', flexWrap: 'wrap', gap: '8px' }}>
               <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', color: 'var(--text-secondary)' }}>
                 {card.label}
               </span>
@@ -1128,7 +1130,7 @@ function NextProjectBlock() {
       }}
     >
       <Link
-        to="/lavanderia"
+        to="/lavanderia-bizkaia"
         className="next-project-link block group"
         style={{ textDecoration: 'none' }}
       >
@@ -1146,16 +1148,17 @@ function NextProjectBlock() {
         >
           {t('case.next_project')}
         </p>
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '32px' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px' }}>
           <p
             className="np-title"
             style={{
               fontFamily: '"Special Gothic Expanded One", sans-serif',
               fontWeight: 400,
-              fontSize: 'clamp(44px, 6.5vw, 96px)',
+              fontSize: 'clamp(28px, 6vw, 96px)',
               letterSpacing: '-0.01em',
               lineHeight: '0.92',
               color: 'var(--hero-title-color)',
+              wordBreak: 'break-word',
             }}
           >
             LAVANDERÍA BIZKAIA

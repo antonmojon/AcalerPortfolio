@@ -728,3 +728,85 @@ body {
   background: var(--accent-color);
   animation: swissLoaderProgress 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+
+/* ─── Agora Case Study Responsive Rules ──────────────────────── */
+@media (max-width: 1000px) {
+  .agora-overview-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+  .agora-overview-headline {
+    order: 1 !important;
+  }
+  .agora-overview-meta {
+    order: 2 !important;
+    margin-top: 8px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navigation */
+  .agora-nav-item {
+    display: none !important;
+  }
+  .agora-nav-links {
+    gap: 16px !important;
+  }
+
+  /* Section and Nav Paddings on Mobile */
+  .section-pad {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 48px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .nav-pad {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+  }
+
+  /* Hero Section */
+  .agora-hero-section {
+    padding-top: 88px !important;
+    padding-bottom: 48px !important;
+  }
+
+  /* Parallax Hero container mobile height */
+  .parallax-wrap {
+    height: clamp(300px, 46vh, 460px) !important;
+  }
+
+  /* 2-Up grid on mobile */
+  .agora-2up-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Screen Marquee Reel on Mobile */
+  .screen-marquee-card {
+    flex: 0 0 280px !important;
+  }
+  .screen-marquee-track {
+    gap: 20px !important;
+    animation-duration: 28s !important;
+  }
+  .screen-marquee-container {
+    padding: 16px 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-pad {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .nav-pad {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
