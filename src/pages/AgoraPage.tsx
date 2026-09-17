@@ -227,7 +227,7 @@ function AgoraOverview() {
         {/* Right: 8 cols — headline & executive brief */}
         <div
           className="reveal stagger-children"
-          style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '28px' }}
+          style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '20px' }}
         >
           <p
             className="font-normal"
@@ -235,24 +235,22 @@ function AgoraOverview() {
           >
             {t('case.agora.headline')}
           </p>
-          <div style={{ borderLeft: '2px solid var(--accent-color)', paddingLeft: '20px', paddingTop: '4px', paddingBottom: '4px' }}>
-            <p
-              style={{
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '12px',
-                lineHeight: '1.8',
-                color: 'var(--text-secondary)',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {language === 'es'
-                ? 'Auditoría Heurística · Encuestas a Docentes & Alumnado · Scoping MVP Web Desktop · Roadmap v2'
-                : language === 'fr'
-                ? 'Audit Heuristique · Enquêtes Enseignants & Étudiants · Cadrage MVP Desktop · Feuille de Route v2'
-                : 'Heuristic Audit · Dual Faculty & Student Discovery · Web Desktop MVP Scoping · Roadmap v2'}
-            </p>
-          </div>
+          <p
+            style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '11px',
+              lineHeight: '1.8',
+              color: 'var(--text-secondary)',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+            }}
+          >
+            {language === 'es'
+              ? 'Auditoría Heurística · Encuestas a Docentes & Alumnado · Scoping MVP Web Desktop · Roadmap v2'
+              : language === 'fr'
+              ? 'Audit Heuristique · Enquêtes Enseignants & Étudiants · Cadrage MVP Desktop · Feuille de Route v2'
+              : 'Heuristic Audit · Dual Faculty & Student Discovery · Web Desktop MVP Scoping · Roadmap v2'}
+          </p>
         </div>
       </div>
     </section>
@@ -318,35 +316,32 @@ function AgoraProblemSection() {
               {block.text}
             </p>
             {block.takeaway && (
-              <div
+              <p
                 style={{
-                  borderLeft: '2px solid var(--accent-color)',
-                  paddingLeft: '18px',
-                  paddingTop: '6px',
-                  paddingBottom: '6px',
-                  backgroundColor: 'var(--bg-surface)',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '12px',
+                  lineHeight: '1.7',
+                  color: 'var(--text-secondary)',
+                  fontStyle: 'italic',
                 }}
               >
-                <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '12px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
-                  «{block.takeaway}»
-                </p>
-              </div>
+                «{block.takeaway}»
+              </p>
             )}
             {block.tags && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
-                {block.tags.map((tag) => (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', marginTop: '4px' }}>
+                {block.tags.map((tag, i) => (
                   <span
                     key={tag}
                     style={{
                       fontFamily: '"Space Mono", monospace',
-                      fontSize: '10px',
+                      fontSize: '11px',
                       letterSpacing: '0.06em',
                       textTransform: 'uppercase',
-                      padding: '4px 10px',
-                      border: '1px solid var(--border-color)',
                       color: 'var(--text-secondary)',
                     }}
                   >
+                    {i > 0 && <span style={{ marginRight: '8px', opacity: 0.35 }}>/</span>}
                     {tag}
                   </span>
                 ))}
@@ -483,64 +478,32 @@ function AgoraResearchSection() {
               </p>
             </div>
 
-            {/* Dos tarjetas de insights contrapuestos */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '8px' }}>
-              <div
-                style={{
-                  padding: '20px',
-                  border: '1px solid var(--border-color)',
-                  backgroundColor: 'var(--bg-surface)',
-                  borderLeft: '3px solid var(--accent-color)',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '10px',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: 'var(--accent-color)',
-                    fontWeight: 700,
-                    display: 'block',
-                    marginBottom: '6px',
-                  }}
-                >
-                  {researchInsights.facultyLabel}
-                </span>
-                <p style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                  {researchInsights.facultyTitle}
-                </p>
-                <p style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+            {/* Insights contrapuestos en lista editorial suiza */}
+            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '16px' }}>
+              <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '18px', paddingBottom: '18px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                  <span style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
+                    {researchInsights.facultyTitle}
+                  </span>
+                  <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent-color)', fontWeight: 700 }}>
+                    {researchInsights.facultyLabel}
+                  </span>
+                </div>
+                <p style={{ fontSize: '14px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
                   {researchInsights.facultyText}
                 </p>
               </div>
 
-              <div
-                style={{
-                  padding: '20px',
-                  border: '1px solid var(--border-color)',
-                  backgroundColor: 'var(--bg-surface)',
-                  borderLeft: '3px solid var(--border-color)',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '10px',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-secondary)',
-                    fontWeight: 700,
-                    display: 'block',
-                    marginBottom: '6px',
-                  }}
-                >
-                  {researchInsights.studentsLabel}
-                </span>
-                <p style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                  {researchInsights.studentsTitle}
-                </p>
-                <p style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+              <div style={{ borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)', paddingTop: '18px', paddingBottom: '18px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                  <span style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
+                    {researchInsights.studentsTitle}
+                  </span>
+                  <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+                    {researchInsights.studentsLabel}
+                  </span>
+                </div>
+                <p style={{ fontSize: '14px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
                   {researchInsights.studentsText}
                 </p>
               </div>
@@ -641,35 +604,32 @@ function AgoraSolutionSection() {
               {block.text}
             </p>
             {block.takeaway && (
-              <div
+              <p
                 style={{
-                  borderLeft: '2px solid var(--accent-color)',
-                  paddingLeft: '18px',
-                  paddingTop: '6px',
-                  paddingBottom: '6px',
-                  backgroundColor: 'var(--bg-surface)',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '12px',
+                  lineHeight: '1.7',
+                  color: 'var(--text-secondary)',
+                  fontStyle: 'italic',
                 }}
               >
-                <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '12px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
-                  «{block.takeaway}»
-                </p>
-              </div>
+                «{block.takeaway}»
+              </p>
             )}
             {block.tags && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
-                {block.tags.map((tag) => (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center', marginTop: '4px' }}>
+                {block.tags.map((tag, i) => (
                   <span
                     key={tag}
                     style={{
                       fontFamily: '"Space Mono", monospace',
-                      fontSize: '10px',
+                      fontSize: '11px',
                       letterSpacing: '0.06em',
                       textTransform: 'uppercase',
-                      padding: '4px 10px',
-                      border: '1px solid var(--border-color)',
                       color: 'var(--text-secondary)',
                     }}
                   >
+                    {i > 0 && <span style={{ marginRight: '8px', opacity: 0.35 }}>/</span>}
                     {tag}
                   </span>
                 ))}
@@ -1027,19 +987,17 @@ function AgoraLearningsSection() {
               {block.text}
             </p>
             {block.takeaway && (
-              <div
+              <p
                 style={{
-                  borderLeft: '2px solid var(--accent-color)',
-                  paddingLeft: '18px',
-                  paddingTop: '6px',
-                  paddingBottom: '6px',
-                  backgroundColor: 'var(--bg-surface)',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '12px',
+                  lineHeight: '1.7',
+                  color: 'var(--text-secondary)',
+                  fontStyle: 'italic',
                 }}
               >
-                <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '12px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
-                  «{block.takeaway}»
-                </p>
-              </div>
+                «{block.takeaway}»
+              </p>
             )}
           </div>
         </div>
@@ -1091,12 +1049,12 @@ function AgoraLearningsSection() {
         ))}
       </div>
 
-      {/* Roadmap v2 Badges */}
+      {/* Roadmap v2 - Swiss Editorial Numbered Rows */}
       <div
         className="reveal"
         style={{
           borderTop: '1px solid var(--border-color)',
-          paddingTop: '32px',
+          paddingTop: '36px',
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',
@@ -1106,7 +1064,7 @@ function AgoraLearningsSection() {
           style={{
             fontFamily: '"Space Mono", monospace',
             fontSize: '11px',
-            letterSpacing: '0.1em',
+            letterSpacing: '0.12em',
             textTransform: 'uppercase',
             color: 'var(--accent-color)',
             fontWeight: 700,
@@ -1114,22 +1072,43 @@ function AgoraLearningsSection() {
         >
           {roadmapLabels.title}
         </span>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-          {roadmapLabels.items.map((item) => (
-            <span
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {roadmapLabels.items.map((item, idx) => (
+            <div
               key={item}
               style={{
-                fontFamily: '"Space Mono", monospace',
-                fontSize: '11px',
-                letterSpacing: '0.04em',
-                padding: '8px 16px',
-                border: '1px solid var(--border-color)',
-                backgroundColor: 'var(--bg-surface)',
-                color: 'var(--text-primary)',
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: '24px',
+                paddingTop: '14px',
+                paddingBottom: '14px',
+                borderBottom: '1px solid var(--border-color)',
               }}
             >
-              → {item}
-            </span>
+              <span
+                style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '11px',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.08em',
+                  width: '28px',
+                  flexShrink: 0,
+                }}
+              >
+                0{idx + 1}
+              </span>
+              <span
+                style={{
+                  fontFamily: '"Special Gothic", sans-serif',
+                  fontSize: '14px',
+                  letterSpacing: '0.02em',
+                  color: 'var(--text-primary)',
+                  fontWeight: 500,
+                }}
+              >
+                {item}
+              </span>
+            </div>
           ))}
         </div>
       </div>
