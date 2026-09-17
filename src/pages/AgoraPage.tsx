@@ -130,10 +130,9 @@ function AgoraHero() {
   );
 }
 
-function AgoraEditorial() {
-  const { t, getAgoraBlocks, language } = useLanguage();
+function AgoraOverview() {
+  const { t, language } = useLanguage();
   const ref = useScrollRevealAll();
-  const blocks = getAgoraBlocks();
 
   const disciplines = {
     es: ['Diseño de Producto', 'Investigación UX & Encuestas', 'Arquitectura de Información', 'Sistema de Diseño UI'],
@@ -153,14 +152,13 @@ function AgoraEditorial() {
       className="section-pad w-full"
       style={{
         paddingTop: '120px',
-        paddingBottom: '40px',
+        paddingBottom: '80px',
         paddingLeft: '80px',
         paddingRight: '80px',
       }}
     >
-      {/* ─── Top Overview: Metadata + Strategic Headline ─── */}
       <div
-        className="editorial-grid grid w-full mb-32"
+        className="editorial-grid grid w-full"
         style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px' }}
       >
         {/* Left: 4 cols — metadata */}
@@ -180,9 +178,7 @@ function AgoraEditorial() {
             >
               {t('case.role_discipline')}
             </p>
-            <div
-              style={{ fontSize: '14px', lineHeight: '1.8', color: 'var(--text-secondary)' }}
-            >
+            <div style={{ fontSize: '14px', lineHeight: '1.8', color: 'var(--text-secondary)' }}>
               {disciplines.map((d) => (
                 <p key={d}>{d}</p>
               ))}
@@ -259,193 +255,22 @@ function AgoraEditorial() {
           </div>
         </div>
       </div>
-
-      {/* ─── Separator ─── */}
-      <div style={{ borderBottom: '1px solid var(--border-color)', marginBottom: '120px' }} />
-
-      {/* ─── 50/50 Alternating Process Walkthrough (Zig-Zag) ─── */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-        {blocks.map((block, index) => {
-          const isEven = index % 2 === 0;
-
-          const textCol = (
-            <div
-              key="text"
-              className="agora-text-col reveal"
-              style={{
-                gridColumn: 'span 5',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                gap: '18px',
-              }}
-            >
-              {/* Step label badge */}
-              <span
-                style={{
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '11px',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent-color)',
-                  fontWeight: 700,
-                }}
-              >
-                {block.label}
-              </span>
-
-              {/* Title */}
-              {block.title && (
-                <h3
-                  style={{
-                    fontFamily: '"Special Gothic", sans-serif',
-                    fontWeight: 700,
-                    fontSize: 'clamp(22px, 2.2vw, 30px)',
-                    lineHeight: '1.25',
-                    letterSpacing: '-0.01em',
-                    color: 'var(--text-primary)',
-                  }}
-                >
-                  {block.title}
-                </h3>
-              )}
-
-              {/* Short crisp narrative text */}
-              <p
-                style={{
-                  fontSize: '16px',
-                  lineHeight: '1.7',
-                  color: 'var(--text-secondary)',
-                }}
-              >
-                {block.text}
-              </p>
-
-              {/* Takeaway / Quote Box */}
-              {block.takeaway && (
-                <div
-                  style={{
-                    borderLeft: '2px solid var(--accent-color)',
-                    paddingLeft: '16px',
-                    paddingTop: '6px',
-                    paddingBottom: '6px',
-                    margin: '4px 0',
-                    backgroundColor: 'rgba(0, 0, 0, 0.015)',
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: '"Space Mono", monospace',
-                      fontSize: '12px',
-                      lineHeight: '1.6',
-                      color: 'var(--text-primary)',
-                    }}
-                  >
-                    «{block.takeaway}»
-                  </p>
-                </div>
-              )}
-
-              {/* Tags / Pills */}
-              {block.tags && block.tags.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '6px' }}>
-                  {block.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      style={{
-                        fontFamily: '"Space Mono", monospace',
-                        fontSize: '10px',
-                        letterSpacing: '0.06em',
-                        textTransform: 'uppercase',
-                        padding: '4px 10px',
-                        border: '1px solid var(--border-color)',
-                        color: 'var(--text-secondary)',
-                        backgroundColor: 'var(--bg-surface)',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-
-          const visualCol = (
-            <div
-              key="visual"
-              className="agora-visual-col reveal"
-              style={{ gridColumn: 'span 7' }}
-            >
-              <div
-                className="agora-image-card"
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  aspectRatio: '16 / 10',
-                  backgroundColor: '#EAEAEA',
-                  overflow: 'hidden',
-                  border: '1px solid var(--border-color)',
-                }}
-              >
-                <img
-                  src={block.img}
-                  alt={block.alt || block.title || block.label}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
-                  loading="lazy"
-                />
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingTop: '12px',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '11px',
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-secondary)',
-                  }}
-                >
-                  {block.caption || `00${index + 1}`}
-                </span>
-                <span
-                  style={{
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '10px',
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-muted)',
-                  }}
-                >
-                  [UI Artifact]
-                </span>
-              </div>
-            </div>
-          );
-
-          return (
-            <div key={block.label} className="agora-step-grid">
-              {isEven ? [textCol, visualCol] : [visualCol, textCol]}
-            </div>
-          );
-        })}
-      </div>
     </section>
   );
 }
 
-function AgoraVideoSection() {
-  const { t } = useLanguage();
-  const ref = useScrollReveal();
+/* ─── Fase 01: El Problema + Pantalla Panorámica Completa ───── */
+function AgoraProblemSection() {
+  const { getAgoraBlocks } = useLanguage();
+  const ref = useScrollRevealAll();
+  const blocks = getAgoraBlocks();
+  const block = blocks[0];
+
+  if (!block) return null;
 
   return (
     <section
+      ref={ref as RefObject<HTMLElement>}
       className="section-pad w-full"
       style={{
         paddingTop: '20px',
@@ -454,12 +279,409 @@ function AgoraVideoSection() {
         paddingRight: '80px',
       }}
     >
-      <div
-        ref={ref as RefObject<HTMLDivElement>}
-        className="reveal"
-        style={{ borderTop: '1px solid var(--border-color)', paddingTop: '32px' }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px', marginBottom: '40px' }}>
+        <div
+          className="editorial-grid grid w-full"
+          style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px', alignItems: 'flex-start' }}
+        >
+          <div className="reveal" style={{ gridColumn: 'span 4' }}>
+            <span
+              style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '11px',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'var(--accent-color)',
+                fontWeight: 700,
+                display: 'block',
+                marginBottom: '12px',
+              }}
+            >
+              {block.label}
+            </span>
+            <h3
+              style={{
+                fontFamily: '"Special Gothic", sans-serif',
+                fontWeight: 700,
+                fontSize: 'clamp(24px, 2.4vw, 32px)',
+                lineHeight: '1.25',
+                letterSpacing: '-0.01em',
+                color: 'var(--text-primary)',
+              }}
+            >
+              {block.title}
+            </h3>
+          </div>
+
+          <div className="reveal" style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <p style={{ fontSize: '17px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              {block.text}
+            </p>
+            {block.takeaway && (
+              <div
+                style={{
+                  borderLeft: '2px solid var(--accent-color)',
+                  paddingLeft: '18px',
+                  paddingTop: '6px',
+                  paddingBottom: '6px',
+                  backgroundColor: 'var(--bg-surface)',
+                }}
+              >
+                <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '12px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
+                  «{block.takeaway}»
+                </p>
+              </div>
+            )}
+            {block.tags && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
+                {block.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '10px',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      padding: '4px 10px',
+                      border: '1px solid var(--border-color)',
+                      color: 'var(--text-secondary)',
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Pantalla panorámica a ancho completo */}
+      <div className="reveal" style={{ marginTop: '48px' }}>
+        <div
+          className="agora-image-card"
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16 / 9',
+            backgroundColor: '#EAEAEA',
+            overflow: 'hidden',
+            border: '1px solid var(--border-color)',
+          }}
+        >
+          <img
+            src={block.img}
+            alt={block.alt || block.title || block.label}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.02]"
+            loading="lazy"
+          />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px' }}>
+          <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+            {block.caption || '001 · Espacio de Trabajo Web Desktop'}
+          </span>
+          <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+            [Vista Panorámica del Workspace]
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Fase 02: Investigación Dual + Tarjetas de Insights + Pantalla ───── */
+function AgoraResearchSection() {
+  const { getAgoraBlocks, language } = useLanguage();
+  const ref = useScrollRevealAll();
+  const blocks = getAgoraBlocks();
+  const block = blocks[1];
+
+  const researchInsights = {
+    es: {
+      facultyLabel: 'Profesorado & Mentores',
+      facultyTitle: 'Visibilidad de Entregas & Feedback',
+      facultyText: 'Los docentes necesitaban un panel centralizado para gestionar entregas y calificar sin perder el hilo de las revisiones en hilos dispersos.',
+      studentsLabel: 'Alumnado de Máster (Data, IA, Ciber)',
+      studentsTitle: 'Sobrecarga Cognitiva',
+      studentsText: 'Los alumnos reportaron fatiga visual con interfaces saturadas al cursar materias densas; reclamaban un entorno limpio de máxima concentración.',
+    },
+    en: {
+      facultyLabel: 'Faculty & Mentors',
+      facultyTitle: 'Centralized Submissions & Grading',
+      facultyText: 'Instructors needed a dedicated workflow to track student hand-ins and deliver feedback without disjointed community threads.',
+      studentsLabel: 'Master’s Students (Data, AI, Cyber)',
+      studentsTitle: 'Cognitive Overload',
+      studentsText: 'Students reported fatigue with cluttered UIs while learning technical subjects; they demanded a clean, focused study workspace.',
+    },
+    fr: {
+      facultyLabel: 'Corps Professoral & Mentors',
+      facultyTitle: 'Visibilité des Rendus & Corrections',
+      facultyText: 'Les enseignants réclamaient un espace centralisé pour gérer les rendus et évaluer sans dispersion dans des fils de discussion.',
+      studentsLabel: 'Étudiants en Mastère (Data, IA, Cyber)',
+      studentsTitle: 'Surcharge Cognitive',
+      studentsText: 'Les étudiants ont souligné la fatigue visuelle face à des interfaces denses ; ils demandaient un environnement épuré et centré sur l’étude.',
+    },
+  }[language] || {
+    facultyLabel: 'Faculty & Mentors',
+    facultyTitle: 'Centralized Submissions & Grading',
+    facultyText: 'Instructors needed a dedicated workflow to track student hand-ins and deliver feedback without disjointed community threads.',
+    studentsLabel: 'Master’s Students (Data, AI, Cyber)',
+    studentsTitle: 'Cognitive Overload',
+    studentsText: 'Students reported fatigue with cluttered UIs while learning technical subjects; they demanded a clean, focused study workspace.',
+  };
+
+  if (!block) return null;
+
+  return (
+    <section
+      ref={ref as RefObject<HTMLElement>}
+      className="section-pad w-full"
+      style={{
+        paddingTop: '20px',
+        paddingBottom: '120px',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+      }}
+    >
+      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px' }}>
+        <div
+          className="editorial-grid grid w-full"
+          style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '48px', alignItems: 'center' }}
+        >
+          {/* Columna Izquierda: Explicación + Tarjetas Duales */}
+          <div className="reveal" style={{ gridColumn: 'span 6', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div>
+              <span
+                style={{
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '11px',
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent-color)',
+                  fontWeight: 700,
+                  display: 'block',
+                  marginBottom: '12px',
+                }}
+              >
+                {block.label}
+              </span>
+              <h3
+                style={{
+                  fontFamily: '"Special Gothic", sans-serif',
+                  fontWeight: 700,
+                  fontSize: 'clamp(24px, 2.4vw, 32px)',
+                  lineHeight: '1.25',
+                  letterSpacing: '-0.01em',
+                  color: 'var(--text-primary)',
+                  marginBottom: '16px',
+                }}
+              >
+                {block.title}
+              </h3>
+              <p style={{ fontSize: '16px', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
+                {block.text}
+              </p>
+            </div>
+
+            {/* Dos tarjetas de insights contrapuestos */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '8px' }}>
+              <div
+                style={{
+                  padding: '20px',
+                  border: '1px solid var(--border-color)',
+                  backgroundColor: 'var(--bg-surface)',
+                  borderLeft: '3px solid var(--accent-color)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: 'var(--accent-color)',
+                    fontWeight: 700,
+                    display: 'block',
+                    marginBottom: '6px',
+                  }}
+                >
+                  {researchInsights.facultyLabel}
+                </span>
+                <p style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', color: 'var(--text-primary)', marginBottom: '6px' }}>
+                  {researchInsights.facultyTitle}
+                </p>
+                <p style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                  {researchInsights.facultyText}
+                </p>
+              </div>
+
+              <div
+                style={{
+                  padding: '20px',
+                  border: '1px solid var(--border-color)',
+                  backgroundColor: 'var(--bg-surface)',
+                  borderLeft: '3px solid var(--border-color)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-secondary)',
+                    fontWeight: 700,
+                    display: 'block',
+                    marginBottom: '6px',
+                  }}
+                >
+                  {researchInsights.studentsLabel}
+                </span>
+                <p style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', color: 'var(--text-primary)', marginBottom: '6px' }}>
+                  {researchInsights.studentsTitle}
+                </p>
+                <p style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                  {researchInsights.studentsText}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Columna Derecha: Pantalla de Flujo de Entregas */}
+          <div className="reveal" style={{ gridColumn: 'span 6' }}>
+            <div
+              className="agora-image-card"
+              style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '4 / 3',
+                backgroundColor: '#EAEAEA',
+                overflow: 'hidden',
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              <img
+                src={block.img}
+                alt={block.alt || block.title || block.label}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px' }}>
+              <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+                {block.caption || '002 · Arquitectura UX & Flujo de Entregas'}
+              </span>
+              <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+                [Arquitectura UX]
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Fase 03: La Solución MVP + Vídeo Demostración en Contexto ───── */
+function AgoraSolutionSection() {
+  const { t, getAgoraBlocks } = useLanguage();
+  const ref = useScrollRevealAll();
+  const blocks = getAgoraBlocks();
+  const block = blocks[2];
+
+  if (!block) return null;
+
+  return (
+    <section
+      ref={ref as RefObject<HTMLElement>}
+      className="section-pad w-full"
+      style={{
+        paddingTop: '20px',
+        paddingBottom: '120px',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+      }}
+    >
+      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px', marginBottom: '40px' }}>
+        <div
+          className="editorial-grid grid w-full"
+          style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px', alignItems: 'flex-start' }}
+        >
+          <div className="reveal" style={{ gridColumn: 'span 4' }}>
+            <span
+              style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '11px',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'var(--accent-color)',
+                fontWeight: 700,
+                display: 'block',
+                marginBottom: '12px',
+              }}
+            >
+              {block.label}
+            </span>
+            <h3
+              style={{
+                fontFamily: '"Special Gothic", sans-serif',
+                fontWeight: 700,
+                fontSize: 'clamp(24px, 2.4vw, 32px)',
+                lineHeight: '1.25',
+                letterSpacing: '-0.01em',
+                color: 'var(--text-primary)',
+              }}
+            >
+              {block.title}
+            </h3>
+          </div>
+
+          <div className="reveal" style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <p style={{ fontSize: '17px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              {block.text}
+            </p>
+            {block.takeaway && (
+              <div
+                style={{
+                  borderLeft: '2px solid var(--accent-color)',
+                  paddingLeft: '18px',
+                  paddingTop: '6px',
+                  paddingBottom: '6px',
+                  backgroundColor: 'var(--bg-surface)',
+                }}
+              >
+                <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '12px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
+                  «{block.takeaway}»
+                </p>
+              </div>
+            )}
+            {block.tags && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
+                {block.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '10px',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      padding: '4px 10px',
+                      border: '1px solid var(--border-color)',
+                      color: 'var(--text-secondary)',
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Demostración en Vídeo 16:9 integrada directamente en la solución */}
+      <div className="reveal" style={{ marginTop: '36px', marginBottom: '64px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <span
             style={{
               fontFamily: '"Special Gothic", sans-serif',
@@ -492,6 +714,7 @@ function AgoraVideoSection() {
             maxHeight: '700px',
             backgroundColor: '#0F0F0F',
             overflow: 'hidden',
+            border: '1px solid var(--border-color)',
           }}
         >
           <video
@@ -519,21 +742,240 @@ function AgoraVideoSection() {
           {t('case.agora.video_desc')}
         </p>
       </div>
+
+      {/* Pantalla del Sistema de Diseño */}
+      <div className="reveal" style={{ marginTop: '48px' }}>
+        <div
+          className="agora-image-card"
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '16 / 9',
+            backgroundColor: '#EAEAEA',
+            overflow: 'hidden',
+            border: '1px solid var(--border-color)',
+          }}
+        >
+          <img
+            src={block.img}
+            alt={block.alt || block.title || block.label}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.02]"
+            loading="lazy"
+          />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px' }}>
+          <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+            {block.caption || '003 · Tokens de Diseño & UI Kit Minimalista'}
+          </span>
+          <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+            [Design System Atómico]
+          </span>
+        </div>
+      </div>
     </section>
   );
 }
 
-function AgoraGallery() {
+/* ─── Galería con Movimiento Propio Continuo (Infinite Screen Reel) ─── */
+function AgoraContinuousReelSection() {
   const { getAgoraCards, language } = useLanguage();
-  const ref = useScrollRevealAll();
+  const ref = useScrollReveal();
   const allCards = getAgoraCards();
-  const complementaryCards = allCards.slice(4);
+  // Duplicar tarjetas para un bucle infinito continuo e imperceptible
+  const marqueeCards = [...allCards, ...allCards];
 
-  const galleryHeader = {
-    es: { title: 'Vistas Complementarias & Espacios', count: '02 Vistas Seleccionadas' },
-    en: { title: 'Complementary Views & Spaces', count: '02 Selected Views' },
-    fr: { title: 'Vues Complémentaires & Espaces', count: '02 Vues Sélectionnées' },
-  }[language] || { title: 'Complementary Views & Spaces', count: '02 Selected Views' };
+  const reelLabels = {
+    es: {
+      title: 'Ecosistema en Movimiento',
+      subtitle: 'Pase continuo de pantallas del MVP · Pausa al pasar el cursor',
+    },
+    en: {
+      title: 'Living Ecosystem',
+      subtitle: 'Continuous MVP screen reel · Hover to pause',
+    },
+    fr: {
+      title: 'Écosystème en Mouvement',
+      subtitle: 'Défilement continu des écrans MVP · Survolez pour figer',
+    },
+  }[language] || {
+    title: 'Living Ecosystem',
+    subtitle: 'Continuous MVP screen reel · Hover to pause',
+  };
+
+  return (
+    <section
+      ref={ref as RefObject<HTMLElement>}
+      className="reveal section-pad w-full"
+      style={{
+        paddingTop: '20px',
+        paddingBottom: '140px',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+      }}
+    >
+      <div
+        style={{
+          borderTop: '1px solid var(--border-color)',
+          paddingTop: '32px',
+          marginBottom: '36px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <span
+            style={{
+              fontFamily: '"Special Gothic", sans-serif',
+              fontWeight: 700,
+              fontSize: '12px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'var(--text-primary)',
+            }}
+          >
+            {reelLabels.title}
+          </span>
+          <span
+            style={{
+              display: 'inline-block',
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--accent-color)',
+            }}
+          />
+        </div>
+        <span
+          style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '11px',
+            letterSpacing: '0.06em',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          {reelLabels.subtitle}
+        </span>
+      </div>
+
+      {/* Carrusel infinito con movimiento propio continuo */}
+      <div className="screen-marquee-container">
+        <div className="screen-marquee-track">
+          {marqueeCards.map((card, idx) => (
+            <div key={`${card.label}-${idx}`} className="screen-marquee-card">
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16 / 10',
+                  backgroundColor: '#EAEAEA',
+                  overflow: 'hidden',
+                  border: '1px solid var(--border-color)',
+                }}
+              >
+                <img
+                  src={card.src}
+                  alt={card.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingTop: '14px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '11px',
+                    letterSpacing: '0.06em',
+                    color: 'var(--text-secondary)',
+                  }}
+                >
+                  {card.label}
+                </span>
+                <span
+                  style={{
+                    fontFamily: '"Special Gothic", sans-serif',
+                    fontWeight: 700,
+                    fontSize: '11px',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  {card.caption}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Fase 04: Aprendizajes Reales + Doble Pantalla + Roadmap v2 ───── */
+function AgoraLearningsSection() {
+  const { getAgoraBlocks, getAgoraCards, language } = useLanguage();
+  const ref = useScrollRevealAll();
+  const blocks = getAgoraBlocks();
+  const allCards = getAgoraCards();
+  const block = blocks[3];
+
+  const cardA = allCards[3] || {
+    src: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&fit=crop&auto=format',
+    label: '004',
+    caption: 'Panel de Concentración y Métricas',
+    alt: 'Agora Study Analytics',
+  };
+
+  const cardB = allCards[4] || {
+    src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&fit=crop&auto=format',
+    label: '005',
+    caption: 'Espacios de Consulta & Foro Docente',
+    alt: 'Agora Peer Mentoring',
+  };
+
+  const roadmapLabels = {
+    es: {
+      title: 'Horizonte de Producto · Roadmap v2',
+      items: [
+        'Optimización del flujo de entregas y corrección modular de proyectos',
+        'Panel de rendimiento pedagógico y métricas de progreso para docentes',
+        'Futura aplicación móvil de apoyo y repaso espaciado para el alumno',
+      ],
+    },
+    en: {
+      title: 'Product Horizon · Roadmap v2',
+      items: [
+        'Refined project submission & modular grading workflow',
+        'Faculty pedagogical tracking dashboard with progress metrics',
+        'Future student mobile companion app for spaced repetition',
+      ],
+    },
+    fr: {
+      title: 'Vision Produit · Feuille de Route v2',
+      items: [
+        'Perfectionnement du flux de dépôt et correction modulaire des projets',
+        'Tableau de bord pédagogique et métriques de progression pour les formateurs',
+        'Future application mobile d’accompagnement et révision espacée',
+      ],
+    },
+  }[language] || {
+    title: 'Product Horizon · Roadmap v2',
+    items: [
+      'Refined project submission & modular grading workflow',
+      'Faculty pedagogical tracking dashboard with progress metrics',
+      'Future student mobile companion app for spaced repetition',
+    ],
+  };
+
+  if (!block) return null;
 
   return (
     <section
@@ -546,45 +988,80 @@ function AgoraGallery() {
         paddingRight: '80px',
       }}
     >
-      {/* Section label */}
-      <div
-        className="reveal flex items-center justify-between mb-16"
-        style={{ borderTop: '1px solid var(--border-color)', paddingTop: '24px' }}
-      >
-        <span
-          style={{
-            fontFamily: '"Special Gothic", sans-serif',
-            fontWeight: 700,
-            fontSize: '12px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'var(--text-primary)',
-          }}
+      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px', marginBottom: '48px' }}>
+        <div
+          className="editorial-grid grid w-full"
+          style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px', alignItems: 'flex-start' }}
         >
-          {galleryHeader.title}
-        </span>
-        <span
-          style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '11px',
-            letterSpacing: '0.06em',
-            color: 'var(--text-secondary)',
-          }}
-        >
-          {galleryHeader.count}
-        </span>
+          <div className="reveal" style={{ gridColumn: 'span 4' }}>
+            <span
+              style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '11px',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'var(--accent-color)',
+                fontWeight: 700,
+                display: 'block',
+                marginBottom: '12px',
+              }}
+            >
+              {block.label}
+            </span>
+            <h3
+              style={{
+                fontFamily: '"Special Gothic", sans-serif',
+                fontWeight: 700,
+                fontSize: 'clamp(24px, 2.4vw, 32px)',
+                lineHeight: '1.25',
+                letterSpacing: '-0.01em',
+                color: 'var(--text-primary)',
+              }}
+            >
+              {block.title}
+            </h3>
+          </div>
+
+          <div className="reveal" style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <p style={{ fontSize: '17px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+              {block.text}
+            </p>
+            {block.takeaway && (
+              <div
+                style={{
+                  borderLeft: '2px solid var(--accent-color)',
+                  paddingLeft: '18px',
+                  paddingTop: '6px',
+                  paddingBottom: '6px',
+                  backgroundColor: 'var(--bg-surface)',
+                }}
+              >
+                <p style={{ fontFamily: '"Space Mono", monospace', fontSize: '12px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
+                  «{block.takeaway}»
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* 2-column complementary grid */}
+      {/* Pantalla doble en paralelo (2-up) */}
       <div
-        className="grid w-full"
+        className="grid w-full mb-16"
         style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}
       >
-        {complementaryCards.map((card) => (
+        {[cardA, cardB].map((card) => (
           <div key={card.label} className="reveal">
             <div
-              className="w-full bg-[#E5E5E5] overflow-hidden"
-              style={{ aspectRatio: '16 / 10', border: '1px solid var(--border-color)' }}
+              className="agora-image-card"
+              style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '16 / 10',
+                backgroundColor: '#EAEAEA',
+                overflow: 'hidden',
+                border: '1px solid var(--border-color)',
+              }}
             >
               <img
                 src={card.src}
@@ -593,15 +1070,8 @@ function AgoraGallery() {
                 loading="lazy"
               />
             </div>
-
-            <div
-              className="flex items-center justify-between"
-              style={{ paddingTop: '16px' }}
-            >
-              <span
-                className="font-medium"
-                style={{ fontSize: '12px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}
-              >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px' }}>
+              <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '11px', letterSpacing: '0.06em', color: 'var(--text-secondary)' }}>
                 {card.label}
               </span>
               <span
@@ -620,24 +1090,73 @@ function AgoraGallery() {
           </div>
         ))}
       </div>
+
+      {/* Roadmap v2 Badges */}
+      <div
+        className="reveal"
+        style={{
+          borderTop: '1px solid var(--border-color)',
+          paddingTop: '32px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '11px',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--accent-color)',
+            fontWeight: 700,
+          }}
+        >
+          {roadmapLabels.title}
+        </span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+          {roadmapLabels.items.map((item) => (
+            <span
+              key={item}
+              style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '11px',
+                letterSpacing: '0.04em',
+                padding: '8px 16px',
+                border: '1px solid var(--border-color)',
+                backgroundColor: 'var(--bg-surface)',
+                color: 'var(--text-primary)',
+              }}
+            >
+              → {item}
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
 
 function NextProjectBlock() {
   const { t } = useLanguage();
+  const ref = useScrollReveal();
+
   return (
-    <section className="w-full" style={{ borderTop: '1px solid var(--border-color)' }}>
+    <section
+      ref={ref as RefObject<HTMLElement>}
+      className="reveal section-pad w-full"
+      style={{
+        borderTop: '1px solid var(--border-color)',
+        paddingTop: '96px',
+        paddingBottom: '96px',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+      }}
+    >
       <Link
-        to="/lavanderia-bizkaia"
-        className="next-project-block block w-full"
-        style={{
-          paddingTop: '96px',
-          paddingBottom: '96px',
-          paddingLeft: '80px',
-          paddingRight: '80px',
-          textDecoration: 'none',
-        }}
+        to="/lavanderia"
+        className="next-project-link block group"
+        style={{ textDecoration: 'none' }}
       >
         <p
           className="np-label"
@@ -690,9 +1209,12 @@ export default function AgoraPage() {
       <AgoraNav />
       <main>
         <AgoraHero />
-        <AgoraEditorial />
-        <AgoraVideoSection />
-        <AgoraGallery />
+        <AgoraOverview />
+        <AgoraProblemSection />
+        <AgoraResearchSection />
+        <AgoraSolutionSection />
+        <AgoraContinuousReelSection />
+        <AgoraLearningsSection />
         <NextProjectBlock />
       </main>
       <Footer />

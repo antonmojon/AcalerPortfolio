@@ -641,3 +641,51 @@ body {
   }
 }
 
+/* ─── Infinite Auto-scrolling Gallery (Continuous Marquee) ───── */
+.screen-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  padding: 24px 0;
+}
+
+.screen-marquee-track {
+  display: flex;
+  gap: 36px;
+  width: max-content;
+  animation: screenMarquee 42s linear infinite;
+  will-change: transform;
+}
+
+.screen-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes screenMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.screen-marquee-card {
+  flex: 0 0 520px;
+  max-width: 85vw;
+  transition: transform 0.4s ease;
+}
+
+.screen-marquee-card:hover {
+  transform: translateY(-6px);
+}
+
+@media (max-width: 768px) {
+  .screen-marquee-card {
+    flex: 0 0 320px;
+  }
+}
+
+
