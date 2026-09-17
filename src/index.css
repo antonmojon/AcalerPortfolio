@@ -688,4 +688,43 @@ body {
   }
 }
 
+/* ─── Swiss Project Loading Screen Animations ───────────────── */
+@keyframes swissLoaderLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
+@keyframes swissLoaderProgress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(10%);
+    width: 60%;
+  }
+  100% {
+    transform: translateX(100%);
+    width: 100%;
+  }
+}
+
+.swiss-loader-line {
+  width: 100%;
+  height: 100%;
+  background: var(--accent-color);
+  animation: swissLoaderLine 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.swiss-loader-progress {
+  width: 50%;
+  height: 100%;
+  background: var(--accent-color);
+  animation: swissLoaderProgress 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}

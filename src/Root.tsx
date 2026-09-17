@@ -1,8 +1,9 @@
 import { Outlet, useLocation } from 'react-router';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import FloatingThemeButton from './components/FloatingThemeButton';
+import ProjectLoadingScreen from './components/ProjectLoadingScreen';
 
 let _introShown = false;
 
@@ -26,35 +27,6 @@ function CustomCursor() {
   }, []);
 
   return <div ref={dotRef} className="cursor-dot" />;
-}
-
-/* ─── Page transition overlay ───────────────────────────── */
-function PageTransition({ pathname }: { pathname: string }) {
-  const [opacity, setOpacity] = useState(0);
-  const [active, setActive] = useState(false);
-  const prev = useRef(pathname);
-  const mounted = useRef(false);
-
-  useEffect(() => {
-    if (!mounted.current) { mounted.current = true; return; }
-    if (prev.current === pathname) return;
-    prev.current = pathname;
-    setActive(true);
-    setOpacity(1);
-    const t1 = setTimeout(() => setOpacity(0), 350);
-    const t2 = setTimeout(() => setActive(false), 750);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [pathname]);
-
-  if (!active) return null;
-
-  return (
-    <div style={{
-      position: 'fixed', inset: 0, backgroundColor: 'var(--accent-color)',
-      zIndex: 8888, pointerEvents: 'none',
-      opacity, transition: 'opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-    }} />
-  );
 }
 
 /* ─── Intro Screen with Seamless Title Transition ─────────── */
@@ -278,9 +250,10 @@ export default function Root() {
         )}
         <CustomCursor />
         <FloatingThemeButton />
-        <PageTransition pathname={pathname} />
         <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', transition: 'background-color 0.4s ease' }}>
-          <Outlet />
+          <Suspense fallback={<ProjectLoadingScreen />}>
+            <Outlet />
+          </Suspense>
         </div>
       </LanguageProvider>
     </ThemeProvider>
