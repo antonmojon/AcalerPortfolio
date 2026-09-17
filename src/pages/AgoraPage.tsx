@@ -271,13 +271,13 @@ function AgoraProblemSection() {
       ref={ref as RefObject<HTMLElement>}
       className="section-pad w-full"
       style={{
-        paddingTop: '20px',
-        paddingBottom: '120px',
+        paddingTop: '60px',
+        paddingBottom: '100px',
         paddingLeft: '80px',
         paddingRight: '80px',
       }}
     >
-      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px', marginBottom: '40px' }}>
+      <div style={{ marginBottom: '40px' }}>
         <div
           className="editorial-grid grid w-full"
           style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px', alignItems: 'flex-start' }}
@@ -432,13 +432,13 @@ function AgoraResearchSection() {
       ref={ref as RefObject<HTMLElement>}
       className="section-pad w-full"
       style={{
-        paddingTop: '20px',
-        paddingBottom: '120px',
+        paddingTop: '60px',
+        paddingBottom: '100px',
         paddingLeft: '80px',
         paddingRight: '80px',
       }}
     >
-      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px' }}>
+      <div>
         <div
           className="editorial-grid grid w-full"
           style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '48px', alignItems: 'center' }}
@@ -478,9 +478,9 @@ function AgoraResearchSection() {
               </p>
             </div>
 
-            {/* Insights contrapuestos en lista editorial suiza */}
-            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '16px' }}>
-              <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '18px', paddingBottom: '18px' }}>
+            {/* Insights contrapuestos en lista editorial suiza sin líneas */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '8px' }}>
+              <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
                   <span style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
                     {researchInsights.facultyTitle}
@@ -494,7 +494,7 @@ function AgoraResearchSection() {
                 </p>
               </div>
 
-              <div style={{ borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)', paddingTop: '18px', paddingBottom: '18px' }}>
+              <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
                   <span style={{ fontFamily: '"Special Gothic", sans-serif', fontWeight: 700, fontSize: '14px', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
                     {researchInsights.studentsTitle}
@@ -559,13 +559,13 @@ function AgoraSolutionSection() {
       ref={ref as RefObject<HTMLElement>}
       className="section-pad w-full"
       style={{
-        paddingTop: '20px',
-        paddingBottom: '120px',
+        paddingTop: '60px',
+        paddingBottom: '100px',
         paddingLeft: '80px',
         paddingRight: '80px',
       }}
     >
-      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px', marginBottom: '40px' }}>
+      <div style={{ marginBottom: '40px' }}>
         <div
           className="editorial-grid grid w-full"
           style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px', alignItems: 'flex-start' }}
@@ -767,16 +767,14 @@ function AgoraContinuousReelSection() {
       ref={ref as RefObject<HTMLElement>}
       className="reveal section-pad w-full"
       style={{
-        paddingTop: '20px',
-        paddingBottom: '140px',
+        paddingTop: '60px',
+        paddingBottom: '120px',
         paddingLeft: '80px',
         paddingRight: '80px',
       }}
     >
       <div
         style={{
-          borderTop: '1px solid var(--border-color)',
-          paddingTop: '32px',
           marginBottom: '36px',
           display: 'flex',
           justifyContent: 'space-between',
@@ -942,13 +940,13 @@ function AgoraLearningsSection() {
       ref={ref as RefObject<HTMLElement>}
       className="section-pad w-full"
       style={{
-        paddingTop: '20px',
-        paddingBottom: '160px',
+        paddingTop: '60px',
+        paddingBottom: '120px',
         paddingLeft: '80px',
         paddingRight: '80px',
       }}
     >
-      <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '48px', marginBottom: '48px' }}>
+      <div style={{ marginBottom: '48px' }}>
         <div
           className="editorial-grid grid w-full"
           style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px', alignItems: 'flex-start' }}
@@ -1049,15 +1047,14 @@ function AgoraLearningsSection() {
         ))}
       </div>
 
-      {/* Roadmap v2 - Swiss Editorial Numbered Rows */}
+      {/* Roadmap v2 - Editorial Numbered List */}
       <div
         className="reveal"
         style={{
-          borderTop: '1px solid var(--border-color)',
-          paddingTop: '36px',
+          marginTop: '48px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '16px',
+          gap: '20px',
         }}
       >
         <span
@@ -1072,27 +1069,25 @@ function AgoraLearningsSection() {
         >
           {roadmapLabels.title}
         </span>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {roadmapLabels.items.map((item, idx) => (
             <div
               key={item}
               style={{
                 display: 'flex',
                 alignItems: 'baseline',
-                gap: '24px',
-                paddingTop: '14px',
-                paddingBottom: '14px',
-                borderBottom: '1px solid var(--border-color)',
+                gap: '20px',
               }}
             >
               <span
                 style={{
                   fontFamily: '"Space Mono", monospace',
                   fontSize: '11px',
-                  color: 'var(--text-muted)',
+                  color: 'var(--accent-color)',
                   letterSpacing: '0.08em',
-                  width: '28px',
+                  width: '24px',
                   flexShrink: 0,
+                  fontWeight: 700,
                 }}
               >
                 0{idx + 1}
@@ -1100,7 +1095,7 @@ function AgoraLearningsSection() {
               <span
                 style={{
                   fontFamily: '"Special Gothic", sans-serif',
-                  fontSize: '14px',
+                  fontSize: '15px',
                   letterSpacing: '0.02em',
                   color: 'var(--text-primary)',
                   fontWeight: 500,
