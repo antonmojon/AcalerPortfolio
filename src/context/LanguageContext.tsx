@@ -40,7 +40,13 @@ export interface PillarTranslation {
 
 export interface CaseStudyBlockTranslation {
   label: string;
+  title?: string;
   text: string;
+  tags?: string[];
+  takeaway?: string;
+  img?: string;
+  alt?: string;
+  caption?: string;
 }
 
 export interface GalleryCardTranslation {
@@ -699,55 +705,127 @@ export const agoraBlocksByLang: Record<Language, CaseStudyBlockTranslation[]> = 
   es: [
     {
       label: '01 / El Problema & Contexto',
-      text: 'En Evolve impartimos másteres de alta exigencia técnica (Data Science, IA, Ciberseguridad, People Analytics). Hasta el momento nos apoyábamos en Circle, pero al tratarse de una herramienta de comunidad genérica se quedaba corta para las dinámicas pedagógicas reales: gestión de entregas, seguimiento académico y flujos profesor-alumno. Ante estas limitaciones, la compañía decidió diseñar y desarrollar su propia plataforma a medida.',
+      title: 'De la dispersión de Circle a una plataforma a medida',
+      text: 'En Evolve impartimos másteres técnicos de alta intensidad (Data Science, IA, Ciberseguridad). La plataforma previa (Circle) se quedaba corta para las dinámicas académicas reales: entregas de proyectos, correcciones docentes y seguimiento individualizado.',
+      takeaway: 'Circle cubría comunidad, pero no los flujos de entrega y evaluación continua que exigía el programa formativo.',
+      tags: ['Auditoría Heurística', 'Limitaciones de Circle', 'Evolve EdTech'],
+      img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Web Platform — Desktop Dashboard & Workspace',
+      caption: '001 · Espacio de Trabajo Web Desktop',
     },
     {
       label: '02 / Investigación & Encuestas',
-      text: 'Lideré la investigación previa realizando una auditoría heurística de la plataforma existente y un análisis exhaustivo de la competencia directa e indirecta. Diseñamos y lanzamos encuestas tanto a profesores como a estudiantes para mapear fricciones: qué aspectos funcionaban, qué generaba frustración diaria y qué herramientas críticas echaban en falta para el seguimiento de sus clases y proyectos.',
+      title: 'Descubrimiento dual: Profesores vs Alumnos',
+      text: 'Lideré una fase de investigación previa con benchmarking competitivo y auditoría UX. Diseñamos encuestas y sesiones de feedback cualitativo tanto a docentes como a estudiantes para mapear fricciones reales en su día a día.',
+      takeaway: 'Docentes necesitaban visibilidad de entregas sin fricción; los alumnos, una interfaz sin distracciones para estudiar materias densas.',
+      tags: ['Encuestas Docentes', 'Encuestas Alumnado', 'Benchmarking Competitivo'],
+      img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Platform — UX Architecture & Project Workflow',
+      caption: '002 · Arquitectura UX & Flujo de Entregas',
     },
     {
       label: '03 / Estrategia MVP Desktop',
-      text: 'Con los insights consolidados, estructuramos toda la arquitectura de información y la experiencia de usuario (UX), definiendo con rigor qué funcionalidades eran indispensables para el primer MVP y cuáles debían posponerse. Priorizamos la versión Web Desktop bajo una premisa estética y funcional clara: un estilo estrictamente minimalista y centrado en el usuario, eliminando cualquier distracción visual para que el alumno conserve el foco en materias de alta densidad técnica.',
+      title: 'Priorización de alcance y reducción de fatiga cognitiva',
+      text: 'Estructuramos la arquitectura UX priorizando con rigor qué funcionalidades entraban en el primer MVP Desktop. Definimos un estilo estrictamente minimalista: eliminar todo ruido visual para que el alumno conserve el foco en materias técnicas complejas.',
+      takeaway: 'Diseño sin adornos superficiales: cada componente y jerarquía tipográfica responde a una necesidad de aprendizaje real.',
+      tags: ['Alcance MVP Desktop', 'Cero Ruido Visual', 'Sistema de Diseño UI'],
+      img: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Design System — Components & Typography Hierarchy',
+      caption: '003 · Tokens de Diseño & UI Kit Minimalista',
     },
     {
       label: '04 / Aprendizajes & Roadmap v2',
-      text: 'El lanzamiento del MVP validó la hipótesis de que simplificar la interfaz mejora radicalmente la experiencia educativa. Con el producto ya en manos de usuarios reales, detectamos oportunidades clave de mejora que están guiando la siguiente versión: optimización del flujo de entregas de proyectos, métricas de progreso más profundas para docentes y la futura adaptación como aplicación móvil de apoyo.',
+      title: 'Validación en producción e iteración continua',
+      text: 'El lanzamiento del MVP validó que simplificar la interfaz mejora radicalmente la experiencia del estudiante. Con usuarios reales en producción, detectamos mejoras clave que están guiando la versión 2.0: optimización de entregas, métricas docentes y futura versión móvil.',
+      takeaway: 'Un producto digital nunca está terminado: el MVP nos dio los datos para diseñar con precisión la versión 2.0.',
+      tags: ['Iteración Continua', 'Roadmap v2 en Desarrollo', 'Futura App Móvil'],
+      img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Study Analytics — Progress & Focus Tracking',
+      caption: '004 · Panel de Concentración y Métricas',
     },
   ],
   en: [
     {
       label: '01 / Context & Problem',
-      text: 'At Evolve, we deliver high-intensity technical master’s programs (Data Science, AI, Cybersecurity, People Analytics). We previously relied on Circle, but as a generic community platform, it fell short of real pedagogical demands: project hand-ins, academic tracking, and teacher-student workflows. Confronted with these bottlenecks, the company decided to build its own tailored platform.',
+      title: 'From Circle’s limitations to a custom platform',
+      text: 'At Evolve, we deliver high-intensity technical master’s programs (Data Science, AI, Cybersecurity). Our previous platform (Circle) fell short of core pedagogical demands: project hand-ins, faculty feedback loops, and individual student progress tracking.',
+      takeaway: 'Circle was built for generic communities, not the structured project delivery and academic rigor required by our programs.',
+      tags: ['Heuristic Audit', 'Circle Bottlenecks', 'Evolve EdTech'],
+      img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Web Platform — Desktop Dashboard & Workspace',
+      caption: '001 · Web Desktop Workspace',
     },
     {
       label: '02 / Research & Dual Discovery',
-      text: 'I led the upfront research phase, conducting a heuristic audit of our existing tool and a comprehensive competitive benchmark. We designed and deployed dual surveys to both faculty and students to map real friction points: what worked, daily frustrations, and critical capabilities missing for coursework and project follow-up.',
+      title: 'Dual Discovery: Faculty vs Student Insights',
+      text: 'I led the upfront research phase combining competitive benchmarks with UX audits. We deployed dual surveys and feedback sessions to both instructors and students to uncover authentic everyday friction points.',
+      takeaway: 'Instructors needed seamless grading visibility; students required zero cognitive clutter to study complex subjects.',
+      tags: ['Faculty Surveys', 'Student Discovery', 'Competitive Benchmark'],
+      img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Platform — UX Architecture & Project Workflow',
+      caption: '002 · UX Architecture & Project Workflow',
     },
     {
       label: '03 / Desktop MVP Strategy',
-      text: 'Synthesizing these insights, we defined the full information architecture and UX, rigorously prioritizing what was essential for the first MVP versus what should be deferred. We prioritized the Web Desktop platform with an intentional design philosophy: a strictly minimalist, user-centered interface that eliminates visual clutter, allowing students to preserve deep focus on dense, complex technical subjects.',
+      title: 'Scoping prioritization & cognitive load reduction',
+      text: 'We mapped the complete UX architecture, establishing strict scope for the Web Desktop MVP. We adopted an uncompromising minimalist aesthetic: stripping out all visual noise so students maintain deep focus on dense technical topics.',
+      takeaway: 'Restrained, functional design where every component and typographical hierarchy directly serves student comprehension.',
+      tags: ['Desktop MVP Scoping', 'Zero Visual Noise', 'Atomic UI System'],
+      img: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Design System — Components & Typography Hierarchy',
+      caption: '003 · Design Tokens & Minimalist UI Kit',
     },
     {
       label: '04 / Learnings & Roadmap v2',
-      text: 'Deploying the MVP validated that stripping away unnecessary noise dramatically improves the technical learning experience. With real students and faculty using the product, we uncovered high-value opportunities currently driving version 2.0: refining project submission and grading workflows, richer progress analytics for instructors, and a future mobile companion app.',
+      title: 'Production validation & continuous iteration',
+      text: 'Deploying the MVP confirmed that radical simplification transforms the learning experience. Real-world usage revealed high-impact opportunities steering version 2.0: refined project submissions, teacher dashboards, and a mobile companion.',
+      takeaway: 'A digital product is never truly finished: the MVP provided the behavioral data to design version 2.0 with surgical precision.',
+      tags: ['Continuous Iteration', 'Roadmap v2 in Progress', 'Future Mobile Companion'],
+      img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Study Analytics — Progress & Focus Tracking',
+      caption: '004 · Focus & Analytics Dashboard',
     },
   ],
   fr: [
     {
       label: '01 / Contexte & Problématique',
-      text: 'Chez Evolve, nous dispensons des mastères techniques exigeants (Data Science, IA, Cybersécurité, People Analytics). Nous utilisions auparavant Circle, mais en tant que plateforme communautaire générique, elle montrait vite ses limites face aux exigences pédagogiques : gestion des livrables, suivi académique et flux enseignant-étudiant. L’entreprise a donc décidé de concevoir sa propre plateforme sur mesure.',
+      title: 'Des limites de Circle à une plateforme sur mesure',
+      text: 'Chez Evolve, nous dispensons des mastères techniques exigeants (Data Science, IA, Cybersécurité). La plateforme précédente (Circle) montrait ses limites face aux impératifs pédagogiques : dépôts de projets, corrections et suivi personnalisé.',
+      takeaway: 'Circle répondait au besoin de communauté, mais pas aux flux d’évaluation continue exigés par les formations techniques.',
+      tags: ['Audit Heuristique', 'Limites de Circle', 'Evolve EdTech'],
+      img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Web Platform — Desktop Dashboard & Workspace',
+      caption: '001 · Espace Bureau Web Desktop',
     },
     {
       label: '02 / Recherche & Enquêtes Mixtes',
-      text: 'J’ai piloté la phase de recherche amont, associant un audit heuristique de l’outil existant à un benchmark concurrentiel approfondi. Nous avons déployé des enquêtes auprès du corps professoral et des étudiants pour identifier les points de friction : ce qui fonctionnait, les irritants du quotidien et les fonctionnalités clés manquantes pour le suivi des cours et des projets.',
+      title: 'Découverte croisée : Enseignants vs Étudiants',
+      text: 'J’ai piloté la recherche amont combinant benchmark concurrentiel et audit UX. Nous avons mené des enquêtes auprès du corps professoral et des étudiants pour identifier avec précision les frictions réelles du quotidien.',
+      takeaway: 'Les formateurs demandaient un suivi fluide des rendus ; les étudiants, une interface épurée pour assimiler des notions denses.',
+      tags: ['Enquêtes Formateurs', 'Enquêtes Étudiants', 'Benchmark Concurrentiel'],
+      img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Platform — UX Architecture & Project Workflow',
+      caption: '002 · Architecture UX & Flux des Projets',
     },
     {
       label: '03 / Stratégie MVP Desktop',
-      text: 'En synthétisant ces enseignements, nous avons structuré l’architecture de l’information et l’UX globale, en priorisant rigoureusement ce qui devait intégrer le premier MVP et ce qui devait être reporté. Nous avons concentré nos efforts sur la version Web Desktop avec une ligne directrice claire : un minimalisme fonctionnel centré sur l’utilisateur, éliminant tout bruit visuel pour favoriser la concentration sur des matières techniques denses.',
+      title: 'Cadrage du périmètre & réduction de la charge cognitive',
+      text: 'Nous avons défini l’architecture UX en priorisant rigoureusement ce qui devait intégrer le premier MVP Desktop. Nous avons opté pour un minimalisme strict : éliminer tout bruit visuel pour préserver la concentration des étudiants sur des sujets complexes.',
+      takeaway: 'Un design épuré où chaque composant et chaque choix typographique répond à un objectif d’apprentissage direct.',
+      tags: ['Périmètre MVP Desktop', 'Zéro Bruit Visuel', 'Design System UI'],
+      img: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Design System — Components & Typography Hierarchy',
+      caption: '003 · Tokens de Design & UI Kit Minimaliste',
     },
     {
-      label: '04 / Retours & Roadmap v2',
-      text: 'Le déploiement du MVP a confirmé que simplifier l’interface transforme radicalement l’expérience d’apprentissage technique. En conditions réelles d’utilisation, nous avons identifié les axes majeurs qui guident la version 2.0 : perfectionnement du parcours de dépôt et correction des projets, métriques d’avancement approfondies pour les formateurs et future déclinaison mobile d’accompagnement.',
+      label: '04 / Retours d’Usage & Roadmap v2',
+      title: 'Validation terrain & amélioration continue',
+      text: 'Le déploiement du MVP a prouvé que la simplification radicale démultiplie l’engagement. En production, les retours terrain orientent déjà la version 2.0 : perfectionnement du parcours de dépôt, tableau de bord formateur et déclinaison mobile.',
+      takeaway: 'Un produit numérique n’est jamais figé : le MVP a fourni les données d’usage pour concevoir la version 2.0 avec justesse.',
+      tags: ['Amélioration Continue', 'Roadmap v2 en Cours', 'Future Déclinaison Mobile'],
+      img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=800&fit=crop&auto=format',
+      alt: 'Agora Study Analytics — Progress & Focus Tracking',
+      caption: '004 · Tableau de Bord & Métriques',
     },
   ],
 };

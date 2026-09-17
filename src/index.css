@@ -607,3 +607,37 @@ body {
     height: 28px !important;
   }
 }
+
+/* ─── Agora 50/50 Visual Layout ─────────────────────────────── */
+.agora-step-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 64px;
+  align-items: center;
+  margin-bottom: 140px;
+}
+
+.agora-image-card {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+
+.agora-image-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 1024px) {
+  .agora-step-grid {
+    gap: 32px !important;
+    margin-bottom: 96px !important;
+  }
+  .agora-step-grid .agora-text-col {
+    order: 1 !important;
+    grid-column: span 12 !important;
+  }
+  .agora-step-grid .agora-visual-col {
+    order: 2 !important;
+    grid-column: span 12 !important;
+  }
+}
+

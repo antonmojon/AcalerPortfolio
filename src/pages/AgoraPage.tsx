@@ -153,14 +153,15 @@ function AgoraEditorial() {
       className="section-pad w-full"
       style={{
         paddingTop: '120px',
-        paddingBottom: '100px',
+        paddingBottom: '40px',
         paddingLeft: '80px',
         paddingRight: '80px',
       }}
     >
+      {/* ─── Top Overview: Metadata + Strategic Headline ─── */}
       <div
-        className="editorial-grid grid w-full"
-        style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '24px' }}
+        className="editorial-grid grid w-full mb-32"
+        style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '32px' }}
       >
         {/* Left: 4 cols — metadata */}
         <div className="reveal-left" style={{ gridColumn: 'span 4' }}>
@@ -227,42 +228,213 @@ function AgoraEditorial() {
           </div>
         </div>
 
-        {/* Right: 8 cols — content */}
+        {/* Right: 8 cols — headline & executive brief */}
         <div
           className="reveal stagger-children"
-          style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '56px' }}
+          style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '28px' }}
         >
           <p
             className="font-normal"
-            style={{ fontSize: '28px', lineHeight: '1.45', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}
+            style={{ fontSize: 'clamp(26px, 2.6vw, 36px)', lineHeight: '1.4', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}
           >
             {t('case.agora.headline')}
           </p>
+          <div style={{ borderLeft: '2px solid var(--accent-color)', paddingLeft: '20px', paddingTop: '4px', paddingBottom: '4px' }}>
+            <p
+              style={{
+                fontFamily: '"Space Mono", monospace',
+                fontSize: '12px',
+                lineHeight: '1.8',
+                color: 'var(--text-secondary)',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {language === 'es'
+                ? 'Auditoría Heurística · Encuestas a Docentes & Alumnado · Scoping MVP Web Desktop · Roadmap v2'
+                : language === 'fr'
+                ? 'Audit Heuristique · Enquêtes Enseignants & Étudiants · Cadrage MVP Desktop · Feuille de Route v2'
+                : 'Heuristic Audit · Dual Faculty & Student Discovery · Web Desktop MVP Scoping · Roadmap v2'}
+            </p>
+          </div>
+        </div>
+      </div>
 
-          {blocks.map((block) => (
-            <div key={block.label} className="reveal">
-              <p
-                className="mb-4"
+      {/* ─── Separator ─── */}
+      <div style={{ borderBottom: '1px solid var(--border-color)', marginBottom: '120px' }} />
+
+      {/* ─── 50/50 Alternating Process Walkthrough (Zig-Zag) ─── */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+        {blocks.map((block, index) => {
+          const isEven = index % 2 === 0;
+
+          const textCol = (
+            <div
+              key="text"
+              className="agora-text-col reveal"
+              style={{
+                gridColumn: 'span 5',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                gap: '18px',
+              }}
+            >
+              {/* Step label badge */}
+              <span
                 style={{
-                  fontFamily: '"Special Gothic", sans-serif',
-                  fontWeight: 700,
-                  fontSize: '12px',
+                  fontFamily: '"Space Mono", monospace',
+                  fontSize: '11px',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  color: 'var(--text-primary)',
+                  color: 'var(--accent-color)',
+                  fontWeight: 700,
                 }}
               >
                 {block.label}
-              </p>
+              </span>
+
+              {/* Title */}
+              {block.title && (
+                <h3
+                  style={{
+                    fontFamily: '"Special Gothic", sans-serif',
+                    fontWeight: 700,
+                    fontSize: 'clamp(22px, 2.2vw, 30px)',
+                    lineHeight: '1.25',
+                    letterSpacing: '-0.01em',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  {block.title}
+                </h3>
+              )}
+
+              {/* Short crisp narrative text */}
               <p
-                className="font-normal"
-                style={{ fontSize: '18px', lineHeight: '1.65', color: 'var(--text-primary)' }}
+                style={{
+                  fontSize: '16px',
+                  lineHeight: '1.7',
+                  color: 'var(--text-secondary)',
+                }}
               >
                 {block.text}
               </p>
+
+              {/* Takeaway / Quote Box */}
+              {block.takeaway && (
+                <div
+                  style={{
+                    borderLeft: '2px solid var(--accent-color)',
+                    paddingLeft: '16px',
+                    paddingTop: '6px',
+                    paddingBottom: '6px',
+                    margin: '4px 0',
+                    backgroundColor: 'rgba(0, 0, 0, 0.015)',
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: '"Space Mono", monospace',
+                      fontSize: '12px',
+                      lineHeight: '1.6',
+                      color: 'var(--text-primary)',
+                    }}
+                  >
+                    «{block.takeaway}»
+                  </p>
+                </div>
+              )}
+
+              {/* Tags / Pills */}
+              {block.tags && block.tags.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '6px' }}>
+                  {block.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontFamily: '"Space Mono", monospace',
+                        fontSize: '10px',
+                        letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                        padding: '4px 10px',
+                        border: '1px solid var(--border-color)',
+                        color: 'var(--text-secondary)',
+                        backgroundColor: 'var(--bg-surface)',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-          ))}
-        </div>
+          );
+
+          const visualCol = (
+            <div
+              key="visual"
+              className="agora-visual-col reveal"
+              style={{ gridColumn: 'span 7' }}
+            >
+              <div
+                className="agora-image-card"
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16 / 10',
+                  backgroundColor: '#EAEAEA',
+                  overflow: 'hidden',
+                  border: '1px solid var(--border-color)',
+                }}
+              >
+                <img
+                  src={block.img}
+                  alt={block.alt || block.title || block.label}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+                  loading="lazy"
+                />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingTop: '12px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '11px',
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-secondary)',
+                  }}
+                >
+                  {block.caption || `00${index + 1}`}
+                </span>
+                <span
+                  style={{
+                    fontFamily: '"Space Mono", monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-muted)',
+                  }}
+                >
+                  [UI Artifact]
+                </span>
+              </div>
+            </div>
+          );
+
+          return (
+            <div key={block.label} className="agora-step-grid">
+              {isEven ? [textCol, visualCol] : [visualCol, textCol]}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -352,16 +524,23 @@ function AgoraVideoSection() {
 }
 
 function AgoraGallery() {
-  const { t, getAgoraCards } = useLanguage();
+  const { getAgoraCards, language } = useLanguage();
   const ref = useScrollRevealAll();
-  const cards = getAgoraCards();
+  const allCards = getAgoraCards();
+  const complementaryCards = allCards.slice(4);
+
+  const galleryHeader = {
+    es: { title: 'Vistas Complementarias & Espacios', count: '02 Vistas Seleccionadas' },
+    en: { title: 'Complementary Views & Spaces', count: '02 Selected Views' },
+    fr: { title: 'Vues Complémentaires & Espaces', count: '02 Vues Sélectionnées' },
+  }[language] || { title: 'Complementary Views & Spaces', count: '02 Selected Views' };
 
   return (
     <section
       ref={ref as RefObject<HTMLElement>}
       className="section-pad w-full"
       style={{
-        paddingTop: '40px',
+        paddingTop: '20px',
         paddingBottom: '160px',
         paddingLeft: '80px',
         paddingRight: '80px',
@@ -369,7 +548,7 @@ function AgoraGallery() {
     >
       {/* Section label */}
       <div
-        className="reveal flex items-center justify-between mb-20"
+        className="reveal flex items-center justify-between mb-16"
         style={{ borderTop: '1px solid var(--border-color)', paddingTop: '24px' }}
       >
         <span
@@ -382,7 +561,7 @@ function AgoraGallery() {
             color: 'var(--text-primary)',
           }}
         >
-          {t('case.agora.gallery_title')}
+          {galleryHeader.title}
         </span>
         <span
           style={{
@@ -392,65 +571,54 @@ function AgoraGallery() {
             color: 'var(--text-secondary)',
           }}
         >
-          {t('case.agora.gallery_count')}
+          {galleryHeader.count}
         </span>
       </div>
 
-      {/* Gallery grid */}
+      {/* 2-column complementary grid */}
       <div
-        className="gallery-grid grid w-full"
-        style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '24px', rowGap: '120px' }}
+        className="grid w-full"
+        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}
       >
-        {cards.map((card, i) => {
-          const colStart = i % 2 === 0 ? 2 : 6;
-          const colSpan = 5;
-
-          return (
+        {complementaryCards.map((card) => (
+          <div key={card.label} className="reveal">
             <div
-              key={card.label}
-              className="reveal gallery-card"
-              style={{
-                gridColumn: `${colStart} / span ${colSpan}`,
-                transitionDelay: `${(i % 3) * 0.1}s`,
-              }}
+              className="w-full bg-[#E5E5E5] overflow-hidden"
+              style={{ aspectRatio: '16 / 10', border: '1px solid var(--border-color)' }}
             >
-              <div
-                className="w-full bg-[#E5E5E5] overflow-hidden"
-                style={{ aspectRatio: '2 / 3' }}
-              >
-                <img
-                  src={card.src}
-                  alt={card.alt}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div
-                className="flex items-center justify-between"
-                style={{ paddingTop: '16px' }}
-              >
-                <span
-                  className="font-medium"
-                  style={{ fontSize: '12px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}
-                >
-                  {card.label}
-                </span>
-                <span
-                  style={{
-                    fontFamily: '"Special Gothic", sans-serif',
-                    fontWeight: 700,
-                    fontSize: '11px',
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-primary)',
-                  }}
-                >
-                  {card.caption}
-                </span>
-              </div>
+              <img
+                src={card.src}
+                alt={card.alt}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+                loading="lazy"
+              />
             </div>
-          );
-        })}
+
+            <div
+              className="flex items-center justify-between"
+              style={{ paddingTop: '16px' }}
+            >
+              <span
+                className="font-medium"
+                style={{ fontSize: '12px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}
+              >
+                {card.label}
+              </span>
+              <span
+                style={{
+                  fontFamily: '"Special Gothic", sans-serif',
+                  fontWeight: 700,
+                  fontSize: '11px',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                {card.caption}
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
