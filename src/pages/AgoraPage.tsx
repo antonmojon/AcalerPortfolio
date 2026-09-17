@@ -136,16 +136,16 @@ function AgoraEditorial() {
   const blocks = getAgoraBlocks();
 
   const disciplines = {
-    es: ['Diseño de Producto', 'Arquitectura UI / UX', 'Sistema de Diseño', 'Prototipado'],
-    en: ['Product Design', 'UI / UX Architecture', 'Design System', 'Prototyping'],
-    fr: ['Design de Produit', 'Architecture UI / UX', 'Design System', 'Prototypage'],
-  }[language] || ['Product Design', 'UI / UX Architecture', 'Design System', 'Prototyping'];
+    es: ['Diseño de Producto', 'Investigación UX & Encuestas', 'Arquitectura de Información', 'Sistema de Diseño UI'],
+    en: ['Product Design', 'UX Research & Surveys', 'Information Architecture', 'UI Design System'],
+    fr: ['Design de Produit', 'Recherche UX & Enquêtes', 'Architecture de l’Information', 'Design System UI'],
+  }[language] || ['Product Design', 'UX Research & Surveys', 'Information Architecture', 'UI Design System'];
 
   const deliverables = {
-    es: ['Dashboard Web', 'Aplicación Móvil', 'Librería de Componentes'],
-    en: ['Web Dashboard', 'Mobile Application', 'Component Library'],
-    fr: ['Tableau de bord Web', 'Application Mobile', 'Bibliothèque de Composants'],
-  }[language] || ['Web Dashboard', 'Mobile Application', 'Component Library'];
+    es: ['Investigación & Benchmarking', 'Arquitectura UX', 'MVP Web Desktop', 'Sistema de Diseño UI'],
+    en: ['Research & Benchmarking', 'UX Architecture', 'Web Desktop MVP', 'UI Design System'],
+    fr: ['Recherche & Benchmark', 'Architecture UX', 'MVP Web Desktop', 'Design System UI'],
+  }[language] || ['Research & Benchmarking', 'UX Architecture', 'Web Desktop MVP', 'UI Design System'];
 
   return (
     <section
@@ -201,7 +201,7 @@ function AgoraEditorial() {
                 {t('case.year_platforms')}
               </p>
               <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
-                2026 — Web Desktop · iOS · Android
+                2026 — Web Desktop (MVP) · Roadmap v2
               </p>
             </div>
             <div style={{ marginTop: '48px' }}>

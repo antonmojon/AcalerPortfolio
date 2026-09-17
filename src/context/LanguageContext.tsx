@@ -155,10 +155,10 @@ export const translations = {
 
     // Case Study - Agora
     'case.agora.top_tag': 'Diseño de Producto & EdTech',
-    'case.agora.headline': 'Educación sin barreras entre dispositivos: un entorno concebido para acompañar el flujo cognitivo del estudiante sin interrupciones.',
+    'case.agora.headline': 'De una herramienta genérica a un producto a medida: cómo transformamos las necesidades reales de profesores y alumnos de másteres técnicos en un MVP Desktop minimalista centrado en el usuario.',
     'case.agora.video_title': '01 / Vídeo de Presentación de Producto',
     'case.agora.video_meta': 'MP4 / Demostración 16:9',
-    'case.agora.video_desc': 'Demostración audiovisual de la navegación y el flujo interactivo de Agora.',
+    'case.agora.video_desc': 'Recorrido audiovisual por los flujos de navegación y la interacción del MVP de Agora.',
     'case.agora.gallery_title': 'Artefactos Visuales & Pantallas',
     'case.agora.gallery_count': '06 Vistas Seleccionadas',
 
@@ -284,7 +284,7 @@ export const translations = {
 
     // Case Study - Agora
     'case.agora.top_tag': 'Product Design & EdTech',
-    'case.agora.headline': 'Barrier-free education across devices: an environment designed to support the student’s cognitive flow without disruption.',
+    'case.agora.headline': 'From a generic tool to a tailored product: translating the real needs of technical master’s students and faculty into a clean, distraction-free Desktop MVP.',
     'case.agora.video_title': '01 / Product Presentation Video',
     'case.agora.video_meta': 'MP4 / 16:9 Showcase',
     'case.agora.video_desc': 'Audiovisual walkthrough of Agora’s responsive navigation and interactive learning flows.',
@@ -413,10 +413,10 @@ export const translations = {
 
     // Case Study - Agora
     'case.agora.top_tag': 'Design de Produit & EdTech',
-    'case.agora.headline': 'Une éducation sans frontières entre les appareils : un environnement pensé pour accompagner le flux cognitif de l’étudiant sans interruption.',
+    'case.agora.headline': 'D’un outil générique à une plateforme sur mesure : transformer les besoins d’étudiants et professeurs en un MVP Desktop minimaliste centré sur l’essentiel.',
     'case.agora.video_title': '01 / Vidéo de Présentation du Produit',
     'case.agora.video_meta': 'MP4 / Démonstration 16:9',
-    'case.agora.video_desc': 'Démonstration audiovisuelle de la navigation et du flux interactif d’Agora.',
+    'case.agora.video_desc': 'Parcours audiovisuel de la navigation et des flux interactifs du MVP d’Agora.',
     'case.agora.gallery_title': 'Artéfacts Visuels & Écrans',
     'case.agora.gallery_count': '06 Vues Sélectionnées',
 
@@ -698,44 +698,56 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
 export const agoraBlocksByLang: Record<Language, CaseStudyBlockTranslation[]> = {
   es: [
     {
-      label: 'Overview',
-      text: 'Agora es una plataforma educativa integral diseñada para sincronizar la concentración y profundidad del aprendizaje en ordenador con la agilidad del microaprendizaje en dispositivos móviles. Una experiencia que acompaña al estudiante en cada fase de su formación.',
+      label: '01 / El Problema & Contexto',
+      text: 'En Evolve impartimos másteres de alta exigencia técnica (Data Science, IA, Ciberseguridad, People Analytics). Hasta el momento nos apoyábamos en Circle, pero al tratarse de una herramienta de comunidad genérica se quedaba corta para las dinámicas pedagógicas reales: gestión de entregas, seguimiento académico y flujos profesor-alumno. Ante estas limitaciones, la compañía decidió diseñar y desarrollar su propia plataforma a medida.',
     },
     {
-      label: 'Challenge',
-      text: 'El reto principal consistió en unificar dos naturalezas de uso: sesiones prolongadas de estudio, toma de notas estructuradas y visualización en pantalla panorámica, frente a sesiones rápidas de 3 a 5 minutos en smartphones sin perder sincronización ni foco pedagógico.',
+      label: '02 / Investigación & Encuestas',
+      text: 'Lideré la investigación previa realizando una auditoría heurística de la plataforma existente y un análisis exhaustivo de la competencia directa e indirecta. Diseñamos y lanzamos encuestas tanto a profesores como a estudiantes para mapear fricciones: qué aspectos funcionaban, qué generaba frustración diaria y qué herramientas críticas echaban en falta para el seguimiento de sus clases y proyectos.',
     },
     {
-      label: 'Approach',
-      text: 'Diseñamos un sistema de diseño modular de alto contraste con tipografía sobria, jerarquía editorial y componentes universales. Las lecciones se adaptan orgánicamente a cada contexto, transformando lecturas complejas de escritorio en tarjetas interactivas de repaso espaciado en la app móvil.',
+      label: '03 / Estrategia MVP Desktop',
+      text: 'Con los insights consolidados, estructuramos toda la arquitectura de información y la experiencia de usuario (UX), definiendo con rigor qué funcionalidades eran indispensables para el primer MVP y cuáles debían posponerse. Priorizamos la versión Web Desktop bajo una premisa estética y funcional clara: un estilo estrictamente minimalista y centrado en el usuario, eliminando cualquier distracción visual para que el alumno conserve el foco en materias de alta densidad técnica.',
+    },
+    {
+      label: '04 / Aprendizajes & Roadmap v2',
+      text: 'El lanzamiento del MVP validó la hipótesis de que simplificar la interfaz mejora radicalmente la experiencia educativa. Con el producto ya en manos de usuarios reales, detectamos oportunidades clave de mejora que están guiando la siguiente versión: optimización del flujo de entregas de proyectos, métricas de progreso más profundas para docentes y la futura adaptación como aplicación móvil de apoyo.',
     },
   ],
   en: [
     {
-      label: 'Overview',
-      text: 'Agora is a comprehensive educational platform designed to synchronize the depth and focus of desktop studying with the speed of mobile micro-learning. An experience that guides students through every phase of their learning journey.',
+      label: '01 / Context & Problem',
+      text: 'At Evolve, we deliver high-intensity technical master’s programs (Data Science, AI, Cybersecurity, People Analytics). We previously relied on Circle, but as a generic community platform, it fell short of real pedagogical demands: project hand-ins, academic tracking, and teacher-student workflows. Confronted with these bottlenecks, the company decided to build its own tailored platform.',
     },
     {
-      label: 'Challenge',
-      text: 'The core challenge was unifying two distinct modes of use: long desktop study sessions with structured note-taking versus rapid 3-to-5 minute mobile review sessions, maintaining real-time synchronization and pedagogical clarity.',
+      label: '02 / Research & Dual Discovery',
+      text: 'I led the upfront research phase, conducting a heuristic audit of our existing tool and a comprehensive competitive benchmark. We designed and deployed dual surveys to both faculty and students to map real friction points: what worked, daily frustrations, and critical capabilities missing for coursework and project follow-up.',
     },
     {
-      label: 'Approach',
-      text: 'We designed a high-contrast modular design system featuring restrained typography, editorial hierarchy, and universal components. Lessons adapt dynamically across contexts, transforming extensive desktop readings into spaced-repetition interactive flashcards on mobile.',
+      label: '03 / Desktop MVP Strategy',
+      text: 'Synthesizing these insights, we defined the full information architecture and UX, rigorously prioritizing what was essential for the first MVP versus what should be deferred. We prioritized the Web Desktop platform with an intentional design philosophy: a strictly minimalist, user-centered interface that eliminates visual clutter, allowing students to preserve deep focus on dense, complex technical subjects.',
+    },
+    {
+      label: '04 / Learnings & Roadmap v2',
+      text: 'Deploying the MVP validated that stripping away unnecessary noise dramatically improves the technical learning experience. With real students and faculty using the product, we uncovered high-value opportunities currently driving version 2.0: refining project submission and grading workflows, richer progress analytics for instructors, and a future mobile companion app.',
     },
   ],
   fr: [
     {
-      label: 'Vue d’ensemble',
-      text: 'Agora est une plateforme éducative complète pensée pour synchroniser la concentration et l’approfondissement sur ordinateur avec l’agilité du micro-apprentissage sur mobile. Une expérience qui accompagne l’étudiant à chaque étape de son parcours.',
+      label: '01 / Contexte & Problématique',
+      text: 'Chez Evolve, nous dispensons des mastères techniques exigeants (Data Science, IA, Cybersécurité, People Analytics). Nous utilisions auparavant Circle, mais en tant que plateforme communautaire générique, elle montrait vite ses limites face aux exigences pédagogiques : gestion des livrables, suivi académique et flux enseignant-étudiant. L’entreprise a donc décidé de concevoir sa propre plateforme sur mesure.',
     },
     {
-      label: 'Défi',
-      text: 'Le défi majeur consistait à unifier deux modes d’usage : des sessions d’étude prolongées avec prise de notes structurée sur grand écran, et des sessions rapides de 3 à 5 minutes sur smartphone, sans jamais perdre la synchronisation ni le fil pédagogique.',
+      label: '02 / Recherche & Enquêtes Mixtes',
+      text: 'J’ai piloté la phase de recherche amont, associant un audit heuristique de l’outil existant à un benchmark concurrentiel approfondi. Nous avons déployé des enquêtes auprès du corps professoral et des étudiants pour identifier les points de friction : ce qui fonctionnait, les irritants du quotidien et les fonctionnalités clés manquantes pour le suivi des cours et des projets.',
     },
     {
-      label: 'Approche',
-      text: 'Nous avons conçu un système de design modulaire à fort contraste, fondé sur une typographie sobre, une hiérarchie éditoriale et des composants universels. Les cours s’adaptent organiquement au support, convertissant de longs textes en fiches interactives de révision espacée sur mobile.',
+      label: '03 / Stratégie MVP Desktop',
+      text: 'En synthétisant ces enseignements, nous avons structuré l’architecture de l’information et l’UX globale, en priorisant rigoureusement ce qui devait intégrer le premier MVP et ce qui devait être reporté. Nous avons concentré nos efforts sur la version Web Desktop avec une ligne directrice claire : un minimalisme fonctionnel centré sur l’utilisateur, éliminant tout bruit visuel pour favoriser la concentration sur des matières techniques denses.',
+    },
+    {
+      label: '04 / Retours & Roadmap v2',
+      text: 'Le déploiement du MVP a confirmé que simplifier l’interface transforme radicalement l’expérience d’apprentissage technique. En conditions réelles d’utilisation, nous avons identifié les axes majeurs qui guident la version 2.0 : perfectionnement du parcours de dépôt et correction des projets, métriques d’avancement approfondies pour les formateurs et future déclinaison mobile d’accompagnement.',
     },
   ],
 };
@@ -750,15 +762,15 @@ export const agoraCardsByLang: Record<Language, GalleryCardTranslation[]> = {
     },
     {
       src: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&h=1200&fit=crop&auto=format',
-      alt: 'Agora Mobile App — Microlearning & Flashcards Flow',
+      alt: 'Agora Platform — UX Architecture & Project Workflow',
       label: '002',
-      caption: 'Microaprendizaje Móvil',
+      caption: 'Arquitectura UX & Flujo de Entregas',
     },
     {
       src: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=900&h=1200&fit=crop&auto=format',
       alt: 'Agora Design System — Components & Typography Hierarchy',
       label: '003',
-      caption: 'Tokens de Diseño & UI Kit',
+      caption: 'Tokens de Diseño & UI Kit Minimalista',
     },
     {
       src: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=900&h=1200&fit=crop&auto=format',
@@ -770,7 +782,7 @@ export const agoraCardsByLang: Record<Language, GalleryCardTranslation[]> = {
       src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=900&h=1200&fit=crop&auto=format',
       alt: 'Agora Peer Mentoring — Real-time Discussion Forums',
       label: '005',
-      caption: 'Espacios de Estudio Colaborativo',
+      caption: 'Espacios de Consulta & Foro Docente',
     },
     {
       src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=1200&fit=crop&auto=format',
@@ -788,15 +800,15 @@ export const agoraCardsByLang: Record<Language, GalleryCardTranslation[]> = {
     },
     {
       src: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&h=1200&fit=crop&auto=format',
-      alt: 'Agora Mobile App — Microlearning & Flashcards Flow',
+      alt: 'Agora Platform — UX Architecture & Project Workflow',
       label: '002',
-      caption: 'Mobile Microlearning',
+      caption: 'UX Architecture & Project Flow',
     },
     {
       src: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=900&h=1200&fit=crop&auto=format',
       alt: 'Agora Design System — Components & Typography Hierarchy',
       label: '003',
-      caption: 'Design Tokens & UI Kit',
+      caption: 'Design Tokens & Minimalist UI Kit',
     },
     {
       src: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=900&h=1200&fit=crop&auto=format',
@@ -808,7 +820,7 @@ export const agoraCardsByLang: Record<Language, GalleryCardTranslation[]> = {
       src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=900&h=1200&fit=crop&auto=format',
       alt: 'Agora Peer Mentoring — Real-time Discussion Forums',
       label: '005',
-      caption: 'Collaborative Study Spaces',
+      caption: 'Faculty Q&A & Discussion Forums',
     },
     {
       src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=1200&fit=crop&auto=format',
@@ -822,19 +834,19 @@ export const agoraCardsByLang: Record<Language, GalleryCardTranslation[]> = {
       src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&h=1200&fit=crop&auto=format',
       alt: 'Agora Web Platform — Desktop Dashboard & Workspace',
       label: '001',
-      caption: 'Espace Bureau Web',
+      caption: 'Espace Bureau Web Desktop',
     },
     {
       src: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&h=1200&fit=crop&auto=format',
-      alt: 'Agora Mobile App — Microlearning & Flashcards Flow',
+      alt: 'Agora Platform — UX Architecture & Project Workflow',
       label: '002',
-      caption: 'Micro-apprentissage Mobile',
+      caption: 'Architecture UX & Flux des Projets',
     },
     {
       src: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=900&h=1200&fit=crop&auto=format',
       alt: 'Agora Design System — Components & Typography Hierarchy',
       label: '003',
-      caption: 'Tokens de Design & Kit UI',
+      caption: 'Tokens de Design & UI Kit Minimaliste',
     },
     {
       src: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=900&h=1200&fit=crop&auto=format',
@@ -846,7 +858,7 @@ export const agoraCardsByLang: Record<Language, GalleryCardTranslation[]> = {
       src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=900&h=1200&fit=crop&auto=format',
       alt: 'Agora Peer Mentoring — Real-time Discussion Forums',
       label: '005',
-      caption: 'Espaces d’Étude Collaboratifs',
+      caption: 'Espaces d’Échange & Forum Enseignant',
     },
     {
       src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=1200&fit=crop&auto=format',
