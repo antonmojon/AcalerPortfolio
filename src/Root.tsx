@@ -4,6 +4,14 @@ import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import FloatingThemeButton from './components/FloatingThemeButton';
 import ProjectLoadingScreen from './components/ProjectLoadingScreen';
+import ComingSoonOverlay from './components/ComingSoonOverlay';
+
+/**
+ * 🔒 MODO PRÓXIMAMENTE (COMING SOON)
+ * - Cambia esta variable a `false` (o elimina la línea) para publicar la web completa.
+ * - Puedes previsualizar la web completa en cualquier momento con: ?preview=true
+ */
+const COMING_SOON_MODE = true;
 
 let _introShown = false;
 
@@ -242,6 +250,7 @@ export default function Root() {
   return (
     <ThemeProvider>
       <LanguageProvider>
+        {COMING_SOON_MODE && <ComingSoonOverlay />}
         {loading && (
           <IntroScreen onDone={() => {
             _introShown = true;
