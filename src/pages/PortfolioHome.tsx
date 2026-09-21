@@ -212,14 +212,13 @@ function StoryCard({ project }: { project: ProjectItemData }) {
     </article>
   );
 
-  if (project.href) {
-    return (
-      <Link to={project.href} style={{ gridColumn: `span ${project.cols}`, textDecoration: 'none', display: 'contents' }}>
-        {inner}
-      </Link>
-    );
-  }
-  return inner;
+  const targetHref = project.href || `/proximamente?project=${encodeURIComponent(project.title)}`;
+
+  return (
+    <Link to={targetHref} style={{ gridColumn: `span ${project.cols}`, textDecoration: 'none', display: 'contents' }}>
+      {inner}
+    </Link>
+  );
 }
 
 function PortfolioNewsGrid() {
