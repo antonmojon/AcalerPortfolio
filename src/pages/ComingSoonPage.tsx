@@ -2,52 +2,31 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSelector from '../components/LanguageSelector';
+import { META } from '../styles/tokens';
 
-const TRANSLATIONS = {
-  es: {
-    status: 'En Desarrollo · 2026',
-    title: 'PRÓXIMAMENTE',
-    desc: 'Caso de estudio en fase final de diseño y documentación editorial.',
-    back: 'Volver al portfolio',
-    brandBack: '← Antonio Calero',
-  },
-  en: {
-    status: 'Work in Progress · 2026',
-    title: 'COMING SOON',
-    desc: 'Case study in final design and editorial documentation stage.',
-    back: 'Back to portfolio',
-    brandBack: '← Antonio Calero',
-  },
-  fr: {
-    status: 'En Développement · 2026',
-    title: 'BIENTÔT DISPONIBLE',
-    desc: 'Étude de cas en phase finale de conception et documentation éditoriale.',
-    back: 'Retour au portfolio',
-    brandBack: '← Antonio Calero',
-  },
+const BACK_LABELS = {
+  es: '← Volver al portfolio',
+  en: '← Back to portfolio',
+  fr: '← Retour au portfolio',
 };
 
 export default function ComingSoonPage() {
   const [pct, setPct] = useState(0);
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [searchParams] = useSearchParams();
   const projectParam = searchParams.get('project');
-
-  const currentLang = (language === 'fr' || language === 'en') ? language : 'es';
-  const t = TRANSLATIONS[currentLang];
 
   // Smooth numeric counter that intentionally freezes at 75%
   useEffect(() => {
     let start: number | null = null;
     let raf: number;
-    const DURATION = 1200;
+    const DURATION = 900;
     const TARGET = 75;
 
     const tick = (now: number) => {
       if (!start) start = now;
       const elapsed = now - start;
       const progress = Math.min(elapsed / DURATION, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = Math.floor(eased * TARGET);
       setPct(current);
@@ -63,6 +42,11 @@ export default function ComingSoonPage() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
+  const currentLang = (language === 'fr' || language === 'en') ? language : 'es';
+  const label = projectParam
+    ? `${projectParam} — ${t('home.coming_soon')}`
+    : t('home.coming_soon');
+
   return (
     <div
       style={{
@@ -71,21 +55,21 @@ export default function ComingSoonPage() {
         backgroundColor: 'var(--bg-primary)',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: '32px 80px',
-        boxSizing: 'border-box',
-        transition: 'background-color 0.4s ease',
         userSelect: 'none',
+        transition: 'background-color 0.4s ease',
       }}
-      className="section-pad"
     >
-      {/* Top Bar */}
+      {/* Top Nav — identical to standard subpages (About, Contact, Agora) */}
       <nav
+        className="nav-pad fixed top-0 left-0 right-0 z-50 flex items-center justify-between"
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
+          paddingLeft: '80px',
+          paddingRight: '80px',
+          paddingTop: '24px',
+          paddingBottom: '24px',
+          backgroundColor: 'var(--bg-primary)',
+          borderBottom: '1px solid var(--border-color)',
+          transition: 'background-color 0.4s ease, border-color 0.3s ease',
         }}
       >
         <Link
@@ -100,151 +84,96 @@ export default function ComingSoonPage() {
             transition: 'color 0.4s ease',
           }}
         >
-          {t.brandBack}
+          ← Antonio Calero
         </Link>
-        <LanguageSelector />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+          <Link
+            to="/#work"
+            className="nav-link"
+            style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}
+          >
+            {t('nav.projects')}
+          </Link>
+          <Link
+            to="/about"
+            className="nav-link"
+            style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}
+          >
+            {t('nav.about')}
+          </Link>
+          <Link
+            to="/contact"
+            className="nav-link"
+            style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}
+          >
+            {t('nav.contact')}
+          </Link>
+          <LanguageSelector />
+        </div>
       </nav>
 
-      {/* Dead-Center Coming Soon Block */}
+      {/* Center Loader — identical in spirit and typography to ProjectLoadingScreen & IntroScreen */}
       <main
         style={{
+          flex: 1,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          textAlign: 'center',
           gap: '8px',
-          margin: 'auto 0',
-          padding: '40px 0',
+          padding: '0 24px',
         }}
       >
-        {/* Status Indicator with pulse dot */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-          <span
-            style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent-color)',
-              display: 'inline-block',
-              animation: 'pulse 1.4s infinite ease-in-out',
-            }}
-          />
-          <span
-            style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '11px',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--accent-color)',
-              fontWeight: 700,
-            }}
-          >
-            {t.status}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h1
-          style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '14px',
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase',
-            color: 'var(--text-primary)',
-            fontWeight: 700,
-            margin: '0',
-          }}
-        >
-          {projectParam ? `${t.title} · ${projectParam}` : t.title}
-        </h1>
-
-        {/* Counter frozen at 75% */}
         <span
           style={{
             fontFamily: '"Space Mono", monospace',
-            fontSize: '13px',
+            fontSize: '11px',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'var(--text-primary)',
+            textAlign: 'center',
+          }}
+        >
+          {label}
+        </span>
+        <span
+          style={{
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '11px',
             letterSpacing: '0.06em',
             color: 'var(--text-secondary)',
             fontVariantNumeric: 'tabular-nums',
-            marginTop: '2px',
           }}
         >
           {String(pct).padStart(3, ' ')}%
         </span>
 
-        {/* Hairline Progress Bar */}
-        <div
-          style={{
-            width: '160px',
-            height: '2px',
-            backgroundColor: 'var(--border-color)',
-            overflow: 'hidden',
-            position: 'relative',
-            marginTop: '16px',
-            marginBottom: '16px',
-          }}
-        >
-          <div
-            style={{
-              width: `${pct}%`,
-              height: '100%',
-              backgroundColor: 'var(--accent-color)',
-              transition: 'width 0.08s ease-out',
-            }}
-          />
-        </div>
-
-        {/* Explanatory note */}
-        <p
-          style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '11px',
-            letterSpacing: '0.05em',
-            color: 'var(--text-muted)',
-            maxWidth: '360px',
-            lineHeight: '1.7',
-            margin: '0',
-          }}
-        >
-          {t.desc}
-        </p>
-
-        {/* Return link */}
         <Link
           to="/"
           style={{
-            marginTop: '32px',
             fontFamily: '"Space Mono", monospace',
             fontSize: '11px',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            color: 'var(--text-primary)',
+            color: 'var(--text-muted)',
             textDecoration: 'none',
-            padding: '10px 22px',
-            border: '1px solid var(--border-color)',
-            transition: 'border-color 0.25s ease, color 0.25s ease, transform 0.2s ease',
+            marginTop: '28px',
+            paddingBottom: '2px',
+            borderBottom: '1px solid transparent',
+            transition: 'color 0.25s ease, border-color 0.25s ease',
           }}
-          className="coming-soon-btn"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'var(--text-primary)';
+            e.currentTarget.style.borderBottomColor = 'var(--text-primary)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--text-muted)';
+            e.currentTarget.style.borderBottomColor = 'transparent';
+          }}
         >
-          ← {t.back}
+          {BACK_LABELS[currentLang]}
         </Link>
       </main>
-
-      {/* Bottom Footer mark */}
-      <footer style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-        <span
-          style={{
-            fontFamily: '"Space Mono", monospace',
-            fontSize: '10px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'var(--text-muted)',
-          }}
-        >
-          Capa Zero · Madrid, España
-        </span>
-      </footer>
     </div>
   );
 }
