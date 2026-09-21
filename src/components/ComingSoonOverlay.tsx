@@ -92,7 +92,7 @@ export default function ComingSoonOverlay() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '32px 80px',
+        padding: 'clamp(20px, 4vh, 32px) clamp(20px, 5vw, 80px)',
         boxSizing: 'border-box',
         userSelect: 'none',
         transition: 'background-color 0.4s ease',
@@ -111,7 +111,7 @@ export default function ComingSoonOverlay() {
         <span
           style={{
             fontFamily: '"Special Gothic Expanded One", sans-serif',
-            fontSize: '15px',
+            fontSize: 'clamp(13px, 3.5vw, 15px)',
             letterSpacing: '0.04em',
             textTransform: 'uppercase',
             color: 'var(--text-primary)',
@@ -131,14 +131,14 @@ export default function ComingSoonOverlay() {
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          gap: '8px',
+          gap: '12px',
         }}
       >
         <span
           style={{
             fontFamily: '"Space Mono", monospace',
-            fontSize: '11px',
-            letterSpacing: '0.12em',
+            fontSize: 'clamp(11px, 2.8vw, 12px)',
+            letterSpacing: '0.14em',
             textTransform: 'uppercase',
             color: 'var(--text-primary)',
           }}
@@ -148,7 +148,7 @@ export default function ComingSoonOverlay() {
         <span
           style={{
             fontFamily: '"Space Mono", monospace',
-            fontSize: '11px',
+            fontSize: 'clamp(11px, 2.8vw, 12px)',
             letterSpacing: '0.06em',
             color: 'var(--text-secondary)',
             fontVariantNumeric: 'tabular-nums',
@@ -167,6 +167,8 @@ export default function ComingSoonOverlay() {
           width: '100%',
           borderTop: '1px solid var(--border-color)',
           paddingTop: '20px',
+          flexWrap: 'wrap',
+          gap: '12px',
           transition: 'border-color 0.4s ease',
         }}
       >
