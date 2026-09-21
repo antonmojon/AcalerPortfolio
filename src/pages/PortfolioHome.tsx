@@ -37,7 +37,7 @@ function PortfolioNav() {
         transition: 'background-color 0.4s ease, border-color 0.3s ease',
       }}
     >
-      <span style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, transition: 'color 0.4s ease' }}>Portfolio 2026</span>
+      <span style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, letterSpacing: '0.08em', transition: 'color 0.4s ease' }}>Capa Zero</span>
       <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         <a href="#work" className="nav-link" style={META}>{t('nav.projects')}</a>
         <Link to="/about" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.about')}</Link>
