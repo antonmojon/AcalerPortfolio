@@ -1,125 +1,59 @@
 import { useTheme } from '../context/ThemeContext';
 
 /**
- * Floating Swiss Editorial Theme Toggle
- * Follows the strict visual language of Antonio Calero's portfolio:
- * - 0px border radius (sharp Swiss modernist geometry)
- * - 1px hairline border with zero diffuse shadows
- * - Space Mono 11px typography matching LanguageSelector (B&N / COLOR)
- * - Micro geometric swatch indicating current palette
+ * Option 3: Minimalist Swiss Micro-Switch
+ * Ultra-compact, clean 2-state sliding toggle:
+ * - 38px x 20px pill track with 1px hairline border
+ * - 14px sliding thumb: #111111 in B&N mode -> #FD1843 in Color mode
+ * - Zero bulky text or boxes, pure restrained Swiss industrial aesthetic
  */
 export default function FloatingThemeButton() {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const isColor = theme === 'color';
 
   return (
-    <div
-      className="floating-theme-tag"
-      role="group"
-      aria-label="Selector de tema cromático (B&N / Color)"
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className="floating-micro-switch"
+      role="switch"
+      aria-checked={isColor}
+      aria-label={isColor ? 'Cambiar a modo Blanco y Negro' : 'Cambiar a modo Color'}
+      title={isColor ? 'Modo actual: Color (Clic para B&N)' : 'Modo actual: Blanco y Negro (Clic para Color)'}
       style={{
         position: 'fixed',
         bottom: '28px',
         right: '28px',
         zIndex: 100001,
-        backgroundColor: 'var(--bg-primary)',
-        border: '1px solid var(--border-color)',
-        borderRadius: 0,
-        padding: '6px 12px',
-        display: 'inline-flex',
+        width: '38px',
+        height: '20px',
+        borderRadius: '999px',
+        backgroundColor: isColor ? 'rgba(253, 24, 67, 0.12)' : 'var(--bg-surface)',
+        border: isColor ? '1px solid rgba(253, 24, 67, 0.45)' : '1px solid var(--border-color)',
+        cursor: 'pointer',
+        padding: '2px',
+        boxSizing: 'border-box',
+        display: 'flex',
         alignItems: 'center',
-        gap: '8px',
+        outline: 'none',
         userSelect: 'none',
-        boxShadow: 'none',
-        fontFamily: '"Space Mono", monospace',
-        fontSize: '11px',
-        letterSpacing: '0.08em',
-        textTransform: 'uppercase',
-        transition: 'background-color 0.4s ease, border-color 0.25s ease',
       }}
     >
-      {/* Geometric Swiss Swatch indicator */}
       <span
         aria-hidden="true"
         style={{
-          width: '6px',
-          height: '6px',
+          width: '14px',
+          height: '14px',
+          borderRadius: '50%',
           backgroundColor: isColor ? '#FD1843' : '#111111',
-          display: 'inline-block',
-          borderRadius: 0,
-          transition: 'background-color 0.3s ease',
+          transform: isColor ? 'translateX(18px)' : 'translateX(0px)',
+          transition: 'transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.28s ease, box-shadow 0.28s ease',
+          boxShadow: isColor
+            ? '0 0 8px rgba(253, 24, 67, 0.5)'
+            : '0 1px 3px rgba(0, 0, 0, 0.25)',
+          display: 'block',
         }}
       />
-
-      {/* B&N button */}
-      <button
-        type="button"
-        onClick={() => setTheme('bw')}
-        aria-pressed={!isColor}
-        title="Modo Blanco y Negro"
-        style={{
-          background: 'none',
-          border: 'none',
-          padding: 0,
-          margin: 0,
-          fontFamily: 'inherit',
-          fontSize: 'inherit',
-          letterSpacing: 'inherit',
-          textTransform: 'uppercase',
-          cursor: 'pointer',
-          fontWeight: !isColor ? 700 : 400,
-          color: !isColor ? 'var(--text-primary)' : 'var(--text-muted)',
-          textDecorationLine: !isColor ? 'underline' : 'none',
-          textUnderlineOffset: '3px',
-          textDecorationThickness: '1px',
-          transition: 'color 0.2s ease',
-          outline: 'none',
-        }}
-        onMouseEnter={(e) => {
-          if (isColor) e.currentTarget.style.color = 'var(--text-primary)';
-        }}
-        onMouseLeave={(e) => {
-          if (isColor) e.currentTarget.style.color = 'var(--text-muted)';
-        }}
-      >
-        B&amp;N
-      </button>
-
-      <span style={{ color: 'var(--text-muted)', opacity: 0.35, fontSize: '10px' }}>/</span>
-
-      {/* Color button */}
-      <button
-        type="button"
-        onClick={() => setTheme('color')}
-        aria-pressed={isColor}
-        title="Modo Color Suiza (Carmesí)"
-        style={{
-          background: 'none',
-          border: 'none',
-          padding: 0,
-          margin: 0,
-          fontFamily: 'inherit',
-          fontSize: 'inherit',
-          letterSpacing: 'inherit',
-          textTransform: 'uppercase',
-          cursor: 'pointer',
-          fontWeight: isColor ? 700 : 400,
-          color: isColor ? 'var(--accent-color)' : 'var(--text-muted)',
-          textDecorationLine: isColor ? 'underline' : 'none',
-          textUnderlineOffset: '3px',
-          textDecorationThickness: '1px',
-          transition: 'color 0.2s ease',
-          outline: 'none',
-        }}
-        onMouseEnter={(e) => {
-          if (!isColor) e.currentTarget.style.color = 'var(--accent-color)';
-        }}
-        onMouseLeave={(e) => {
-          if (!isColor) e.currentTarget.style.color = 'var(--text-muted)';
-        }}
-      >
-        Color
-      </button>
-    </div>
+    </button>
   );
 }

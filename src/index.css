@@ -588,22 +588,22 @@ body {
   }
 }
 
-.floating-theme-tag {
+.floating-micro-switch {
   position: fixed;
   bottom: 28px;
   right: 28px;
   z-index: 100001;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.floating-theme-tag:hover {
-  border-color: var(--text-primary) !important;
+.floating-micro-switch:hover {
+  transform: scale(1.08);
 }
 
 @media (max-width: 768px) {
-  .floating-theme-tag {
-    bottom: 16px !important;
-    right: 16px !important;
-    padding: 5px 10px !important;
+  .floating-micro-switch {
+    bottom: 20px !important;
+    right: 20px !important;
   }
 }
 
