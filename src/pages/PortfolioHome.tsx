@@ -151,72 +151,72 @@ import type { ProjectItemData } from '../context/LanguageContext';
 function StoryCard({ project }: { project: ProjectItemData }) {
   const { t } = useLanguage();
   const [over, setOver] = useState(false);
-  const imgH = project.large ? 440 : 300;
-  const titleSize = project.large ? 'clamp(28px, 3vw, 48px)' : 'clamp(20px, 2vw, 30px)';
+  const targetHref = project.href || `/proximamente?project=${encodeURIComponent(project.title)}`;
 
-  const inner = (
-    <article
+  return (
+    <Link
+      to={targetHref}
+      className={`story-card ${project.large ? 'story-card-large' : 'story-card-regular'}`}
       style={{
         gridColumn: `span ${project.cols}`,
-        cursor: project.href ? 'none' : 'default',
+        textDecoration: 'none',
+        color: 'inherit',
+        cursor: project.href ? 'pointer' : 'default',
       }}
       onMouseEnter={() => setOver(true)}
       onMouseLeave={() => setOver(false)}
       aria-label={project.href ? `Ver proyecto ${project.title}` : `${project.title} — ${t('home.coming_soon')}`}
     >
-      <div style={{ overflow: 'hidden', height: `${imgH}px`, backgroundColor: 'var(--bg-surface)', marginBottom: '16px' }}>
+      <div className="story-card-img-wrap">
         <img
           src={project.img ?? ''}
           alt={project.title}
           className="work-card-img"
           loading="lazy"
           style={{
-            width: '100%', height: '100%', objectFit: 'cover',
             filter: `grayscale(${over ? 0 : 12}%) contrast(1.04)`,
             transition: 'filter 0.5s ease',
           }}
         />
       </div>
-      <div style={{ paddingTop: '12px', marginBottom: '10px', display: 'flex', justifyContent: 'space-between' }}>
+      <div className="story-card-meta">
         <span style={{ ...META, color: 'var(--text-muted)' }}>{project.num}</span>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          {project.tags.map(t => <span key={t} style={META}>{t}</span>)}
+        <div className="story-card-tags">
+          {project.tags.map(tag => (
+            <span key={tag} style={META}>{tag}</span>
+          ))}
           <span style={{ ...META, color: 'var(--text-muted)' }}>{project.year}</span>
         </div>
       </div>
-      <span style={{
-        fontFamily: '"Special Gothic", sans-serif',
-        fontWeight: 700,
-        fontSize: titleSize,
-        letterSpacing: '-0.02em',
-        lineHeight: '1.05',
-        color: 'var(--text-primary)',
-        borderBottom: over ? '2px solid var(--accent-color)' : '2px solid transparent',
-        paddingBottom: '1px',
-        transition: 'border-color 0.25s ease, color 0.4s ease',
-        display: 'inline',
-      }}>
-        {project.title}
-        <span style={{
-          marginLeft: '8px', fontSize: '0.7em',
-          opacity: over ? 1 : 0,
-          transform: over ? 'translateX(0)' : 'translateX(-4px)',
-          display: 'inline-block',
-          color: 'var(--accent-color)',
-          transition: 'opacity 0.3s ease, transform 0.3s ease',
-        }}>→</span>
-      </span>
+      <h2
+        className="story-card-title"
+        style={{
+          borderBottom: over ? '2px solid var(--accent-color)' : '2px solid transparent',
+          paddingBottom: '1px',
+          transition: 'border-color 0.25s ease, color 0.4s ease',
+        }}
+      >
+        <span>{project.title}</span>
+        <span
+          className="story-card-arrow"
+          style={{
+            marginLeft: '8px',
+            fontSize: '0.7em',
+            opacity: over ? 1 : 0,
+            transform: over ? 'translateX(0)' : 'translateX(-4px)',
+            display: 'inline-block',
+            color: 'var(--accent-color)',
+            transition: 'opacity 0.3s ease, transform 0.3s ease',
+          }}
+        >
+          →
+        </span>
+      </h2>
       {!project.href && (
-        <p style={{ ...META, color: 'var(--text-muted)', marginTop: '8px', fontSize: '10px' }}>{t('home.coming_soon')}</p>
+        <p style={{ ...META, color: 'var(--text-muted)', marginTop: '8px', fontSize: '10px' }}>
+          {t('home.coming_soon')}
+        </p>
       )}
-    </article>
-  );
-
-  const targetHref = project.href || `/proximamente?project=${encodeURIComponent(project.title)}`;
-
-  return (
-    <Link to={targetHref} style={{ gridColumn: `span ${project.cols}`, textDecoration: 'none', display: 'contents' }}>
-      {inner}
     </Link>
   );
 }

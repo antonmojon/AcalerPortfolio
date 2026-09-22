@@ -334,6 +334,111 @@ body {
   padding-right: 80px;
 }
 
+/* ─── Story Cards & News Grid System ──────────────────────── */
+.story-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.story-card-img-wrap {
+  overflow: hidden;
+  background-color: var(--bg-surface);
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.story-card-large .story-card-img-wrap {
+  height: 440px;
+}
+
+.story-card-regular .story-card-img-wrap {
+  height: 300px;
+}
+
+.story-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.story-card-meta {
+  padding-top: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.story-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.story-card-title {
+  font-family: "Special Gothic", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  display: inline-block;
+  margin: 0;
+}
+
+.story-card-large .story-card-title {
+  font-size: clamp(28px, 3vw, 48px);
+}
+
+.story-card-regular .story-card-title {
+  font-size: clamp(20px, 2vw, 30px);
+}
+
+/* ─── Tablet Grid Layout (769px to 1024px) ─────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .news-grid-section {
+    padding: 36px 40px 80px !important;
+  }
+
+  .news-row-a {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px 24px !important;
+    margin-bottom: 36px !important;
+  }
+
+  .news-row-a .story-card {
+    grid-column: span 1 !important;
+  }
+
+  .news-row-a .story-card-img-wrap {
+    height: 320px !important;
+  }
+
+  .news-row-b {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px 24px !important;
+  }
+
+  .news-row-b .story-card {
+    grid-column: span 1 !important;
+  }
+
+  .news-row-b .story-card:nth-child(3) {
+    grid-column: span 2 !important;
+  }
+
+  .news-row-b .story-card-img-wrap {
+    height: 280px !important;
+  }
+}
+
 /* ─── Responsive ────────────────────────────────────────── */
 @media (max-width: 1000px) {
   .editorial-grid, .gallery-grid, .footer-grid {
@@ -378,21 +483,40 @@ body {
     padding-right: 0 !important;
   }
 
-  /* News grid — single column */
+  /* News grid & Cards on Mobile */
   .news-grid-section {
-    padding: 32px 24px 64px !important;
+    padding: 24px 20px 64px !important;
   }
 
   .news-row-a,
   .news-row-b {
     display: flex !important;
     flex-direction: column !important;
-    gap: 48px !important;
+    gap: 40px !important;
+    margin-bottom: 40px !important;
   }
 
-  .news-row-a > *,
-  .news-row-b > * {
+  .story-card {
     grid-column: span 12 !important;
+    width: 100% !important;
+  }
+
+  .story-card-img-wrap {
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    max-height: 340px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .story-card-large .story-card-title,
+  .story-card-regular .story-card-title {
+    font-size: clamp(24px, 5.8vw, 34px) !important;
+    line-height: 1.1 !important;
+  }
+
+  .story-card-arrow {
+    opacity: 0.8 !important;
+    transform: none !important;
   }
 
   /* CTA */
@@ -806,6 +930,14 @@ body {
   .nav-pad {
     padding-left: 16px !important;
     padding-right: 16px !important;
+  }
+  .news-grid-section {
+    padding: 20px 16px 48px !important;
+  }
+  .news-row-a,
+  .news-row-b {
+    gap: 32px !important;
+    margin-bottom: 32px !important;
   }
 }
 
