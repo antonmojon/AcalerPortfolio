@@ -588,23 +588,23 @@ body {
   }
 }
 
-.floating-theme-btn {
+.floating-theme-pill {
   position: fixed;
   bottom: 28px;
   right: 28px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 7500;
+  z-index: 100001;
+}
+
+.floating-theme-pill:hover {
+  border-color: var(--text-primary) !important;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
-  .floating-theme-btn {
-    bottom: 20px !important;
-    right: 20px !important;
-    width: 28px !important;
-    height: 28px !important;
+  .floating-theme-pill {
+    bottom: 18px !important;
+    right: 18px !important;
+    padding: 5px 10px !important;
   }
 }
 
