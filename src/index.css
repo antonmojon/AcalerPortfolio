@@ -337,11 +337,17 @@ body {
 }
 .scroll-track::-webkit-scrollbar { display: none; }
 
-/* ─── Work card hover ───────────────────────────────────── */
-.work-card-img {
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+/* ─── Work / Story card hover ────────────────────────────── */
+.work-card-img,
+.story-card-img-wrap img {
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  will-change: transform;
 }
-.work-card:hover .work-card-img { transform: scale(1.05); }
+.story-card:hover .work-card-img,
+.story-card:hover .story-card-img-wrap img,
+.work-card:hover .work-card-img {
+  transform: scale(1.04);
+}
 
 /* ─── Parallax container ────────────────────────────────── */
 .parallax-wrap {

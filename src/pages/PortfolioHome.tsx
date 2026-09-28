@@ -195,7 +195,8 @@ function StoryCard({ project }: { project: ProjectItemData }) {
           loading="lazy"
           style={{
             filter: `grayscale(${over ? 0 : 12}%) contrast(1.04)`,
-            transition: 'filter 0.5s ease',
+            transform: over ? 'scale(1.04)' : 'scale(1)',
+            transition: 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease',
           }}
         />
       </div>
