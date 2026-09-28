@@ -194,7 +194,7 @@ function AboutBio() {
         </div>
 
         {/* Rol */}
-        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '32px' }}>
+        <div>
           <p style={{ ...META, marginBottom: '8px', color: 'var(--text-primary)' }}>{t('about.bio_role_label')}</p>
           <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)' }}>
             {t('about.bio_role_value')}
@@ -203,7 +203,7 @@ function AboutBio() {
         </div>
 
         {/* Idiomas */}
-        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '32px' }}>
+        <div>
           <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '20px' }}>{t('about.languages_label')}</p>
           <div style={{ display: 'flex', gap: '40px' }}>
             {[
@@ -395,7 +395,7 @@ function AboutExperience() {
           <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '24px' }}>
             {t('about.exp_title')}
           </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {experiences.map(({ company, role, period }) => (
               <div
                 key={company}
@@ -403,8 +403,6 @@ function AboutExperience() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'baseline',
-                  borderBottom: '1px solid var(--border-color)',
-                  paddingBottom: '16px',
                 }}
               >
                 <div>
@@ -438,7 +436,7 @@ function AboutExperience() {
           <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '24px' }}>
             {t('about.edu_title')}
           </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {educations.map(({ school, degree, year }) => (
               <div
                 key={school}
@@ -446,8 +444,6 @@ function AboutExperience() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'baseline',
-                  borderBottom: '1px solid var(--border-color)',
-                  paddingBottom: '16px',
                 }}
               >
                 <div>
@@ -636,7 +632,7 @@ function AboutStack() {
           </p>
         </div>
 
-        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '24px', marginTop: '48px' }}>
+        <div style={{ marginTop: '48px' }}>
           <p style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', margin: 0, lineHeight: '1.6', whiteSpace: 'pre-line' }}>
             {t('about.stack_meta')}
           </p>
