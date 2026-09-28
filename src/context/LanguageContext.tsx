@@ -109,7 +109,7 @@ export const translations = {
     'about.stack_title': 'La importancia del stack',
     'about.stack_manifesto_p1': 'El diseño no termina en el lienzo estático: vive en la interacción real, en los tokens y en el código vivo.',
     'about.stack_manifesto_p2': 'Articulo un flujo donde el craft visual, la lógica agéntica y la síntesis generativa multiplican la velocidad y la calidad de entrega de producto.',
-    'about.stack_meta': 'Ecosistema activo · 9 herramientas seleccionadas para producción',
+    'about.stack_meta': 'Ecosistema activo · 12 herramientas seleccionadas para producción',
     'about.cta_title': 'CREEMOS ALGO JUNTOS',
 
     // Contact
@@ -238,7 +238,7 @@ export const translations = {
     'about.stack_title': 'The Importance of the Stack',
     'about.stack_manifesto_p1': 'Design does not end on the static canvas: it lives in real interaction, tokens, and living code.',
     'about.stack_manifesto_p2': 'I structure a workflow where visual craft, agentic reasoning, and generative synthesis accelerate velocity and elevate product delivery quality.',
-    'about.stack_meta': 'Active ecosystem · 9 tools curated for production',
+    'about.stack_meta': 'Active ecosystem · 12 tools curated for production',
     'about.cta_title': "LET'S BUILD SOMETHING",
 
     // Contact
@@ -367,7 +367,7 @@ export const translations = {
     'about.stack_title': 'L’importance de la stack',
     'about.stack_manifesto_p1': 'Le design ne s’arrête pas au canevas statique : il s’anime dans l’interaction réelle, les tokens et le code vivant.',
     'about.stack_manifesto_p2': 'J’articule un workflow où le craft visuel, la logique agentique et la synthèse générative démultiplient la vitesse et la qualité de livraison.',
-    'about.stack_meta': 'Écosystème actif · 9 outils sélectionnés pour la production',
+    'about.stack_meta': 'Écosystème actif · 12 outils sélectionnés pour la production',
     'about.cta_title': 'CRÉONS ENSEMBLE',
 
     // Contact
@@ -633,6 +633,16 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'SeaDance', tag: 'Motion AI', focus: 'Vídeo cinematográfico por prompt' },
       ],
     },
+    {
+      num: '04',
+      title: 'Colaboración & Workspace',
+      role: 'Gestión, Datos & Handoff',
+      tools: [
+        { name: 'Notion', tag: 'Docs & Wiki', focus: 'Documentación de producto, especificaciones y design roadmap' },
+        { name: 'Slack', tag: 'Async Comms', focus: 'Comunicación de equipo, canales de producto y feedback ágil' },
+        { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (datos cuantitativos), PowerPoint (presentaciones ejecutivas) y Teams' },
+      ],
+    },
   ],
   en: [
     {
@@ -665,6 +675,16 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'SeaDance', tag: 'Motion AI', focus: 'Cinematic video generation via prompt' },
       ],
     },
+    {
+      num: '04',
+      title: 'Collaboration & Workspace',
+      role: 'Management, Data & Handoff',
+      tools: [
+        { name: 'Notion', tag: 'Docs & Wiki', focus: 'Product documentation, specs, and design roadmaps' },
+        { name: 'Slack', tag: 'Async Comms', focus: 'Team communication, product channels, and rapid feedback' },
+        { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (quantitative data), PowerPoint (executive decks), and Teams' },
+      ],
+    },
   ],
   fr: [
     {
@@ -695,6 +715,16 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
       tools: [
         { name: 'Magnific AI', tag: 'Haute-Rég.', focus: 'Suréchantillonnage et hyper-détail' },
         { name: 'SeaDance', tag: 'Motion IA', focus: 'Génération vidéo cinématographique' },
+      ],
+    },
+    {
+      num: '04',
+      title: 'Collaboration & Espace de Travail',
+      role: 'Gestion, Données & Handoff',
+      tools: [
+        { name: 'Notion', tag: 'Docs & Wiki', focus: 'Documentation produit, spécifications et feuille de route' },
+        { name: 'Slack', tag: 'Comms Asynchrones', focus: 'Communication d’équipe, canaux produit et retours agiles' },
+        { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (analyse de données), PowerPoint (présentations) et Teams' },
       ],
     },
   ],

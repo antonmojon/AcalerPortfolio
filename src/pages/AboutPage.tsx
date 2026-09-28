@@ -268,6 +268,21 @@ const TOOL_ICONS: Record<string, React.ReactNode> = {
   InDesign: (
     <span style={{ fontFamily: '"Space Mono", monospace', fontWeight: 700, fontSize: '11px', letterSpacing: '-0.05em' }}>Id</span>
   ),
+  Notion: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M4 4.5h16a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V6A1.5 1.5 0 0 1 4 4.5zm2.5 3v9h2.2l4.8-6.3V16.5H16v-9h-2.2L9 13.8V7.5H6.5z" />
+    </svg>
+  ),
+  Slack: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/>
+    </svg>
+  ),
+  'Microsoft 365': (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M1 1h10v10H1V1zm12 0h10v10H13V1zM1 13h10v10H1V13zm12 0h10v10H13V13z" />
+    </svg>
+  ),
   'Claude Code': (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="4 17 10 11 4 5" />
@@ -523,6 +538,16 @@ const PILLARS_DATA: PillarData[] = [
     tools: [
       { name: 'Magnific AI', tag: 'Hiper-res', focus: 'Upscaling e hiper-detalle' },
       { name: 'SeaDance', tag: 'Motion AI', focus: 'Vídeo cinematográfico por prompt' },
+    ],
+  },
+  {
+    num: '04',
+    title: 'Colaboración & Workspace',
+    role: 'Gestión, Datos & Handoff',
+    tools: [
+      { name: 'Notion', tag: 'Docs & Wiki', focus: 'Documentación de producto, especificaciones y design roadmap' },
+      { name: 'Slack', tag: 'Async Comms', focus: 'Comunicación de equipo, canales de producto y feedback ágil' },
+      { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (datos cuantitativos), PowerPoint (presentaciones ejecutivas) y Teams' },
     ],
   },
 ];
