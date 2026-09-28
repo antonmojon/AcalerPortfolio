@@ -534,12 +534,12 @@ const PILLARS_DATA: PillarData[] = [
     role: 'Arquitectura Atómica & UI',
     tools: [
       { name: 'Figma', tag: 'Tokens & Vars', focus: 'Tokens, librerías y componentes' },
+      { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploración conceptual acelerada' },
       { name: 'Photoshop', tag: 'Adobe CC', focus: 'Retoque digital y key visuals' },
       { name: 'Illustrator', tag: 'Adobe CC', focus: 'Construcción vectorial e iconografía' },
       { name: 'InDesign', tag: 'Adobe CC', focus: 'Diseño editorial, especímenes tipográficos y guías de marca' },
       { name: 'After Effects', tag: 'Motion & UI', focus: 'Animación de micro-interacciones UI y motion graphics' },
       { name: 'Premiere Pro', tag: 'Video Edit', focus: 'Montaje audiovisual, reels y demos de producto' },
-      { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploración conceptual acelerada' },
     ],
   },
   {

@@ -609,12 +609,12 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
       role: 'Arquitectura Atómica & UI',
       tools: [
         { name: 'Figma', tag: 'Tokens & Vars', focus: 'Tokens, librerías y componentes' },
+        { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploración conceptual acelerada' },
         { name: 'Photoshop', tag: 'Adobe CC', focus: 'Retoque digital y key visuals' },
         { name: 'Illustrator', tag: 'Adobe CC', focus: 'Construcción vectorial e iconografía' },
         { name: 'InDesign', tag: 'Adobe CC', focus: 'Diseño editorial, especímenes tipográficos y guías de marca' },
         { name: 'After Effects', tag: 'Motion & UI', focus: 'Animación de micro-interacciones UI y motion graphics' },
         { name: 'Premiere Pro', tag: 'Video Edit', focus: 'Montaje audiovisual, reels y demos de producto' },
-        { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploración conceptual acelerada' },
       ],
     },
     {
@@ -656,12 +656,12 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
       role: 'Atomic Architecture & UI',
       tools: [
         { name: 'Figma', tag: 'Tokens & Vars', focus: 'Tokens, libraries, and design components' },
+        { name: 'Stitch', tag: 'Rapid UI', focus: 'Accelerated conceptual exploration' },
         { name: 'Photoshop', tag: 'Adobe CC', focus: 'Digital retouching and key visuals' },
         { name: 'Illustrator', tag: 'Adobe CC', focus: 'Vector construction and iconography' },
         { name: 'InDesign', tag: 'Adobe CC', focus: 'Editorial design, typography specimens, and brand guidelines' },
         { name: 'After Effects', tag: 'Motion & UI', focus: 'UI micro-interaction animation and motion graphics' },
         { name: 'Premiere Pro', tag: 'Video Edit', focus: 'Audiovisual editing, showreels, and product walkthroughs' },
-        { name: 'Stitch', tag: 'Rapid UI', focus: 'Accelerated conceptual exploration' },
       ],
     },
     {
@@ -703,12 +703,12 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
       role: 'Architecture Atomique & UI',
       tools: [
         { name: 'Figma', tag: 'Tokens & Vars', focus: 'Design tokens, bibliothèques et composants' },
+        { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploration conceptuelle accélérée' },
         { name: 'Photoshop', tag: 'Adobe CC', focus: 'Retouche numérique et visuels clés' },
         { name: 'Illustrator', tag: 'Adobe CC', focus: 'Construction vectorielle et iconographie' },
         { name: 'InDesign', tag: 'Adobe CC', focus: 'Design éditorial, spécimens typographiques et chartes graphiques' },
         { name: 'After Effects', tag: 'Motion & UI', focus: 'Animation de micro-interactions UI et motion design' },
         { name: 'Premiere Pro', tag: 'Montage Vidéo', focus: 'Montage audiovisuel, showreels et démos produit' },
-        { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploration conceptuelle accélérée' },
       ],
     },
     {
