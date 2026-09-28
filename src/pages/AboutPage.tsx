@@ -143,21 +143,20 @@ function AboutBio() {
 
         {/* Bio — 7 cols */}
         <div
-          className="reveal about-bio-col"
+          className="about-bio-col"
           style={{
             gridColumn: 'span 7',
             padding: '72px 80px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            gap: '56px',
+            gap: '48px',
           }}
         >
-          {/* Name + Role (integrated into bio column) */}
-          <div>
+          {/* Name + Role (matching Home typography & grounded without scroll jump) */}
+          <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '36px' }}>
             <p
-              className="meta-reveal"
-              style={{ ...META, color: 'var(--text-secondary)', marginBottom: '24px' }}
+              style={{ ...META, color: 'var(--text-secondary)', marginBottom: '16px' }}
             >
               {t('about.hero_role')}
             </p>
@@ -166,14 +165,14 @@ function AboutBio() {
                 text={t('about.name')}
                 delay={0.1}
                 duration={900}
-                className="scramble-inner"
                 style={{
-                  fontFamily: '"Special Gothic", sans-serif',
-                  fontWeight: 700,
-                  fontSize: 'clamp(40px, 5vw, 72px)',
-                  letterSpacing: '-0.03em',
+                  fontFamily: '"Special Gothic Expanded One", sans-serif',
+                  fontWeight: 400,
+                  fontSize: 'clamp(34px, 4.2vw, 58px)',
+                  letterSpacing: '-0.01em',
                   lineHeight: '0.92',
                   color: 'var(--hero-title-color)',
+                  display: 'block',
                   transition: 'color 0.4s ease',
                 }}
               />

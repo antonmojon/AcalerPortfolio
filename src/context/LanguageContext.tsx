@@ -81,7 +81,7 @@ export const translations = {
 
     // About - Hero
     'about.top_tag': 'Sobre mí',
-    'about.name': 'Antonio Calero',
+    'about.name': 'ANTONIO CALERO',
     'about.hero_role': 'Dirección de Diseño & Sistemas UI/UX',
 
     // About - Bio
@@ -211,7 +211,7 @@ export const translations = {
 
     // About - Hero
     'about.top_tag': 'About me',
-    'about.name': 'Antonio Calero',
+    'about.name': 'ANTONIO CALERO',
     'about.hero_role': 'Design Direction & UI/UX Systems',
 
     // About - Bio
@@ -341,7 +341,7 @@ export const translations = {
 
     // About - Hero
     'about.top_tag': 'À propos',
-    'about.name': 'Antonio Calero',
+    'about.name': 'ANTONIO CALERO',
     'about.hero_role': 'Direction du Design & Systèmes UI/UX',
 
     // About - Bio
