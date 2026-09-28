@@ -11,7 +11,7 @@ import ComingSoonOverlay from './components/ComingSoonOverlay';
  * - Cambia esta variable a `false` (o elimina la línea) para publicar la web completa.
  * - Puedes previsualizar la web completa en cualquier momento con: ?preview=true
  */
-const COMING_SOON_MODE = true;
+const COMING_SOON_MODE = false;
 
 let _introShown = false;
 
