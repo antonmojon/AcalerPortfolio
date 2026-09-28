@@ -304,7 +304,7 @@ function PortfolioCTA() {
               { label: 'Behance', href: 'https://www.behance.net/antoniocalero' },
             ].map(({ label, href }) => (
               <a key={label} href={href} target="_blank" rel="noreferrer"
-                className="nav-link" style={{ ...META, color: 'var(--cta-text)', textDecoration: 'none' }}>{label} ↗</a>
+                className="cta-social-link" style={{ ...META, color: 'var(--cta-text)', textDecoration: 'none' }}>{label} ↗</a>
             ))}
           </div>
         </div>
