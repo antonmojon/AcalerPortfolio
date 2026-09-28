@@ -37,48 +37,13 @@ function CustomCursor() {
   return <div ref={dotRef} className="cursor-dot" />;
 }
 
-/* ─── Intro Screen with Seamless Title Transition ─────────── */
-type IntroPhase = 'count' | 'name' | 'animating';
-
+/* ─── Intro Screen with Smooth Editorial Dissolve ─────────── */
 function IntroScreen({ onDone }: { onDone: () => void }) {
   const [pct, setPct] = useState(0);
-  const [phase, setPhase] = useState<IntroPhase>('count');
-  const [targetY, setTargetY] = useState<number | null>(null);
-  const [animating, setAnimating] = useState(false);
-  const [overlayOpacity, setOverlayOpacity] = useState(1);
-  const probeRef = useRef<HTMLSpanElement>(null);
-  const [fs, setFs] = useState<number | null>(null);
+  const [phase, setPhase] = useState<'count' | 'name'>('count');
+  const [fading, setFading] = useState(false);
 
-  // 1. Calculate font size to match Home page exactly
-  useEffect(() => {
-    let mounted = true;
-    const fit = () => {
-      if (!mounted) return;
-      const isMobile = window.innerWidth <= 768;
-      const padding = isMobile ? 48 : 160;
-      const available = window.innerWidth - padding;
-      if (probeRef.current && available > 0) {
-        probeRef.current.style.fontSize = '100px';
-        const ratio = available / probeRef.current.scrollWidth;
-        // Cap font size to an elegant maximum (~118px) so it doesn't blow up on wide monitors
-        const calculated = Math.floor(100 * ratio);
-        setFs(Math.min(calculated, 118));
-      }
-    };
-    fit();
-    if (document.fonts) {
-      document.fonts.ready.then(() => {
-        if (mounted) fit();
-      });
-    }
-    window.addEventListener('resize', fit);
-    return () => {
-      mounted = false;
-      window.removeEventListener('resize', fit);
-    };
-  }, []);
-
-  // 1b. Strictly lock body scroll and window position until intro is completely finished
+  // 1. Strictly lock body scroll during intro
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     window.scrollTo(0, 0);
@@ -87,13 +52,11 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     };
   }, []);
 
-  // 2. Counter animation 0% -> 100%
+  // 2. Counter animation 0% -> 100%, then clean dissolve
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     let start: number | null = null;
     let raf: number;
-    const DURATION = 1100;
+    const DURATION = 850;
 
     const tick = (now: number) => {
       if (!start) start = now;
@@ -107,7 +70,14 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
         setPct(100);
         setTimeout(() => {
           setPhase('name');
-        }, 200);
+          setTimeout(() => {
+            setFading(true);
+            setTimeout(() => {
+              _introShown = true;
+              onDone();
+            }, 650);
+          }, 600);
+        }, 150);
       }
     };
 
@@ -115,139 +85,78 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     return () => {
       cancelAnimationFrame(raf);
     };
-  }, []);
-
-  // 3. Scroll triggers the smooth glide into the masthead (blocking scroll leak to home behind)
-  useEffect(() => {
-    if (phase !== 'name') return;
-
-    const onScroll = (e: Event) => {
-      if (e.cancelable) {
-        e.preventDefault();
-      }
-      window.scrollTo(0, 0);
-
-      setPhase('animating');
-      setAnimating(true);
-
-      // Measure target position from actual home masthead title
-      let targetTop = 127;
-      const homeMasthead =
-        document.querySelector('.masthead-pad .scramble-line') ||
-        document.querySelector('.masthead-pad h1') ||
-        document.querySelector('.masthead-pad');
-      if (homeMasthead) {
-        const rect = homeMasthead.getBoundingClientRect();
-        if (rect.top > 0) {
-          targetTop = rect.top;
-        }
-      }
-
-      setTargetY(targetTop);
-
-      // Fade overlay background smoothly
-      setTimeout(() => {
-        setOverlayOpacity(0);
-      }, 550);
-
-      // Complete transition and unlock scroll
-      setTimeout(() => {
-        document.body.style.overflow = '';
-        _introShown = true;
-        onDone();
-      }, 1250);
-    };
-
-    window.addEventListener('wheel', onScroll, { once: true, passive: false });
-    window.addEventListener('touchmove', onScroll, { once: true, passive: false });
-    window.addEventListener('keydown', onScroll, { once: true });
-
-    return () => {
-      window.removeEventListener('wheel', onScroll);
-      window.removeEventListener('touchmove', onScroll);
-      window.removeEventListener('keydown', onScroll);
-    };
-  }, [phase, onDone]);
-
-  const titleStyle = {
-    fontFamily: '"Special Gothic Expanded One", sans-serif',
-    fontWeight: 400,
-    fontSize: fs ? `${fs}px` : '100px',
-    letterSpacing: '-0.01em',
-    lineHeight: '0.88',
-    color: 'var(--hero-title-color)',
-    display: 'block',
-    whiteSpace: 'nowrap' as const,
-    transition: 'color 0.4s ease',
-  };
+  }, [onDone]);
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0,
-      backgroundColor: 'var(--bg-primary)',
-      zIndex: 9000,
-      touchAction: 'none',
-      overscrollBehavior: 'none',
-      opacity: overlayOpacity,
-      transition: animating ? 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-      pointerEvents: animating ? 'none' : 'auto',
-      userSelect: 'none',
-    }}>
-      {/* Hidden probe for font measurement */}
-      <span ref={probeRef} aria-hidden style={{ ...titleStyle, fontSize: '100px', position: 'absolute', visibility: 'hidden', pointerEvents: 'none' }}>
-        ANTONIO CALERO
-      </span>
-
+    <div
+      onClick={() => {
+        setFading(true);
+        setTimeout(() => {
+          _introShown = true;
+          onDone();
+        }, 300);
+      }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: 'var(--bg-primary)',
+        zIndex: 9000,
+        touchAction: 'none',
+        overscrollBehavior: 'none',
+        opacity: fading ? 0 : 1,
+        transition: fading ? 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+        pointerEvents: fading ? 'none' : 'auto',
+        userSelect: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'default',
+      }}
+    >
       {/* Counter */}
       {phase === 'count' && (
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span style={{
-            fontFamily: '"Space Mono", monospace', fontSize: '11px',
-            letterSpacing: '0.06em', color: 'var(--text-primary)', fontVariantNumeric: 'tabular-nums',
-          }}>
-            {String(pct).padStart(3, ' ')}%
-          </span>
-        </div>
-      )}
-
-      {/* Name: 100% dead-centered horizontally & vertically, then glides to masthead */}
-      {(phase === 'name' || phase === 'animating') && (
-        <div
-          className="masthead-pad"
+        <span
           style={{
-            position: 'absolute',
-            top: animating && targetY !== null ? `${targetY}px` : '50%',
-            left: 0, right: 0,
-            transform: animating ? 'translateY(0%)' : 'translateY(-50%)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-            paddingTop: 0,
-            paddingLeft: '80px',
-            paddingRight: '80px',
-            boxSizing: 'border-box',
-            transition: animating
-              ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
-              : 'none',
-            willChange: 'top, transform',
+            fontFamily: '"Space Mono", monospace',
+            fontSize: '11px',
+            letterSpacing: '0.06em',
+            color: 'var(--text-primary)',
+            fontVariantNumeric: 'tabular-nums',
           }}
         >
-          <span style={{ ...titleStyle, width: '100%', textAlign: 'center' }}>
-            ANTONIO CALERO
-          </span>
-        </div>
+          {String(pct).padStart(3, ' ')}%
+        </span>
       )}
 
-      {/* Scroll indicator */}
-      {phase === 'name' && !animating && (
-        <div style={{
-          position: 'absolute', bottom: '8vh', left: 0, right: 0,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
-          animation: 'fadeIn 0.5s ease 0.3s both',
-        }}>
-          <span style={{ fontFamily: '"Space Mono", monospace', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#AAAAAA' }}>scroll</span>
-          <span className="bounce-arrow" style={{ color: '#AAAAAA', fontSize: '14px' }}>↓</span>
+      {/* Name: Editorial centered flash before dissolve */}
+      {phase === 'name' && (
+        <div style={{ textAlign: 'center', padding: '0 24px', animation: 'fadeIn 0.3s ease both' }}>
+          <span
+            style={{
+              fontFamily: '"Special Gothic Expanded One", sans-serif',
+              fontWeight: 400,
+              fontSize: 'clamp(36px, 6vw, 84px)',
+              letterSpacing: '-0.01em',
+              lineHeight: '0.90',
+              color: 'var(--hero-title-color)',
+              display: 'block',
+              textTransform: 'uppercase',
+            }}
+          >
+            ANTONIO CALERO
+          </span>
+          <p
+            style={{
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '11px',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+              marginTop: '16px',
+            }}
+          >
+            Portfolio 2026
+          </p>
         </div>
       )}
     </div>
