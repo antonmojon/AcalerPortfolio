@@ -283,6 +283,21 @@ const TOOL_ICONS: Record<string, React.ReactNode> = {
       <path d="M1 1h10v10H1V1zm12 0h10v10H13V1zM1 13h10v10H1V13zm12 0h10v10H13V13z" />
     </svg>
   ),
+  'Microsoft Clarity': (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M4 19h16v2H2V3h2v16zm4-7h2v6H8v-6zm5-5h2v11h-2V7zm5 3h2v8h-2v-8z" />
+    </svg>
+  ),
+  Clarity: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M4 19h16v2H2V3h2v16zm4-7h2v6H8v-6zm5-5h2v11h-2V7zm5 3h2v8h-2v-8z" />
+    </svg>
+  ),
+  GitHub: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+    </svg>
+  ),
   'Claude Code': (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="4 17 10 11 4 5" />
@@ -529,6 +544,7 @@ const PILLARS_DATA: PillarData[] = [
       { name: 'Claude Code', tag: 'CLI Agent', focus: 'Agente autónomo en terminal' },
       { name: 'Claude 3.7 Sonnet', tag: 'Reasoning', focus: 'Heurísticas UX y arquitectura' },
       { name: 'Google Gemini & Nano', tag: 'Multimodal', focus: 'Inferencia contextual on-device' },
+      { name: 'GitHub', tag: 'Version Control', focus: 'Control de versiones, repositorios de tokens y sincronización de código UI' },
     ],
   },
   {
@@ -548,6 +564,7 @@ const PILLARS_DATA: PillarData[] = [
       { name: 'Notion', tag: 'Docs & Wiki', focus: 'Documentación de producto, especificaciones y design roadmap' },
       { name: 'Slack', tag: 'Async Comms', focus: 'Comunicación de equipo, canales de producto y feedback ágil' },
       { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (datos cuantitativos), PowerPoint (presentaciones ejecutivas) y Teams' },
+      { name: 'Microsoft Clarity', tag: 'UX Analytics', focus: 'Mapas de calor, grabaciones de sesión y telemetría de interacción' },
     ],
   },
 ];

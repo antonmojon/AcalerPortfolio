@@ -109,7 +109,7 @@ export const translations = {
     'about.stack_title': 'La importancia del stack',
     'about.stack_manifesto_p1': 'El diseño no termina en el lienzo estático: vive en la interacción real, en los tokens y en el código vivo.',
     'about.stack_manifesto_p2': 'Articulo un flujo donde el craft visual, la lógica agéntica y la síntesis generativa multiplican la velocidad y la calidad de entrega de producto.',
-    'about.stack_meta': 'Ecosistema activo · 12 herramientas seleccionadas para producción',
+    'about.stack_meta': 'Ecosistema activo · 14 herramientas seleccionadas para producción',
     'about.cta_title': 'CREEMOS ALGO JUNTOS',
 
     // Contact
@@ -238,7 +238,7 @@ export const translations = {
     'about.stack_title': 'The Importance of the Stack',
     'about.stack_manifesto_p1': 'Design does not end on the static canvas: it lives in real interaction, tokens, and living code.',
     'about.stack_manifesto_p2': 'I structure a workflow where visual craft, agentic reasoning, and generative synthesis accelerate velocity and elevate product delivery quality.',
-    'about.stack_meta': 'Active ecosystem · 12 tools curated for production',
+    'about.stack_meta': 'Active ecosystem · 14 tools curated for production',
     'about.cta_title': "LET'S BUILD SOMETHING",
 
     // Contact
@@ -367,7 +367,7 @@ export const translations = {
     'about.stack_title': 'L’importance de la stack',
     'about.stack_manifesto_p1': 'Le design ne s’arrête pas au canevas statique : il s’anime dans l’interaction réelle, les tokens et le code vivant.',
     'about.stack_manifesto_p2': 'J’articule un workflow où le craft visuel, la logique agentique et la synthèse générative démultiplient la vitesse et la qualité de livraison.',
-    'about.stack_meta': 'Écosystème actif · 12 outils sélectionnés pour la production',
+    'about.stack_meta': 'Écosystème actif · 14 outils sélectionnés pour la production',
     'about.cta_title': 'CRÉONS ENSEMBLE',
 
     // Contact
@@ -622,6 +622,7 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Claude Code', tag: 'CLI Agent', focus: 'Agente autónomo en terminal' },
         { name: 'Claude 3.7 Sonnet', tag: 'Reasoning', focus: 'Heurísticas UX y arquitectura' },
         { name: 'Google Gemini & Nano', tag: 'Multimodal', focus: 'Inferencia contextual on-device' },
+        { name: 'GitHub', tag: 'Version Control', focus: 'Control de versiones, repositorios de tokens y sincronización de código UI' },
       ],
     },
     {
@@ -641,6 +642,7 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Notion', tag: 'Docs & Wiki', focus: 'Documentación de producto, especificaciones y design roadmap' },
         { name: 'Slack', tag: 'Async Comms', focus: 'Comunicación de equipo, canales de producto y feedback ágil' },
         { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (datos cuantitativos), PowerPoint (presentaciones ejecutivas) y Teams' },
+        { name: 'Microsoft Clarity', tag: 'UX Analytics', focus: 'Mapas de calor, grabaciones de sesión y telemetría de interacción' },
       ],
     },
   ],
@@ -664,6 +666,7 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Claude Code', tag: 'CLI Agent', focus: 'Autonomous terminal agent' },
         { name: 'Claude 3.7 Sonnet', tag: 'Reasoning', focus: 'UX heuristics and system architecture' },
         { name: 'Google Gemini & Nano', tag: 'Multimodal', focus: 'Contextual on-device inference' },
+        { name: 'GitHub', tag: 'Version Control', focus: 'Version control, token repositories, and code synchronization' },
       ],
     },
     {
@@ -683,6 +686,7 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Notion', tag: 'Docs & Wiki', focus: 'Product documentation, specs, and design roadmaps' },
         { name: 'Slack', tag: 'Async Comms', focus: 'Team communication, product channels, and rapid feedback' },
         { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (quantitative data), PowerPoint (executive decks), and Teams' },
+        { name: 'Microsoft Clarity', tag: 'UX Analytics', focus: 'Session heatmaps, recordings, and user interaction telemetry' },
       ],
     },
   ],
@@ -706,6 +710,7 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Claude Code', tag: 'CLI Agent', focus: 'Agent autonome dans le terminal' },
         { name: 'Claude 3.7 Sonnet', tag: 'Raisonnement', focus: 'Heuristiques UX et architecture' },
         { name: 'Google Gemini & Nano', tag: 'Multimodal', focus: 'Inférence contextuelle sur appareil' },
+        { name: 'GitHub', tag: 'Contrôle de Version', focus: 'Dépôts de code, synchronisation des tokens et CI/CD UI' },
       ],
     },
     {
@@ -725,6 +730,7 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Notion', tag: 'Docs & Wiki', focus: 'Documentation produit, spécifications et feuille de route' },
         { name: 'Slack', tag: 'Comms Asynchrones', focus: 'Communication d’équipe, canaux produit et retours agiles' },
         { name: 'Microsoft 365', tag: 'Excel · PPT · Teams', focus: 'Excel (analyse de données), PowerPoint (présentations) et Teams' },
+        { name: 'Microsoft Clarity', tag: 'Analytique UX', focus: 'Cartes thermiques, enregistrements de session et friction utilisateur' },
       ],
     },
   ],
