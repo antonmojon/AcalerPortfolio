@@ -151,6 +151,12 @@ body {
 
 @media (pointer: fine) {
   body { cursor: none; }
+  input, textarea, select, .editorial-input {
+    cursor: text !important;
+  }
+  button, [role="button"], a {
+    cursor: pointer !important;
+  }
 }
 
 /* ─── Custom cursor ─────────────────────────────────────── */
