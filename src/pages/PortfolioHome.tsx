@@ -37,7 +37,27 @@ function PortfolioNav() {
         transition: 'background-color 0.4s ease, border-color 0.3s ease',
       }}
     >
-      <span className="nav-brand-text" style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, letterSpacing: '0.08em', transition: 'color 0.4s ease' }}>Capa Zero</span>
+      <Link
+        to="/"
+        onClick={(e) => {
+          if (window.location.pathname === '/') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }}
+        className="nav-brand-link"
+        style={{
+          fontFamily: '"Special Gothic Expanded One", sans-serif',
+          fontSize: '15px',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
+          color: 'var(--hero-title-color)',
+          textDecoration: 'none',
+          transition: 'color 0.4s ease',
+        }}
+      >
+        Antonio Calero
+      </Link>
       <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         <a href="#work" className="nav-link" style={META}>{t('nav.projects')}</a>
         <Link to="/about" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.about')}</Link>
