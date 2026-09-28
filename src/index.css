@@ -1010,8 +1010,8 @@ body {
   }
   .about-hero-topbar,
   .contact-hero-topbar {
-    padding-bottom: 24px !important;
-    margin-bottom: 40px !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 20px !important;
   }
   .about-hero-name,
   .contact-hero-title-wrap {
@@ -1117,8 +1117,8 @@ body {
   }
   .about-hero-topbar,
   .contact-hero-topbar {
-    padding-bottom: 20px !important;
-    margin-bottom: 28px !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 16px !important;
   }
   .about-hero-name,
   .contact-hero-title-wrap {

@@ -90,9 +90,7 @@ function AboutHero() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingBottom: '40px',
-          borderBottom: '1px solid var(--border-color)',
-          marginBottom: '64px',
+          marginBottom: '28px',
         }}
       >
         <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('about.top_tag')}</p>
