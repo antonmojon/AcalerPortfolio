@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <style>
     :root {
-      --rhombus-fill: #111111;
-      --rhombus-stroke: #ffffff;
-      --zero-stroke: #ffffff;
+      --rhombus-fill: #ffffff;
+      --rhombus-stroke: #111111;
+      --zero-stroke: #111111;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --rhombus-fill: #ffffff;
+        --rhombus-fill: #111111;
         --rhombus-stroke: #ffffff;
-        --zero-stroke: #0a0a0a;
+        --zero-stroke: #ffffff;
       }
     }
     .rhombus {
       fill: var(--rhombus-fill);
       stroke: var(--rhombus-stroke);
-      stroke-width: 1.5;
+      stroke-width: 1.8;
       stroke-linejoin: round;
     }
     .zero {
@@ -24,7 +24,7 @@
       stroke-width: 2.6;
     }
   </style>
-  <!-- Rombo monocromo -->
+  <!-- Rombo invertido -->
   <polygon class="rhombus" points="16,2 30,16 16,30 2,16" />
   <!-- Cero geométrico central -->
   <rect class="zero" x="10.5" y="8" width="11" height="16" rx="5.5" />
