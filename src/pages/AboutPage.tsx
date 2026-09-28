@@ -70,134 +70,141 @@ function AboutNav() {
   );
 }
 
-/* ─── Portrait + Bio (with name integrated) ──────────────── */
+/* ─── Hero ─────────────────────────────────────────────────── */
+function AboutHero() {
+  const { t } = useLanguage();
+  return (
+    <section
+      className="section-pad about-hero-section"
+      style={{
+        paddingTop: '128px',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        borderBottom: '1px solid var(--border-color)',
+      }}
+    >
+      {/* Top bar */}
+      <div
+        className="about-hero-topbar"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingBottom: '40px',
+          borderBottom: '1px solid var(--border-color)',
+          marginBottom: '64px',
+        }}
+      >
+        <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('about.top_tag')}</p>
+      </div>
+
+      {/* Name & Role — Full width editorial masthead matching Home & Contact */}
+      <div className="about-hero-name" style={{ paddingBottom: '72px' }}>
+        <p
+          className="meta-reveal"
+          style={{ ...META, color: 'var(--text-secondary)', marginBottom: '20px' }}
+        >
+          {t('about.hero_role')}
+        </p>
+        <div className="scramble-line">
+          <ScrambleText
+            text="ANTONIO CALERO"
+            delay={0.1}
+            duration={900}
+            className="scramble-inner"
+            style={{
+              fontFamily: '"Special Gothic Expanded One", sans-serif',
+              fontWeight: 400,
+              fontSize: 'clamp(44px, 6.5vw, 108px)',
+              letterSpacing: '-0.01em',
+              lineHeight: '0.92',
+              color: 'var(--hero-title-color)',
+              transition: 'color 0.4s ease',
+            }}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Portrait + Bio ────────────────────────────────────────── */
 function AboutBio() {
   const { t } = useLanguage();
   const ref = useRevealAll();
   return (
-    <>
-      {/* Top bar — thin header above the grid */}
+    <section
+      ref={ref as RefObject<HTMLElement>}
+      className="editorial-grid grid w-full"
+      style={{ gridTemplateColumns: 'repeat(12, 1fr)', borderBottom: '1px solid var(--border-color)' }}
+    >
+      {/* Portrait / Foto — 5 cols */}
       <div
-        className="about-hero-section"
+        className="about-portrait-wrapper"
         style={{
-          paddingTop: '128px',
-          paddingLeft: '80px',
-          paddingRight: '80px',
+          gridColumn: 'span 5',
+          borderRight: '1px solid var(--border-color)',
+          overflow: 'hidden',
+          backgroundColor: 'var(--bg-surface)',
+          position: 'relative',
+          width: '100%',
+          minHeight: '580px',
         }}
       >
-        <div
-          className="about-hero-topbar"
+        <img
+          src={PORTRAIT || '/antonio-calero.jpg'}
+          alt="Antonio Calero"
+          loading="eager"
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingBottom: '40px',
-            borderBottom: '1px solid var(--border-color)',
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 20%',
+            filter: 'grayscale(100%) contrast(105%)',
+            display: 'block',
           }}
-        >
-          <p style={{ ...META, color: 'var(--text-primary)' }}>{t('about.top_tag')}</p>
-        </div>
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (!target.src.endsWith('/antonio-calero.jpg')) {
+              target.src = '/antonio-calero.jpg';
+            }
+          }}
+        />
       </div>
 
-      {/* Portrait + Bio grid */}
-      <section
-        ref={ref as RefObject<HTMLElement>}
-        className="editorial-grid grid w-full"
-        style={{ gridTemplateColumns: 'repeat(12, 1fr)', borderBottom: '1px solid var(--border-color)' }}
+      {/* Bio — 7 cols */}
+      <div
+        className="about-bio-col"
+        style={{
+          gridColumn: 'span 7',
+          padding: '72px 80px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: '48px',
+        }}
       >
-        {/* Portrait / Foto — 5 cols */}
-        <div
-          className="about-portrait-wrapper"
-          style={{
-            gridColumn: 'span 5',
-            borderRight: '1px solid var(--border-color)',
-            overflow: 'hidden',
-            backgroundColor: 'var(--bg-surface)',
-            position: 'relative',
-            width: '100%',
-            minHeight: '580px',
-          }}
-        >
-          <img
-            src={PORTRAIT || '/antonio-calero.jpg'}
-            alt="Antonio Calero"
-            loading="eager"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center 20%',
-              filter: 'grayscale(100%) contrast(105%)',
-              display: 'block',
-            }}
-            onError={(e) => {
-              const target = e.currentTarget;
-              if (!target.src.endsWith('/antonio-calero.jpg')) {
-                target.src = '/antonio-calero.jpg';
-              }
-            }}
-          />
+        {/* Perfil & Enfoque */}
+        <div>
+          <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '24px' }}>{t('about.bio_label')}</p>
+          <p style={{ ...BODY, fontSize: '22px', lineHeight: '1.5', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
+            {t('about.bio_p1')}
+          </p>
+          <p style={{ ...BODY, fontSize: '17px', color: 'var(--text-primary)', marginTop: '20px', lineHeight: '1.6' }}>
+            {t('about.bio_p2')}
+          </p>
         </div>
 
-        {/* Bio — 7 cols */}
-        <div
-          className="about-bio-col"
-          style={{
-            gridColumn: 'span 7',
-            padding: '72px 80px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            gap: '48px',
-          }}
-        >
-          {/* Name + Role (matching Home typography & grounded without scroll jump) */}
-          <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '36px' }}>
-            <p
-              style={{ ...META, color: 'var(--text-secondary)', marginBottom: '16px' }}
-            >
-              {t('about.hero_role')}
-            </p>
-            <div className="scramble-line">
-              <ScrambleText
-                text={t('about.name')}
-                delay={0.1}
-                duration={900}
-                style={{
-                  fontFamily: '"Special Gothic Expanded One", sans-serif',
-                  fontWeight: 400,
-                  fontSize: 'clamp(34px, 4.2vw, 58px)',
-                  letterSpacing: '-0.01em',
-                  lineHeight: '0.92',
-                  color: 'var(--hero-title-color)',
-                  display: 'block',
-                  transition: 'color 0.4s ease',
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Perfil & Enfoque */}
-          <div>
-            <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '24px' }}>{t('about.bio_label')}</p>
-            <p style={{ ...BODY, fontSize: '22px', lineHeight: '1.5', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
-              {t('about.bio_p1')}
-            </p>
-            <p style={{ ...BODY, fontSize: '17px', color: 'var(--text-primary)', marginTop: '20px', lineHeight: '1.6' }}>
-              {t('about.bio_p2')}
-            </p>
-          </div>
-
-          {/* Rol */}
-          <div>
-            <p style={{ ...META, marginBottom: '8px', color: 'var(--text-primary)' }}>{t('about.bio_role_label')}</p>
-            <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)' }}>
-              {t('about.bio_role_value')}
-            </p>
-            <p style={{ ...META, marginTop: '6px', color: 'var(--text-primary)' }}>{t('about.bio_status')}</p>
-          </div>
+        {/* Rol */}
+        <div>
+          <p style={{ ...META, marginBottom: '8px', color: 'var(--text-primary)' }}>{t('about.bio_role_label')}</p>
+          <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)' }}>
+            {t('about.bio_role_value')}
+          </p>
+          <p style={{ ...META, marginTop: '6px', color: 'var(--text-primary)' }}>{t('about.bio_status')}</p>
+        </div>
 
           {/* Idiomas */}
           <div>
@@ -222,7 +229,6 @@ function AboutBio() {
           </div>
         </div>
       </section>
-    </>
   );
 }
 
@@ -875,6 +881,7 @@ export default function AboutPage() {
     <>
       <AboutNav />
       <main>
+        <AboutHero />
         <AboutBio />
         <AboutExperience />
         <AboutStack />
