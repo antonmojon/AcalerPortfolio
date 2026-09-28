@@ -109,7 +109,7 @@ export const translations = {
     'about.stack_title': 'La importancia del stack',
     'about.stack_manifesto_p1': 'El diseño no termina en el lienzo estático: vive en la interacción real, en los tokens y en el código vivo.',
     'about.stack_manifesto_p2': 'Articulo un flujo donde el craft visual, la lógica agéntica y la síntesis generativa multiplican la velocidad y la calidad de entrega de producto.',
-    'about.stack_meta': 'Ecosistema activo · 14 herramientas seleccionadas para producción',
+    'about.stack_meta': 'Ecosistema activo · 17 herramientas seleccionadas para producción',
     'about.cta_title': 'CREEMOS ALGO JUNTOS',
 
     // Contact
@@ -238,7 +238,7 @@ export const translations = {
     'about.stack_title': 'The Importance of the Stack',
     'about.stack_manifesto_p1': 'Design does not end on the static canvas: it lives in real interaction, tokens, and living code.',
     'about.stack_manifesto_p2': 'I structure a workflow where visual craft, agentic reasoning, and generative synthesis accelerate velocity and elevate product delivery quality.',
-    'about.stack_meta': 'Active ecosystem · 14 tools curated for production',
+    'about.stack_meta': 'Active ecosystem · 17 tools curated for production',
     'about.cta_title': "LET'S BUILD SOMETHING",
 
     // Contact
@@ -367,7 +367,7 @@ export const translations = {
     'about.stack_title': 'L’importance de la stack',
     'about.stack_manifesto_p1': 'Le design ne s’arrête pas au canevas statique : il s’anime dans l’interaction réelle, les tokens et le code vivant.',
     'about.stack_manifesto_p2': 'J’articule un workflow où le craft visuel, la logique agentique et la synthèse générative démultiplient la vitesse et la qualité de livraison.',
-    'about.stack_meta': 'Écosystème actif · 14 outils sélectionnés pour la production',
+    'about.stack_meta': 'Écosystème actif · 17 outils sélectionnés pour la production',
     'about.cta_title': 'CRÉONS ENSEMBLE',
 
     // Contact
@@ -611,6 +611,9 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Figma', tag: 'Tokens & Vars', focus: 'Tokens, librerías y componentes' },
         { name: 'Photoshop', tag: 'Adobe CC', focus: 'Retoque digital y key visuals' },
         { name: 'Illustrator', tag: 'Adobe CC', focus: 'Construcción vectorial e iconografía' },
+        { name: 'InDesign', tag: 'Adobe CC', focus: 'Diseño editorial, especímenes tipográficos y guías de marca' },
+        { name: 'After Effects', tag: 'Motion & UI', focus: 'Animación de micro-interacciones UI y motion graphics' },
+        { name: 'Premiere Pro', tag: 'Video Edit', focus: 'Montaje audiovisual, reels y demos de producto' },
         { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploración conceptual acelerada' },
       ],
     },
@@ -655,6 +658,9 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Figma', tag: 'Tokens & Vars', focus: 'Tokens, libraries, and design components' },
         { name: 'Photoshop', tag: 'Adobe CC', focus: 'Digital retouching and key visuals' },
         { name: 'Illustrator', tag: 'Adobe CC', focus: 'Vector construction and iconography' },
+        { name: 'InDesign', tag: 'Adobe CC', focus: 'Editorial design, typography specimens, and brand guidelines' },
+        { name: 'After Effects', tag: 'Motion & UI', focus: 'UI micro-interaction animation and motion graphics' },
+        { name: 'Premiere Pro', tag: 'Video Edit', focus: 'Audiovisual editing, showreels, and product walkthroughs' },
         { name: 'Stitch', tag: 'Rapid UI', focus: 'Accelerated conceptual exploration' },
       ],
     },
@@ -699,6 +705,9 @@ export const pillarsByLang: Record<Language, PillarTranslation[]> = {
         { name: 'Figma', tag: 'Tokens & Vars', focus: 'Design tokens, bibliothèques et composants' },
         { name: 'Photoshop', tag: 'Adobe CC', focus: 'Retouche numérique et visuels clés' },
         { name: 'Illustrator', tag: 'Adobe CC', focus: 'Construction vectorielle et iconographie' },
+        { name: 'InDesign', tag: 'Adobe CC', focus: 'Design éditorial, spécimens typographiques et chartes graphiques' },
+        { name: 'After Effects', tag: 'Motion & UI', focus: 'Animation de micro-interactions UI et motion design' },
+        { name: 'Premiere Pro', tag: 'Montage Vidéo', focus: 'Montage audiovisuel, showreels et démos produit' },
         { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploration conceptuelle accélérée' },
       ],
     },

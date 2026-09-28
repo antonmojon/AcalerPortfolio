@@ -268,6 +268,9 @@ const TOOL_ICONS: Record<string, React.ReactNode> = {
   InDesign: (
     <span style={{ fontFamily: '"Space Mono", monospace', fontWeight: 700, fontSize: '11px', letterSpacing: '-0.05em' }}>Id</span>
   ),
+  Lightroom: (
+    <span style={{ fontFamily: '"Space Mono", monospace', fontWeight: 700, fontSize: '11px', letterSpacing: '-0.05em' }}>Lr</span>
+  ),
   Notion: (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
       <path d="M4 4.5h16a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V6A1.5 1.5 0 0 1 4 4.5zm2.5 3v9h2.2l4.8-6.3V16.5H16v-9h-2.2L9 13.8V7.5H6.5z" />
@@ -533,6 +536,9 @@ const PILLARS_DATA: PillarData[] = [
       { name: 'Figma', tag: 'Tokens & Vars', focus: 'Tokens, librerías y componentes' },
       { name: 'Photoshop', tag: 'Adobe CC', focus: 'Retoque digital y key visuals' },
       { name: 'Illustrator', tag: 'Adobe CC', focus: 'Construcción vectorial e iconografía' },
+      { name: 'InDesign', tag: 'Adobe CC', focus: 'Diseño editorial, especímenes tipográficos y guías de marca' },
+      { name: 'After Effects', tag: 'Motion & UI', focus: 'Animación de micro-interacciones UI y motion graphics' },
+      { name: 'Premiere Pro', tag: 'Video Edit', focus: 'Montaje audiovisual, reels y demos de producto' },
       { name: 'Stitch', tag: 'Rapid UI', focus: 'Exploración conceptual acelerada' },
     ],
   },
