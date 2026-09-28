@@ -565,17 +565,17 @@ export const projectsByLang: Record<Language, ProjectItemData[]> = {
 /* ─── Structured Data for Experience ────────────────────────── */
 export const experiencesByLang: Record<Language, ExperienceItemTranslation[]> = {
   es: [
-    { company: 'Empresa actual', role: 'Lead Product Designer', period: '2026 al presente' },
+    { company: 'Evolve', role: 'Lead Product Designer', period: '2026 al presente' },
     { company: 'Freelance', role: 'UI/UX Designer', period: '2025 a 2026' },
     { company: 'Newlink Spain', role: 'Graphic Designer, Art Director', period: '2021 a 2025' },
   ],
   en: [
-    { company: 'Current Company', role: 'Lead Product Designer', period: '2026 to present' },
+    { company: 'Evolve', role: 'Lead Product Designer', period: '2026 to present' },
     { company: 'Freelance', role: 'UI/UX Designer', period: '2025 to 2026' },
     { company: 'Newlink Spain', role: 'Graphic Designer, Art Director', period: '2021 to 2025' },
   ],
   fr: [
-    { company: 'Entreprise actuelle', role: 'Lead Designer Produit', period: '2026 à aujourd’hui' },
+    { company: 'Evolve', role: 'Lead Designer Produit', period: '2026 à aujourd’hui' },
     { company: 'Freelance', role: 'Designer UI/UX', period: '2025 à 2026' },
     { company: 'Newlink Spain', role: 'Designer Graphique, Directeur Artistique', period: '2021 à 2025' },
   ],
