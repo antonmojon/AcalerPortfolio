@@ -78,9 +78,17 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     };
   }, []);
 
-  // 2. Counter animation 0% -> 100%
+  // 1b. Strictly lock body scroll and window position until intro is completely finished
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  // 2. Counter animation 0% -> 100%
+  useEffect(() => {
     window.scrollTo(0, 0);
 
     let start: number | null = null;
@@ -105,22 +113,29 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
 
     raf = requestAnimationFrame(tick);
     return () => {
-      document.body.style.overflow = '';
       cancelAnimationFrame(raf);
     };
   }, []);
 
-  // 3. Scroll triggers the smooth glide into the masthead
+  // 3. Scroll triggers the smooth glide into the masthead (blocking scroll leak to home behind)
   useEffect(() => {
     if (phase !== 'name') return;
 
-    const onScroll = () => {
+    const onScroll = (e: Event) => {
+      if (e.cancelable) {
+        e.preventDefault();
+      }
+      window.scrollTo(0, 0);
+
       setPhase('animating');
       setAnimating(true);
 
       // Measure target position from actual home masthead title
       let targetTop = 127;
-      const homeMasthead = document.querySelector('.masthead-pad h1') || document.querySelector('.masthead-pad .scramble-line') || document.querySelector('.masthead-pad');
+      const homeMasthead =
+        document.querySelector('.masthead-pad .scramble-line') ||
+        document.querySelector('.masthead-pad h1') ||
+        document.querySelector('.masthead-pad');
       if (homeMasthead) {
         const rect = homeMasthead.getBoundingClientRect();
         if (rect.top > 0) {
@@ -143,8 +158,8 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
       }, 1250);
     };
 
-    window.addEventListener('wheel', onScroll, { once: true, passive: true });
-    window.addEventListener('touchmove', onScroll, { once: true, passive: true });
+    window.addEventListener('wheel', onScroll, { once: true, passive: false });
+    window.addEventListener('touchmove', onScroll, { once: true, passive: false });
     window.addEventListener('keydown', onScroll, { once: true });
 
     return () => {
@@ -171,6 +186,8 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
       position: 'fixed', inset: 0,
       backgroundColor: 'var(--bg-primary)',
       zIndex: 9000,
+      touchAction: 'none',
+      overscrollBehavior: 'none',
       opacity: overlayOpacity,
       transition: animating ? 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
       pointerEvents: animating ? 'none' : 'auto',
