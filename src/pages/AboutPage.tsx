@@ -653,12 +653,11 @@ function AboutStack() {
           <div
             key={pillar.num}
             style={{
-              borderTop: pIdx > 0 ? '1px solid var(--border-color)' : 'none',
-              paddingTop: pIdx > 0 ? '36px' : '0',
+              paddingTop: pIdx > 0 ? '8px' : '0',
             }}
           >
             {/* Cabecera del Pilar */}
-            <div style={{ marginBottom: '20px' }}>
+            <div style={{ marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '4px' }}>
                 <span
                   style={{
@@ -691,7 +690,7 @@ function AboutStack() {
             </div>
 
             {/* Herramientas del Pilar */}
-            <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--border-color)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               {pillar.tools.map((tool) => {
                 const isSelected = selectedTool === tool.name;
 
