@@ -79,7 +79,7 @@ export default function LavanderiaPage() {
         {/* Hero */}
         <section
           className="section-pad lavanderia-hero w-full"
-          style={{ paddingTop: '128px', display: 'flex', flexDirection: 'column', gap: '16px' }}
+          style={{ paddingTop: '128px', paddingLeft: '80px', paddingRight: '80px', display: 'flex', flexDirection: 'column', gap: '16px' }}
         >
           <div className="meta-reveal flex items-center" style={{ gap: 'clamp(32px, 8vw, 120px)' }}>
             <span style={META}>{t('case.lavanderia.tag')}</span>
@@ -189,7 +189,18 @@ export default function LavanderiaPage() {
         </section>
 
         {/* Footer */}
-        <footer className="section-pad w-full lavanderia-footer-wrap" style={{ borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between' }}>
+        <footer
+          className="section-pad w-full lavanderia-footer-wrap"
+          style={{
+            borderTop: '1px solid var(--border-color)',
+            paddingTop: '40px',
+            paddingBottom: '40px',
+            paddingLeft: '80px',
+            paddingRight: '80px',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
           <span style={META}>Bilbao, España 2026</span>
           <span style={META}>{t('home.footer_title')}</span>
         </footer>

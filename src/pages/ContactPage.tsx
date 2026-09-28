@@ -73,6 +73,9 @@ function ContactHero() {
     <section
       className="section-pad contact-hero-section"
       style={{
+        paddingTop: '128px',
+        paddingLeft: '80px',
+        paddingRight: '80px',
         borderBottom: '1px solid var(--border-color)',
       }}
     >
@@ -83,14 +86,16 @@ function ContactHero() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          paddingBottom: '40px',
           borderBottom: '1px solid var(--border-color)',
+          marginBottom: '64px',
         }}
       >
         <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('contact.hero_tag')}</p>
       </div>
 
       {/* Main Title */}
-      <div className="contact-hero-title-wrap">
+      <div className="contact-hero-title-wrap" style={{ paddingBottom: '72px' }}>
         <p
           className="meta-reveal"
           style={{ ...META, color: 'var(--text-primary)', marginBottom: '20px' }}
@@ -462,6 +467,15 @@ function ContactFooter() {
     <footer
       ref={ref as RefObject<HTMLElement>}
       className="reveal section-pad contact-footer-wrap"
+      style={{
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        paddingTop: '40px',
+        paddingBottom: '40px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
     >
       <span style={META}>© 2026 Antonio Calero</span>
       <div className="contact-footer-links" style={{ display: 'flex', gap: '32px' }}>

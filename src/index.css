@@ -618,6 +618,7 @@ body {
 
 @media (max-width: 1000px) {
   .about-portrait-wrapper {
+    grid-column: span 12 !important;
     height: 480px !important;
     min-height: auto !important;
     border-right: none !important;
@@ -964,7 +965,8 @@ body {
     padding-top: 88px !important;
   }
   .about-hero-section,
-  .contact-hero-section {
+  .contact-hero-section,
+  .lavanderia-hero {
     padding-left: 40px !important;
     padding-right: 40px !important;
     padding-top: 104px !important;
@@ -974,7 +976,8 @@ body {
 /* Large tablet / small laptop breakpoint (max-width: 1000px) */
 @media (max-width: 1000px) {
   .about-hero-section,
-  .contact-hero-section {
+  .contact-hero-section,
+  .lavanderia-hero {
     padding-top: 108px !important;
     padding-left: 24px !important;
     padding-right: 24px !important;
@@ -1040,7 +1043,8 @@ body {
     display: none !important;
   }
   .about-hero-section,
-  .contact-hero-section {
+  .contact-hero-section,
+  .lavanderia-hero {
     padding-top: 96px !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
@@ -1079,7 +1083,8 @@ body {
     padding-top: 76px !important;
   }
   .about-hero-section,
-  .contact-hero-section {
+  .contact-hero-section,
+  .lavanderia-hero {
     padding-top: 84px !important;
     padding-left: 16px !important;
     padding-right: 16px !important;
