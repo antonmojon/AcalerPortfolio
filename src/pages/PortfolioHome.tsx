@@ -185,7 +185,6 @@ function StoryCard({ project }: { project: ProjectItemData }) {
           {project.tags.map(tag => (
             <span key={tag} style={META}>{tag}</span>
           ))}
-          <span style={{ ...META, color: 'var(--text-muted)' }}>{project.year}</span>
         </div>
       </div>
       <h2
