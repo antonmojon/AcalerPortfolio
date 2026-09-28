@@ -1183,7 +1183,7 @@ function NextProjectBlock() {
 
 export default function AgoraPage() {
   return (
-    <>
+    <div className="agora-page">
       <AgoraNav />
       <main>
         <AgoraHero />
@@ -1196,6 +1196,6 @@ export default function AgoraPage() {
         <NextProjectBlock />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

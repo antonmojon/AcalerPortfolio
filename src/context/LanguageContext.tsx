@@ -110,7 +110,7 @@ export const translations = {
     'about.stack_manifesto_p1': 'El diseño no termina en el lienzo estático: vive en la interacción real, en los tokens y en el código vivo.',
     'about.stack_manifesto_p2': 'Articulo un flujo donde el craft visual, la lógica agéntica y la síntesis generativa multiplican la velocidad y la calidad de entrega de producto.',
     'about.stack_meta': 'Ecosistema activo · 17 herramientas seleccionadas para producción',
-    'about.cta_title': 'CREEMOS ALGO JUNTOS',
+    'about.cta_title': 'HABLEMOS',
 
     // Contact
     'contact.top_tag': 'Contacto',
@@ -239,7 +239,7 @@ export const translations = {
     'about.stack_manifesto_p1': 'Design does not end on the static canvas: it lives in real interaction, tokens, and living code.',
     'about.stack_manifesto_p2': 'I structure a workflow where visual craft, agentic reasoning, and generative synthesis accelerate velocity and elevate product delivery quality.',
     'about.stack_meta': 'Active ecosystem · 17 tools curated for production',
-    'about.cta_title': "LET'S BUILD SOMETHING",
+    'about.cta_title': "LET'S TALK",
 
     // Contact
     'contact.top_tag': 'Contact',
@@ -368,7 +368,7 @@ export const translations = {
     'about.stack_manifesto_p1': 'Le design ne s’arrête pas au canevas statique : il s’anime dans l’interaction réelle, les tokens et le code vivant.',
     'about.stack_manifesto_p2': 'J’articule un workflow où le craft visuel, la logique agentique et la synthèse générative démultiplient la vitesse et la qualité de livraison.',
     'about.stack_meta': 'Écosystème actif · 17 outils sélectionnés pour la production',
-    'about.cta_title': 'CRÉONS ENSEMBLE',
+    'about.cta_title': 'PARLONS',
 
     // Contact
     'contact.top_tag': 'Contact',

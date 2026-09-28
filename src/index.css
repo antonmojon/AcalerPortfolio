@@ -884,15 +884,15 @@ body {
     gap: 16px !important;
   }
 
-  /* Section and Nav Paddings on Mobile */
-  .section-pad {
+  /* Section and Nav Paddings on Mobile — AGORA ONLY */
+  .agora-page .section-pad {
     padding-left: 20px !important;
     padding-right: 20px !important;
     padding-top: 48px !important;
     padding-bottom: 72px !important;
   }
 
-  .nav-pad {
+  .agora-page .nav-pad {
     padding-left: 20px !important;
     padding-right: 20px !important;
     padding-top: 18px !important;
