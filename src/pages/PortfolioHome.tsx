@@ -108,7 +108,7 @@ function PortfolioMasthead() {
   const { t } = useLanguage();
   return (
     <header className="masthead-pad" style={{ paddingTop: '88px', paddingLeft: '80px', paddingRight: '80px' }}>
-      <div style={{ borderTop: '2px solid var(--accent-color)', paddingTop: '12px', marginBottom: '8px', transition: 'border-color 0.4s ease' }}>
+      <div style={{ marginBottom: '8px' }}>
         <span style={{ ...META, color: 'var(--text-muted)' }}>{t('home.est')}</span>
       </div>
       <FitTitle text="ANTONIO CALERO" />

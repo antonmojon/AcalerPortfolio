@@ -180,7 +180,7 @@ function ContactBody() {
             </p>
           </div>
 
-          <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '32px', marginBottom: '32px' }}>
+          <div style={{ marginBottom: '32px' }}>
             <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)', lineHeight: '1.6', margin: 0 }}>
               {t('contact.security_note')}
             </p>
@@ -188,7 +188,7 @@ function ContactBody() {
 
           {/* Datos de Disponibilidad y Ubicación */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '20px' }}>
+            <div>
               <p style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', marginBottom: '6px' }}>
                 {t('contact.availability_label')}
               </p>
@@ -197,7 +197,7 @@ function ContactBody() {
               </p>
             </div>
 
-            <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '20px' }}>
+            <div>
               <p style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', marginBottom: '6px' }}>
                 {t('contact.location_label')}
               </p>
@@ -270,7 +270,7 @@ function ContactBody() {
           </div>
 
           {submitted ? (
-            <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '40px', marginTop: '16px' }}>
+            <div style={{ paddingTop: '20px', marginTop: '16px' }}>
               <p style={{ ...META, color: 'var(--accent-color)', marginBottom: '12px', fontWeight: 700 }}>
                 {t('contact.success_banner')}
               </p>
