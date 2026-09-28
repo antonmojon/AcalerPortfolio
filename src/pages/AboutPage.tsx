@@ -605,10 +605,7 @@ function AboutStack() {
         <div>
           <div
             style={{
-              borderTop: '2px solid var(--accent-color)',
-              paddingTop: '12px',
               marginBottom: '20px',
-              transition: 'border-color 0.4s ease',
             }}
           >
             <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
