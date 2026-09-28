@@ -74,6 +74,7 @@ export default function ComingSoonPage() {
       >
         <Link
           to="/"
+          className="nav-brand-link"
           style={{
             fontFamily: '"Special Gothic Expanded One", sans-serif',
             fontSize: '15px',
@@ -86,7 +87,7 @@ export default function ComingSoonPage() {
         >
           ← Antonio Calero
         </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+        <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
           <Link
             to="/#work"
             className="nav-link"

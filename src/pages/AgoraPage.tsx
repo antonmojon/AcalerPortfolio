@@ -51,6 +51,7 @@ function AgoraNav() {
     >
       <Link
         to="/"
+        className="nav-brand-link"
         style={{
           fontFamily: '"Special Gothic Expanded One", sans-serif',
           fontSize: '15px',
@@ -63,7 +64,7 @@ function AgoraNav() {
       >
         {t('nav.back')}
       </Link>
-      <div className="agora-nav-links" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+      <div className="nav-links-wrap agora-nav-links" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         {[
           { label: t('nav.projects'), href: '/#work' },
           { label: t('nav.about'), href: '/about' },

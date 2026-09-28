@@ -37,8 +37,8 @@ function PortfolioNav() {
         transition: 'background-color 0.4s ease, border-color 0.3s ease',
       }}
     >
-      <span style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, letterSpacing: '0.08em', transition: 'color 0.4s ease' }}>Capa Zero</span>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+      <span className="nav-brand-text" style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, letterSpacing: '0.08em', transition: 'color 0.4s ease' }}>Capa Zero</span>
+      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         <a href="#work" className="nav-link" style={META}>{t('nav.projects')}</a>
         <Link to="/about" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.about')}</Link>
         <Link to="/contact" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.contact')}</Link>
@@ -132,7 +132,7 @@ function PortfolioMasthead() {
             <span style={META}>{item}</span>
           </div>
         ))}
-        <Link to="/contact" style={{
+        <Link to="/contact" className="infobar-link" style={{
           ...META, color: 'var(--accent-color)', textDecoration: 'none',
           padding: '10px 0 10px 20px',
           display: 'flex', alignItems: 'center', gap: '6px',
@@ -237,7 +237,7 @@ function PortfolioNewsGrid() {
       <div className="news-row-a" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '0 32px', marginBottom: '48px' }}>
         {rowA.map(p => <StoryCard key={p.num} project={p} />)}
       </div>
-      <div style={{ marginBottom: '48px' }} />
+      <div className="news-row-spacer" style={{ marginBottom: '48px' }} />
       <div className="news-row-b" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '0 32px' }}>
         {rowB.map(p => <StoryCard key={p.num} project={p} />)}
       </div>

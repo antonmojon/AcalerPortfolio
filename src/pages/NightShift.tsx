@@ -30,6 +30,7 @@ function NightShiftNav() {
     >
       <Link
         to="/"
+        className="nav-brand-link"
         style={{
           fontFamily: '"Special Gothic Expanded One", sans-serif',
           fontSize: '15px',
@@ -42,7 +43,7 @@ function NightShiftNav() {
       >
         {t('nav.back')}
       </Link>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         {[
           { label: t('nav.projects'), href: '/#work' },
           { label: t('nav.about'), href: '/about' },

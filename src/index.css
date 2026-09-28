@@ -13,6 +13,13 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: none;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body, #root {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 html::-webkit-scrollbar { display: none; }
@@ -939,4 +946,185 @@ body {
     margin-bottom: 32px !important;
   }
 }
+
+/* ─── Global Responsive Optimization ────────────────────────── */
+.nav-links-wrap {
+  transition: gap 0.2s ease;
+}
+.nav-brand-link {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Tablet adjustments (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .masthead-pad {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding-top: 88px !important;
+  }
+  .about-hero-section,
+  .contact-hero-section {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding-top: 104px !important;
+  }
+}
+
+/* Large tablet / small laptop breakpoint (max-width: 1000px) */
+@media (max-width: 1000px) {
+  .about-hero-section,
+  .contact-hero-section {
+    padding-top: 108px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .about-hero-topbar,
+  .contact-hero-topbar {
+    padding-bottom: 24px !important;
+    margin-bottom: 40px !important;
+  }
+  .about-hero-name,
+  .contact-hero-title-wrap {
+    padding-bottom: 44px !important;
+  }
+  .about-bio-col {
+    grid-column: span 12 !important;
+    padding: 48px 24px !important;
+    gap: 40px !important;
+  }
+  .about-exp-col {
+    grid-column: span 12 !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 48px 24px !important;
+  }
+  .about-edu-col {
+    grid-column: span 12 !important;
+    padding: 48px 24px !important;
+  }
+  .about-lang-row {
+    gap: 28px !important;
+  }
+  .about-pad {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .editorial-empty-spacer {
+    display: none !important;
+  }
+}
+
+/* Mobile breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+  .nav-links-wrap {
+    gap: 16px !important;
+  }
+  .infobar {
+    grid-template-columns: 1fr !important;
+  }
+  .infobar > div,
+  .infobar > a,
+  .infobar > button {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+  .infobar > a:last-child {
+    border-bottom: none !important;
+  }
+  .news-row-spacer {
+    display: none !important;
+  }
+  .about-hero-section,
+  .contact-hero-section {
+    padding-top: 96px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .about-footer-wrap,
+  .contact-footer-wrap,
+  .lavanderia-footer-wrap {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
+  .about-footer-links,
+  .contact-footer-links {
+    gap: 20px !important;
+  }
+}
+
+/* Compact mobile breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+  .nav-links-wrap {
+    gap: 10px !important;
+  }
+  .nav-links-wrap .nav-link {
+    font-size: 10.5px !important;
+  }
+  .nav-brand-link {
+    font-size: 13px !important;
+  }
+  .masthead-pad {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 76px !important;
+  }
+  .about-hero-section,
+  .contact-hero-section {
+    padding-top: 84px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .about-hero-topbar,
+  .contact-hero-topbar {
+    padding-bottom: 20px !important;
+    margin-bottom: 28px !important;
+  }
+  .about-hero-name,
+  .contact-hero-title-wrap {
+    padding-bottom: 32px !important;
+  }
+  .about-bio-col,
+  .about-exp-col,
+  .about-edu-col,
+  .about-stack-anchor,
+  .about-stack-content,
+  .contact-col-left,
+  .contact-col-right {
+    padding: 32px 16px !important;
+  }
+  .about-lang-row {
+    gap: 20px !important;
+  }
+  .about-pad {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .cta-pad {
+    padding: 44px 16px !important;
+  }
+}
+
+/* Ultra-compact screens (max-width: 360px) */
+@media (max-width: 360px) {
+  .nav-links-wrap {
+    gap: 7px !important;
+  }
+  .nav-links-wrap .nav-link {
+    font-size: 9.5px !important;
+  }
+  .nav-brand-link {
+    font-size: 12px !important;
+  }
+}
+
 

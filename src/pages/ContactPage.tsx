@@ -46,6 +46,7 @@ function ContactNav() {
     >
       <Link
         to="/"
+        className="nav-brand-link"
         style={{
           fontFamily: '"Special Gothic Expanded One", sans-serif',
           fontSize: '15px', letterSpacing: '0.04em',
@@ -55,7 +56,7 @@ function ContactNav() {
       >
         ← Antonio Calero
       </Link>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         <Link to="/#work" className="nav-link" style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}>{t('nav.projects')}</Link>
         <Link to="/about" className="nav-link" style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}>{t('nav.about')}</Link>
         <Link to="/contact" className="nav-link" style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, textDecoration: 'none' }}>{t('nav.contact')}</Link>
@@ -70,29 +71,26 @@ function ContactHero() {
   const { t } = useLanguage();
   return (
     <section
+      className="section-pad contact-hero-section"
       style={{
-        paddingTop: '128px',
-        paddingLeft: '80px',
-        paddingRight: '80px',
         borderBottom: '1px solid var(--border-color)',
       }}
     >
       {/* Top bar */}
       <div
+        className="contact-hero-topbar"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingBottom: '40px',
           borderBottom: '1px solid var(--border-color)',
-          marginBottom: '64px',
         }}
       >
         <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('contact.hero_tag')}</p>
       </div>
 
       {/* Main Title */}
-      <div style={{ paddingBottom: '72px' }}>
+      <div className="contact-hero-title-wrap">
         <p
           className="meta-reveal"
           style={{ ...META, color: 'var(--text-primary)', marginBottom: '20px' }}
@@ -463,15 +461,10 @@ function ContactFooter() {
   return (
     <footer
       ref={ref as RefObject<HTMLElement>}
-      className="reveal section-pad"
-      style={{
-        paddingLeft: '80px', paddingRight: '80px',
-        paddingTop: '40px', paddingBottom: '40px',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-      }}
+      className="reveal section-pad contact-footer-wrap"
     >
       <span style={META}>© 2026 Antonio Calero</span>
-      <div style={{ display: 'flex', gap: '32px' }}>
+      <div className="contact-footer-links" style={{ display: 'flex', gap: '32px' }}>
         <Link to="/about" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.about')}</Link>
         <a href="https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/" target="_blank" rel="noreferrer" className="nav-link" style={META}>LinkedIn</a>
         <a href="https://www.behance.net/antoniocalero" target="_blank" rel="noreferrer" className="nav-link" style={META}>Behance</a>

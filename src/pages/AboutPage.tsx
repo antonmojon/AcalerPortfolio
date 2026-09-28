@@ -50,6 +50,7 @@ function AboutNav() {
     >
       <Link
         to="/"
+        className="nav-brand-link"
         style={{
           fontFamily: '"Special Gothic Expanded One", sans-serif',
           fontSize: '15px', letterSpacing: '0.04em',
@@ -59,7 +60,7 @@ function AboutNav() {
       >
         ← Antonio Calero
       </Link>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         <Link to="/#work" className="nav-link" style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}>{t('nav.projects')}</Link>
         <Link to="/about" className="nav-link" style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, textDecoration: 'none' }}>{t('nav.about')}</Link>
         <Link to="/contact" className="nav-link" style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}>{t('nav.contact')}</Link>
@@ -74,29 +75,26 @@ function AboutHero() {
   const { t } = useLanguage();
   return (
     <section
+      className="section-pad about-hero-section"
       style={{
-        paddingTop: '128px',
-        paddingLeft: '80px',
-        paddingRight: '80px',
         borderBottom: '1px solid var(--border-color)',
       }}
     >
       {/* Top bar */}
       <div
+        className="about-hero-topbar"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingBottom: '40px',
           borderBottom: '1px solid var(--border-color)',
-          marginBottom: '80px',
         }}
       >
         <p style={{ ...META, color: 'var(--text-primary)' }}>{t('about.top_tag')}</p>
       </div>
 
       {/* Name */}
-      <div style={{ paddingBottom: '80px' }}>
+      <div className="about-hero-name">
         <p
           className="meta-reveal"
           style={{ ...META, color: 'var(--text-secondary)', marginBottom: '24px' }}
@@ -173,14 +171,12 @@ function AboutBio() {
 
       {/* Bio — 7 cols */}
       <div
-        className="reveal"
+        className="reveal about-bio-col"
         style={{
           gridColumn: 'span 7',
-          padding: '72px 80px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          gap: '56px',
         }}
       >
         <div>
@@ -205,7 +201,7 @@ function AboutBio() {
         {/* Idiomas */}
         <div>
           <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '20px' }}>{t('about.languages_label')}</p>
-          <div style={{ display: 'flex', gap: '40px' }}>
+          <div className="about-lang-row" style={{ display: 'flex' }}>
             {[
               { lang: 'ES', label: t('about.lang_es_title'), level: t('about.lang_es_level') },
               { lang: 'EN', label: t('about.lang_en_title'), level: t('about.lang_en_level') },
@@ -380,11 +376,10 @@ function AboutExperience() {
     >
       {/* Columna Izquierda: Experiencia Laboral — 5 cols */}
       <div
-        className="reveal-left"
+        className="reveal-left about-exp-col"
         style={{
           gridColumn: 'span 5',
           borderRight: '1px solid var(--border-color)',
-          padding: '64px 64px 64px 80px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -422,10 +417,9 @@ function AboutExperience() {
 
       {/* Columna Derecha: Formación Académica & Redes — 7 cols */}
       <div
-        className="reveal"
+        className="reveal about-edu-col"
         style={{
           gridColumn: 'span 7',
-          padding: '64px 80px',
           display: 'flex',
           flexDirection: 'column',
           gap: '48px',
@@ -785,7 +779,7 @@ function AboutCTA() {
   const { t } = useLanguage();
   return (
     <section style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--cta-bg)', color: 'var(--cta-text)', transition: 'background-color 0.4s ease, color 0.4s ease' }}>
-      <div style={{ padding: '96px 80px' }}>
+      <div className="cta-pad">
         <Link
           to="/contact"
           className="portfolio-cta-link block w-full"
@@ -850,16 +844,11 @@ function AboutFooter() {
   return (
     <footer
       ref={ref as RefObject<HTMLElement>}
-      className="reveal section-pad"
-      style={{
-        paddingLeft: '80px', paddingRight: '80px',
-        paddingTop: '40px', paddingBottom: '40px',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-      }}
+      className="reveal section-pad about-footer-wrap"
     >
       <span style={META}>© 2026 Antonio Calero</span>
       <span style={META}>{t('footer.rights')}</span>
-      <div style={{ display: 'flex', gap: '32px' }}>
+      <div className="about-footer-links" style={{ display: 'flex', gap: '32px' }}>
         <Link to="/contact" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.contact')}</Link>
         <a href="https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/" target="_blank" rel="noreferrer" className="nav-link" style={META}>LinkedIn</a>
         <a href="https://www.behance.net/antoniocalero" target="_blank" rel="noreferrer" className="nav-link" style={META}>Behance</a>

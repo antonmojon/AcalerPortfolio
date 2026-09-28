@@ -40,6 +40,7 @@ function LavanderiaNav() {
     >
       <Link
         to="/"
+        className="nav-brand-link"
         style={{
           fontFamily: '"Special Gothic Expanded One", sans-serif',
           fontSize: '15px', letterSpacing: '0.04em',
@@ -49,7 +50,7 @@ function LavanderiaNav() {
       >
         {t('nav.back')}
       </Link>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
         {[
           { label: t('nav.projects'), href: '/#work' },
           { label: t('nav.about'), href: '/about' },
@@ -77,10 +78,10 @@ export default function LavanderiaPage() {
       <main>
         {/* Hero */}
         <section
-          className="section-pad w-full"
-          style={{ paddingTop: '128px', paddingLeft: '80px', paddingRight: '80px', display: 'flex', flexDirection: 'column', gap: '16px' }}
+          className="section-pad lavanderia-hero w-full"
+          style={{ paddingTop: '128px', display: 'flex', flexDirection: 'column', gap: '16px' }}
         >
-          <div className="meta-reveal flex items-center" style={{ gap: '120px' }}>
+          <div className="meta-reveal flex items-center" style={{ gap: 'clamp(32px, 8vw, 120px)' }}>
             <span style={META}>{t('case.lavanderia.tag')}</span>
             <span style={META}>2025</span>
           </div>
@@ -118,7 +119,7 @@ export default function LavanderiaPage() {
           style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '120px', paddingBottom: '120px' }}
         >
           <div className="editorial-grid grid w-full" style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '24px' }}>
-            <div style={{ gridColumn: 'span 4' }} />
+            <div className="editorial-empty-spacer" style={{ gridColumn: 'span 4' }} />
             <div style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '56px' }}>
               <p style={{ fontFamily: '"Inter"', fontWeight: 400, fontSize: '28px', lineHeight: '1.3', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
                 {data.intro}
@@ -188,7 +189,7 @@ export default function LavanderiaPage() {
         </section>
 
         {/* Footer */}
-        <footer className="section-pad w-full" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '40px', paddingBottom: '40px', paddingLeft: '80px', paddingRight: '80px', display: 'flex', justifyContent: 'space-between' }}>
+        <footer className="section-pad w-full lavanderia-footer-wrap" style={{ borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between' }}>
           <span style={META}>Bilbao, España 2026</span>
           <span style={META}>{t('home.footer_title')}</span>
         </footer>
