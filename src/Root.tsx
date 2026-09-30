@@ -55,28 +55,25 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
   animatingRef.current = animating;
   const startGlideRef = useRef<() => void>(() => {});
 
-  // 1. Calculate font size to match Home page exactly
+  // 1. Calculate font size to match Home page exactly and never overflow
   useEffect(() => {
     let mounted = true;
     const fit = () => {
       if (!mounted) return;
-      // First check if home page title already rendered its font size
-      const homeSpan = document.querySelector('.masthead-pad .scramble-line span') as HTMLElement | null;
-      if (homeSpan) {
-        const computedFs = parseFloat(window.getComputedStyle(homeSpan).fontSize);
-        if (computedFs > 0) {
-          setFs(computedFs);
-          return;
-        }
-      }
       const isMobile = window.innerWidth <= 768;
-      const padding = isMobile ? 48 : 160;
-      const available = window.innerWidth - padding;
-      if (probeRef.current && available > 0) {
-        probeRef.current.style.fontSize = '100px';
-        const ratio = available / probeRef.current.scrollWidth;
-        const calculated = Math.floor(100 * ratio);
-        setFs(Math.min(calculated, 118));
+      const horizontalPad = isMobile ? 48 : 160;
+      const available = Math.max(window.innerWidth - horizontalPad, 200);
+
+      const probe = probeRef.current;
+      if (probe) {
+        probe.style.fontSize = '100px';
+        const probeWidth = probe.scrollWidth;
+        if (probeWidth > 0) {
+          const ratio = available / probeWidth;
+          const calculated = Math.floor(100 * ratio);
+          // Match Home page: cap at 118px on large screens, proportionally scale down on smaller screens
+          setFs(Math.min(calculated, 118));
+        }
       }
     };
     fit();
@@ -211,7 +208,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
   const titleStyle = {
     fontFamily: '"Special Gothic Expanded One", sans-serif',
     fontWeight: 400,
-    fontSize: fs ? `${fs}px` : '100px',
+    fontSize: fs ? `${fs}px` : 'clamp(28px, 6.5vw, 118px)',
     letterSpacing: '-0.01em',
     lineHeight: '0.88',
     color: 'var(--hero-title-color)',
@@ -245,7 +242,19 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
       <span
         ref={probeRef}
         aria-hidden
-        style={{ ...titleStyle, fontSize: '100px', position: 'absolute', visibility: 'hidden', pointerEvents: 'none' }}
+        style={{
+          fontFamily: '"Special Gothic Expanded One", sans-serif',
+          fontWeight: 400,
+          fontSize: '100px',
+          letterSpacing: '-0.01em',
+          lineHeight: '0.88',
+          position: 'fixed',
+          left: -9999,
+          top: -9999,
+          visibility: 'hidden',
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+        }}
       >
         ANTONIO CALERO
       </span>
@@ -270,7 +279,6 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
       {/* Name: 100% centered horizontally & vertically, then glides to masthead */}
       {(phase === 'name' || phase === 'animating') && (
         <div
-          className="masthead-pad"
           style={{
             position: 'absolute',
             top: animating && targetY !== null ? `${targetY}px` : '50%',
@@ -281,17 +289,25 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
+            paddingLeft: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
+            paddingRight: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
             paddingTop: 0,
-            paddingLeft: '80px',
-            paddingRight: '80px',
+            paddingBottom: 0,
             boxSizing: 'border-box',
+            width: '100%',
             transition: animating
-              ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
+              ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), padding 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
               : 'none',
             willChange: 'top, transform',
           }}
         >
-          <span style={{ ...titleStyle, width: '100%', textAlign: 'center' }}>
+          <span
+            style={{
+              ...titleStyle,
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
             ANTONIO CALERO
           </span>
         </div>
