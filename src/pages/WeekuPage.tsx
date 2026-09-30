@@ -272,13 +272,16 @@ export default function WeekuPage() {
                 </div>
               </div>
 
-              {/* Clean Mockups Lineup */}
-              <img
-                className="project-image"
-                src="/images/weeku/weeku-lineup.jpg"
-                alt="Weeku — Mobile Interface Mockups Lineup"
-                loading="lazy"
-              />
+              {/* Clean Transparent Mockups Lineup */}
+              <div className="project-image-transparent-wrap" style={{ padding: '2vw 0', display: 'flex', justifyContent: 'center' }}>
+                <img
+                  className="project-image"
+                  src="/images/weeku/weeku-lineup-clean.png"
+                  alt="Weeku — Mobile Interface Mockups Lineup"
+                  loading="lazy"
+                  style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                />
+              </div>
 
               {/* Section 04: Arquitectura de la Información */}
               <div className="project-section-block scroll-in-group">
