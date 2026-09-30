@@ -272,11 +272,11 @@ export default function WeekuPage() {
                 </div>
               </div>
 
-              {/* UI Screens Image Break */}
+              {/* Clean Mockups Lineup */}
               <img
                 className="project-image"
-                src="/images/weeku/04-ui-screens.jpg"
-                alt="Weeku — Mobile Interface Flows and Design"
+                src="/images/weeku/weeku-lineup.jpg"
+                alt="Weeku — Mobile Interface Mockups Lineup"
                 loading="lazy"
               />
 
