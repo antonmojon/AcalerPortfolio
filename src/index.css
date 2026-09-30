@@ -1934,4 +1934,210 @@ header {
   }
 }
 
+/* ==========================================================================
+   PAGE PROJECT (Matthieu Givelet Layout)
+   ========================================================================== */
+
+.page-project {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.project {
+  position: relative;
+  display: grid;
+  grid-template-columns: 43vw 1fr;
+  align-items: start;
+}
+
+.project-image-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+  padding: 0 2.5vw 4vw 0;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-xs);
+  display: block;
+  background-color: var(--color-grey);
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-infos {
+  position: sticky;
+  top: 5.6vw;
+  height: calc(100dvh - 5.6vw);
+  padding: 0 2.5vw 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.project-number {
+  position: absolute;
+  top: -3.4vw;
+  right: 2.5vw;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  color: var(--color-dark);
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 3.8vw;
+  line-height: 1;
+  margin: 2vw 0 4vw;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.project-desc-box {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  align-items: start;
+  gap: 1.5vw;
+}
+
+.project-date {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-dark);
+  opacity: 0.7;
+}
+
+.project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+
+.project-cat {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.45;
+  color: var(--color-dark);
+  opacity: 0.65;
+}
+
+.project-desc {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+  font-size: var(--font-size-s);
+  line-height: 1.45;
+  color: var(--color-dark);
+}
+
+.next-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6vw;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-s);
+  color: var(--color-dark);
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: auto;
+  padding-top: 2vw;
+}
+
+.next-project-link:hover .link-line {
+  background-size: 100% 1px;
+}
+
+/* Contact page specific */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 40vw 1fr;
+  gap: 4vw;
+  padding: 4vw 2.5vw 8vw;
+}
+
+.contact-left-title {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4.5vw, 64px);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 2vw;
+}
+
+.contact-input-field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  font-family: var(--font-body);
+  font-size: var(--font-size-m);
+  color: var(--color-dark);
+  padding: 1vw 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.contact-input-field:focus {
+  border-bottom-color: var(--color-dark);
+}
+
+@media (max-width: 768px) {
+  .project {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8vw;
+    align-items: initial;
+  }
+
+  .project-image-box {
+    gap: 3vw;
+    padding: 0 4vw 8vw;
+  }
+
+  .project-infos {
+    position: initial;
+    height: auto;
+    padding: 0 4vw;
+  }
+
+  .project-number {
+    top: 7vw;
+    right: 6vw;
+  }
+
+  .project-title {
+    font-size: 9vw;
+    margin: 4vw 0 6vw;
+  }
+
+  .project-desc-box {
+    grid-template-columns: 1fr;
+    gap: 4vw;
+  }
+
+  .project-details {
+    gap: 5vw;
+  }
+
+  .next-project-mobile {
+    margin: 8vw 4vw 16vw;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    padding: 8vw 4vw 16vw;
+    gap: 8vw;
+  }
+}
+
+
 

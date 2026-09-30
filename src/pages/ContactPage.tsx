@@ -1,521 +1,322 @@
-import { useState, useEffect, type FormEvent, type RefObject } from 'react';
-import { Link } from 'react-router';
-import ScrambleText from '../components/ScrambleText';
-import { useReveal, useRevealAll } from '../hooks/useReveal';
-import LanguageSelector from '../components/LanguageSelector';
+import { useState, useEffect, useRef, type FormEvent } from 'react';
+import MgNav from '../components/MgNav';
+import MgFooter from '../components/MgFooter';
 import { useLanguage } from '../context/LanguageContext';
 
-const META = {
-  fontFamily: '"Space Mono", monospace',
-  fontWeight: 400,
-  fontSize: '12px',
-  letterSpacing: '0.05em',
-  textTransform: 'uppercase' as const,
-  color: 'var(--text-primary)',
-  lineHeight: '1.6',
-};
+export default function ContactPage() {
+  const { language } = useLanguage();
+  const isEs = language === 'es';
+  const rootRef = useRef<HTMLDivElement>(null);
 
-const BODY = {
-  fontFamily: '"Inter", sans-serif',
-  fontWeight: 400,
-  fontSize: '18px',
-  lineHeight: '1.5',
-  color: 'var(--text-primary)',
-};
-
-/* ─── Nav ─────────────────────────────────────────────────── */
-function ContactNav() {
-  const { t } = useLanguage();
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
-
-  return (
-    <nav
-      className="nav-pad fixed top-0 left-0 right-0 z-50 flex items-center justify-between"
-      style={{
-        paddingLeft: '80px', paddingRight: '80px',
-        paddingTop: '24px', paddingBottom: '24px',
-        backgroundColor: 'var(--bg-primary)',
-        borderBottom: scrolled ? '1px solid var(--border-color)' : '1px solid transparent',
-        transition: 'background-color 0.4s ease, border-color 0.3s ease',
-      }}
-    >
-      <Link
-        to="/"
-        className="nav-brand-link"
-        style={{
-          fontFamily: '"Special Gothic Expanded One", sans-serif',
-          fontSize: '15px', letterSpacing: '0.04em',
-          textTransform: 'uppercase', color: 'var(--text-primary)', textDecoration: 'none',
-          transition: 'color 0.4s ease',
-        }}
-      >
-        ← Antonio Calero
-      </Link>
-      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
-        <Link to="/#work" className="nav-link" style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}>{t('nav.projects')}</Link>
-        <Link to="/about" className="nav-link" style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}>{t('nav.about')}</Link>
-        <Link to="/contact" className="nav-link" style={{ ...META, color: 'var(--hero-title-color)', fontWeight: 700, textDecoration: 'none' }}>{t('nav.contact')}</Link>
-        <LanguageSelector />
-      </div>
-    </nav>
-  );
-}
-
-/* ─── Hero ─────────────────────────────────────────────────── */
-function ContactHero() {
-  const { t } = useLanguage();
-  return (
-    <section
-      className="section-pad contact-hero-section"
-      style={{
-        paddingTop: '128px',
-        paddingLeft: '80px',
-        paddingRight: '80px',
-        borderBottom: '1px solid var(--border-color)',
-      }}
-    >
-      {/* Top bar */}
-      <div
-        className="contact-hero-topbar"
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '28px',
-        }}
-      >
-        <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('contact.hero_tag')}</p>
-      </div>
-
-      {/* Main Title */}
-      <div className="contact-hero-title-wrap" style={{ paddingBottom: '72px' }}>
-        <p
-          className="meta-reveal"
-          style={{ ...META, color: 'var(--text-primary)', marginBottom: '20px' }}
-        >
-          {t('contact.conversation_prompt')}
-        </p>
-        <div className="scramble-line">
-          <ScrambleText
-            text={t('contact.hero_title')}
-            delay={0.1}
-            duration={900}
-            className="scramble-inner"
-            style={{
-              fontFamily: '"Special Gothic", sans-serif',
-              fontWeight: 700,
-              fontSize: 'clamp(44px, 6vw, 96px)',
-              letterSpacing: '-0.03em',
-              lineHeight: '0.92',
-              color: 'var(--hero-title-color)',
-              transition: 'color 0.4s ease',
-            }}
-          />
-        </div>
-        <p
-          style={{
-            ...BODY,
-            fontSize: '20px',
-            color: 'var(--text-primary)',
-            marginTop: '28px',
-            maxWidth: '720px',
-            lineHeight: '1.5',
-          }}
-        >
-          {t('contact.hero_subtitle')}
-        </p>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Contact Body: Direct Channels + Form (5 cols | 7 cols) ─ */
-function ContactBody() {
-  const { t } = useLanguage();
-  const ref = useRevealAll();
-
-  // Form State
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleSubmit = async (e: FormEvent) => {
+  // Safe email builder (never in static HTML)
+  const handleSafeEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !message.trim()) return;
-    setIsSubmitting(true);
-
-    try {
-      const endpoint = (import.meta as unknown as { env?: { VITE_FORMSPREE_ENDPOINT?: string } }).env?.VITE_FORMSPREE_ENDPOINT;
-      if (endpoint) {
-        await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ name, email, message }),
-        });
-      } else {
-        await new Promise(r => setTimeout(r, 650));
-      }
-    } catch {
-      // Graceful fallback
-    } finally {
-      setIsSubmitting(false);
-      setSubmitted(true);
-    }
+    const user = 'antonio.calero.alcala';
+    const domain = 'gmail.com';
+    window.location.href = `mailto:${user}@${domain}`;
   };
 
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const user = 'antonio.calero.alcala';
+    const domain = 'gmail.com';
+    navigator.clipboard.writeText(`${user}@${domain}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
+  };
+
+  // ScrollIn IntersectionObserver
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const delay = 0.06;
+    const groups = root.querySelectorAll('.scroll-in-group');
+    const borders = root.querySelectorAll('.border');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          if (entry.target.classList.contains('scroll-in-group')) {
+            entry.target.querySelectorAll('.scroll-in').forEach((el, index) => {
+              (el as HTMLElement).style.setProperty('--stagger-delay', `${index * delay}s`);
+              el.classList.add('is-visible');
+            });
+          } else {
+            entry.target.classList.add('is-visible');
+          }
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08 }
+    );
+
+    groups.forEach((g) => observer.observe(g));
+    borders.forEach((b) => observer.observe(b));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!formState.name || !formState.email || !formState.message) return;
+    setSubmitted(true);
+  };
 
   return (
-    <section
-      ref={ref as RefObject<HTMLElement>}
-      className="editorial-grid grid w-full"
-      style={{ gridTemplateColumns: 'repeat(12, 1fr)', borderBottom: '1px solid var(--border-color)' }}
-    >
-      {/* Columna Izquierda: Información Profesional & Canales — 5 cols (Cero Cajas) */}
-      <div
-        className="reveal-left contact-col-left"
-        style={{
-          gridColumn: 'span 5',
-          borderRight: '1px solid var(--border-color)',
-          padding: '64px 64px 64px 80px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          gap: '48px',
-        }}
-      >
-        <div>
-          <div
-            style={{
-              marginBottom: '32px',
-            }}
-          >
-            <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
-              {t('contact.channels_eyebrow')}
+    <div ref={rootRef} className="transition-wrapper">
+      <MgNav />
+
+      <main>
+        <section className="contact-grid">
+          {/* Left Column: Editorial Info */}
+          <div className="scroll-in-group">
+            <p className="text-box" style={{ marginBottom: '2vw' }}>
+              <span className="scroll-in" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xs)' }}>
+                [ {isEs ? 'Contacto' : 'Contact'} ]
+              </span>
             </p>
-          </div>
 
-          <div style={{ marginBottom: '32px' }}>
-            <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)', lineHeight: '1.6', margin: 0 }}>
-              {t('contact.security_note')}
+            <h1 className="contact-left-title text-box">
+              <span className="scroll-in">
+                {isEs ? 'Hablemos de tu idea' : "Let's connect"}
+              </span>
+            </h1>
+
+            <p className="text-box" style={{ marginBottom: '2vw', maxWidth: '34vw' }}>
+              <span className="scroll-in" style={{ fontSize: 'var(--font-size-s)', lineHeight: '1.5' }}>
+                {isEs
+                  ? 'Disponible para proyectos de diseño de producto, sistemas de diseño y consultoría estratégica en remoto o presencial.'
+                  : 'Open for product design leadership, design systems, and design engineering consultancy worldwide.'}
+              </span>
             </p>
-          </div>
 
-          {/* Datos de Disponibilidad y Ubicación */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div>
-              <p style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                {t('contact.availability_label')}
+            <div style={{ marginTop: '3vw', display: 'flex', flexDirection: 'column', gap: '1.2vw' }}>
+              <div className="text-box">
+                <span className="scroll-in" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xs)', opacity: 0.6 }}>
+                  [ {isEs ? 'Ubicación' : 'Location'} ]
+                </span>
+              </div>
+              <p className="text-box">
+                <span className="scroll-in" style={{ fontSize: 'var(--font-size-s)' }}>
+                  Bilbao, Bizkaia — España (UTC+1)
+                </span>
               </p>
-              <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)', margin: 0 }}>
-                {t('contact.availability_value')}
-              </p>
-            </div>
 
-            <div>
-              <p style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                {t('contact.location_label')}
-              </p>
-              <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)', margin: 0 }}>
-                {t('contact.location_value')}
-              </p>
-            </div>
+              <div className="text-box" style={{ marginTop: '1vw' }}>
+                <span className="scroll-in" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xs)', opacity: 0.6 }}>
+                  [ {isEs ? 'Canales directos' : 'Direct Channels'} ]
+                </span>
+              </div>
 
-          </div>
-        </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
+                <span className="text-box">
+                  <button
+                    onClick={handleSafeEmail}
+                    className="scroll-in link-line"
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--font-size-s)',
+                      color: 'var(--color-dark)',
+                      textAlign: 'left',
+                    }}
+                  >
+                    {isEs ? 'Enviar correo electrónico ↗' : 'Send an email ↗'}
+                  </button>
+                </span>
 
-        {/* Redes profesionales */}
-        <div style={{ paddingTop: '16px' }}>
-          <p style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', marginBottom: '14px' }}>
-            {t('contact.channels_label')}
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-            {[
-              { label: 'LinkedIn ↗', href: 'https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/' },
-              { label: 'Behance ↗', href: 'https://www.behance.net/antoniocalero' },
-            ].map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="contact-social-link"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '14px 18px',
-                  border: '1px solid var(--border-color)',
-                  fontFamily: '"Space Mono", monospace',
-                  fontSize: '11px',
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  transition: 'background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease',
-                }}
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
+                <span className="text-box">
+                  <button
+                    onClick={handleCopyEmail}
+                    className="scroll-in link-line"
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--font-size-xs)',
+                      color: 'var(--color-dark)',
+                      opacity: 0.7,
+                      textAlign: 'left',
+                    }}
+                  >
+                    {copied
+                      ? (isEs ? '✓ Correo copiado al portapapeles' : '✓ Email copied to clipboard')
+                      : (isEs ? 'Copiar dirección al portapapeles' : 'Copy address to clipboard')}
+                  </button>
+                </span>
 
-      {/* Columna Derecha: Formulario Editorial — 7 cols (Cero Cajas) */}
-      <div
-        className="reveal contact-col-right"
-        style={{
-          gridColumn: 'span 7',
-          padding: '64px 80px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div>
-          <div
-            style={{
-              marginBottom: '32px',
-            }}
-          >
-            <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
-              {t('contact.form_eyebrow')}
-            </p>
-          </div>
+                <span className="text-box" style={{ marginTop: '0.4vw' }}>
+                  <a
+                    href="https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="scroll-in link-line"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--font-size-s)',
+                      color: 'var(--color-dark)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    LinkedIn ↗
+                  </a>
+                </span>
 
-          {submitted ? (
-            <div style={{ paddingTop: '20px', marginTop: '16px' }}>
-              <p style={{ ...META, color: 'var(--accent-color)', marginBottom: '12px', fontWeight: 700 }}>
-                {t('contact.success_banner')}
-              </p>
-              <h3
-                style={{
-                  fontFamily: '"Special Gothic", sans-serif',
-                  fontSize: 'clamp(28px, 3vw, 40px)',
-                  letterSpacing: '-0.02em',
-                  color: 'var(--hero-title-color)',
-                  marginBottom: '16px',
-                }}
-              >
-                {t('contact.thanks_title')}
-              </h3>
-              <p style={{ ...BODY, fontSize: '17px', color: 'var(--text-primary)', lineHeight: '1.6', maxWidth: '580px' }}>
-                {t('contact.thanks_desc')}
-              </p>
-              <div style={{ display: 'flex', gap: '16px', marginTop: '32px', flexWrap: 'wrap' }}>
-                <a
-                  href="https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-link"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    padding: '12px 24px',
-                    border: '1px solid var(--border-color)',
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '11px',
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
-                    transition: 'all 0.25s ease',
-                  }}
-                >
-                  {t('contact.success_linkedin')}
-                </a>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setName('');
-                    setEmail('');
-                    setMessage('');
-                    setSubmitted(false);
-                  }}
-                  style={{
-                    ...META,
-                    padding: '12px 24px',
-                    border: '1px solid var(--border-color)',
-                    backgroundColor: 'transparent',
-                    color: 'var(--text-primary)',
-                    cursor: 'pointer',
-                    transition: 'border-color 0.2s ease',
-                  }}
-                >
-                  ← {t('contact.send_another')}
-                </button>
+                <span className="text-box">
+                  <a
+                    href="https://www.behance.net/antoniocalero"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="scroll-in link-line"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--font-size-s)',
+                      color: 'var(--color-dark)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Behance ↗
+                  </a>
+                </span>
               </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-              {/* Campos de texto: Líneas abiertas sin cajas */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px', marginBottom: '36px' }}>
+          </div>
+
+          {/* Right Column: Clean Minimalist Form */}
+          <div className="scroll-in-group" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+            <div className="border" style={{ marginBottom: '3vw' }}></div>
+
+            {submitted ? (
+              <div style={{ padding: '3vw 0' }}>
+                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4vw', marginBottom: '1vw' }}>
+                  {isEs ? '¡Mensaje recibido!' : 'Message received!'}
+                </h2>
+                <p style={{ fontSize: 'var(--font-size-m)', opacity: 0.8, lineHeight: '1.5' }}>
+                  {isEs
+                    ? 'Gracias por contactar. Responderé a la mayor brevedad posible.'
+                    : 'Thank you for reaching out. I will get back to you shortly.'}
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2.5vw' }}>
                 <div>
-                  <label htmlFor="contact-name" style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', display: 'block', marginBottom: '12px' }}>
-                    {t('contact.name_label')}
+                  <label
+                    htmlFor="contact-name"
+                    style={{
+                      display: 'block',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--font-size-xs)',
+                      marginBottom: '0.8vw',
+                      opacity: 0.6,
+                    }}
+                  >
+                    [ 01 {isEs ? 'Nombre' : 'Name'} ]
                   </label>
                   <input
                     id="contact-name"
                     type="text"
                     required
-                    placeholder={t('contact.name_placeholder')}
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    className="editorial-input"
-                    style={{
-                      width: '100%',
-                      padding: '12px 0',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      borderBottom: '1px solid var(--border-color)',
-                      color: 'var(--text-primary)',
-                      fontFamily: '"Inter", sans-serif',
-                      fontSize: '16px',
-                      outline: 'none',
-                      borderRadius: 0,
-                      transition: 'border-color 0.2s ease',
-                    }}
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    placeholder={isEs ? 'Tu nombre o empresa' : 'Your name or studio'}
+                    className="contact-input-field"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="contact-email" style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', display: 'block', marginBottom: '12px' }}>
-                    {t('contact.email_label')}
+                  <label
+                    htmlFor="contact-email"
+                    style={{
+                      display: 'block',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--font-size-xs)',
+                      marginBottom: '0.8vw',
+                      opacity: 0.6,
+                    }}
+                  >
+                    [ 02 {isEs ? 'Correo' : 'Email'} ]
                   </label>
                   <input
                     id="contact-email"
                     type="email"
                     required
-                    placeholder={t('contact.email_placeholder')}
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    className="editorial-input"
-                    style={{
-                      width: '100%',
-                      padding: '12px 0',
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      borderBottom: '1px solid var(--border-color)',
-                      color: 'var(--text-primary)',
-                      fontFamily: '"Inter", sans-serif',
-                      fontSize: '16px',
-                      outline: 'none',
-                      borderRadius: 0,
-                      transition: 'border-color 0.2s ease',
-                    }}
+                    value={formState.email}
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                    placeholder={isEs ? 'nombre@empresa.com' : 'hello@company.com'}
+                    className="contact-input-field"
                   />
                 </div>
-              </div>
 
-              {/* Mensaje */}
-              <div style={{ marginBottom: '40px' }}>
-                <label htmlFor="contact-message" style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', display: 'block', marginBottom: '12px' }}>
-                  {t('contact.message_label')}
-                </label>
-                <textarea
-                  id="contact-message"
-                  required
-                  rows={4}
-                  placeholder={t('contact.message_placeholder')}
-                  value={message}
-                  onChange={e => setMessage(e.target.value)}
-                  className="editorial-input"
-                  style={{
-                    width: '100%',
-                    padding: '12px 0',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    borderBottom: '1px solid var(--border-color)',
-                    color: 'var(--text-primary)',
-                    fontFamily: '"Inter", sans-serif',
-                    fontSize: '16px',
-                    lineHeight: '1.6',
-                    outline: 'none',
-                    borderRadius: 0,
-                    resize: 'vertical',
-                    transition: 'border-color 0.2s ease',
-                  }}
-                />
-              </div>
+                <div>
+                  <label
+                    htmlFor="contact-message"
+                    style={{
+                      display: 'block',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--font-size-xs)',
+                      marginBottom: '0.8vw',
+                      opacity: 0.6,
+                    }}
+                  >
+                    [ 03 {isEs ? 'Proyecto o Consulta' : 'Project details'} ]
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    required
+                    rows={4}
+                    value={formState.message}
+                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                    placeholder={
+                      isEs
+                        ? 'Cuéntame brevemente sobre objetivos, plazos y alcance...'
+                        : 'Tell me about timeline, objectives, and scope...'
+                    }
+                    className="contact-input-field"
+                    style={{ resize: 'vertical' }}
+                  />
+                </div>
 
-              {/* Envío */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
-                <span style={{ ...META, fontSize: '10px', color: 'var(--text-primary)' }}>
-                  {t('contact.form_reply_note')}
-                </span>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="editorial-submit-btn"
+                  className="cta text-box"
                   style={{
-                    ...META,
-                    padding: '16px 36px',
-                    border: '1px solid var(--hero-title-color)',
-                    backgroundColor: isSubmitting ? 'var(--border-color)' : 'var(--hero-title-color)',
-                    color: isSubmitting ? 'var(--text-secondary)' : 'var(--bg-primary)',
-                    fontWeight: 700,
-                    fontSize: '12px',
-                    letterSpacing: '0.08em',
-                    cursor: isSubmitting ? 'wait' : 'pointer',
-                    transition: 'opacity 0.25s ease, transform 0.25s ease, background-color 0.25s ease',
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    marginTop: '1vw',
+                    cursor: 'pointer',
+                    textAlign: 'left',
                   }}
                 >
-                  {isSubmitting ? t('contact.submitting') : t('contact.form_submit_btn')}
+                  <div className="scroll-in">
+                    <div className="cta-text">
+                      <span className="link-line" style={{ fontSize: 'var(--font-size-m)' }}>
+                        {isEs ? 'Enviar mensaje' : 'Send message'}
+                      </span>
+                      <span className="cta-icon-about">→</span>
+                    </div>
+                  </div>
                 </button>
-              </div>
-            </form>
-          )}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Footer ────────────────────────────────────────────────── */
-function ContactFooter() {
-  const { t } = useLanguage();
-  const ref = useReveal(0.05);
-  return (
-    <footer
-      ref={ref as RefObject<HTMLElement>}
-      className="reveal section-pad contact-footer-wrap"
-      style={{
-        paddingLeft: '80px',
-        paddingRight: '80px',
-        paddingTop: '40px',
-        paddingBottom: '40px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-      <span style={META}>© 2026 Antonio Calero</span>
-      <div className="contact-footer-links" style={{ display: 'flex', gap: '32px' }}>
-        <Link to="/about" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.about')}</Link>
-        <a href="https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/" target="_blank" rel="noreferrer" className="nav-link" style={META}>LinkedIn</a>
-        <a href="https://www.behance.net/antoniocalero" target="_blank" rel="noreferrer" className="nav-link" style={META}>Behance</a>
-      </div>
-    </footer>
-  );
-}
-
-/* ─── Page ──────────────────────────────────────────────────── */
-export default function ContactPage() {
-  return (
-    <>
-      <ContactNav />
-      <main>
-        <ContactHero />
-        <ContactBody />
-        <ContactFooter />
+              </form>
+            )}
+          </div>
+        </section>
       </main>
-    </>
+
+      <MgFooter />
+    </div>
   );
 }

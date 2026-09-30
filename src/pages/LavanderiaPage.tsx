@@ -1,210 +1,202 @@
-import { useState, useEffect, type RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
-import ScrambleText from '../components/ScrambleText';
-import ParallaxImage from '../components/ParallaxImage';
-import { useReveal } from '../hooks/useReveal';
-import LanguageSelector from '../components/LanguageSelector';
+import MgNav from '../components/MgNav';
+import MgFooter from '../components/MgFooter';
 import { useLanguage } from '../context/LanguageContext';
 
-const META = {
-  fontFamily: '"Space Mono", monospace',
-  fontWeight: 400,
-  fontSize: '12px',
-  letterSpacing: '0.05em',
-  textTransform: 'uppercase' as const,
-  color: 'var(--text-secondary)',
-  lineHeight: '1.6',
-};
+export default function LavanderiaPage() {
+  const { language } = useLanguage();
+  const isEs = language === 'es';
+  const rootRef = useRef<HTMLDivElement>(null);
 
-const HERO_IMG = 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=1600&h=760&fit=crop&auto=format';
-
-function LavanderiaNav() {
-  const { t } = useLanguage();
-  const [scrolled, setScrolled] = useState(false);
+  // Exact scrollIn() IntersectionObserver matching Matthieu Givelet
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
+    const root = rootRef.current;
+    if (!root) return;
+
+    const delay = 0.06;
+    const groups = root.querySelectorAll('.scroll-in-group');
+    const borders = root.querySelectorAll('.border');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          if (entry.target.classList.contains('scroll-in-group')) {
+            entry.target.querySelectorAll('.scroll-in').forEach((el, index) => {
+              (el as HTMLElement).style.setProperty('--stagger-delay', `${index * delay}s`);
+              el.classList.add('is-visible');
+            });
+          } else {
+            entry.target.classList.add('is-visible');
+          }
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08 }
+    );
+
+    groups.forEach((g) => observer.observe(g));
+    borders.forEach((b) => observer.observe(b));
+
+    return () => observer.disconnect();
   }, []);
 
-  return (
-    <nav
-      className="nav-pad fixed top-0 left-0 right-0 z-50 flex items-center justify-between"
-      style={{
-        paddingLeft: '80px', paddingRight: '80px',
-        paddingTop: '24px', paddingBottom: '24px',
-        backgroundColor: 'var(--bg-primary)',
-        borderBottom: scrolled ? '1px solid var(--border-color)' : '1px solid transparent',
-        transition: 'background-color 0.4s ease, border-color 0.3s ease',
-      }}
-    >
-      <Link
-        to="/"
-        className="nav-brand-link"
-        style={{
-          fontFamily: '"Special Gothic Expanded One", sans-serif',
-          fontSize: '15px', letterSpacing: '0.04em',
-          textTransform: 'uppercase', color: 'var(--text-primary)', textDecoration: 'none',
-          transition: 'color 0.4s ease',
-        }}
-      >
-        {t('nav.back')}
-      </Link>
-      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
-        {[
-          { label: t('nav.projects'), href: '/#work' },
-          { label: t('nav.about'), href: '/about' },
-          { label: t('nav.contact'), href: '/contact' },
-        ].map(({ label, href }) => (
-          <Link key={label} to={href} className="nav-link"
-            style={{ ...META, color: 'var(--text-primary)', textDecoration: 'none' }}
-          >{label}</Link>
-        ))}
-        <LanguageSelector />
-      </div>
-    </nav>
-  );
-}
+  const roles = isEs
+    ? [
+        'Identidad de Marca & Branding',
+        'Estrategia Digital & UI/UX',
+        'Desarrollo Frontend',
+        'Optimización Operativa',
+      ]
+    : [
+        'Brand Identity & Art Direction',
+        'Digital Strategy & UI/UX',
+        'Frontend Web Engineering',
+        'Operational Funnel Design',
+      ];
 
-export default function LavanderiaPage() {
-  const { t, getLavanderiaData } = useLanguage();
-  const quoteRef = useReveal();
-  const editRef = useReveal();
-  const data = getLavanderiaData();
+  const images = [
+    {
+      src: 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=1600&h=1000&fit=crop&auto=format',
+      alt: 'Lavandería Bizkaia Industrial Identity',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?w=1600&h=1000&fit=crop&auto=format',
+      alt: 'Lavandería Bizkaia Logistics and Booking Flow',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=1600&h=1000&fit=crop&auto=format',
+      alt: 'Lavandería Bizkaia Design System & Print Material',
+    },
+  ];
 
   return (
-    <>
-      <LavanderiaNav />
+    <div ref={rootRef} className="transition-wrapper">
+      <MgNav />
+
       <main>
-        {/* Hero */}
-        <section
-          className="section-pad lavanderia-hero w-full"
-          style={{ paddingTop: '128px', paddingLeft: '80px', paddingRight: '80px', display: 'flex', flexDirection: 'column', gap: '16px' }}
-        >
-          <div className="meta-reveal flex items-center" style={{ gap: 'clamp(32px, 8vw, 120px)' }}>
-            <span style={META}>{t('case.lavanderia.tag')}</span>
-            <span style={META}>2025</span>
-          </div>
-          <div>
-            <div className="scramble-line">
-              <ScrambleText text="LAVANDERÍA" delay={0.1} duration={900} className="scramble-inner" style={{
-                fontFamily: '"Special Gothic", sans-serif', fontWeight: 700,
-                fontSize: 'clamp(48px, 7vw, 100px)', letterSpacing: '-0.03em',
-                lineHeight: '0.95', color: 'var(--hero-title-color)',
-                transition: 'color 0.4s ease',
-              }} />
-            </div>
-            <div className="scramble-line">
-              <ScrambleText text="BIZKAIA" delay={0.38} duration={900} className="scramble-inner" style={{
-                fontFamily: '"Special Gothic", sans-serif', fontWeight: 700,
-                fontSize: 'clamp(48px, 7vw, 100px)', letterSpacing: '-0.03em',
-                lineHeight: '0.95', color: 'var(--hero-title-color)',
-                transition: 'color 0.4s ease',
-              }} />
-            </div>
-          </div>
-          <ParallaxImage
-            src={HERO_IMG}
-            alt="Lavandería Bizkaia — identity"
-            height={760}
-            speed={0.2}
-            style={{ filter: 'contrast(1.04)' }}
-          />
-        </section>
-
-        {/* Editorial */}
-        <section
-          ref={editRef as RefObject<HTMLElement>}
-          className="reveal section-pad w-full"
-          style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '120px', paddingBottom: '120px' }}
-        >
-          <div className="editorial-grid grid w-full" style={{ gridTemplateColumns: 'repeat(12, 1fr)', gap: '24px' }}>
-            <div className="editorial-empty-spacer" style={{ gridColumn: 'span 4' }} />
-            <div style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '56px' }}>
-              <p style={{ fontFamily: '"Inter"', fontWeight: 400, fontSize: '28px', lineHeight: '1.3', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
-                {data.intro}
+        <section className="page-project">
+          <section className="project">
+            {/* Sticky Left Column: Project Info & Meta */}
+            <div className="project-infos scroll-in-group">
+              <p className="project-number text-box">
+                <span className="scroll-in">02</span>
               </p>
-              {data.blocks.map((b) => (
-                <div key={b.label} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  <p style={{ ...META, color: 'var(--text-secondary)' }}>{b.label}</p>
-                  <p style={{ fontFamily: '"Inter"', fontWeight: 400, fontSize: '18px', lineHeight: '1.5', color: 'var(--text-primary)' }}>{b.text}</p>
+
+              <div className="project-infos-box">
+                <h1 className="project-title text-box">
+                  <span className="scroll-in">LAVANDERÍA BIZKAIA</span>
+                </h1>
+
+                <div className="project-desc-box">
+                  <p className="project-date text-box">
+                    <span className="scroll-in">[ 2023 — 2024 ]</span>
+                  </p>
+
+                  <div className="project-details">
+                    <p className="project-cat">
+                      {roles.map((role) => (
+                        <span key={role} className="text-box">
+                          <span className="scroll-in">{role}</span>
+                        </span>
+                      ))}
+                    </p>
+
+                    <div className="project-desc">
+                      <p className="text-box" style={{ marginBottom: '1.2vw' }}>
+                        <span className="scroll-in">
+                          {isEs
+                            ? 'Transformación digital integral y dirección de arte para referente del sector de lavandería industrial y de hostelería.'
+                            : 'Complete digital transformation and brand repositioning for a premier commercial laundry provider in northern Spain.'}
+                        </span>
+                      </p>
+                      <p className="text-box" style={{ marginBottom: '1.2vw' }}>
+                        <span className="scroll-in">
+                          {isEs
+                            ? 'Armoniza la fuerza del sector manufacturero con una experiencia digital editorial cálida y transparente.'
+                            : 'Balancing utilitarian industrial machinery with warm, human-centered hospitality aesthetics and transparent pricing.'}
+                        </span>
+                      </p>
+                      <p className="text-box" style={{ marginBottom: '1.2vw' }}>
+                        <span className="scroll-in">
+                          {isEs
+                            ? 'Generó un aumento del 44% en solicitudes comerciales y redujo a la mitad el tiempo de onboarding de clientes B2B.'
+                            : 'Drove a 44% lift in qualified commercial inquiries and reduced onboarding time for enterprise accounts by 50%.'}
+                        </span>
+                      </p>
+
+                      <a
+                        className="cta text-box"
+                        href="https://www.behance.net/antoniocalero"
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ marginTop: '1vw' }}
+                      >
+                        <div className="scroll-in">
+                          <div className="cta-text">
+                            <span className="link-line">
+                              {isEs ? 'Ver caso en Behance' : 'View on Behance'}
+                            </span>
+                            <span className="cta-icon-up">↗</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              {/* Next Project Link */}
+              <Link
+                to="/night-shift"
+                className="cta text-box scroll-in-group desktop-el next-project-link"
+              >
+                <div className="scroll-in">
+                  <div className="cta-text">
+                    <span className="cta-icon-about">→</span>
+                    <span className="link-line">
+                      {isEs ? 'Siguiente: Night Shift' : 'Next: Night Shift'}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            {/* Right Column: High-Res Project Images */}
+            <div className="project-image-box el-in">
+              {images.map((img, i) => (
+                <img
+                  key={i}
+                  className="project-image"
+                  src={img.src}
+                  alt={img.alt}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
               ))}
-            </div>
-          </div>
-        </section>
 
-        {/* Quote */}
-        <section
-          className="section-pad"
-          style={{ borderTop: '1px solid var(--border-color)', paddingTop: '40px', paddingBottom: '160px', paddingLeft: '80px', paddingRight: '80px' }}
-        >
-          <div ref={quoteRef as RefObject<HTMLDivElement>} className="reveal" style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <p style={{ fontFamily: '"Inter"', fontWeight: 500, fontSize: 'clamp(28px, 3.5vw, 48px)', lineHeight: '1.2', letterSpacing: '-0.02em', color: 'var(--text-primary)', marginBottom: '48px' }}>
-              {data.quote}
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '16px' }}>
-              <div style={{ textAlign: 'right' }}>
-                <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '2px' }}>Antonio Calero</p>
-                <p style={META}>{t('case.lavanderia.role')}</p>
-              </div>
-              <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--accent-color)', color: 'var(--accent-contrast)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '"Space Mono"', fontWeight: 700, fontSize: '13px', flexShrink: 0 }}>
-                AC
-              </div>
+              {/* Mobile Next Project */}
+              <Link
+                to="/night-shift"
+                className="cta text-box scroll-in-group mobile-el next-project-mobile"
+              >
+                <div className="scroll-in">
+                  <div className="cta-text">
+                    <span className="cta-icon-about">→</span>
+                    <span className="link-line">
+                      {isEs ? 'Siguiente: Night Shift' : 'Next: Night Shift'}
+                    </span>
+                  </div>
+                </div>
+              </Link>
             </div>
-          </div>
+          </section>
         </section>
-
-        {/* Next project → back to portfolio */}
-        <section className="w-full" style={{ borderTop: '1px solid var(--border-color)' }}>
-          <Link
-            to="/"
-            className="next-project-block block w-full"
-            style={{
-              paddingTop: '96px',
-              paddingBottom: '96px',
-              paddingLeft: '80px',
-              paddingRight: '80px',
-              textDecoration: 'none',
-            }}
-          >
-            <p className="np-label" style={{
-              fontFamily: '"Space Mono", monospace',
-              fontWeight: 400,
-              fontSize: '11px',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'var(--text-secondary)',
-              marginBottom: '28px',
-            }}>{t('case.back_to_portfolio')}</p>
-            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '32px' }}>
-              <p className="np-title" style={{
-                fontFamily: '"Special Gothic Expanded One", sans-serif',
-                fontWeight: 400, fontSize: 'clamp(44px, 6.5vw, 96px)',
-                letterSpacing: '-0.01em', lineHeight: '0.92', color: 'var(--hero-title-color)',
-              }}>ANTONIO CALERO</p>
-              <span className="np-arrow" style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'var(--hero-title-color)', paddingBottom: '8px', flexShrink: 0 }}>→</span>
-            </div>
-          </Link>
-        </section>
-
-        {/* Footer */}
-        <footer
-          className="section-pad w-full lavanderia-footer-wrap"
-          style={{
-            borderTop: '1px solid var(--border-color)',
-            paddingTop: '40px',
-            paddingBottom: '40px',
-            paddingLeft: '80px',
-            paddingRight: '80px',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <span style={META}>Bilbao, España 2026</span>
-          <span style={META}>{t('home.footer_title')}</span>
-        </footer>
       </main>
-    </>
+
+      <MgFooter />
+    </div>
   );
 }

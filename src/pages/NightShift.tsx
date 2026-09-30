@@ -1,127 +1,202 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
-import Hero from '../components/Hero';
-import EditorialContent from '../components/EditorialContent';
-import GalleryFeed from '../components/GalleryFeed';
-import QuoteBlock from '../components/QuoteBlock';
-import Footer from '../components/Footer';
-import LanguageSelector from '../components/LanguageSelector';
+import MgNav from '../components/MgNav';
+import MgFooter from '../components/MgFooter';
 import { useLanguage } from '../context/LanguageContext';
 
-function NightShiftNav() {
-  const { t } = useLanguage();
-  const [scrolled, setScrolled] = useState(false);
+export default function NightShift() {
+  const { language } = useLanguage();
+  const isEs = language === 'es';
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  // Exact scrollIn() IntersectionObserver matching Matthieu Givelet
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', fn, { passive: true });
-    return () => window.removeEventListener('scroll', fn);
+    const root = rootRef.current;
+    if (!root) return;
+
+    const delay = 0.06;
+    const groups = root.querySelectorAll('.scroll-in-group');
+    const borders = root.querySelectorAll('.border');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          if (entry.target.classList.contains('scroll-in-group')) {
+            entry.target.querySelectorAll('.scroll-in').forEach((el, index) => {
+              (el as HTMLElement).style.setProperty('--stagger-delay', `${index * delay}s`);
+              el.classList.add('is-visible');
+            });
+          } else {
+            entry.target.classList.add('is-visible');
+          }
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08 }
+    );
+
+    groups.forEach((g) => observer.observe(g));
+    borders.forEach((b) => observer.observe(b));
+
+    return () => observer.disconnect();
   }, []);
 
-  return (
-    <nav
-      className="nav-pad fixed top-0 left-0 right-0 z-50 flex items-center justify-between"
-      style={{
-        paddingLeft: '80px', paddingRight: '80px',
-        paddingTop: '24px', paddingBottom: '24px',
-        backgroundColor: 'var(--bg-primary)',
-        borderBottom: scrolled ? '1px solid var(--border-color)' : '1px solid transparent',
-        transition: 'background-color 0.4s ease, border-color 0.3s ease',
-      }}
-    >
-      <Link
-        to="/"
-        className="nav-brand-link"
-        style={{
-          fontFamily: '"Special Gothic Expanded One", sans-serif',
-          fontSize: '15px',
-          letterSpacing: '0.04em',
-          textTransform: 'uppercase',
-          color: 'var(--text-primary)',
-          textDecoration: 'none',
-          transition: 'color 0.4s ease',
-        }}
-      >
-        {t('nav.back')}
-      </Link>
-      <div className="nav-links-wrap" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
-        {[
-          { label: t('nav.projects'), href: '/#work' },
-          { label: t('nav.about'), href: '/about' },
-          { label: t('nav.contact'), href: '/contact' },
-        ].map(({ label, href }) => (
-          <Link key={label} to={href} className="nav-link"
-            style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '12px',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              color: 'var(--text-primary)',
-              textDecoration: 'none',
-            }}
-          >{label}</Link>
-        ))}
-        <LanguageSelector />
-      </div>
-    </nav>
-  );
-}
+  const roles = isEs
+    ? [
+        'Estrategia de Producto Móvil',
+        'UI Circadiana & Contraste OLED',
+        'Microinteracciones Hápticas',
+        'Ergonomía de Turnos Rotativos',
+      ]
+    : [
+        'Mobile Product Strategy',
+        'Circadian OLED Dark Mode UI',
+        'Haptic Micro-interactions',
+        'Shift-Worker Ergonomics',
+      ];
 
-function NextProjectBlock() {
-  const { t } = useLanguage();
-  return (
-    <section className="w-full" style={{ borderTop: '1px solid var(--border-color)' }}>
-      <Link
-        to="/lavanderia-bizkaia"
-        className="next-project-block block w-full"
-        style={{
-          paddingTop: '96px',
-          paddingBottom: '96px',
-          paddingLeft: '80px',
-          paddingRight: '80px',
-          textDecoration: 'none',
-        }}
-      >
-        <p className="np-label" style={{
-          fontFamily: '"Space Mono", monospace',
-          fontWeight: 400,
-          fontSize: '11px',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'var(--text-secondary)',
-          marginBottom: '28px',
-        }}>
-          {t('case.next_project')}
-        </p>
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '32px' }}>
-          <p className="np-title" style={{
-            fontFamily: '"Special Gothic Expanded One", sans-serif',
-            fontWeight: 400,
-            fontSize: 'clamp(44px, 6.5vw, 96px)',
-            letterSpacing: '-0.01em',
-            lineHeight: '0.92',
-            color: 'var(--hero-title-color)',
-          }}>
-            LAVANDERÍA BIZKAIA
-          </p>
-          <span className="np-arrow" style={{ fontSize: 'clamp(32px, 4vw, 56px)', color: 'var(--hero-title-color)', paddingBottom: '8px', flexShrink: 0 }}>→</span>
-        </div>
-      </Link>
-    </section>
-  );
-}
+  const images = [
+    {
+      src: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=1600&h=1000&fit=crop&auto=format',
+      alt: 'Night Shift Interface Hero',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1600&h=1000&fit=crop&auto=format',
+      alt: 'Night Shift Mobile Screens and Typography',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&h=1000&fit=crop&auto=format',
+      alt: 'Night Shift Circadian UI Tokens',
+    },
+  ];
 
-export default function NightShift() {
   return (
-    <>
-      <NightShiftNav />
+    <div ref={rootRef} className="transition-wrapper">
+      <MgNav />
+
       <main>
-        <Hero />
-        <EditorialContent />
-        <GalleryFeed />
-        <QuoteBlock />
-        <NextProjectBlock />
+        <section className="page-project">
+          <section className="project">
+            {/* Sticky Left Column: Project Info & Meta */}
+            <div className="project-infos scroll-in-group">
+              <p className="project-number text-box">
+                <span className="scroll-in">03</span>
+              </p>
+
+              <div className="project-infos-box">
+                <h1 className="project-title text-box">
+                  <span className="scroll-in">NIGHT SHIFT</span>
+                </h1>
+
+                <div className="project-desc-box">
+                  <p className="project-date text-box">
+                    <span className="scroll-in">[ 2024 ]</span>
+                  </p>
+
+                  <div className="project-details">
+                    <p className="project-cat">
+                      {roles.map((role) => (
+                        <span key={role} className="text-box">
+                          <span className="scroll-in">{role}</span>
+                        </span>
+                      ))}
+                    </p>
+
+                    <div className="project-desc">
+                      <p className="text-box" style={{ marginBottom: '1.2vw' }}>
+                        <span className="scroll-in">
+                          {isEs
+                            ? 'Aplicación móvil de apoyo y seguimiento biométrico creada específicamente para trabajadores con horarios nocturnos o rotativos.'
+                            : 'Dedicated mobile companion app and telemetry tracker engineered specifically for night-shift, emergency, and 24/7 rotational workers.'}
+                        </span>
+                      </p>
+                      <p className="text-box" style={{ marginBottom: '1.2vw' }}>
+                        <span className="scroll-in">
+                          {isEs
+                            ? 'Arquitectura cromática de negros OLED puros y luz ámbar que elimina la fatiga ocular y preserva los ciclos de melatonina.'
+                            : 'Pure OLED black ergonomics and warm amber spectrum lighting eliminate retinal fatigue and preserve fragile melatonin cycles.'}
+                        </span>
+                      </p>
+                      <p className="text-box" style={{ marginBottom: '1.2vw' }}>
+                        <span className="scroll-in">
+                          {isEs
+                            ? 'Interacciones de un solo gesto diseñadas para operar con destreza motora reducida por cansancio acumulado.'
+                            : 'One-thumb gestures and high-contrast telemetry designed for quick operation under heavy cognitive and physical fatigue.'}
+                        </span>
+                      </p>
+
+                      <a
+                        className="cta text-box"
+                        href="https://www.behance.net/antoniocalero"
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ marginTop: '1vw' }}
+                      >
+                        <div className="scroll-in">
+                          <div className="cta-text">
+                            <span className="link-line">
+                              {isEs ? 'Ver caso en Behance' : 'View on Behance'}
+                            </span>
+                            <span className="cta-icon-up">↗</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Next Project Link */}
+              <Link
+                to="/agora"
+                className="cta text-box scroll-in-group desktop-el next-project-link"
+              >
+                <div className="scroll-in">
+                  <div className="cta-text">
+                    <span className="cta-icon-about">→</span>
+                    <span className="link-line">
+                      {isEs ? 'Siguiente: Agora' : 'Next: Agora'}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            {/* Right Column: High-Res Project Images */}
+            <div className="project-image-box el-in">
+              {images.map((img, i) => (
+                <img
+                  key={i}
+                  className="project-image"
+                  src={img.src}
+                  alt={img.alt}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              ))}
+
+              {/* Mobile Next Project */}
+              <Link
+                to="/agora"
+                className="cta text-box scroll-in-group mobile-el next-project-mobile"
+              >
+                <div className="scroll-in">
+                  <div className="cta-text">
+                    <span className="cta-icon-about">→</span>
+                    <span className="link-line">
+                      {isEs ? 'Siguiente: Agora' : 'Next: Agora'}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </section>
+        </section>
       </main>
-      <Footer />
-    </>
+
+      <MgFooter />
+    </div>
   );
 }
