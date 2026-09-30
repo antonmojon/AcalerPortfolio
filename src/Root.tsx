@@ -348,6 +348,27 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
   );
 }
 
+/* ─── Blueprint Architectural Guidelines ──────────────────── */
+function BlueprintGuides() {
+  return (
+    <div
+      className="blueprint-guides"
+      aria-hidden="true"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        pointerEvents: 'none',
+        zIndex: 0,
+        maxWidth: '100vw',
+        overflow: 'hidden',
+      }}
+    >
+      <div className="blueprint-guide-left" />
+      <div className="blueprint-guide-right" />
+    </div>
+  );
+}
+
 /* ─── Root ──────────────────────────────────────────────── */
 export default function Root() {
   const { pathname } = useLocation();
@@ -371,10 +392,11 @@ export default function Root() {
         <CustomCursor />
         <FloatingThemeButton />
         <div
+          className="blueprint-bg"
           style={{
-            backgroundColor: 'var(--bg-primary)',
             minHeight: '100vh',
             transition: 'background-color 0.4s ease',
+            position: 'relative',
             ...(loading ? {
               position: 'fixed',
               top: 0,
@@ -386,9 +408,12 @@ export default function Root() {
             } : {}),
           }}
         >
-          <Suspense fallback={<ProjectLoadingScreen />}>
-            <Outlet />
-          </Suspense>
+          <BlueprintGuides />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <Suspense fallback={<ProjectLoadingScreen />}>
+              <Outlet />
+            </Suspense>
+          </div>
         </div>
       </LanguageProvider>
     </ThemeProvider>
