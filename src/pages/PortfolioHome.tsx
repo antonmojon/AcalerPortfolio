@@ -128,8 +128,11 @@ function PortfolioMasthead() {
   const { t } = useLanguage();
   return (
     <header className="masthead-pad" style={{ paddingTop: '88px', paddingLeft: '80px', paddingRight: '80px' }}>
-      <div style={{ marginBottom: '8px' }}>
+      <div style={{ marginBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ ...META, color: 'var(--text-muted)' }}>{t('home.est')}</span>
+        <span style={{ ...META, color: 'var(--text-muted)', fontSize: '11px', letterSpacing: '0.08em' }}>
+          CAPA ZERO // LAYER 00
+        </span>
       </div>
       <FitTitle text="ANTONIO CALERO" />
       <div className="infobar" style={{
@@ -141,17 +144,21 @@ function PortfolioMasthead() {
         alignItems: 'center',
         transition: 'border-color 0.4s ease',
       }}>
-        {[t('home.discipline'), t('home.location')].map((item, i) => (
-          <div key={item} style={{
-            padding: '10px 0',
-            borderRight: '1px solid var(--border-color)',
-            paddingRight: '20px',
-            paddingLeft: i > 0 ? '20px' : '0',
-            transition: 'border-color 0.4s ease',
-          }}>
-            <span style={META}>{item}</span>
-          </div>
-        ))}
+        <div style={{
+          padding: '10px 0',
+          borderRight: '1px solid var(--border-color)',
+          paddingRight: '20px',
+          transition: 'border-color 0.4s ease',
+        }}>
+          <span style={META}>{t('home.discipline')}</span>
+        </div>
+        <div style={{
+          padding: '10px 20px',
+          borderRight: '1px solid var(--border-color)',
+          transition: 'border-color 0.4s ease',
+        }}>
+          <span style={META}>{t('home.location')} · 40.4168° N</span>
+        </div>
         <Link to="/contact" className="infobar-link" style={{
           ...META, color: 'var(--accent-color)', textDecoration: 'none',
           padding: '10px 0 10px 20px',
@@ -176,6 +183,10 @@ function StoryCard({ project }: { project: ProjectItemData }) {
   const cardContent = (
     <>
       <div className="story-card-img-wrap">
+        <span className="blueprint-corner blueprint-corner-tl" aria-hidden />
+        <span className="blueprint-corner blueprint-corner-tr" aria-hidden />
+        <span className="blueprint-corner blueprint-corner-bl" aria-hidden />
+        <span className="blueprint-corner blueprint-corner-br" aria-hidden />
         <img
           src={project.img ?? ''}
           alt={project.title}
@@ -189,7 +200,7 @@ function StoryCard({ project }: { project: ProjectItemData }) {
         />
       </div>
       <div className="story-card-meta">
-        <span style={{ ...META, color: 'var(--text-muted)' }}>{project.num}</span>
+        <span style={{ ...META, color: 'var(--text-muted)' }}>FIG. {project.num}</span>
         <div className="story-card-tags">
           {project.tags.map(tag => (
             <span key={tag} style={META}>{tag}</span>
@@ -280,6 +291,24 @@ function PortfolioNewsGrid() {
       className="reveal news-grid-section"
       style={{ padding: '40px 80px 96px' }}
     >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingBottom: '16px',
+          marginBottom: '40px',
+          borderBottom: '1px solid var(--border-color)',
+          transition: 'border-color 0.4s ease',
+        }}
+      >
+        <span style={{ ...META, color: 'var(--text-primary)', fontWeight: 700 }}>
+          {t('home.selected_projects')}
+        </span>
+        <span style={{ ...META, color: 'var(--text-muted)', fontSize: '11px', letterSpacing: '0.08em' }}>
+          ARCHIVE // 12-COL · 001—005
+        </span>
+      </div>
       <div className="news-row-a" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '0 32px', marginBottom: '48px' }}>
         {rowA.map(p => <StoryCard key={p.num} project={p} />)}
       </div>

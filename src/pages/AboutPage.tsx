@@ -149,6 +149,10 @@ function AboutBio() {
           minHeight: '580px',
         }}
       >
+        <span className="blueprint-corner blueprint-corner-tl" aria-hidden />
+        <span className="blueprint-corner blueprint-corner-tr" aria-hidden />
+        <span className="blueprint-corner blueprint-corner-bl" aria-hidden />
+        <span className="blueprint-corner blueprint-corner-br" aria-hidden />
         <img
           src={PORTRAIT || '/antonio-calero.jpg'}
           alt="Antonio Calero"

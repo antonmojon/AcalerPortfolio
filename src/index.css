@@ -377,11 +377,31 @@ body {
 }
 
 .story-card-img-wrap {
+  position: relative;
   overflow: hidden;
   background-color: var(--bg-surface);
   margin-bottom: 16px;
   width: 100%;
 }
+
+/* ─── Blueprint Technical Registration Marks ─────────────── */
+.blueprint-corner {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+  z-index: 3;
+  transition: border-color 0.3s ease;
+  border-color: var(--border-color);
+}
+.story-card:hover .blueprint-corner,
+.about-portrait-wrapper:hover .blueprint-corner {
+  border-color: var(--accent-color);
+}
+.blueprint-corner-tl { top: 8px; left: 8px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.blueprint-corner-tr { top: 8px; right: 8px; border-top: 1.5px solid; border-right: 1.5px solid; }
+.blueprint-corner-bl { bottom: 8px; left: 8px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
+.blueprint-corner-br { bottom: 8px; right: 8px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
 
 .story-card-large .story-card-img-wrap {
   height: 440px;
