@@ -39,10 +39,9 @@ function CustomCursor() {
 
 /* ─── Intro Screen with Seamless Title Transition ─────────── */
 type IntroPhase = 'drafting' | 'name' | 'animating';
-const FULL_NAME = 'ANTONIO CALERO';
 
 function IntroScreen({ onDone }: { onDone: () => void }) {
-  const [draftedCount, setDraftedCount] = useState(0);
+  const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<IntroPhase>('drafting');
   const [targetY, setTargetY] = useState<number | null>(null);
   const [animating, setAnimating] = useState(false);
@@ -90,21 +89,32 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     };
   }, []);
 
-  // 2. Blueprint drafting animation: construct ANTONIO CALERO character by character
+  // 2. Blueprint Architectural Fill Animation: Wireframe -> Solid Ink Wipe
   useEffect(() => {
-    let current = 0;
-    const interval = setInterval(() => {
-      current += 1;
-      setDraftedCount(current);
-      if (current >= FULL_NAME.length) {
-        clearInterval(interval);
+    let start: number | null = null;
+    let rafId: number;
+    const DURATION = 1350; // 1.35s organic mechanical sweep
+
+    const tick = (now: number) => {
+      if (!start) start = now;
+      const elapsed = now - start;
+      const p = Math.min(elapsed / DURATION, 1);
+      // Smooth architectural plotter curve
+      const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      setProgress(eased * 100);
+
+      if (p < 1) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        setProgress(100);
         setTimeout(() => {
           setPhase('name');
-        }, 220);
+        }, 260);
       }
-    }, 70); // 70ms per character: 14 chars * 70ms = ~980ms total drafting time
+    };
 
-    return () => clearInterval(interval);
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   // 3. Glide trigger implementation
@@ -151,7 +161,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     const triggerAction = () => {
       if (animatingRef.current) return;
       if (phaseRef.current === 'drafting') {
-        setDraftedCount(FULL_NAME.length);
+        setProgress(100);
         setPhase('name');
         startGlideRef.current();
       } else if (phaseRef.current === 'name') {
@@ -205,7 +215,6 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     fontSize: fs ? `${fs}px` : 'clamp(28px, 6.5vw, 118px)',
     letterSpacing: '-0.01em',
     lineHeight: '0.88',
-    color: 'var(--hero-title-color)',
     display: 'block',
     whiteSpace: 'nowrap' as const,
     transition: 'color 0.4s ease',
@@ -216,7 +225,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
       onClick={() => {
         if (!animating) {
           if (phase === 'drafting') {
-            setDraftedCount(FULL_NAME.length);
+            setProgress(100);
             setPhase('name');
             startGlide();
           } else if (phase === 'name') {
@@ -259,7 +268,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
         ANTONIO CALERO
       </span>
 
-      {/* Name: Constructed like a blueprint, 100% centered, then glides to masthead */}
+      {/* Blueprint Construction Frame: Perfectly centered, fills from wireframe to solid ink */}
       <div
         style={{
           position: 'absolute',
@@ -285,62 +294,134 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
         }}
       >
         <div style={{ position: 'relative', display: 'inline-block', maxWidth: '100%' }}>
-          <span
+          {/* Top technical dimension bar */}
+          <div
             style={{
-              ...titleStyle,
-              width: '100%',
-              textAlign: 'center',
+              position: 'absolute',
+              top: '-26px',
+              left: 0,
+              right: 0,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderBottom: '1px dashed var(--border-color)',
+              paddingBottom: '4px',
+              opacity: phase === 'name' || animating ? 0 : 0.75,
+              transition: 'opacity 0.4s ease',
+              pointerEvents: 'none',
             }}
           >
-            {FULL_NAME.split('').map((char, i) => {
-              const isDrawn = phase !== 'drafting' || i < draftedCount;
-              const isCurrent = phase === 'drafting' && i === draftedCount - 1;
-              return (
+            <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>DIM: 1920 × 1080</span>
+            <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em', color: 'var(--accent-color)', fontWeight: 700 }}>
+              {progress < 100 ? `PLANO TÉCNICO · ${Math.floor(progress)}%` : 'TRAZADO 100%'}
+            </span>
+            <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>ESCALA 1:1</span>
+          </div>
+
+          {/* Corner drafting marks */}
+          <span className="blueprint-corner blueprint-corner-tl" style={{ top: '-14px', left: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
+          <span className="blueprint-corner blueprint-corner-tr" style={{ top: '-14px', right: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
+          <span className="blueprint-corner blueprint-corner-bl" style={{ bottom: '-14px', left: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
+          <span className="blueprint-corner blueprint-corner-br" style={{ bottom: '-14px', right: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
+
+          {/* Double Layer Title: Layer 1 Wireframe + Layer 2 Solid Ink Fill with clipPath */}
+          <div style={{ position: 'relative', display: 'block', overflow: 'hidden' }}>
+            {/* Layer 1: Blueprint Wireframe Stroke (always defines structure) */}
+            <span
+              style={{
+                ...titleStyle,
+                color: 'transparent',
+                WebkitTextStroke: '1.5px var(--hero-title-color)',
+                opacity: 0.32,
+                userSelect: 'none',
+              }}
+            >
+              ANTONIO CALERO
+            </span>
+
+            {/* Layer 2: Solid Filled Ink (reveals with clip-path as plotter sweeps) */}
+            <span
+              style={{
+                ...titleStyle,
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                color: 'var(--hero-title-color)',
+                clipPath: `inset(0 ${Math.max(0, 100 - progress)}% 0 0)`,
+                userSelect: 'none',
+              }}
+            >
+              ANTONIO CALERO
+            </span>
+
+            {/* Layer 3: Vertical Drafting Laser / Beam */}
+            {progress < 100 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: `${progress}%`,
+                  width: '2px',
+                  backgroundColor: 'var(--accent-color)',
+                  boxShadow: '0 0 8px var(--accent-color)',
+                  pointerEvents: 'none',
+                  zIndex: 10,
+                }}
+              >
                 <span
-                  key={i}
                   style={{
-                    color: isDrawn ? 'var(--hero-title-color)' : 'var(--border-color)',
-                    opacity: isDrawn ? 1 : 0.16,
-                    transition: 'color 0.15s ease, opacity 0.15s ease',
-                    position: 'relative',
-                    display: 'inline-block',
+                    position: 'absolute',
+                    top: '-6px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    fontSize: '9px',
+                    lineHeight: 1,
+                    color: 'var(--accent-color)',
                   }}
                 >
-                  {char === ' ' ? '\u00A0' : char}
-                  {isCurrent && (
-                    <span
-                      aria-hidden
-                      style={{
-                        position: 'absolute',
-                        bottom: '-4px',
-                        left: 0,
-                        right: 0,
-                        height: '2px',
-                        backgroundColor: 'var(--accent-color)',
-                        pointerEvents: 'none',
-                      }}
-                    />
-                  )}
+                  ▼
                 </span>
-              );
-            })}
-          </span>
+                <span
+                  style={{
+                    position: 'absolute',
+                    bottom: '-6px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    fontSize: '9px',
+                    lineHeight: 1,
+                    color: 'var(--accent-color)',
+                  }}
+                >
+                  ▲
+                </span>
+              </div>
+            )}
+          </div>
 
-          {/* Blueprint subtle drafting baseline */}
-          {phase === 'drafting' && (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '-6px',
-                left: 0,
-                width: `${Math.min((draftedCount / FULL_NAME.length) * 100, 100)}%`,
-                height: '1px',
-                backgroundColor: 'var(--accent-color)',
-                opacity: 0.5,
-                transition: 'width 0.07s linear',
-              }}
-            />
-          )}
+          {/* Bottom technical ruler baseline */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '-26px',
+              left: 0,
+              right: 0,
+              borderTop: '1px dashed var(--border-color)',
+              paddingTop: '4px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              opacity: phase === 'name' || animating ? 0 : 0.75,
+              transition: 'opacity 0.4s ease',
+              pointerEvents: 'none',
+            }}
+          >
+            <span style={{ ...META, fontSize: '9px' }}>├───────</span>
+            <span style={{ ...META, fontSize: '9px', color: 'var(--text-secondary)' }}>CAPA ZERO · PLANO DE TRAZADO</span>
+            <span style={{ ...META, fontSize: '9px' }}>───────┤</span>
+          </div>
         </div>
       </div>
 
