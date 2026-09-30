@@ -171,22 +171,10 @@ import type { ProjectItemData } from '../context/LanguageContext';
 function StoryCard({ project }: { project: ProjectItemData }) {
   const { t } = useLanguage();
   const [over, setOver] = useState(false);
-  const targetHref = project.href || `/proximamente?project=${encodeURIComponent(project.title)}`;
+  const isClickable = Boolean(project.href);
 
-  return (
-    <Link
-      to={targetHref}
-      className={`story-card ${project.large ? 'story-card-large' : 'story-card-regular'}`}
-      style={{
-        gridColumn: `span ${project.cols}`,
-        textDecoration: 'none',
-        color: 'inherit',
-        cursor: project.href ? 'pointer' : 'default',
-      }}
-      onMouseEnter={() => setOver(true)}
-      onMouseLeave={() => setOver(false)}
-      aria-label={project.href ? `Ver proyecto ${project.title}` : `${project.title} — ${t('home.coming_soon')}`}
-    >
+  const cardContent = (
+    <>
       <div className="story-card-img-wrap">
         <img
           src={project.img ?? ''}
@@ -194,8 +182,8 @@ function StoryCard({ project }: { project: ProjectItemData }) {
           className="work-card-img"
           loading="lazy"
           style={{
-            filter: `grayscale(${over ? 0 : 12}%) contrast(1.04)`,
-            transform: over ? 'scale(1.04)' : 'scale(1)',
+            filter: `grayscale(${over && isClickable ? 0 : 12}%) contrast(1.04)`,
+            transform: over && isClickable ? 'scale(1.04)' : 'scale(1)',
             transition: 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease',
           }}
         />
@@ -206,38 +194,75 @@ function StoryCard({ project }: { project: ProjectItemData }) {
           {project.tags.map(tag => (
             <span key={tag} style={META}>{tag}</span>
           ))}
+          {!isClickable && (
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>
+              [{t('home.coming_soon')}]
+            </span>
+          )}
         </div>
       </div>
       <h2
         className="story-card-title"
         style={{
-          borderBottom: over ? '2px solid var(--accent-color)' : '2px solid transparent',
+          borderBottom: over && isClickable ? '2px solid var(--accent-color)' : '2px solid transparent',
           paddingBottom: '1px',
           transition: 'border-color 0.25s ease, color 0.4s ease',
         }}
       >
         <span>{project.title}</span>
-        <span
-          className="story-card-arrow"
-          style={{
-            marginLeft: '8px',
-            fontSize: '0.7em',
-            opacity: over ? 1 : 0,
-            transform: over ? 'translateX(0)' : 'translateX(-4px)',
-            display: 'inline-block',
-            color: 'var(--accent-color)',
-            transition: 'opacity 0.3s ease, transform 0.3s ease',
-          }}
-        >
-          →
-        </span>
+        {isClickable && (
+          <span
+            className="story-card-arrow"
+            style={{
+              marginLeft: '8px',
+              fontSize: '0.7em',
+              opacity: over ? 1 : 0,
+              transform: over ? 'translateX(0)' : 'translateX(-4px)',
+              display: 'inline-block',
+              color: 'var(--accent-color)',
+              transition: 'opacity 0.3s ease, transform 0.3s ease',
+            }}
+          >
+            →
+          </span>
+        )}
       </h2>
-      {!project.href && (
-        <p style={{ ...META, color: 'var(--text-muted)', marginTop: '8px', fontSize: '10px' }}>
-          {t('home.coming_soon')}
-        </p>
-      )}
-    </Link>
+    </>
+  );
+
+  if (isClickable && project.href) {
+    return (
+      <Link
+        to={project.href}
+        className={`story-card ${project.large ? 'story-card-large' : 'story-card-regular'}`}
+        style={{
+          gridColumn: `span ${project.cols}`,
+          textDecoration: 'none',
+          color: 'inherit',
+          cursor: 'pointer',
+        }}
+        onMouseEnter={() => setOver(true)}
+        onMouseLeave={() => setOver(false)}
+        aria-label={`Ver proyecto ${project.title}`}
+      >
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={`story-card ${project.large ? 'story-card-large' : 'story-card-regular'}`}
+      style={{
+        gridColumn: `span ${project.cols}`,
+        textDecoration: 'none',
+        color: 'inherit',
+        cursor: 'default',
+      }}
+      aria-label={`${project.title} — ${t('home.coming_soon')}`}
+    >
+      {cardContent}
+    </div>
   );
 }
 
