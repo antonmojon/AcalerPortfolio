@@ -317,39 +317,107 @@ export default function WeekuPage() {
                 </div>
               </div>
 
-              {/* Section 05: Sistema de Diseño & Tokens */}
+              {/* Section 05: Sistema de Diseño, Paleta y Tipografía */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
                 <span className="project-section-meta">[ 05 / SISTEMA DE DISEÑO ]</span>
                 <h2 className="project-section-title text-box">
                   <span className="scroll-in">
-                    {isEs ? 'Tokens, Tipografía y Paleta' : 'Tokens, Typography & Palette'}
+                    {isEs ? 'Paleta Cromática' : 'Color Palette'}
                   </span>
                 </h2>
-                <div className="project-spec-table">
-                  <div className="project-spec-row">
-                    <span className="project-spec-label">[ Tipografía Display ]</span>
-                    <span className="project-spec-value">
-                      {isEs
-                        ? 'Grotesca expresiva de trazo curvo para logotipo e identidad de marca.'
-                        : 'Expressive curved display grotesque for brand identity and logotype.'}
-                    </span>
+
+                {/* Color Squares Grid */}
+                <div className="color-squares-grid">
+                  <div className="color-square-item text-box">
+                    <div className="color-square-box scroll-in" style={{ backgroundColor: '#E25B45' }}></div>
+                    <div className="color-square-meta scroll-in">
+                      <span className="color-square-hex">#E25B45</span>
+                      <span className="color-square-name">{isEs ? 'Terracotta · Primario' : 'Terracotta · Primary'}</span>
+                    </div>
                   </div>
-                  <div className="border"></div>
-                  <div className="project-spec-row">
-                    <span className="project-spec-label">[ Tipografía UI ]</span>
-                    <span className="project-spec-value">
-                      {isEs
-                        ? 'Montserrat (Regular, Medium, SemiBold) para alta legibilidad en interfaces móviles densas.'
-                        : 'Montserrat (Regular, Medium, SemiBold) for crisp hierarchy across dense mobile viewports.'}
-                    </span>
+
+                  <div className="color-square-item text-box">
+                    <div className="color-square-box scroll-in" style={{ backgroundColor: '#A82E2E' }}></div>
+                    <div className="color-square-meta scroll-in">
+                      <span className="color-square-hex">#A82E2E</span>
+                      <span className="color-square-name">{isEs ? 'Brick Red · Contraste' : 'Brick Red · Contrast'}</span>
+                    </div>
                   </div>
+
+                  <div className="color-square-item text-box">
+                    <div className="color-square-box scroll-in" style={{ backgroundColor: '#F8C8BE' }}></div>
+                    <div className="color-square-meta scroll-in">
+                      <span className="color-square-hex">#F8C8BE</span>
+                      <span className="color-square-name">{isEs ? 'Soft Peach · Soporte' : 'Soft Peach · Support'}</span>
+                    </div>
+                  </div>
+
+                  <div className="color-square-item text-box">
+                    <div className="color-square-box scroll-in" style={{ backgroundColor: '#FFF8F6', border: '1px solid var(--border-color)' }}></div>
+                    <div className="color-square-meta scroll-in">
+                      <span className="color-square-hex">#FFF8F6</span>
+                      <span className="color-square-name">{isEs ? 'Cream Light · Fondo' : 'Cream Light · Surface'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Typography Specimen */}
+                <div className="type-specimen-block" style={{ marginTop: '3vw' }}>
                   <div className="border"></div>
-                  <div className="project-spec-row">
-                    <span className="project-spec-label">[ Tokens de Color ]</span>
-                    <span className="project-spec-value">
-                      Terracotta (#E25B45) · Brick Red (#A82E2E) · Soft Peach (#F8C8BE) · Cream Light (#FFF8F6)
-                    </span>
+                  <span className="project-section-meta">[ 05.1 / TIPOGRAFÍA EDITORIAL ]</span>
+
+                  {/* Brand Display Hero */}
+                  <div className="type-display-hero text-box">
+                    <div className="type-display-word scroll-in" style={{ fontFamily: 'var(--font-heading)' }}>
+                      Weeku
+                    </div>
+                    <div className="type-display-glyph scroll-in" style={{ fontFamily: 'var(--font-heading)' }}>
+                      W
+                    </div>
+                  </div>
+
+                  {/* Montserrat UI Weights Specimen */}
+                  <div className="type-weights-list">
+                    <div className="type-weight-row text-box">
+                      <span className="type-weight-meta scroll-in">Montserrat Regular · 400</span>
+                      <p className="type-weight-sample scroll-in" style={{ fontWeight: 400 }}>
+                        {isEs
+                          ? 'Planificación inteligente, recetas paso a paso y lista de la compra automatizada.'
+                          : 'Intelligent meal planning, step-by-step recipes, and automated shopping checklists.'}
+                      </p>
+                    </div>
+
+                    <div className="type-weight-row text-box">
+                      <span className="type-weight-meta scroll-in">Montserrat Medium · 500</span>
+                      <p className="type-weight-sample scroll-in" style={{ fontWeight: 500 }}>
+                        {isEs
+                          ? '350 kcal · 28g Proteínas · 42g Carbohidratos · 12g Grasas saludables'
+                          : '350 kcal · 28g Protein · 42g Carbohydrates · 12g Healthy Fats'}
+                      </p>
+                    </div>
+
+                    <div className="type-weight-row text-box">
+                      <span className="type-weight-meta scroll-in">Montserrat SemiBold · 600</span>
+                      <p className="type-weight-sample scroll-in" style={{ fontWeight: 600 }}>
+                        {isEs
+                          ? 'Lunes · Arroz con Pollo en Salsa cremosa y base de verduras'
+                          : 'Monday · Rice with Chicken in Creamy Sauce and vegetable base'}
+                      </p>
+                    </div>
+
+                    <div className="type-weight-row text-box">
+                      <span className="type-weight-meta scroll-in">Montserrat Bold · 700</span>
+                      <p className="type-weight-sample scroll-in" style={{ fontWeight: 700 }}>
+                        {isEs ? '¿Qué comemos hoy? · Generar nuevo menú semanal' : 'What are we eating today? · Generate new weekly menu'}
+                      </p>
+                    </div>
+
+                    <div className="text-box" style={{ marginTop: '0.8vw' }}>
+                      <p className="scroll-in" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.08em' }}>
+                        ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz · 0123456789
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
