@@ -231,17 +231,17 @@ function MgHero() {
       <div className="home-hero-subtitle-wrapper">
         <h1 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.7s' } as React.CSSProperties}>
-            {isEs ? 'Diseñador de producto' : 'Product designer'}
+            {isEs ? 'Diseñador de\u00A0producto' : 'Product\u00A0designer'}
           </span>
         </h1>
         <h2 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.78s' } as React.CSSProperties}>
-            {isEs ? '& arquitecto de sistemas' : '& systems architect'}
+            {isEs ? '& arquitecto de\u00A0sistemas' : '& systems\u00A0architect'}
           </span>
         </h2>
         <h2 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.86s' } as React.CSSProperties}>
-            {isEs ? '[ Bilbao, España ]' : '[ Bilbao, Spain ]'}
+            {isEs ? '[\u00A0Bilbao, España\u00A0]' : '[\u00A0Bilbao, Spain\u00A0]'}
           </span>
         </h2>
       </div>
@@ -263,24 +263,24 @@ function MgHero() {
             </span>
             <span className="text-box">
               <span className="scroll-in">
-                {isEs ? 'limpias, meditadas y sólidas' : 'simple, thoughtful solutions'}
+                {isEs ? 'simples, meditadas y\u00A0sólidas' : 'simple, thoughtful solutions'}
               </span>
             </span>
             <span className="text-box">
               <span className="scroll-in">
-                {isEs ? 'que encajen con el producto' : 'that fit the project and feel'}
+                {isEs ? 'que encajen con el\u00A0producto' : 'that fit the project and\u00A0feel'}
               </span>
             </span>
             <span className="text-box">
               <span className="scroll-in">
-                {isEs ? 'y se sientan vivas al usarlas.' : 'good to use.'}
+                {isEs ? 'y se sientan vivas al\u00A0usarlas.' : 'good to\u00A0use.'}
               </span>
             </span>
           </p>
           <Link className="cta text-box anchor" to="/about">
             <div className="scroll-in">
               <div className="cta-text">
-                <span className="link-line">{isEs ? 'Más sobre mí' : 'More about me'}</span>
+                <span className="link-line">{isEs ? 'Más sobre\u00A0mí' : 'More about\u00A0me'}</span>
                 <span className="cta-arrow-icon">→</span>
               </div>
             </div>

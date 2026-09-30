@@ -1189,13 +1189,37 @@ body {
   }
 }
 
-/* Base typography helpers */
+/* Base typography helpers with anti-widow rules */
+p,
+li,
+.project-desc,
+.about-first-text,
+.about-service-text,
+.about-text,
+.infos-box-text,
+.footer-text {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+.home-hero-subtitle,
+.project-title,
+.about-title,
+.contact-left-title,
+.home-work-header-title {
+  text-wrap: balance;
+}
+
 .text-box {
   overflow: hidden;
   display: block;
   padding-bottom: 2px;
   word-break: normal;
   overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 
 .text-box.nowrap,

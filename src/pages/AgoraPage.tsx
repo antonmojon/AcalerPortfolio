@@ -113,22 +113,22 @@ export default function AgoraPage() {
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Agora es un ecosistema de colaboración integral concebido para equipos de producto y aprendizaje distribuido.'
-                            : 'Agora is an all-in-one collaborative workspace engineered for distributed product teams and educational organizations.'}
+                            ? 'Agora es un ecosistema de colaboración integral concebido para equipos de producto y aprendizaje\u00A0distribuido.'
+                            : 'Agora is an all-in-one collaborative workspace engineered for distributed product teams and educational\u00A0organizations.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Prioriza la concentración reduciendo la carga cognitiva visual mediante jerarquías sobrias y flujos multi-panel continuos.'
-                            : 'Prioritizing focus and cognitive clarity through sober typography, keyboard-driven navigation, and fluid multi-pane flows.'}
+                            ? 'Prioriza la concentración reduciendo la carga cognitiva visual mediante jerarquías sobrias y flujos multi-panel\u00A0continuos.'
+                            : 'Prioritizing focus and cognitive clarity through sober typography, keyboard-driven navigation, and fluid multi-pane\u00A0flows.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Construido sobre una biblioteca de 40+ componentes accesibles y tokens sincronizados con código.'
-                            : 'Engineered upon a rigorous library of 40+ accessible UI components and design tokens synchronized with engineering.'}
+                            ? 'Construido sobre una biblioteca de 40+ componentes accesibles y tokens sincronizados con\u00A0código.'
+                            : 'Engineered upon a rigorous library of 40+ accessible UI components and design tokens synchronized with\u00A0engineering.'}
                         </span>
                       </p>
 
@@ -142,7 +142,7 @@ export default function AgoraPage() {
                         <div className="scroll-in">
                           <div className="cta-text">
                             <span className="link-line">
-                              {isEs ? 'Ver caso en Behance' : 'View on Behance'}
+                              {isEs ? 'Ver caso en\u00A0Behance' : 'View on\u00A0Behance'}
                             </span>
                             <span className="cta-icon-up">↗</span>
                           </div>
@@ -162,7 +162,7 @@ export default function AgoraPage() {
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente: Lavandería Bizkaia' : 'Next: Lavandería Bizkaia'}
+                      {isEs ? 'Siguiente: Lavandería\u00A0Bizkaia' : 'Next: Lavandería\u00A0Bizkaia'}
                     </span>
                   </div>
                 </div>

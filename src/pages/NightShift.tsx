@@ -109,22 +109,22 @@ export default function NightShift() {
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Aplicación móvil de apoyo y seguimiento biométrico creada específicamente para trabajadores con horarios nocturnos o rotativos.'
-                            : 'Dedicated mobile companion app and telemetry tracker engineered specifically for night-shift, emergency, and 24/7 rotational workers.'}
+                            ? 'Aplicación móvil de apoyo y seguimiento biométrico creada específicamente para trabajadores con horarios nocturnos o\u00A0rotativos.'
+                            : 'Dedicated mobile companion app and telemetry tracker engineered specifically for night-shift, emergency, and 24/7 rotational\u00A0workers.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Arquitectura cromática de negros OLED puros y luz ámbar que elimina la fatiga ocular y preserva los ciclos de melatonina.'
-                            : 'Pure OLED black ergonomics and warm amber spectrum lighting eliminate retinal fatigue and preserve fragile melatonin cycles.'}
+                            ? 'Arquitectura cromática de negros OLED puros y luz ámbar que elimina la fatiga ocular y preserva los ciclos de\u00A0melatonina.'
+                            : 'Pure OLED black ergonomics and warm amber spectrum lighting eliminate retinal fatigue and preserve fragile melatonin\u00A0cycles.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Interacciones de un solo gesto diseñadas para operar con destreza motora reducida por cansancio acumulado.'
-                            : 'One-thumb gestures and high-contrast telemetry designed for quick operation under heavy cognitive and physical fatigue.'}
+                            ? 'Interacciones de un solo gesto diseñadas para operar con destreza motora reducida por cansancio\u00A0acumulado.'
+                            : 'One-thumb gestures and high-contrast telemetry designed for quick operation under heavy cognitive and physical\u00A0fatigue.'}
                         </span>
                       </p>
 
@@ -138,7 +138,7 @@ export default function NightShift() {
                         <div className="scroll-in">
                           <div className="cta-text">
                             <span className="link-line">
-                              {isEs ? 'Ver caso en Behance' : 'View on Behance'}
+                              {isEs ? 'Ver caso en\u00A0Behance' : 'View on\u00A0Behance'}
                             </span>
                             <span className="cta-icon-up">↗</span>
                           </div>
@@ -158,7 +158,7 @@ export default function NightShift() {
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente: Agora' : 'Next: Agora'}
+                      {isEs ? 'Siguiente:\u00A0Agora' : 'Next:\u00A0Agora'}
                     </span>
                   </div>
                 </div>

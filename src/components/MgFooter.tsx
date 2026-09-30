@@ -34,9 +34,9 @@ export default function MgFooter() {
             </span>
             <span className="text-box">
               <span className="scroll-in">
-                {isEs ? 'diseñar interfaces limpias. ' : 'new ideas. Feel free to '}
+                {isEs ? 'diseñar interfaces\u00A0limpias. ' : 'new\u00A0ideas. Feel free to '}
                 <Link className="text-link" to="/contact">
-                  {isEs ? 'hablemos.' : 'say hello.'}
+                  {isEs ? 'hablemos.' : 'say\u00A0hello.'}
                 </Link>
               </span>
             </span>
@@ -52,13 +52,13 @@ export default function MgFooter() {
               <span className="scroll-in">
                 Contacto :{' '}
                 <Link className="link-line" to="/contact">
-                  {isEs ? 'Formulario directo →' : 'Direct contact form →'}
+                  {isEs ? 'Formulario directo\u00A0→' : 'Direct contact form\u00A0→'}
                 </Link>
               </span>
             </span>
             <span className="text-box">
               <span className="scroll-in">
-                Ubicación : Bilbao, Bizkaia · España (UTC+1)
+                Ubicación : Bilbao, Bizkaia ·\u00A0España (UTC+1)
               </span>
             </span>
             <span className="text-box">

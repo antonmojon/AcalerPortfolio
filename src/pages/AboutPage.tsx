@@ -94,8 +94,8 @@ export default function AboutPage() {
                   <span className="text-box">
                     <span className="scroll-in alinea-1" style={{ display: 'block' }}>
                       {isEs
-                        ? 'Soy diseñador de producto y arquitecto de interfaces. Me interesa combinar el rigor tipográfico suizo con sistemas de diseño atómicos vivos y plataformas preparadas para escalar.'
-                        : "I'm a product designer and interface architect. I combine Swiss typographic discipline with living atomic design systems and software platforms engineered to scale."}
+                        ? 'Soy diseñador de producto y arquitecto de interfaces. Me interesa combinar el rigor tipográfico suizo con sistemas de diseño atómicos vivos y plataformas preparadas para\u00A0escalar.'
+                        : "I'm a product designer and interface architect. I combine Swiss typographic discipline with living atomic design systems and software platforms engineered to\u00A0scale."}
                     </span>
                   </span>
                 </p>
@@ -104,8 +104,8 @@ export default function AboutPage() {
                   <span className="text-box">
                     <span className="scroll-in alinea-1" style={{ display: 'block' }}>
                       {isEs
-                        ? 'Trabajo en la intersección entre diseño y desarrollo de software, cuidando cada micro-interacción para que herramientas complejas se sientan simples, intuitivas y sólidas.'
-                        : 'Working at the intersection of design and software engineering, focusing on the details that make complex products feel simple, intuitive, and enduring.'}
+                        ? 'Trabajo en la intersección entre diseño y desarrollo de software, cuidando cada micro-interacción para que herramientas complejas se sientan simples, intuitivas y\u00A0sólidas.'
+                        : 'Working at the intersection of design and software engineering, focusing on the details that make complex products feel simple, intuitive, and\u00A0enduring.'}
                     </span>
                   </span>
                 </p>
@@ -117,7 +117,7 @@ export default function AboutPage() {
                   <div className="about-infos-box scroll-in-group">
                     <h2 className="about-title text-box">
                       <span className="scroll-in">
-                        {isEs ? 'Diseño de Producto' : 'Product Design'}
+                        {isEs ? 'Diseño de\u00A0Producto' : 'Product\u00A0Design'}
                       </span>
                     </h2>
                     <p className="about-service-text">
@@ -127,8 +127,8 @@ export default function AboutPage() {
                       <span className="text-box alinea-2">
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Definición de arquitecturas de información, diseño de flujos complejos de alta densidad y plataformas B2B preparadas para crecer.'
-                            : 'Information architecture, complex workflow design, high-density telemetry, and B2B platforms engineered for growth.'}
+                            ? 'Definición de arquitecturas de información, diseño de flujos complejos de alta densidad y plataformas B2B preparadas para\u00A0crecer.'
+                            : 'Information architecture, complex workflow design, high-density telemetry, and B2B platforms engineered for\u00A0growth.'}
                         </span>
                       </span>
                     </p>
@@ -137,7 +137,7 @@ export default function AboutPage() {
                   <div className="about-infos-box scroll-in-group">
                     <h2 className="about-title text-box">
                       <span className="scroll-in">
-                        {isEs ? 'Sistemas & Tokens' : 'Systems & Tokens'}
+                        {isEs ? 'Sistemas &\u00A0Tokens' : 'Systems &\u00A0Tokens'}
                       </span>
                     </h2>
                     <p className="about-service-text">
@@ -147,8 +147,8 @@ export default function AboutPage() {
                       <span className="text-box alinea-2 numb-2">
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Arquitectura de tokens de diseño, estándares de accesibilidad WCAG AAA y puente directo con equipos de ingeniería.'
-                            : 'Design token architecture, living code integration, WCAG AAA accessibility, and zero-redundancy engineering handoff.'}
+                            ? 'Arquitectura de tokens de diseño, estándares de accesibilidad WCAG AAA y puente directo con equipos de\u00A0ingeniería.'
+                            : 'Design token architecture, living code integration, WCAG AAA accessibility, and zero-redundancy engineering\u00A0handoff.'}
                         </span>
                       </span>
                     </p>
@@ -165,7 +165,7 @@ export default function AboutPage() {
                     </h2>
                     <p className="about-text o-40">
                       <span className="text-box">
-                        <span className="scroll-in">Bilbao, Bizkaia · España</span>
+                        <span className="scroll-in">Bilbao, Bizkaia ·\u00A0España</span>
                       </span>
                       <span className="text-box">
                         <span className="scroll-in">[ CET · UTC+1 ]</span>
@@ -227,7 +227,7 @@ export default function AboutPage() {
                     <div className="scroll-in">
                       <div className="cta-text">
                         <span className="link-line cta-text-about">
-                          {isEs ? 'Iniciar conversación' : 'Get in touch'}
+                          {isEs ? 'Iniciar\u00A0conversación' : 'Get in\u00A0touch'}
                         </span>
                         <span className="cta-icon-about">→</span>
                       </div>

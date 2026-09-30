@@ -86,15 +86,15 @@ export default function ContactPage() {
 
             <h1 className="contact-left-title text-box">
               <span className="scroll-in">
-                {isEs ? 'Hablemos de tu idea' : "Let's connect"}
+                {isEs ? 'Hablemos de tu\u00A0idea' : "Let's\u00A0connect"}
               </span>
             </h1>
 
             <p className="text-box" style={{ marginBottom: '2vw' }}>
               <span className="scroll-in" style={{ display: 'block', fontSize: 'var(--font-size-s)', lineHeight: '1.5' }}>
                 {isEs
-                  ? 'Disponible para proyectos de diseño de producto, sistemas de diseño y consultoría estratégica en remoto o presencial.'
-                  : 'Open for product design leadership, design systems, and design engineering consultancy worldwide.'}
+                  ? 'Disponible para proyectos de diseño de producto, sistemas de diseño y consultoría estratégica en remoto o\u00A0presencial.'
+                  : 'Open for product design leadership, design systems, and design engineering consultancy\u00A0worldwide.'}
               </span>
             </p>
 
@@ -106,7 +106,7 @@ export default function ContactPage() {
               </div>
               <p className="text-box">
                 <span className="scroll-in" style={{ fontSize: 'var(--font-size-s)' }}>
-                  Bilbao, Bizkaia — España (UTC+1)
+                  Bilbao, Bizkaia —\u00A0España (UTC+1)
                 </span>
               </p>
 
@@ -304,7 +304,7 @@ export default function ContactPage() {
                   <div className="scroll-in">
                     <div className="cta-text">
                       <span className="link-line" style={{ fontSize: 'var(--font-size-m)' }}>
-                        {isEs ? 'Enviar mensaje' : 'Send message'}
+                        {isEs ? 'Enviar\u00A0mensaje' : 'Send\u00A0message'}
                       </span>
                       <span className="cta-icon-about">→</span>
                     </div>

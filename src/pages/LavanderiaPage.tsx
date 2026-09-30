@@ -109,22 +109,22 @@ export default function LavanderiaPage() {
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Transformación digital integral y dirección de arte para referente del sector de lavandería industrial y de hostelería.'
-                            : 'Complete digital transformation and brand repositioning for a premier commercial laundry provider in northern Spain.'}
+                            ? 'Transformación digital integral y dirección de arte para referente del sector de lavandería industrial y de\u00A0hostelería.'
+                            : 'Complete digital transformation and brand repositioning for a premier commercial laundry provider in northern\u00A0Spain.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Armoniza la fuerza del sector manufacturero con una experiencia digital editorial cálida y transparente.'
-                            : 'Balancing utilitarian industrial machinery with warm, human-centered hospitality aesthetics and transparent pricing.'}
+                            ? 'Armoniza la fuerza del sector manufacturero con una experiencia digital editorial cálida y\u00A0transparente.'
+                            : 'Balancing utilitarian industrial machinery with warm, human-centered hospitality aesthetics and transparent\u00A0pricing.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Generó un aumento del 44% en solicitudes comerciales y redujo a la mitad el tiempo de onboarding de clientes B2B.'
-                            : 'Drove a 44% lift in qualified commercial inquiries and reduced onboarding time for enterprise accounts by 50%.'}
+                            ? 'Generó un aumento del 44% en solicitudes comerciales y redujo a la mitad el tiempo de onboarding de clientes\u00A0B2B.'
+                            : 'Drove a 44% lift in qualified commercial inquiries and reduced onboarding time for enterprise accounts by\u00A050%.'}
                         </span>
                       </p>
 
@@ -138,7 +138,7 @@ export default function LavanderiaPage() {
                         <div className="scroll-in">
                           <div className="cta-text">
                             <span className="link-line">
-                              {isEs ? 'Ver caso en Behance' : 'View on Behance'}
+                              {isEs ? 'Ver caso en\u00A0Behance' : 'View on\u00A0Behance'}
                             </span>
                             <span className="cta-icon-up">↗</span>
                           </div>
@@ -158,7 +158,7 @@ export default function LavanderiaPage() {
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente: Night Shift' : 'Next: Night Shift'}
+                      {isEs ? 'Siguiente: Night\u00A0Shift' : 'Next: Night\u00A0Shift'}
                     </span>
                   </div>
                 </div>
