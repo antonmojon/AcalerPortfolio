@@ -37,6 +37,16 @@ function CustomCursor() {
   return <div ref={dotRef} className="cursor-dot" />;
 }
 
+const META = {
+  fontFamily: '"Space Mono", monospace',
+  fontWeight: 400,
+  fontSize: '11px',
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase' as const,
+  color: 'var(--text-secondary)',
+  lineHeight: '1.5',
+};
+
 /* ─── Intro Screen with Seamless Title Transition ─────────── */
 type IntroPhase = 'drafting' | 'name' | 'animating';
 
