@@ -2388,6 +2388,186 @@ header {
     padding: 8vw 4vw 16vw;
     gap: 8vw;
   }
+
+  .editorial-card {
+    padding: 6vw 4vw;
+    gap: 4vw;
+  }
+
+  .stat-card-grid {
+    grid-template-columns: 1fr;
+    gap: 3vw;
+  }
+
+  .two-col-grid {
+    grid-template-columns: 1fr;
+    gap: 4vw;
+  }
+
+  .swatch-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3vw;
+  }
+}
+
+/* ─── Editorial Case Study Modules (Weeku & Detailed Studies) ─── */
+.editorial-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-s);
+  padding: 2.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+}
+
+.editorial-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1vw;
+  margin-bottom: 0.5vw;
+}
+
+.editorial-card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 1.8vw, 28px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.editorial-card-tag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  opacity: 0.5;
+}
+
+.editorial-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8vw;
+}
+
+.editorial-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4vw 0.9vw;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  background: var(--bg-primary);
+}
+
+.stat-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1vw;
+}
+
+.stat-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  padding: 1.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vw;
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 3.2vw, 52px);
+  line-height: 1;
+  color: #E25B45;
+  font-weight: 500;
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  opacity: 0.8;
+  text-wrap: pretty;
+}
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2vw;
+}
+
+.comparison-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  padding: 1.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vw;
+}
+
+.comparison-title {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.comparison-item {
+  font-size: var(--font-size-s);
+  line-height: 1.4;
+  padding-left: 1.2vw;
+  position: relative;
+  text-wrap: pretty;
+}
+
+.comparison-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  opacity: 0.4;
+}
+
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1vw;
+}
+
+.swatch-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+}
+
+.swatch-color {
+  height: 60px;
+  width: 100%;
+}
+
+.swatch-info {
+  padding: 0.6vw;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xxs);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2vw;
+}
+
+.figma-container {
+  width: 100%;
+  border-radius: var(--radius-s);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: #1e1e1e;
+  position: relative;
 }
 
 

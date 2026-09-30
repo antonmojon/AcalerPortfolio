@@ -38,20 +38,28 @@ const PROJECTS = [
 const ARCHIVE = [
   {
     num: '01',
+    name: 'Weeku',
+    detail: 'AI Meal Planning · UI/UX, Research & Design System',
+    date: '2025',
+    href: '/weeku',
+    img: '/weeku-cover.jpg',
+  },
+  {
+    num: '02',
     name: 'Módulo App',
     detail: 'Product design, UI/UX architecture',
     date: '2024 - 2026',
     img: 'https://images.unsplash.com/photo-1558655146-6c222b05fce4?w=800&h=600&fit=crop&auto=format',
   },
   {
-    num: '02',
+    num: '03',
     name: 'Palomar Studio',
     detail: 'Visual identity, packaging & typography',
     date: '2023 - 2024',
     img: 'https://images.unsplash.com/photo-1658863025658-4a259cc68fc9?w=800&h=600&fit=crop&auto=format',
   },
   {
-    num: '03',
+    num: '04',
     name: 'Tipo Libre',
     detail: 'Specimen publication, variable fonts',
     date: '2022 - 2023',
@@ -372,35 +380,57 @@ function MgArchive() {
         </div>
 
         <div className="archive-list scroll-in-group">
-          {ARCHIVE.map((item, idx) => (
-            <div
-              key={item.name}
-              className={`archive-list-el ${hoverIndex === idx ? 'is-hover' : ''}`}
-              onMouseEnter={() => setHoverIndex(idx)}
-              onMouseLeave={() => setHoverIndex(null)}
-            >
-              <div className="archive-list-text">
-                <p className="archive-name">
-                  <span className="archive-list-num" style={{ marginRight: '1vw', opacity: 0.4, fontSize: 'var(--font-size-xxs)' }}>
-                    {item.num}
-                  </span>
-                  <span>{item.name}</span>
-                </p>
-                <p className="archive-detail">{item.detail}</p>
-                <p className="archive-date list-last-el">{item.date}</p>
-              </div>
+          {ARCHIVE.map((item, idx) => {
+            const rowContent = (
+              <>
+                <div className="archive-list-text">
+                  <p className="archive-name">
+                    <span className="archive-list-num" style={{ marginRight: '1vw', opacity: 0.4, fontSize: 'var(--font-size-xxs)' }}>
+                      {item.num}
+                    </span>
+                    <span>{item.name}</span>
+                    {'href' in item && item.href && (
+                      <span style={{ marginLeft: '0.6vw', opacity: 0.5, fontSize: 'var(--font-size-xs)' }}>→</span>
+                    )}
+                  </p>
+                  <p className="archive-detail">{item.detail}</p>
+                  <p className="archive-date list-last-el">{item.date}</p>
+                </div>
 
-              {/* Floating image box with smooth height expand on hover */}
-              <div className="archive-list-image-box">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="archive-list-image"
-                  loading="lazy"
-                />
+                {/* Floating image box with smooth height expand on hover */}
+                <div className="archive-list-image-box">
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    className="archive-list-image"
+                    loading="lazy"
+                  />
+                </div>
+              </>
+            );
+
+            return 'href' in item && item.href ? (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`archive-list-el ${hoverIndex === idx ? 'is-hover' : ''}`}
+                style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}
+                onMouseEnter={() => setHoverIndex(idx)}
+                onMouseLeave={() => setHoverIndex(null)}
+              >
+                {rowContent}
+              </Link>
+            ) : (
+              <div
+                key={item.name}
+                className={`archive-list-el ${hoverIndex === idx ? 'is-hover' : ''}`}
+                onMouseEnter={() => setHoverIndex(idx)}
+                onMouseLeave={() => setHoverIndex(null)}
+              >
+                {rowContent}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
