@@ -83,20 +83,23 @@ function AboutHero() {
         borderBottom: '1px solid var(--border-color)',
       }}
     >
-      {/* Top bar */}
+      {/* Top technical dimension bar */}
       <div
         className="about-hero-topbar"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          borderBottom: '1px dashed var(--border-color)',
+          paddingBottom: '6px',
           marginBottom: '28px',
         }}
       >
-        <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('about.top_tag')}</p>
-        <span style={{ ...META, color: 'var(--text-secondary)', margin: 0 }}>
-          Madrid · 2026
+        <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>DIM: PERFIL · 01</span>
+        <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>
+          {t('about.top_tag')} · MADRID, ES
         </span>
+        <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>ESCALA 1:1</span>
       </div>
 
       {/* Name & Role — Full width editorial masthead matching Home & Contact */}
@@ -805,15 +808,31 @@ function AboutCTA() {
   return (
     <section style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--cta-bg)', color: 'var(--cta-text)', transition: 'background-color 0.4s ease, color 0.4s ease' }}>
       <div className="cta-pad" style={{ padding: '96px 80px' }}>
+        {/* Top dimension line */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '32px',
+            borderBottom: '1px dashed rgba(255,255,255,0.2)',
+            paddingBottom: '12px',
+          }}
+        >
+          <span style={{ ...META, color: 'var(--cta-text)', fontSize: '9px', letterSpacing: '0.08em' }}>
+            PLANO 03 / CONTRATACIÓN & CONSULTAS
+          </span>
+          <span style={{ ...META, color: 'var(--cta-text)', fontSize: '9px', letterSpacing: '0.08em' }}>
+            DISPONIBILIDAD INMEDIATA
+          </span>
+        </div>
+
         <Link
           to="/contact"
           className="portfolio-cta-link block w-full"
           aria-label="Ir a contacto - Trabajemos juntos"
           style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px' }}>
-            <p style={{ ...META, color: 'var(--cta-text)', margin: 0 }}>{t('home.cta_tag')}</p>
-          </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '32px' }}>
             <span
               style={{
@@ -874,9 +893,11 @@ function AboutFooter() {
         paddingLeft: '80px', paddingRight: '80px',
         paddingTop: '40px', paddingBottom: '40px',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        borderTop: '1px solid var(--border-color)',
       }}
     >
       <span style={META}>© 2026 Antonio Calero</span>
+      <span style={{ ...META, fontSize: '10px' }}>CAPA ZERO · ARQUITECTURA DE INTERACCIÓN</span>
       <span style={META}>{t('footer.rights')}</span>
       <div className="about-footer-links" style={{ display: 'flex', gap: '32px' }}>
         <Link to="/contact" className="nav-link" style={{ ...META, textDecoration: 'none' }}>{t('nav.contact')}</Link>
