@@ -1158,72 +1158,610 @@ body {
   }
 }
 
-/* ─── Horizontal Runway / Galería Lateral Styles ─────────────────────────── */
-.runway-wrapper {
+/* ─── Matthieu Givelet Inspired Editorial Design ──────────────────────────── */
+.mg-page-wrapper {
   background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
   width: 100%;
 }
 
-.runway-track {
+.link-line {
+  position: relative;
+  width: fit-content;
+  padding-bottom: 2px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.link-line::before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.5s cubic-bezier(0.18, 0.83, 0.27, 1);
+}
+
+.link-line:hover::before,
+.group:hover .link-line::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.mg-navbar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.mg-navbar-header.is-scrolled {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mg-navbar {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.8vw 2.5vw;
 }
 
-.runway-slide {
-  height: 100vh;
-  box-sizing: border-box;
+.mg-nav-brand {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
-.runway-img-zoom:hover {
-  transform: scale(1.04) !important;
+.mg-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2.4vw;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.runway-outro-link:hover .runway-outro-arrow {
-  transform: translateX(12px) !important;
+.mg-nav-link {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(13px, 1vw, 15px);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 400;
 }
 
-.runway-case-btn:hover {
-  opacity: 0.88;
+.mg-link-count {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(10px, 0.8vw, 12px);
+  opacity: 0.45;
+  margin-left: 4px;
+}
+
+.mg-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+}
+
+.mg-nav-cta {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(13px, 1vw, 15px);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.mg-hero {
+  padding: 8vw 2.5vw 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.mg-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6vw;
+  width: 100%;
+  margin-bottom: 3.5vw;
+  flex-wrap: nowrap;
+}
+
+.mg-title-part {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: clamp(40px, 8.8vw, 140px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--hero-title-color);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.mg-title-image-box {
+  position: relative;
+  width: clamp(65px, 12vw, 175px);
+  height: clamp(42px, 8vw, 115px);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.mg-title-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.mg-title-image.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mg-subtitle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 4.5vw;
+}
+
+.mg-subtitle-line {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(22px, 3.2vw, 48px);
+  line-height: 1.15;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.mg-subtitle-location {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(12px, 1.2vw, 17px);
+  opacity: 0.45;
+  margin-top: 0.8vw;
+  font-weight: 400;
+}
+
+.mg-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.mg-infos-box {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 2.8vw;
+  width: 100%;
+}
+
+.mg-label {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(11px, 0.95vw, 13px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.55;
+  margin: 0;
+}
+
+.mg-infos-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3.5vw;
+}
+
+.mg-infos-text {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(15px, 1.4vw, 21px);
+  line-height: 1.35;
+  max-width: 27vw;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.mg-cta-link {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(13px, 1.1vw, 16px);
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mg-cta-arrow {
+  margin-left: 6px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.mg-cta-link:hover .mg-cta-arrow {
   transform: translateX(4px);
 }
 
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* ─── Selected Works ─────────────────────────────────────── */
+.mg-work-section {
+  padding: 5vw 2.5vw 8vw;
+  position: relative;
 }
 
+.mg-work-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5vw;
+}
+
+.mg-section-title {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(24px, 3.2vw, 46px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.mg-section-count {
+  font-family: "Space Mono", monospace;
+  font-size: 1.1vw;
+  opacity: 0.45;
+}
+
+.mg-work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4vw 2.5vw;
+}
+
+.mg-project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.mg-project-image-box {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 4px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+}
+
+.mg-project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.18, 0.83, 0.27, 1);
+}
+
+.mg-project-card:hover .mg-project-image {
+  transform: scale(1.035);
+}
+
+.mg-project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 0.4vw;
+}
+
+.mg-project-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7vw;
+}
+
+.mg-project-num {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(10px, 0.85vw, 12px);
+  opacity: 0.45;
+}
+
+.mg-project-title {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(16px, 1.4vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.mg-project-role {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(12px, 0.95vw, 14px);
+  opacity: 0.55;
+  display: flex;
+  gap: 8px;
+}
+
+.mg-project-year {
+  font-family: "Space Mono", monospace;
+  font-size: 0.85em;
+}
+
+/* ─── Archive ────────────────────────────────────────────── */
+.mg-archive-section {
+  padding: 5vw 2.5vw 7vw;
+  position: relative;
+}
+
+.mg-archive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 3vw;
+  margin-bottom: 2vw;
+}
+
+.mg-archive-cols {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  padding-bottom: 0.8vw;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mg-archive-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  align-items: center;
+  padding: 1.4vw 0;
+  border-bottom: 1px solid var(--border-color);
+  cursor: default;
+}
+
+.mg-archive-col-name {
+  display: flex;
+  align-items: center;
+}
+
+.mg-archive-num {
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  opacity: 0.4;
+  margin-right: 14px;
+}
+
+.mg-archive-name {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 500;
+}
+
+.mg-archive-col-detail {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(13px, 1vw, 15px);
+  opacity: 0.6;
+}
+
+.mg-archive-col-date {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(11px, 0.9vw, 13px);
+  opacity: 0.5;
+}
+
+.mg-archive-preview {
+  position: absolute;
+  right: 28%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+  aspect-ratio: 16 / 10;
+  border-radius: 4px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 30;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+  animation: mgFadeIn 0.25s ease forwards;
+}
+
+.mg-archive-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes mgFadeIn {
+  from { opacity: 0; transform: translateY(-44%) scale(0.96); }
+  to { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+.mg-footer {
+  position: relative;
+  padding: 5vw 2.5vw 7vw;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 4vw;
+}
+
+.mg-footer-copy {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(11px, 0.95vw, 13px);
+  opacity: 0.6;
+  margin: 0;
+}
+
+.mg-footer-right {
+  display: flex;
+  justify-content: space-between;
+  gap: 4vw;
+}
+
+.mg-footer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+}
+
+.mg-footer-text {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(14px, 1.15vw, 17px);
+  line-height: 1.4;
+  color: var(--text-primary);
+  max-width: 22vw;
+  margin: 0;
+}
+
+.mg-text-inline-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mg-footer-links-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vw;
+}
+
+.mg-footer-contact-link {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.mg-footer-muted {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(11px, 0.9vw, 12px);
+  opacity: 0.5;
+}
+
+.mg-footer-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+}
+
+.mg-footer-social a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.75;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* ─── Responsive Media Queries ───────────────────────────── */
 @media (max-width: 768px) {
-  .hide-mobile {
+  .desktop-only {
     display: none !important;
   }
-  
-  .runway-slide {
-    width: 90vw !important;
-    height: calc(100vh - 46px) !important;
-    scroll-snap-align: start !important;
-    padding: 80px 24px 60px !important;
-  }
-  
-  .runway-slide-hero,
-  .runway-slide-outro {
-    width: 96vw !important;
-    padding: 80px 24px 60px !important;
-  }
-  
-  .runway-hero-grid,
-  .runway-case-body,
-  .runway-manifesto-grid,
-  .runway-archive-grid {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-  
-  .runway-case-media {
-    max-height: 220px !important;
+
+  .mg-navbar {
+    padding: 18px 20px;
   }
 
-  .runway-hud {
-    padding: 0 16px !important;
+  .mg-hero {
+    padding: 100px 20px 48px;
+  }
+
+  .mg-title-wrapper {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .mg-title-part {
+    font-size: clamp(32px, 9vw, 48px);
+  }
+
+  .mg-title-image-box {
+    width: 60px;
+    height: 38px;
+  }
+
+  .mg-subtitle-wrapper {
+    margin-bottom: 40px;
+  }
+
+  .mg-subtitle-line {
+    font-size: clamp(20px, 5.5vw, 26px);
+  }
+
+  .mg-infos-box {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 24px;
+  }
+
+  .mg-infos-right {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mg-infos-text {
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  .mg-work-section,
+  .mg-archive-section {
+    padding: 48px 20px;
+  }
+
+  .mg-work-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .mg-project-meta {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .mg-archive-row {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .mg-archive-col-detail {
+    display: none;
+  }
+
+  .mg-footer {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 48px 20px 60px;
+  }
+
+  .mg-footer-right {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .mg-footer-text {
+    max-width: 100%;
   }
 }
 
