@@ -38,8 +38,6 @@ html::-webkit-scrollbar { display: none; }
   --cta-text: #FAFAFA;
   --card-border: #E0E0E0;
   --cursor-color: #FFFFFF;
-  --blueprint-line: rgba(0, 0, 0, 0.032);
-  --blueprint-guide: rgba(0, 0, 0, 0.055);
 }
 
 [data-theme="color"] {
@@ -56,8 +54,6 @@ html::-webkit-scrollbar { display: none; }
   --cta-text: #FFF9FA;
   --card-border: rgba(253, 24, 67, 0.26);
   --cursor-color: #02E7BC;
-  --blueprint-line: rgba(253, 24, 67, 0.032);
-  --blueprint-guide: rgba(253, 24, 67, 0.055);
 }
 
 /* ─── Color Theme Overrides: Completely eliminates black in color mode ─── */
@@ -381,69 +377,10 @@ body {
 }
 
 .story-card-img-wrap {
-  position: relative;
   overflow: hidden;
   background-color: var(--bg-surface);
   margin-bottom: 16px;
   width: 100%;
-}
-
-/* ─── Blueprint Technical Registration Marks ─────────────── */
-.blueprint-corner {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  pointer-events: none;
-  z-index: 3;
-  transition: border-color 0.3s ease;
-  border-color: var(--border-color);
-}
-.story-card:hover .blueprint-corner,
-.about-portrait-wrapper:hover .blueprint-corner {
-  border-color: var(--accent-color);
-}
-.blueprint-corner-tl { top: 8px; left: 8px; border-top: 1.5px solid; border-left: 1.5px solid; }
-.blueprint-corner-tr { top: 8px; right: 8px; border-top: 1.5px solid; border-right: 1.5px solid; }
-.blueprint-corner-bl { bottom: 8px; left: 8px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
-.blueprint-corner-br { bottom: 8px; right: 8px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
-
-/* ─── Blueprint Drafting Background Grid & Guidelines ──────── */
-.blueprint-bg {
-  background-color: var(--bg-primary);
-  background-image:
-    linear-gradient(to right, var(--blueprint-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--blueprint-line) 1px, transparent 1px);
-  background-size: 48px 48px;
-  background-position: -1px -1px;
-}
-
-.blueprint-guide-left {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 80px;
-  width: 1px;
-  background-color: var(--blueprint-guide);
-}
-.blueprint-guide-right {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 80px;
-  width: 1px;
-  background-color: var(--blueprint-guide);
-}
-@media (min-width: 769px) and (max-width: 1024px) {
-  .blueprint-guide-left { left: 40px !important; }
-  .blueprint-guide-right { right: 40px !important; }
-}
-@media (max-width: 768px) {
-  .blueprint-guide-left { left: 24px !important; }
-  .blueprint-guide-right { right: 24px !important; }
-}
-@media (max-width: 480px) {
-  .blueprint-guide-left { left: 16px !important; }
-  .blueprint-guide-right { right: 16px !important; }
 }
 
 .story-card-large .story-card-img-wrap {
@@ -742,33 +679,28 @@ body {
 .editorial-stack-row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding: 13px 8px;
-  cursor: default;
+  align-items: flex-start;
+  padding: 12px 0;
+  cursor: pointer;
   background: transparent;
-  transition: background-color 0.2s ease, padding-left 0.2s ease;
+  transition: padding-left 0.2s ease;
 }
 
 .editorial-stack-row:hover {
-  background-color: var(--bg-surface);
-  padding-left: 14px;
+  padding-left: 8px;
 }
 
 .editorial-stack-row:hover .editorial-stack-name {
-  color: var(--hero-title-color) !important;
+  border-bottom-color: var(--accent-color) !important;
+}
+
+.editorial-stack-row:hover .editorial-stack-arrow {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
 }
 
 .editorial-stack-row:hover .editorial-stack-icon {
   color: var(--accent-color) !important;
-}
-
-@media (max-width: 640px) {
-  .editorial-stack-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 6px !important;
-    padding: 12px 4px !important;
-  }
 }
 
 /* ─── Contact Page: Retícula Suiza y Formulario Editorial ───── */

@@ -37,29 +37,19 @@ function CustomCursor() {
   return <div ref={dotRef} className="cursor-dot" />;
 }
 
-const META = {
-  fontFamily: '"Space Mono", monospace',
-  fontWeight: 400,
-  fontSize: '11px',
-  letterSpacing: '0.08em',
-  textTransform: 'uppercase' as const,
-  color: 'var(--text-secondary)',
-  lineHeight: '1.5',
-};
-
 /* ─── Intro Screen with Seamless Title Transition ─────────── */
-type IntroPhase = 'drafting' | 'name' | 'animating';
+type IntroPhase = 'count' | 'name' | 'animating';
 
 function IntroScreen({ onDone }: { onDone: () => void }) {
-  const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<IntroPhase>('drafting');
+  const [pct, setPct] = useState(0);
+  const [phase, setPhase] = useState<IntroPhase>('count');
   const [targetY, setTargetY] = useState<number | null>(null);
   const [animating, setAnimating] = useState(false);
   const [overlayOpacity, setOverlayOpacity] = useState(1);
   const probeRef = useRef<HTMLSpanElement>(null);
   const [fs, setFs] = useState<number | null>(null);
 
-  const phaseRef = useRef<IntroPhase>('drafting');
+  const phaseRef = useRef<IntroPhase>('count');
   phaseRef.current = phase;
   const animatingRef = useRef(false);
   animatingRef.current = animating;
@@ -99,35 +89,88 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     };
   }, []);
 
-  // 2. Blueprint Architectural Fill Animation: Wireframe -> Solid Ink Wipe
+  // 2. Strict scroll lock & global wheel blocker to prevent background scroll
   useEffect(() => {
-    let start: number | null = null;
-    let rafId: number;
-    const DURATION = 1350; // 1.35s organic mechanical sweep
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
 
-    const tick = (now: number) => {
-      if (!start) start = now;
-      const elapsed = now - start;
-      const p = Math.min(elapsed / DURATION, 1);
-      // Smooth architectural plotter curve
-      const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-      setProgress(eased * 100);
-
-      if (p < 1) {
-        rafId = requestAnimationFrame(tick);
-      } else {
-        setProgress(100);
-        setTimeout(() => {
-          setPhase('name');
-        }, 260);
+    const onWheel = (e: WheelEvent) => {
+      // 100% prevent any scroll from leaking to the background home page
+      e.preventDefault();
+      if (phaseRef.current === 'name' && !animatingRef.current) {
+        if (Math.abs(e.deltaY) > 2 || Math.abs(e.deltaX) > 2) {
+          startGlideRef.current();
+        }
       }
     };
 
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
+    let touchStartY = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      if (phaseRef.current === 'name' && !animatingRef.current) {
+        if (Math.abs(e.touches[0].clientY - touchStartY) > 6) {
+          startGlideRef.current();
+        }
+      }
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (['ArrowDown', 'ArrowUp', 'Space', 'Enter', 'PageDown'].includes(e.key)) {
+        e.preventDefault();
+        if (phaseRef.current === 'name' && !animatingRef.current) {
+          startGlideRef.current();
+        }
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('keydown', onKeyDown);
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
   }, []);
 
-  // 3. Glide trigger implementation
+  // 3. Counter animation 0% -> 100%
+  useEffect(() => {
+    let start: number | null = null;
+    let raf: number;
+    const DURATION = 950;
+
+    const tick = (now: number) => {
+      if (!start) start = now;
+      const progress = Math.min((now - start) / DURATION, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setPct(Math.floor(eased * 100));
+
+      if (progress < 1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        setPct(100);
+        setTimeout(() => {
+          setPhase('name');
+        }, 150);
+      }
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // 4. Glide trigger implementation
   const startGlide = useCallback(() => {
     if (animatingRef.current) return;
     animatingRef.current = true;
@@ -162,69 +205,13 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
 
   startGlideRef.current = startGlide;
 
-  // 4. Strict scroll lock & interaction handlers (skip drafting or glide)
-  useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    window.scrollTo(0, 0);
-
-    const triggerAction = () => {
-      if (animatingRef.current) return;
-      if (phaseRef.current === 'drafting') {
-        setProgress(100);
-        setPhase('name');
-        startGlideRef.current();
-      } else if (phaseRef.current === 'name') {
-        startGlideRef.current();
-      }
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      if (!animatingRef.current && (Math.abs(e.deltaY) > 2 || Math.abs(e.deltaX) > 2)) {
-        triggerAction();
-      }
-    };
-
-    let touchStartY = 0;
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      if (!animatingRef.current && Math.abs(e.touches[0].clientY - touchStartY) > 6) {
-        triggerAction();
-      }
-    };
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (['ArrowDown', 'ArrowUp', 'Space', 'Enter', 'PageDown'].includes(e.key)) {
-        e.preventDefault();
-        triggerAction();
-      }
-    };
-
-    window.addEventListener('wheel', onWheel, { passive: false });
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-    window.addEventListener('keydown', onKeyDown);
-
-    return () => {
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('keydown', onKeyDown);
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    };
-  }, []);
-
   const titleStyle = {
     fontFamily: '"Special Gothic Expanded One", sans-serif',
     fontWeight: 400,
     fontSize: fs ? `${fs}px` : 'clamp(28px, 6.5vw, 118px)',
     letterSpacing: '-0.01em',
     lineHeight: '0.88',
+    color: 'var(--hero-title-color)',
     display: 'block',
     whiteSpace: 'nowrap' as const,
     transition: 'color 0.4s ease',
@@ -233,14 +220,8 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
   return (
     <div
       onClick={() => {
-        if (!animating) {
-          if (phase === 'drafting') {
-            setProgress(100);
-            setPhase('name');
-            startGlide();
-          } else if (phase === 'name') {
-            startGlide();
-          }
+        if (phase === 'name' && !animating) {
+          startGlide();
         }
       }}
       style={{
@@ -254,7 +235,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
         transition: animating ? 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
         pointerEvents: animating ? 'none' : 'auto',
         userSelect: 'none',
-        cursor: !animating ? 'pointer' : 'default',
+        cursor: phase === 'name' && !animating ? 'pointer' : 'default',
       }}
     >
       {/* Hidden probe for font measurement */}
@@ -278,162 +259,59 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
         ANTONIO CALERO
       </span>
 
-      {/* Blueprint Construction Frame: Perfectly centered, fills from wireframe to solid ink */}
-      <div
-        style={{
-          position: 'absolute',
-          top: animating && targetY !== null ? `${targetY}px` : '50%',
-          left: 0,
-          right: 0,
-          transform: animating ? 'translateY(0%)' : 'translateY(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          textAlign: 'center',
-          paddingLeft: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
-          paddingRight: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
-          paddingTop: 0,
-          paddingBottom: 0,
-          boxSizing: 'border-box',
-          width: '100%',
-          transition: animating
-            ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), padding 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
-            : 'none',
-          willChange: 'top, transform',
-        }}
-      >
-        <div style={{ position: 'relative', display: 'inline-block', maxWidth: '100%' }}>
-          {/* Top technical dimension bar */}
-          <div
+      {/* Counter */}
+      {phase === 'count' && (
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span
             style={{
-              position: 'absolute',
-              top: '-26px',
-              left: 0,
-              right: 0,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderBottom: '1px dashed var(--border-color)',
-              paddingBottom: '4px',
-              opacity: phase === 'name' || animating ? 0 : 0.75,
-              transition: 'opacity 0.4s ease',
-              pointerEvents: 'none',
+              fontFamily: '"Space Mono", monospace',
+              fontSize: '11px',
+              letterSpacing: '0.06em',
+              color: 'var(--text-primary)',
+              fontVariantNumeric: 'tabular-nums',
             }}
           >
-            <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>DIM: 1920 × 1080</span>
-            <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em', color: 'var(--accent-color)', fontWeight: 700 }}>
-              {progress < 100 ? `PLANO TÉCNICO · ${Math.floor(progress)}%` : 'TRAZADO 100%'}
-            </span>
-            <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>ESCALA 1:1</span>
-          </div>
-
-          {/* Corner drafting marks */}
-          <span className="blueprint-corner blueprint-corner-tl" style={{ top: '-14px', left: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
-          <span className="blueprint-corner blueprint-corner-tr" style={{ top: '-14px', right: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
-          <span className="blueprint-corner blueprint-corner-bl" style={{ bottom: '-14px', left: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
-          <span className="blueprint-corner blueprint-corner-br" style={{ bottom: '-14px', right: '-14px', opacity: phase === 'name' || animating ? 0 : 0.75, transition: 'opacity 0.4s ease' }} />
-
-          {/* Double Layer Title: Layer 1 Wireframe + Layer 2 Solid Ink Fill with clipPath */}
-          <div style={{ position: 'relative', display: 'block', overflow: 'hidden' }}>
-            {/* Layer 1: Blueprint Wireframe Stroke (always defines structure) */}
-            <span
-              style={{
-                ...titleStyle,
-                color: 'transparent',
-                WebkitTextStroke: '1.5px var(--hero-title-color)',
-                opacity: 0.32,
-                userSelect: 'none',
-              }}
-            >
-              ANTONIO CALERO
-            </span>
-
-            {/* Layer 2: Solid Filled Ink (reveals with clip-path as plotter sweeps) */}
-            <span
-              style={{
-                ...titleStyle,
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                color: 'var(--hero-title-color)',
-                clipPath: `inset(0 ${Math.max(0, 100 - progress)}% 0 0)`,
-                userSelect: 'none',
-              }}
-            >
-              ANTONIO CALERO
-            </span>
-
-            {/* Layer 3: Vertical Drafting Laser / Beam */}
-            {progress < 100 && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  left: `${progress}%`,
-                  width: '2px',
-                  backgroundColor: 'var(--accent-color)',
-                  boxShadow: '0 0 8px var(--accent-color)',
-                  pointerEvents: 'none',
-                  zIndex: 10,
-                }}
-              >
-                <span
-                  style={{
-                    position: 'absolute',
-                    top: '-6px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    fontSize: '9px',
-                    lineHeight: 1,
-                    color: 'var(--accent-color)',
-                  }}
-                >
-                  ▼
-                </span>
-                <span
-                  style={{
-                    position: 'absolute',
-                    bottom: '-6px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    fontSize: '9px',
-                    lineHeight: 1,
-                    color: 'var(--accent-color)',
-                  }}
-                >
-                  ▲
-                </span>
-              </div>
-            )}
-          </div>
-
-          {/* Bottom technical ruler baseline */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-26px',
-              left: 0,
-              right: 0,
-              borderTop: '1px dashed var(--border-color)',
-              paddingTop: '4px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              opacity: phase === 'name' || animating ? 0 : 0.75,
-              transition: 'opacity 0.4s ease',
-              pointerEvents: 'none',
-            }}
-          >
-            <span style={{ ...META, fontSize: '9px' }}>├───────</span>
-            <span style={{ ...META, fontSize: '9px', color: 'var(--text-secondary)' }}>CAPA ZERO · PLANO DE TRAZADO</span>
-            <span style={{ ...META, fontSize: '9px' }}>───────┤</span>
-          </div>
+            {String(pct).padStart(3, ' ')}%
+          </span>
         </div>
-      </div>
+      )}
+
+      {/* Name: 100% centered horizontally & vertically, then glides to masthead */}
+      {(phase === 'name' || phase === 'animating') && (
+        <div
+          style={{
+            position: 'absolute',
+            top: animating && targetY !== null ? `${targetY}px` : '50%',
+            left: 0,
+            right: 0,
+            transform: animating ? 'translateY(0%)' : 'translateY(-50%)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            paddingLeft: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
+            paddingRight: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
+            paddingTop: 0,
+            paddingBottom: 0,
+            boxSizing: 'border-box',
+            width: '100%',
+            transition: animating
+              ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), padding 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
+              : 'none',
+            willChange: 'top, transform',
+          }}
+        >
+          <span
+            style={{
+              ...titleStyle,
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
+            ANTONIO CALERO
+          </span>
+        </div>
+      )}
 
       {/* Scroll indicator */}
       {phase === 'name' && !animating && (
@@ -447,7 +325,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
             flexDirection: 'column',
             alignItems: 'center',
             gap: '8px',
-            animation: 'fadeIn 0.5s ease 0.2s both',
+            animation: 'fadeIn 0.5s ease 0.3s both',
           }}
         >
           <span
@@ -466,27 +344,6 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
           </span>
         </div>
       )}
-    </div>
-  );
-}
-
-/* ─── Blueprint Architectural Guidelines ──────────────────── */
-function BlueprintGuides() {
-  return (
-    <div
-      className="blueprint-guides"
-      aria-hidden="true"
-      style={{
-        position: 'fixed',
-        inset: 0,
-        pointerEvents: 'none',
-        zIndex: 0,
-        maxWidth: '100vw',
-        overflow: 'hidden',
-      }}
-    >
-      <div className="blueprint-guide-left" />
-      <div className="blueprint-guide-right" />
     </div>
   );
 }
@@ -514,11 +371,10 @@ export default function Root() {
         <CustomCursor />
         <FloatingThemeButton />
         <div
-          className="blueprint-bg"
           style={{
+            backgroundColor: 'var(--bg-primary)',
             minHeight: '100vh',
             transition: 'background-color 0.4s ease',
-            position: 'relative',
             ...(loading ? {
               position: 'fixed',
               top: 0,
@@ -530,12 +386,9 @@ export default function Root() {
             } : {}),
           }}
         >
-          <BlueprintGuides />
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <Suspense fallback={<ProjectLoadingScreen />}>
-              <Outlet />
-            </Suspense>
-          </div>
+          <Suspense fallback={<ProjectLoadingScreen />}>
+            <Outlet />
+          </Suspense>
         </div>
       </LanguageProvider>
     </ThemeProvider>
