@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import LanguageSelector from '../components/LanguageSelector';
 import { useLanguage } from '../context/LanguageContext';
@@ -68,21 +68,23 @@ function MgHeader() {
       <nav className="navbar">
         <Link to="/" className="nav-logo anchor">
           <p className="text-box">
-            <span className="nav-in">©AntonioCalero</span>
+            <span className="nav-in" style={{ '--stagger-delay': '0s' } as React.CSSProperties}>
+              ©AntonioCalero
+            </span>
           </p>
         </Link>
 
         <div className="nav-links-wrapper desktop-el">
           <ul className="nav-links">
-            <a className="nav-link nav-link-work nav-in anchor" href="#work">
+            <a className="nav-link nav-link-work nav-in anchor" href="#work" style={{ '--stagger-delay': '0.05s' } as React.CSSProperties}>
               <li className="link-line">{t('nav.projects')}</li>
               <span className="nav-link-count">({PROJECTS.length})</span>
             </a>
-            <a className="nav-link nav-link-archive nav-in anchor" href="#archive">
+            <a className="nav-link nav-link-archive nav-in anchor" href="#archive" style={{ '--stagger-delay': '0.1s' } as React.CSSProperties}>
               <li className="link-line">Archive</li>
               <span className="nav-link-count">({ARCHIVE.length})</span>
             </a>
-            <Link className="nav-link nav-in anchor" to="/about">
+            <Link className="nav-link nav-in anchor" to="/about" style={{ '--stagger-delay': '0.15s' } as React.CSSProperties}>
               <li className="link-line">{t('nav.about')}</li>
             </Link>
           </ul>
@@ -90,7 +92,9 @@ function MgHeader() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.2vw' }}>
           <Link className="nav-button text-box desktop-el" to="/contact">
-            <span className="nav-in link-line">{t('nav.contact')}</span>
+            <span className="nav-in link-line" style={{ '--stagger-delay': '0.2s' } as React.CSSProperties}>
+              {t('nav.contact')}
+            </span>
           </Link>
           <LanguageSelector />
           <button
@@ -145,28 +149,53 @@ function MgHeader() {
   );
 }
 
-/* ─── Hero Section (Direct Clone with Animated Boxes & 3D Image Flip) */
+/* ─── Hero Section with Letter Wave & 3D Flip ────────────────────── */
 function MgHero() {
   const { language } = useLanguage();
   const isEs = language === 'es';
-  const [animated, setAnimated] = useState(false);
+  const [boxesAnimated, setBoxesAnimated] = useState(false);
+  const [imageBoxAnimated, setImageBoxAnimated] = useState(false);
 
+  // Exact choreography from Matthieu Givelet:
+  // 1. Letters glide up immediately
+  // 2. At 700ms, box1 and box2 slide apart
+  // 3. At 1100ms, the image box flips open in 3D
   useEffect(() => {
-    const t = setTimeout(() => {
-      setAnimated(true);
-    }, 150);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => {
+      setBoxesAnimated(true);
+    }, 700);
+
+    const t2 = setTimeout(() => {
+      setImageBoxAnimated(true);
+    }, 1100);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
 
+  const firstLetters = ['A', 'N', 'T', 'O', 'N', 'I', 'O'];
+  const lastLetters = ['C', 'A', 'L', 'E', 'R', 'O'];
+
   return (
-    <section className="home-hero masthead-pad">
-      {/* Signature Name with embedded animated image frame */}
+    <section className="home-hero masthead-pad page-home">
+      {/* Signature Name with embedded animated 3D image frame */}
       <div className="home-title-wrapper" aria-label="Antonio Calero">
-        <div className={`home-title-box-1 ${animated ? 'is-animated' : ''}`}>
-          <span className="home-title-text">ANTONIO</span>
+        <div className={`home-title-box-1 ${boxesAnimated ? 'is-animated' : ''}`}>
+          {firstLetters.map((char, index) => (
+            <span key={index} className="text-box" style={{ display: 'inline-flex' }}>
+              <span
+                className="home-title-letter home-title-text"
+                style={{ '--stagger-delay': `${0.1 + index * 0.05}s` } as React.CSSProperties}
+              >
+                {char}
+              </span>
+            </span>
+          ))}
         </div>
 
-        <div className={`home-title-image-box ${animated ? 'is-animated' : ''}`}>
+        <div className={`home-title-image-box ${imageBoxAnimated ? 'is-animated' : ''}`}>
           <img
             className="home-title-image-1 is-animated"
             src={PROJECTS[0].img}
@@ -175,7 +204,7 @@ function MgHero() {
           <img
             className="home-title-image-2 is-animated"
             src={PROJECTS[1].img}
-            alt="Lavanderia Bizkaia"
+            alt="Lavandería Bizkaia"
           />
           <img
             className="home-title-image-3 is-animated"
@@ -184,31 +213,42 @@ function MgHero() {
           />
         </div>
 
-        <div className={`home-title-box-2 ${animated ? 'is-animated' : ''}`}>
-          <span className="home-title-text">CALERO</span>
+        <div className={`home-title-box-2 ${boxesAnimated ? 'is-animated' : ''}`}>
+          {lastLetters.map((char, index) => (
+            <span key={index} className="text-box" style={{ display: 'inline-flex' }}>
+              <span
+                className="home-title-letter home-title-text"
+                style={{ '--stagger-delay': `${0.45 + index * 0.05}s` } as React.CSSProperties}
+              >
+                {char}
+              </span>
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Subtitles */}
+      {/* Subtitles with text-in glide reveal */}
       <div className="home-hero-subtitle-wrapper">
         <h1 className="home-hero-subtitle">
-          <span className="home-hero-subtitle-el text-in">
+          <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.7s' } as React.CSSProperties}>
             {isEs ? 'Diseñador de producto y' : 'Product designer and'}
           </span>
         </h1>
         <h2 className="home-hero-subtitle">
-          <span className="home-hero-subtitle-el text-in">
+          <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.78s' } as React.CSSProperties}>
             {isEs ? 'arquitecto de interfaces — en España' : 'interface architect — based in Spain'}
           </span>
         </h2>
         <h2 className="home-hero-subtitle">
-          <span className="home-hero-subtitle-el text-in">[ Madrid ]</span>
+          <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.86s' } as React.CSSProperties}>
+            [ Madrid ]
+          </span>
         </h2>
       </div>
 
       {/* Approach Box with scale-in border */}
       <div className="infos-box scroll-in-group">
-        <div className="border is-visible"></div>
+        <div className="border"></div>
         <div className="infos-box-left">
           <p className="text-box">
             <span className="scroll-in">[ {isEs ? 'Enfoque' : 'Approach'} ]</span>
@@ -277,7 +317,7 @@ function MgSelectedWork() {
           <Link
             key={project.id}
             to={project.href}
-            className="project-card is-visible"
+            className="project-card"
             aria-label={`${project.title} - ${project.category}`}
           >
             <div className="project-card-box">
@@ -315,7 +355,7 @@ function MgArchive() {
     <section id="archive" className="archive-section-wrap">
       <div className="archive">
         <div className="infos-box scroll-in-group" style={{ marginBottom: '4vw' }}>
-          <div className="border is-visible"></div>
+          <div className="border"></div>
           <div className="infos-box-left">
             <p className="text-box">
               <span className="scroll-in">[ Archive ]</span>
@@ -394,7 +434,7 @@ function MgFooter() {
 
   return (
     <footer className="footer">
-      <div className="border is-visible"></div>
+      <div className="border"></div>
       <div className="text-box scroll-in-group">
         <p className="scroll-in">©2026 Antonio Calero</p>
       </div>
@@ -477,10 +517,49 @@ function MgFooter() {
   );
 }
 
-/* ─── Main Portfolio Home ────────────────────────────────────────── */
+/* ─── Main Portfolio Home with Scroll-In Observer ────────────────── */
 export default function PortfolioHome() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Exact IntersectionObserver logic from Matthieu Givelet's scrollIn()
+  useEffect(() => {
+    const root = containerRef.current;
+    if (!root) return;
+
+    const delay = 0.08;
+    const groups = root.querySelectorAll('.scroll-in-group');
+    const borders = root.querySelectorAll('.border');
+    const fadeElements = root.querySelectorAll('.project-card, .project-image');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          if (entry.target.classList.contains('scroll-in-group')) {
+            entry.target.querySelectorAll('.scroll-in').forEach((el, index) => {
+              (el as HTMLElement).style.setProperty('--stagger-delay', `${index * delay}s`);
+              el.classList.add('is-visible');
+            });
+          } else {
+            entry.target.classList.add('is-visible');
+          }
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    groups.forEach((g) => observer.observe(g));
+    borders.forEach((b) => observer.observe(b));
+    fadeElements.forEach((f) => observer.observe(f));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="transition-wrapper">
+    <div ref={containerRef} className="transition-wrapper">
       <MgHeader />
       <main>
         <MgHero />
