@@ -94,8 +94,8 @@ function AboutHero() {
         }}
       >
         <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('about.top_tag')}</p>
-        <span className="blueprint-stamp" style={{ ...META, color: 'var(--text-secondary)', margin: 0 }}>
-          CAPA ZERO // PERFIL 01
+        <span style={{ ...META, color: 'var(--text-secondary)', margin: 0 }}>
+          Madrid · 2026
         </span>
       </div>
 
@@ -177,11 +177,6 @@ function AboutBio() {
             }
           }}
         />
-        <div style={{ position: 'absolute', bottom: '16px', left: '20px', zIndex: 2, pointerEvents: 'none' }}>
-          <span style={{ ...META, fontSize: '10px', color: 'var(--accent-contrast)', backgroundColor: 'var(--text-primary)', padding: '3px 8px', letterSpacing: '0.08em' }}>
-            FIG. 00 // AUTOR · 40.4168° N
-          </span>
-        </div>
       </div>
 
       {/* Bio — 7 cols */}
@@ -198,9 +193,8 @@ function AboutBio() {
       >
         {/* Perfil & Enfoque */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ SEC. 01 // OVERVIEW ]</span>
-            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>01 /</span>
             <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('about.bio_label')}</p>
           </div>
           <p style={{ ...BODY, fontSize: '20px', lineHeight: '1.5', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
@@ -410,9 +404,8 @@ function AboutExperience() {
         }}
       >
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ SEC. 02 // TRAYECTORIA ]</span>
-            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>02 /</span>
             <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
               {t('about.exp_title')}
             </p>
@@ -457,9 +450,8 @@ function AboutExperience() {
       >
         {/* Formación Académica */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ FORMACIÓN ]</span>
-            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>03 /</span>
             <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
               {t('about.edu_title')}
             </p>
@@ -492,9 +484,8 @@ function AboutExperience() {
 
         {/* Redes profesionales */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ CANALES ]</span>
-            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>04 /</span>
             <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
               {t('about.channels_title')}
             </p>
@@ -638,12 +629,11 @@ function AboutStack() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
+              gap: '8px',
               marginBottom: '20px',
             }}
           >
-            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ SEC. 03 // ECOSYSTEM ]</span>
-            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>05 /</span>
             <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
               {t('about.stack_eyebrow')}
             </p>
@@ -783,7 +773,7 @@ function AboutStack() {
                         lineHeight: '1.4',
                       }}
                     >
-                      — {tool.focus}
+                      · {tool.focus}
                     </span>
                   </div>
 
@@ -797,7 +787,7 @@ function AboutStack() {
                       letterSpacing: '0.06em',
                     }}
                   >
-                    [{tool.tag}]
+                    {tool.tag}
                   </span>
                 </div>
               ))}

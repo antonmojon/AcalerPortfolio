@@ -38,18 +38,19 @@ function CustomCursor() {
 }
 
 /* ─── Intro Screen with Seamless Title Transition ─────────── */
-type IntroPhase = 'count' | 'name' | 'animating';
+type IntroPhase = 'drafting' | 'name' | 'animating';
+const FULL_NAME = 'ANTONIO CALERO';
 
 function IntroScreen({ onDone }: { onDone: () => void }) {
-  const [pct, setPct] = useState(0);
-  const [phase, setPhase] = useState<IntroPhase>('count');
+  const [draftedCount, setDraftedCount] = useState(0);
+  const [phase, setPhase] = useState<IntroPhase>('drafting');
   const [targetY, setTargetY] = useState<number | null>(null);
   const [animating, setAnimating] = useState(false);
   const [overlayOpacity, setOverlayOpacity] = useState(1);
   const probeRef = useRef<HTMLSpanElement>(null);
   const [fs, setFs] = useState<number | null>(null);
 
-  const phaseRef = useRef<IntroPhase>('count');
+  const phaseRef = useRef<IntroPhase>('drafting');
   phaseRef.current = phase;
   const animatingRef = useRef(false);
   animatingRef.current = animating;
@@ -89,88 +90,24 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
     };
   }, []);
 
-  // 2. Strict scroll lock & global wheel blocker to prevent background scroll
+  // 2. Blueprint drafting animation: construct ANTONIO CALERO character by character
   useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    window.scrollTo(0, 0);
-
-    const onWheel = (e: WheelEvent) => {
-      // 100% prevent any scroll from leaking to the background home page
-      e.preventDefault();
-      if (phaseRef.current === 'name' && !animatingRef.current) {
-        if (Math.abs(e.deltaY) > 2 || Math.abs(e.deltaX) > 2) {
-          startGlideRef.current();
-        }
-      }
-    };
-
-    let touchStartY = 0;
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      if (phaseRef.current === 'name' && !animatingRef.current) {
-        if (Math.abs(e.touches[0].clientY - touchStartY) > 6) {
-          startGlideRef.current();
-        }
-      }
-    };
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (['ArrowDown', 'ArrowUp', 'Space', 'Enter', 'PageDown'].includes(e.key)) {
-        e.preventDefault();
-        if (phaseRef.current === 'name' && !animatingRef.current) {
-          startGlideRef.current();
-        }
-      }
-    };
-
-    window.addEventListener('wheel', onWheel, { passive: false });
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-    window.addEventListener('keydown', onKeyDown);
-
-    return () => {
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('keydown', onKeyDown);
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    };
-  }, []);
-
-  // 3. Counter animation 0% -> 100%
-  useEffect(() => {
-    let start: number | null = null;
-    let raf: number;
-    const DURATION = 950;
-
-    const tick = (now: number) => {
-      if (!start) start = now;
-      const progress = Math.min((now - start) / DURATION, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setPct(Math.floor(eased * 100));
-
-      if (progress < 1) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        setPct(100);
+    let current = 0;
+    const interval = setInterval(() => {
+      current += 1;
+      setDraftedCount(current);
+      if (current >= FULL_NAME.length) {
+        clearInterval(interval);
         setTimeout(() => {
           setPhase('name');
-        }, 150);
+        }, 220);
       }
-    };
+    }, 70); // 70ms per character: 14 chars * 70ms = ~980ms total drafting time
 
-    raf = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(raf);
-    };
+    return () => clearInterval(interval);
   }, []);
 
-  // 4. Glide trigger implementation
+  // 3. Glide trigger implementation
   const startGlide = useCallback(() => {
     if (animatingRef.current) return;
     animatingRef.current = true;
@@ -205,6 +142,63 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
 
   startGlideRef.current = startGlide;
 
+  // 4. Strict scroll lock & interaction handlers (skip drafting or glide)
+  useEffect(() => {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
+
+    const triggerAction = () => {
+      if (animatingRef.current) return;
+      if (phaseRef.current === 'drafting') {
+        setDraftedCount(FULL_NAME.length);
+        setPhase('name');
+        startGlideRef.current();
+      } else if (phaseRef.current === 'name') {
+        startGlideRef.current();
+      }
+    };
+
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      if (!animatingRef.current && (Math.abs(e.deltaY) > 2 || Math.abs(e.deltaX) > 2)) {
+        triggerAction();
+      }
+    };
+
+    let touchStartY = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      if (!animatingRef.current && Math.abs(e.touches[0].clientY - touchStartY) > 6) {
+        triggerAction();
+      }
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (['ArrowDown', 'ArrowUp', 'Space', 'Enter', 'PageDown'].includes(e.key)) {
+        e.preventDefault();
+        triggerAction();
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('keydown', onKeyDown);
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   const titleStyle = {
     fontFamily: '"Special Gothic Expanded One", sans-serif',
     fontWeight: 400,
@@ -220,8 +214,14 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
   return (
     <div
       onClick={() => {
-        if (phase === 'name' && !animating) {
-          startGlide();
+        if (!animating) {
+          if (phase === 'drafting') {
+            setDraftedCount(FULL_NAME.length);
+            setPhase('name');
+            startGlide();
+          } else if (phase === 'name') {
+            startGlide();
+          }
         }
       }}
       style={{
@@ -235,7 +235,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
         transition: animating ? 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
         pointerEvents: animating ? 'none' : 'auto',
         userSelect: 'none',
-        cursor: phase === 'name' && !animating ? 'pointer' : 'default',
+        cursor: !animating ? 'pointer' : 'default',
       }}
     >
       {/* Hidden probe for font measurement */}
@@ -259,48 +259,32 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
         ANTONIO CALERO
       </span>
 
-      {/* Counter */}
-      {phase === 'count' && (
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span
-            style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '11px',
-              letterSpacing: '0.06em',
-              color: 'var(--text-primary)',
-              fontVariantNumeric: 'tabular-nums',
-            }}
-          >
-            {String(pct).padStart(3, ' ')}%
-          </span>
-        </div>
-      )}
-
-      {/* Name: 100% centered horizontally & vertically, then glides to masthead */}
-      {(phase === 'name' || phase === 'animating') && (
-        <div
-          style={{
-            position: 'absolute',
-            top: animating && targetY !== null ? `${targetY}px` : '50%',
-            left: 0,
-            right: 0,
-            transform: animating ? 'translateY(0%)' : 'translateY(-50%)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-            paddingLeft: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
-            paddingRight: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
-            paddingTop: 0,
-            paddingBottom: 0,
-            boxSizing: 'border-box',
-            width: '100%',
-            transition: animating
-              ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), padding 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
-              : 'none',
-            willChange: 'top, transform',
-          }}
-        >
+      {/* Name: Constructed like a blueprint, 100% centered, then glides to masthead */}
+      <div
+        style={{
+          position: 'absolute',
+          top: animating && targetY !== null ? `${targetY}px` : '50%',
+          left: 0,
+          right: 0,
+          transform: animating ? 'translateY(0%)' : 'translateY(-50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          paddingLeft: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
+          paddingRight: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
+          paddingTop: 0,
+          paddingBottom: 0,
+          boxSizing: 'border-box',
+          width: '100%',
+          transition: animating
+            ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), padding 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
+            : 'none',
+          willChange: 'top, transform',
+        }}
+      >
+        <div style={{ position: 'relative', display: 'inline-block', maxWidth: '100%' }}>
           <span
             style={{
               ...titleStyle,
@@ -308,10 +292,57 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
               textAlign: 'center',
             }}
           >
-            ANTONIO CALERO
+            {FULL_NAME.split('').map((char, i) => {
+              const isDrawn = phase !== 'drafting' || i < draftedCount;
+              const isCurrent = phase === 'drafting' && i === draftedCount - 1;
+              return (
+                <span
+                  key={i}
+                  style={{
+                    color: isDrawn ? 'var(--hero-title-color)' : 'var(--border-color)',
+                    opacity: isDrawn ? 1 : 0.16,
+                    transition: 'color 0.15s ease, opacity 0.15s ease',
+                    position: 'relative',
+                    display: 'inline-block',
+                  }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                  {isCurrent && (
+                    <span
+                      aria-hidden
+                      style={{
+                        position: 'absolute',
+                        bottom: '-4px',
+                        left: 0,
+                        right: 0,
+                        height: '2px',
+                        backgroundColor: 'var(--accent-color)',
+                        pointerEvents: 'none',
+                      }}
+                    />
+                  )}
+                </span>
+              );
+            })}
           </span>
+
+          {/* Blueprint subtle drafting baseline */}
+          {phase === 'drafting' && (
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '-6px',
+                left: 0,
+                width: `${Math.min((draftedCount / FULL_NAME.length) * 100, 100)}%`,
+                height: '1px',
+                backgroundColor: 'var(--accent-color)',
+                opacity: 0.5,
+                transition: 'width 0.07s linear',
+              }}
+            />
+          )}
         </div>
-      )}
+      </div>
 
       {/* Scroll indicator */}
       {phase === 'name' && !animating && (
@@ -325,7 +356,7 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
             flexDirection: 'column',
             alignItems: 'center',
             gap: '8px',
-            animation: 'fadeIn 0.5s ease 0.3s both',
+            animation: 'fadeIn 0.5s ease 0.2s both',
           }}
         >
           <span

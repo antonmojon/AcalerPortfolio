@@ -130,8 +130,8 @@ function PortfolioMasthead() {
     <header className="masthead-pad" style={{ paddingTop: '88px', paddingLeft: '80px', paddingRight: '80px' }}>
       <div style={{ marginBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ ...META, color: 'var(--text-muted)' }}>{t('home.est')}</span>
-        <span style={{ ...META, color: 'var(--text-muted)', fontSize: '11px', letterSpacing: '0.08em' }}>
-          CAPA ZERO // LAYER 00
+        <span style={{ ...META, color: 'var(--text-muted)' }}>
+          Portfolio 2026
         </span>
       </div>
       <FitTitle text="ANTONIO CALERO" />
@@ -157,7 +157,7 @@ function PortfolioMasthead() {
           borderRight: '1px solid var(--border-color)',
           transition: 'border-color 0.4s ease',
         }}>
-          <span style={META}>{t('home.location')} · 40.4168° N</span>
+          <span style={META}>{t('home.location')} · CET (UTC+1)</span>
         </div>
         <Link to="/contact" className="infobar-link" style={{
           ...META, color: 'var(--accent-color)', textDecoration: 'none',
@@ -200,14 +200,14 @@ function StoryCard({ project }: { project: ProjectItemData }) {
         />
       </div>
       <div className="story-card-meta">
-        <span style={{ ...META, color: 'var(--text-muted)' }}>FIG. {project.num}</span>
+        <span style={{ ...META, color: 'var(--text-muted)' }}>{project.num}</span>
         <div className="story-card-tags">
           {project.tags.map(tag => (
             <span key={tag} style={META}>{tag}</span>
           ))}
           {!isClickable && (
             <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>
-              [{t('home.coming_soon')}]
+              {t('home.coming_soon')}
             </span>
           )}
         </div>
@@ -305,8 +305,8 @@ function PortfolioNewsGrid() {
         <span style={{ ...META, color: 'var(--text-primary)', fontWeight: 700 }}>
           {t('home.selected_projects')}
         </span>
-        <span style={{ ...META, color: 'var(--text-muted)', fontSize: '11px', letterSpacing: '0.08em' }}>
-          ARCHIVE // 12-COL · 001—005
+        <span style={{ ...META, color: 'var(--text-muted)' }}>
+          001—005
         </span>
       </div>
       <div className="news-row-a" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '0 32px', marginBottom: '48px' }}>
