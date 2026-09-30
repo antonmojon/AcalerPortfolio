@@ -2388,6 +2388,123 @@ header {
     padding: 8vw 4vw 16vw;
     gap: 8vw;
   }
+
+  .project-editorial-right {
+    gap: 10vw;
+    padding: 0 4vw 12vw;
+  }
+
+  .project-section-block {
+    gap: 4vw;
+    padding-top: 6vw;
+  }
+
+  .project-section-body {
+    padding-left: 0;
+  }
+
+  .project-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 6vw;
+  }
+
+  .project-spec-row {
+    grid-template-columns: 1fr;
+    gap: 1.5vw;
+    padding: 3vw 0;
+  }
+}
+
+/* ─── Swiss Editorial Project Sections ─── */
+.project-editorial-right {
+  display: flex;
+  flex-direction: column;
+  gap: 5vw;
+  padding: 0 2.5vw 8vw 0;
+}
+
+.project-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  position: relative;
+  padding-top: 2vw;
+}
+
+.project-section-meta {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  opacity: 0.6;
+}
+
+.project-section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2.4vw, 38px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.project-section-body {
+  font-size: var(--font-size-m);
+  line-height: 1.4;
+  text-wrap: pretty;
+  padding-left: 3vw;
+}
+
+.project-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5vw;
+  padding-top: 1vw;
+}
+
+.project-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vw;
+}
+
+.project-metric-num {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.project-metric-desc {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  opacity: 0.7;
+  text-wrap: pretty;
+}
+
+.project-spec-table {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1vw;
+}
+
+.project-spec-row {
+  display: grid;
+  grid-template-columns: 14vw 1fr;
+  align-items: baseline;
+  padding: 1.2vw 0;
+  gap: 2vw;
+}
+
+.project-spec-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  opacity: 0.6;
+}
+
+.project-spec-value {
+  font-size: var(--font-size-s);
+  line-height: 1.4;
+  text-wrap: pretty;
 }
 
 
