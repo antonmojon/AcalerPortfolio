@@ -1385,6 +1385,14 @@ header {
   color: var(--text-primary);
 }
 
+.desktop-el {
+  display: block;
+}
+
+.mobile-el {
+  display: none !important;
+}
+
 .burger-button {
   display: none;
 }
