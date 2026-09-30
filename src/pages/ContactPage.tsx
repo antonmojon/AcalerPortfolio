@@ -90,8 +90,8 @@ export default function ContactPage() {
               </span>
             </h1>
 
-            <p className="text-box" style={{ marginBottom: '2vw', maxWidth: '34vw' }}>
-              <span className="scroll-in" style={{ fontSize: 'var(--font-size-s)', lineHeight: '1.5' }}>
+            <p className="text-box" style={{ marginBottom: '2vw' }}>
+              <span className="scroll-in" style={{ display: 'block', fontSize: 'var(--font-size-s)', lineHeight: '1.5' }}>
                 {isEs
                   ? 'Disponible para proyectos de diseño de producto, sistemas de diseño y consultoría estratégica en remoto o presencial.'
                   : 'Open for product design leadership, design systems, and design engineering consultancy worldwide.'}

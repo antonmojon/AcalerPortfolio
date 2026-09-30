@@ -92,69 +92,20 @@ export default function AboutPage() {
               <div className="about-first scroll-in-group">
                 <p className="about-first-text">
                   <span className="text-box">
-                    <span className="scroll-in alinea-1">
+                    <span className="scroll-in alinea-1" style={{ display: 'block' }}>
                       {isEs
-                        ? 'Soy diseñador de producto y'
-                        : "I'm a product designer and"}
-                    </span>
-                  </span>
-                  <span className="text-box">
-                    <span className="scroll-in">
-                      {isEs
-                        ? 'arquitecto de interfaces. Me interesa'
-                        : 'interface architect. I enjoy combining'}
-                    </span>
-                  </span>
-                  <span className="text-box">
-                    <span className="scroll-in">
-                      {isEs
-                        ? 'combinar el rigor tipográfico suizo con'
-                        : 'Swiss typographic rigor with atomic'}
-                    </span>
-                  </span>
-                  <span className="text-box">
-                    <span className="scroll-in">
-                      {isEs
-                        ? 'sistemas de diseño atómicos vivos y'
-                        : 'design systems and high-density'}
-                    </span>
-                  </span>
-                  <span className="text-box">
-                    <span className="scroll-in">
-                      {isEs
-                        ? 'plataformas digitales preparadas para escalar.'
-                        : 'software platforms built to scale.'}
+                        ? 'Soy diseñador de producto y arquitecto de interfaces. Me interesa combinar el rigor tipográfico suizo con sistemas de diseño atómicos vivos y plataformas preparadas para escalar.'
+                        : "I'm a product designer and interface architect. I combine Swiss typographic discipline with living atomic design systems and software platforms engineered to scale."}
                     </span>
                   </span>
                 </p>
 
                 <p className="about-first-text">
                   <span className="text-box">
-                    <span className="scroll-in alinea-1">
+                    <span className="scroll-in alinea-1" style={{ display: 'block' }}>
                       {isEs
-                        ? 'Trabajo en la intersección entre diseño y'
-                        : 'I work at the intersection of design and'}
-                    </span>
-                  </span>
-                  <span className="text-box">
-                    <span className="scroll-in">
-                      {isEs
-                        ? 'desarrollo de software, cuidando cada'
-                        : 'software engineering, focusing on the'}
-                    </span>
-                  </span>
-                  <span className="text-box">
-                    <span className="scroll-in">
-                      {isEs
-                        ? 'pequeño detalle que hace que un producto'
-                        : 'details that make complex tools feel'}
-                    </span>
-                  </span>
-                  <span className="text-box">
-                    <span className="scroll-in">
-                      {isEs
-                        ? 'complejo sea simple, intuitivo y sólido.'
-                        : 'simple, intuitive and enduring.'}
+                        ? 'Trabajo en la intersección entre diseño y desarrollo de software, cuidando cada micro-interacción para que herramientas complejas se sientan simples, intuitivas y sólidas.'
+                        : 'Working at the intersection of design and software engineering, focusing on the details that make complex products feel simple, intuitive, and enduring.'}
                     </span>
                   </span>
                 </p>
@@ -174,24 +125,10 @@ export default function AboutPage() {
                         <span className="scroll-in">01</span>
                       </span>
                       <span className="text-box alinea-2">
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Definición de arquitecturas de información,'
-                            : 'Information architecture, user flows,'}
-                        </span>
-                      </span>
-                      <span className="text-box">
-                        <span className="scroll-in">
-                          {isEs
-                            ? 'diseño de flujos complejos de alta densidad'
-                            : 'complex workflows and cohesive digital'}
-                        </span>
-                      </span>
-                      <span className="text-box">
-                        <span className="scroll-in">
-                          {isEs
-                            ? 'y plataformas B2B preparadas para crecer.'
-                            : 'platforms engineered for high impact.'}
+                            ? 'Definición de arquitecturas de información, diseño de flujos complejos de alta densidad y plataformas B2B preparadas para crecer.'
+                            : 'Information architecture, complex workflow design, high-density telemetry, and B2B platforms engineered for growth.'}
                         </span>
                       </span>
                     </p>
@@ -208,24 +145,10 @@ export default function AboutPage() {
                         <span className="scroll-in">02</span>
                       </span>
                       <span className="text-box alinea-2 numb-2">
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
-                            ? 'Arquitectura de tokens de diseño,'
-                            : 'Design token architecture, living'}
-                        </span>
-                      </span>
-                      <span className="text-box">
-                        <span className="scroll-in">
-                          {isEs
-                            ? 'estándares de accesibilidad WCAG AAA y'
-                            : 'code integration, WCAG AAA accessibility,'}
-                        </span>
-                      </span>
-                      <span className="text-box">
-                        <span className="scroll-in">
-                          {isEs
-                            ? 'puente directo con equipos de ingeniería.'
-                            : 'and zero-redundancy engineering handoff.'}
+                            ? 'Arquitectura de tokens de diseño, estándares de accesibilidad WCAG AAA y puente directo con equipos de ingeniería.'
+                            : 'Design token architecture, living code integration, WCAG AAA accessibility, and zero-redundancy engineering handoff.'}
                         </span>
                       </span>
                     </p>
@@ -242,7 +165,7 @@ export default function AboutPage() {
                     </h2>
                     <p className="about-text o-40">
                       <span className="text-box">
-                        <span className="scroll-in">Madrid, España</span>
+                        <span className="scroll-in">Bilbao, Bizkaia · España</span>
                       </span>
                       <span className="text-box">
                         <span className="scroll-in">[ CET · UTC+1 ]</span>

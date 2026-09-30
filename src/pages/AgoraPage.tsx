@@ -111,21 +111,21 @@ export default function AgoraPage() {
 
                     <div className="project-desc">
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Agora es un ecosistema de colaboración integral concebido para equipos de producto y aprendizaje distribuido.'
                             : 'Agora is an all-in-one collaborative workspace engineered for distributed product teams and educational organizations.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Prioriza la concentración reduciendo la carga cognitiva visual mediante jerarquías sobrias y flujos multi-panel continuos.'
                             : 'Prioritizing focus and cognitive clarity through sober typography, keyboard-driven navigation, and fluid multi-pane flows.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Construido sobre una biblioteca de 40+ componentes accesibles y tokens sincronizados con código.'
                             : 'Engineered upon a rigorous library of 40+ accessible UI components and design tokens synchronized with engineering.'}

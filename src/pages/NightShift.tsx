@@ -107,21 +107,21 @@ export default function NightShift() {
 
                     <div className="project-desc">
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Aplicación móvil de apoyo y seguimiento biométrico creada específicamente para trabajadores con horarios nocturnos o rotativos.'
                             : 'Dedicated mobile companion app and telemetry tracker engineered specifically for night-shift, emergency, and 24/7 rotational workers.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Arquitectura cromática de negros OLED puros y luz ámbar que elimina la fatiga ocular y preserva los ciclos de melatonina.'
                             : 'Pure OLED black ergonomics and warm amber spectrum lighting eliminate retinal fatigue and preserve fragile melatonin cycles.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Interacciones de un solo gesto diseñadas para operar con destreza motora reducida por cansancio acumulado.'
                             : 'One-thumb gestures and high-contrast telemetry designed for quick operation under heavy cognitive and physical fatigue.'}

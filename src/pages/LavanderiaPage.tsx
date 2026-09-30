@@ -107,21 +107,21 @@ export default function LavanderiaPage() {
 
                     <div className="project-desc">
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Transformación digital integral y dirección de arte para referente del sector de lavandería industrial y de hostelería.'
                             : 'Complete digital transformation and brand repositioning for a premier commercial laundry provider in northern Spain.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Armoniza la fuerza del sector manufacturero con una experiencia digital editorial cálida y transparente.'
                             : 'Balancing utilitarian industrial machinery with warm, human-centered hospitality aesthetics and transparent pricing.'}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
-                        <span className="scroll-in">
+                        <span className="scroll-in" style={{ display: 'block' }}>
                           {isEs
                             ? 'Generó un aumento del 44% en solicitudes comerciales y redujo a la mitad el tiempo de onboarding de clientes B2B.'
                             : 'Drove a 44% lift in qualified commercial inquiries and reduced onboarding time for enterprise accounts by 50%.'}

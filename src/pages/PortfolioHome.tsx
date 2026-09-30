@@ -231,17 +231,17 @@ function MgHero() {
       <div className="home-hero-subtitle-wrapper">
         <h1 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.7s' } as React.CSSProperties}>
-            {isEs ? 'Diseñador de producto y' : 'Product designer and'}
+            {isEs ? 'Diseñador de producto' : 'Product designer'}
           </span>
         </h1>
         <h2 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.78s' } as React.CSSProperties}>
-            {isEs ? 'arquitecto de interfaces — en España' : 'interface architect — based in Spain'}
+            {isEs ? '& arquitecto de sistemas' : '& systems architect'}
           </span>
         </h2>
         <h2 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.86s' } as React.CSSProperties}>
-            [ Bilbao ]
+            {isEs ? '[ Bilbao, España ]' : '[ Bilbao, Spain ]'}
           </span>
         </h2>
       </div>

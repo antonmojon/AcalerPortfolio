@@ -1193,7 +1193,17 @@ body {
 .text-box {
   overflow: hidden;
   display: block;
-  padding-bottom: 1px;
+  padding-bottom: 2px;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.text-box.nowrap,
+.nav-logo .text-box,
+.project-number.text-box,
+.about-numb.text-box,
+.home-title-box-1 .text-box,
+.home-title-box-2 .text-box {
   white-space: nowrap;
 }
 
@@ -1397,26 +1407,28 @@ header {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 2vw;
+  gap: 1.5vw;
   perspective: 25vw;
   width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .home-title-box-1,
 .home-title-box-2 {
   overflow: hidden;
-  height: 11vw;
+  height: clamp(40px, 8.2vw, 120px);
   display: flex;
   align-items: center;
   transition: transform 1.5s cubic-bezier(.66,0,.23,1);
 }
 
 .home-title-box-1 {
-  transform: translateX(8.3vw);
+  transform: translateX(4.5vw);
 }
 
 .home-title-box-2 {
-  transform: translateX(-8.3vw);
+  transform: translateX(-4.5vw);
 }
 
 .home-title-box-1.is-animated,
@@ -1426,24 +1438,26 @@ header {
 
 .home-title-text {
   font-family: "Special Gothic Expanded One", sans-serif;
-  font-size: 11vw;
+  font-size: clamp(34px, 7.2vw, 105px);
   line-height: 0.9;
   letter-spacing: -0.02em;
   color: var(--hero-title-color);
+  white-space: nowrap;
 }
 
 .home-title-image-box {
   position: relative;
   overflow: hidden;
-  width: 14vw;
-  height: 10vw;
+  width: clamp(42px, 9vw, 125px);
+  height: clamp(30px, 6.4vw, 88px);
   border-radius: var(--radius-xs);
-  transform: scale(1.1) translateX(1.5vw) rotateY(90deg);
+  transform: scale(1.1) translateX(1vw) rotateY(90deg);
   opacity: 0;
   transform-style: preserve-3d;
   transform-origin: center;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .home-title-image-box.is-animated {
@@ -1502,19 +1516,22 @@ header {
   flex-direction: column;
   align-items: center;
   margin-bottom: 4.5vw;
+  text-align: center;
 }
 
 .home-hero-subtitle {
   overflow: hidden;
-  display: flex;
-  height: 4.1vw;
-  font-size: 3.6vw;
-  line-height: 110%;
+  display: block;
+  min-height: min-content;
+  font-size: clamp(20px, 3.2vw, 46px);
+  line-height: 1.18;
   font-weight: 400;
+  padding-bottom: 4px;
 }
 
 .home-hero-subtitle-el {
   font-family: var(--font-sans);
+  display: inline-block;
 }
 
 /* ─── Approach Box ─── */
@@ -1841,35 +1858,44 @@ header {
     padding: 25vw 4vw 20vw;
   }
 
+  .home-title-wrapper {
+    gap: 1vw;
+    padding: 0 1vw;
+  }
+
   .home-title-box-1,
   .home-title-box-2 {
-    height: 14vw;
+    height: clamp(26px, 7.5vw, 44px);
   }
 
   .home-title-text {
-    font-size: 14vw;
+    font-size: clamp(18px, 6vw, 36px);
+    white-space: nowrap;
   }
 
   .home-title-box-1 {
-    transform: translateX(10.6vw);
+    transform: translateX(3vw);
   }
 
   .home-title-box-2 {
-    transform: translateX(-10.6vw);
+    transform: translateX(-3vw);
   }
 
   .home-title-image-box {
-    width: 19vw;
-    height: 13vw;
+    width: clamp(28px, 8.5vw, 55px);
+    height: clamp(20px, 6vw, 38px);
   }
 
   .home-hero-subtitle-wrapper {
-    margin-bottom: 12vw;
+    margin-bottom: 8vw;
+    padding: 0 4vw;
   }
 
   .home-hero-subtitle {
-    height: 8.3vw;
-    font-size: 7vw;
+    height: auto;
+    font-size: clamp(16px, 5vw, 24px);
+    line-height: 1.25;
+    padding-bottom: 2px;
   }
 
   .infos-box {
@@ -1931,6 +1957,191 @@ header {
 
   .footer-box {
     max-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   PAGE ABOUT (Matthieu Givelet Layout)
+   ========================================================================== */
+
+.page-about {
+  position: relative;
+  width: 100%;
+}
+
+.about {
+  position: relative;
+  display: grid;
+  grid-template-columns: 43vw 1fr;
+  align-items: start;
+}
+
+.about-photo-box {
+  position: sticky;
+  top: 5.6vw;
+  height: calc(100dvh - 5.6vw);
+  padding: 7vw 2.5vw 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.about-photo-wrapper {
+  overflow: hidden;
+  width: 18vw;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-grey);
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.3);
+  transform-origin: center;
+  transition: transform 0.1s ease-out;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10vw;
+  padding: 6.3vw 2.5vw 4vw 0;
+}
+
+.about-first {
+  display: flex;
+  flex-direction: column;
+  gap: 3vw;
+}
+
+.about-first-text {
+  font-size: clamp(20px, 2.2vw, 36px);
+  line-height: 1.25;
+  color: var(--color-dark);
+}
+
+.alinea-1 {
+  text-indent: 6vw;
+}
+
+.alinea-2 {
+  text-indent: 2vw;
+}
+
+.about-second {
+  padding-left: 6vw;
+  margin-bottom: 8vw;
+  display: flex;
+  flex-direction: column;
+  gap: 10vw;
+}
+
+.about-service,
+.about-credit {
+  display: flex;
+  flex-direction: column;
+  gap: 6vw;
+}
+
+.about-infos-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vw;
+}
+
+.about-title {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 2.8vw, 48px);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.about-service-text {
+  position: relative;
+  padding-left: 5vw;
+  font-size: var(--font-size-m);
+  line-height: 1.35;
+}
+
+.about-numb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  opacity: 0.6;
+}
+
+.about-text {
+  font-size: var(--font-size-m);
+  line-height: 1.35;
+}
+
+.cta-text-about {
+  font-size: clamp(20px, 2.6vw, 42px);
+}
+
+.cta-icon-about {
+  display: inline-block;
+  margin-right: 0.6vw;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 768px) {
+  .about {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-photo-box {
+    position: initial;
+    height: auto;
+    padding: 16vw 4vw 8vw;
+  }
+
+  .about-photo-wrapper {
+    width: 50vw;
+    max-width: 240px;
+  }
+
+  .about-right {
+    gap: 12vw;
+    padding: 4vw 4vw 20vw;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .about-first {
+    gap: 6vw;
+  }
+
+  .about-first-text {
+    font-size: clamp(18px, 5vw, 24px);
+  }
+
+  .alinea-1 {
+    text-indent: 10vw;
+  }
+
+  .about-second {
+    padding-left: 0;
+    gap: 12vw;
+  }
+
+  .about-service-text {
+    padding-left: 10vw;
+  }
+
+  .about-title {
+    font-size: clamp(20px, 6vw, 28px);
+  }
+
+  .cta-text-about {
+    font-size: clamp(20px, 6vw, 28px);
   }
 }
 
