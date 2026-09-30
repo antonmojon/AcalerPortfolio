@@ -128,45 +128,62 @@ function PortfolioMasthead() {
   const { t } = useLanguage();
   return (
     <header className="masthead-pad" style={{ paddingTop: '88px', paddingLeft: '80px', paddingRight: '80px' }}>
-      <div style={{ marginBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ ...META, color: 'var(--text-muted)' }}>{t('home.est')}</span>
-        <span style={{ ...META, color: 'var(--text-muted)' }}>
-          Portfolio 2026
+      {/* Top technical dimension bar matching loader */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '1px dashed var(--border-color)',
+          paddingBottom: '6px',
+          marginBottom: '16px',
+          transition: 'border-color 0.4s ease',
+        }}
+      >
+        <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>DIM: 1920 × 1080</span>
+        <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>
+          {t('home.est')} · MADRID, ES
         </span>
+        <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em' }}>ESCALA 1:1</span>
       </div>
+
       <FitTitle text="ANTONIO CALERO" />
+
+      {/* Blueprint Infobar */}
       <div className="infobar" style={{
-        borderTop: '1px solid var(--border-color)',
-        borderBottom: '1px solid var(--border-color)',
+        borderTop: '1px dashed var(--border-color)',
+        borderBottom: '1px dashed var(--border-color)',
         marginTop: '16px',
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr auto',
+        gridTemplateColumns: '1.2fr 1fr auto',
         alignItems: 'center',
         transition: 'border-color 0.4s ease',
       }}>
         <div style={{
-          padding: '10px 0',
-          borderRight: '1px solid var(--border-color)',
+          padding: '12px 0',
+          borderRight: '1px dashed var(--border-color)',
           paddingRight: '20px',
           transition: 'border-color 0.4s ease',
         }}>
-          <span style={META}>{t('home.discipline')}</span>
+          <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>01 / </span>
+          <span style={{ ...META, color: 'var(--text-primary)' }}>{t('home.discipline')}</span>
         </div>
         <div style={{
-          padding: '10px 20px',
-          borderRight: '1px solid var(--border-color)',
+          padding: '12px 20px',
+          borderRight: '1px dashed var(--border-color)',
           transition: 'border-color 0.4s ease',
         }}>
-          <span style={META}>{t('home.location')} · CET (UTC+1)</span>
+          <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>02 / </span>
+          <span style={{ ...META, color: 'var(--text-primary)' }}>{t('home.location')} · CET (UTC+1)</span>
         </div>
         <Link to="/contact" className="infobar-link" style={{
           ...META, color: 'var(--accent-color)', textDecoration: 'none',
-          padding: '10px 0 10px 20px',
+          padding: '12px 0 12px 20px',
           display: 'flex', alignItems: 'center', gap: '6px',
           transition: 'opacity 0.2s ease, color 0.4s ease',
           fontWeight: 700,
         }}>
-          {t('nav.contact')} →
+          03 / {t('nav.contact')} →
         </Link>
       </div>
     </header>
@@ -182,7 +199,13 @@ function StoryCard({ project }: { project: ProjectItemData }) {
 
   const cardContent = (
     <>
-      <div className="story-card-img-wrap">
+      <div
+        className="story-card-img-wrap"
+        style={{
+          border: over && isClickable ? '1px solid var(--accent-color)' : '1px solid var(--border-color)',
+          transition: 'border-color 0.3s ease',
+        }}
+      >
         <span className="blueprint-corner blueprint-corner-tl" aria-hidden />
         <span className="blueprint-corner blueprint-corner-tr" aria-hidden />
         <span className="blueprint-corner blueprint-corner-bl" aria-hidden />
@@ -198,16 +221,24 @@ function StoryCard({ project }: { project: ProjectItemData }) {
             transition: 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease',
           }}
         />
+        <div style={{ position: 'absolute', bottom: '10px', left: '12px', zIndex: 2, pointerEvents: 'none' }}>
+          <span style={{ ...META, fontSize: '9px', letterSpacing: '0.08em', color: 'var(--text-secondary)', backgroundColor: 'var(--bg-primary)', padding: '2px 6px', border: '1px solid var(--border-color)' }}>
+            REF. 0{project.num}
+          </span>
+        </div>
       </div>
-      <div className="story-card-meta">
-        <span style={{ ...META, color: 'var(--text-muted)' }}>{project.num}</span>
+      <div className="story-card-meta" style={{ marginTop: '14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>0{project.num} /</span>
+          <span style={{ ...META, color: 'var(--text-muted)' }}>LÁMINA</span>
+        </div>
         <div className="story-card-tags">
           {project.tags.map(tag => (
-            <span key={tag} style={META}>{tag}</span>
+            <span key={tag} style={{ ...META, fontSize: '10px', color: 'var(--text-secondary)' }}>{tag}</span>
           ))}
           {!isClickable && (
-            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>
-              {t('home.coming_soon')}
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700, fontSize: '10px' }}>
+              EN TRAZADO
             </span>
           )}
         </div>
@@ -216,7 +247,8 @@ function StoryCard({ project }: { project: ProjectItemData }) {
         className="story-card-title"
         style={{
           borderBottom: over && isClickable ? '2px solid var(--accent-color)' : '2px solid transparent',
-          paddingBottom: '1px',
+          paddingBottom: '2px',
+          marginTop: '6px',
           transition: 'border-color 0.25s ease, color 0.4s ease',
         }}
       >
@@ -291,22 +323,26 @@ function PortfolioNewsGrid() {
       className="reveal news-grid-section"
       style={{ padding: '40px 80px 96px' }}
     >
+      {/* Blueprint Archive Section Header */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingBottom: '16px',
+          paddingBottom: '12px',
           marginBottom: '40px',
-          borderBottom: '1px solid var(--border-color)',
+          borderBottom: '1px dashed var(--border-color)',
           transition: 'border-color 0.4s ease',
         }}
       >
-        <span style={{ ...META, color: 'var(--text-primary)', fontWeight: 700 }}>
-          {t('home.selected_projects')}
-        </span>
-        <span style={{ ...META, color: 'var(--text-muted)' }}>
-          001—005
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>PLANO 01 /</span>
+          <span style={{ ...META, color: 'var(--text-primary)', fontWeight: 700 }}>
+            {t('home.selected_projects')}
+          </span>
+        </div>
+        <span style={{ ...META, color: 'var(--text-secondary)', fontSize: '10px' }}>
+          ESPECIFICACIÓN · 001—005
         </span>
       </div>
       <div className="news-row-a" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '0 32px', marginBottom: '48px' }}>
@@ -326,15 +362,31 @@ function PortfolioCTA() {
   return (
     <section className="w-full">
       <div className="cta-pad" style={{ backgroundColor: 'var(--cta-bg)', padding: '96px 80px', transition: 'background-color 0.4s ease' }}>
+        {/* Top dimension line */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '32px',
+            borderBottom: '1px dashed rgba(255,255,255,0.2)',
+            paddingBottom: '12px',
+          }}
+        >
+          <span style={{ ...META, color: 'var(--cta-text)', fontSize: '9px', letterSpacing: '0.08em' }}>
+            PLANO 02 / CONTRATACIÓN & CONSULTAS
+          </span>
+          <span style={{ ...META, color: 'var(--cta-text)', fontSize: '9px', letterSpacing: '0.08em' }}>
+            DISPONIBILIDAD INMEDIATA
+          </span>
+        </div>
+
         <Link
           to="/contact"
           className="portfolio-cta-link block w-full"
           aria-label="Ir a contacto - Trabajemos juntos"
           style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px' }}>
-            <p style={{ ...META, color: 'var(--cta-text)', margin: 0 }}>{t('home.cta_tag')}</p>
-          </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '32px' }}>
             <div className="scramble-line">
               <ScrambleText
@@ -386,6 +438,7 @@ function PortfolioCTA() {
       </div>
       <div className="footer-bar" style={{ padding: '20px 80px', display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border-color)', transition: 'border-color 0.4s ease' }}>
         <span style={META}>© 2026 Antonio Calero</span>
+        <span style={{ ...META, fontSize: '10px' }}>CAPA ZERO · ARQUITECTURA DE INTERACCIÓN</span>
         <span style={META}>{t('footer.rights')}</span>
       </div>
     </section>
