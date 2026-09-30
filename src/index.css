@@ -742,28 +742,33 @@ body {
 .editorial-stack-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 12px 0;
-  cursor: pointer;
+  align-items: baseline;
+  padding: 13px 8px;
+  cursor: default;
   background: transparent;
-  transition: padding-left 0.2s ease;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
 }
 
 .editorial-stack-row:hover {
-  padding-left: 8px;
+  background-color: var(--bg-surface);
+  padding-left: 14px;
 }
 
 .editorial-stack-row:hover .editorial-stack-name {
-  border-bottom-color: var(--accent-color) !important;
-}
-
-.editorial-stack-row:hover .editorial-stack-arrow {
-  opacity: 1 !important;
-  transform: translateX(0) !important;
+  color: var(--hero-title-color) !important;
 }
 
 .editorial-stack-row:hover .editorial-stack-icon {
   color: var(--accent-color) !important;
+}
+
+@media (max-width: 640px) {
+  .editorial-stack-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    padding: 12px 4px !important;
+  }
 }
 
 /* ─── Contact Page: Retícula Suiza y Formulario Editorial ───── */

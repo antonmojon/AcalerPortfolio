@@ -9,8 +9,8 @@ import portraitImg from '../assets/antonio-calero.jpg';
 const META = {
   fontFamily: '"Space Mono", monospace',
   fontWeight: 400,
-  fontSize: '12px',
-  letterSpacing: '0.05em',
+  fontSize: '11px',
+  letterSpacing: '0.08em',
   textTransform: 'uppercase' as const,
   color: 'var(--text-secondary)',
   lineHeight: '1.6',
@@ -19,8 +19,8 @@ const META = {
 const BODY = {
   fontFamily: '"Inter", sans-serif',
   fontWeight: 400,
-  fontSize: '18px',
-  lineHeight: '1.5',
+  fontSize: '16px',
+  lineHeight: '1.65',
   color: 'var(--text-primary)',
 };
 
@@ -94,6 +94,9 @@ function AboutHero() {
         }}
       >
         <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('about.top_tag')}</p>
+        <span className="blueprint-stamp" style={{ ...META, color: 'var(--text-secondary)', margin: 0 }}>
+          CAPA ZERO // PERFIL 01
+        </span>
       </div>
 
       {/* Name & Role — Full width editorial masthead matching Home & Contact */}
@@ -174,6 +177,11 @@ function AboutBio() {
             }
           }}
         />
+        <div style={{ position: 'absolute', bottom: '16px', left: '20px', zIndex: 2, pointerEvents: 'none' }}>
+          <span style={{ ...META, fontSize: '10px', color: 'var(--accent-contrast)', backgroundColor: 'var(--text-primary)', padding: '3px 8px', letterSpacing: '0.08em' }}>
+            FIG. 00 // AUTOR · 40.4168° N
+          </span>
+        </div>
       </div>
 
       {/* Bio — 7 cols */}
@@ -190,47 +198,52 @@ function AboutBio() {
       >
         {/* Perfil & Enfoque */}
         <div>
-          <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '24px' }}>{t('about.bio_label')}</p>
-          <p style={{ ...BODY, fontSize: '22px', lineHeight: '1.5', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ SEC. 01 // OVERVIEW ]</span>
+            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+            <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>{t('about.bio_label')}</p>
+          </div>
+          <p style={{ ...BODY, fontSize: '20px', lineHeight: '1.5', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
             {t('about.bio_p1')}
           </p>
-          <p style={{ ...BODY, fontSize: '17px', color: 'var(--text-primary)', marginTop: '20px', lineHeight: '1.6' }}>
+          <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-secondary)', marginTop: '20px', lineHeight: '1.65' }}>
             {t('about.bio_p2')}
           </p>
         </div>
 
         {/* Rol */}
-        <div>
-          <p style={{ ...META, marginBottom: '8px', color: 'var(--text-primary)' }}>{t('about.bio_role_label')}</p>
-          <p style={{ ...BODY, fontSize: '16px', color: 'var(--text-primary)' }}>
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '28px' }}>
+          <p style={{ ...META, marginBottom: '8px', color: 'var(--text-secondary)' }}>{t('about.bio_role_label')}</p>
+          <p style={{ ...BODY, fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>
             {t('about.bio_role_value')}
           </p>
-          <p style={{ ...META, marginTop: '6px', color: 'var(--text-primary)' }}>{t('about.bio_status')}</p>
+          <p style={{ ...META, marginTop: '8px', color: 'var(--text-secondary)' }}>{t('about.bio_status')}</p>
         </div>
 
-          {/* Idiomas */}
-          <div>
-            <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '20px' }}>{t('about.languages_label')}</p>
-            <div className="about-lang-row" style={{ display: 'flex', gap: '40px' }}>
-              {[
-                { lang: 'ES', label: t('about.lang_es_title'), level: t('about.lang_es_level') },
-                { lang: 'EN', label: t('about.lang_en_title'), level: t('about.lang_en_level') },
-                { lang: 'FR', label: t('about.lang_fr_title'), level: t('about.lang_fr_level') },
-              ].map(({ lang, label, level }) => (
-                <div key={lang}>
-                  <p style={{
-                    fontFamily: '"Special Gothic", sans-serif',
-                    fontWeight: 700, fontSize: '32px',
-                    letterSpacing: '-0.02em', color: 'var(--hero-title-color)', lineHeight: '1',
-                    transition: 'color 0.4s ease',
-                  }}>{lang}</p>
-                  <p style={{ ...META, fontSize: '10px', marginTop: '6px', color: 'var(--text-primary)' }}>{label}<br />{level}</p>
-                </div>
-              ))}
-            </div>
+        {/* Idiomas */}
+        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '28px' }}>
+          <p style={{ ...META, color: 'var(--text-secondary)', marginBottom: '20px' }}>{t('about.languages_label')}</p>
+          <div className="about-lang-row" style={{ display: 'flex', gap: '48px' }}>
+            {[
+              { lang: 'ES', label: t('about.lang_es_title'), level: t('about.lang_es_level') },
+              { lang: 'EN', label: t('about.lang_en_title'), level: t('about.lang_en_level') },
+              { lang: 'FR', label: t('about.lang_fr_title'), level: t('about.lang_fr_level') },
+            ].map(({ lang, label, level }) => (
+              <div key={lang}>
+                <p style={{
+                  fontFamily: '"Special Gothic", sans-serif',
+                  fontWeight: 700, fontSize: '28px',
+                  letterSpacing: '-0.02em', color: 'var(--hero-title-color)', lineHeight: '1',
+                  margin: 0,
+                  transition: 'color 0.4s ease',
+                }}>{lang}</p>
+                <p style={{ ...META, fontSize: '10px', marginTop: '6px', color: 'var(--text-secondary)' }}>{label} · {level}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
 
@@ -397,11 +410,14 @@ function AboutExperience() {
         }}
       >
         <div>
-          {/* Sin borde superior encima del título */}
-          <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '24px' }}>
-            {t('about.exp_title')}
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ SEC. 02 // TRAYECTORIA ]</span>
+            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+            <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
+              {t('about.exp_title')}
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {experiences.map(({ company, role, period }) => (
               <div
                 key={company}
@@ -409,15 +425,17 @@ function AboutExperience() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'baseline',
+                  borderBottom: '1px solid var(--border-color)',
+                  paddingBottom: '16px',
                 }}
               >
                 <div>
                   <p style={{ ...BODY, fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>
                     {company}
                   </p>
-                  <p style={{ ...META, fontSize: '11px', color: 'var(--text-primary)' }}>{role}</p>
+                  <p style={{ ...META, fontSize: '11px', color: 'var(--text-secondary)' }}>{role}</p>
                 </div>
-                <p style={{ ...META, fontSize: '10px', flexShrink: 0, marginLeft: '12px', textAlign: 'right', color: 'var(--text-primary)' }}>
+                <p style={{ ...META, fontSize: '11px', flexShrink: 0, marginLeft: '12px', textAlign: 'right', color: 'var(--text-primary)' }}>
                   {period}
                 </p>
               </div>
@@ -437,12 +455,16 @@ function AboutExperience() {
           gap: '48px',
         }}
       >
-        {/* Formación Académica — Sin borde superior encima */}
+        {/* Formación Académica */}
         <div>
-          <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '24px' }}>
-            {t('about.edu_title')}
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ FORMACIÓN ]</span>
+            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+            <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
+              {t('about.edu_title')}
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {educations.map(({ school, degree, year }) => (
               <div
                 key={school}
@@ -450,15 +472,17 @@ function AboutExperience() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'baseline',
+                  borderBottom: '1px solid var(--border-color)',
+                  paddingBottom: '16px',
                 }}
               >
                 <div>
                   <p style={{ ...BODY, fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>
                     {school}
                   </p>
-                  <p style={{ ...META, fontSize: '11px', color: 'var(--text-primary)' }}>{degree}</p>
+                  <p style={{ ...META, fontSize: '11px', color: 'var(--text-secondary)' }}>{degree}</p>
                 </div>
-                <p style={{ ...META, fontSize: '10px', flexShrink: 0, marginLeft: '12px', color: 'var(--text-primary)' }}>
+                <p style={{ ...META, fontSize: '11px', flexShrink: 0, marginLeft: '12px', color: 'var(--text-primary)' }}>
                   {year}
                 </p>
               </div>
@@ -466,11 +490,15 @@ function AboutExperience() {
           </div>
         </div>
 
-        {/* Redes profesionales — Sin borde superior encima */}
+        {/* Redes profesionales */}
         <div>
-          <p style={{ ...META, color: 'var(--text-primary)', marginBottom: '16px' }}>
-            {t('about.channels_title')}
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ CANALES ]</span>
+            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
+            <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
+              {t('about.channels_title')}
+            </p>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px', width: '100%' }}>
             {[
               { label: 'LinkedIn ↗', href: 'https://www.linkedin.com/in/antonio-calero-alcala-de-la-moneda-b8732a164/' },
@@ -580,7 +608,6 @@ const PILLARS_DATA: PillarData[] = [
 function AboutStack() {
   const { t, getPillars } = useLanguage();
   const ref = useRevealAll();
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
   const pillars = getPillars();
 
   return (
@@ -609,9 +636,14 @@ function AboutStack() {
         <div>
           <div
             style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
               marginBottom: '20px',
             }}
           >
+            <span style={{ ...META, color: 'var(--accent-color)', fontWeight: 700 }}>[ SEC. 03 // ECOSYSTEM ]</span>
+            <span style={{ ...META, color: 'var(--border-color)' }}>—</span>
             <p style={{ ...META, color: 'var(--text-primary)', margin: 0 }}>
               {t('about.stack_eyebrow')}
             </p>
@@ -635,19 +667,19 @@ function AboutStack() {
           <p style={{ ...BODY, fontSize: '18px', lineHeight: '1.5', letterSpacing: '-0.01em', color: 'var(--text-primary)', marginBottom: '18px' }}>
             {t('about.stack_manifesto_p1')}
           </p>
-          <p style={{ ...BODY, fontSize: '15px', lineHeight: '1.6', color: 'var(--text-primary)', margin: 0 }}>
+          <p style={{ ...BODY, fontSize: '15px', lineHeight: '1.6', color: 'var(--text-secondary)', margin: 0 }}>
             {t('about.stack_manifesto_p2')}
           </p>
         </div>
 
-        <div style={{ marginTop: '48px' }}>
-          <p style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', margin: 0, lineHeight: '1.6', whiteSpace: 'pre-line' }}>
+        <div style={{ marginTop: '48px', borderTop: '1px solid var(--border-color)', paddingTop: '24px' }}>
+          <p style={{ ...META, fontSize: '10px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.6', whiteSpace: 'pre-line' }}>
             {t('about.stack_meta')}
           </p>
         </div>
       </div>
 
-      {/* Columna Derecha: Los 3 Pilares y Herramientas — 7 cols */}
+      {/* Columna Derecha: Los 4 Pilares y Herramientas — 7 cols */}
       <div
         className="reveal about-stack-content"
         style={{
@@ -655,7 +687,7 @@ function AboutStack() {
           padding: '64px 80px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '44px',
+          gap: '48px',
         }}
       >
         {pillars.map((pillar, pIdx) => (
@@ -693,94 +725,82 @@ function AboutStack() {
                   {pillar.title}
                 </h3>
               </div>
-              <p style={{ ...META, fontSize: '11px', color: 'var(--text-primary)', margin: 0 }}>
+              <p style={{ ...META, fontSize: '11px', color: 'var(--text-secondary)', margin: 0 }}>
                 {pillar.role}
               </p>
             </div>
 
-            {/* Herramientas del Pilar */}
+            {/* Herramientas del Pilar — Matriz Arquitectónica Inmediata (Cero Clics) */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {pillar.tools.map((tool) => {
-                const isSelected = selectedTool === tool.name;
-
-                return (
-                  <div
-                    key={tool.name}
-                    onClick={() => setSelectedTool(prev => prev === tool.name ? null : tool.name)}
-                    className="editorial-stack-row"
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Herramienta ${tool.name}`}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        setSelectedTool(prev => prev === tool.name ? null : tool.name);
-                      }
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', flex: 1 }}>
-                      <span
-                        className="editorial-stack-icon"
-                        style={{
-                          width: '18px',
-                          height: '18px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: 'var(--text-primary)',
-                          flexShrink: 0,
-                          marginTop: '2px',
-                          transition: 'color 0.2s ease',
-                        }}
-                      >
-                        {TOOL_ICONS[tool.name]}
-                      </span>
-                      <div style={{ flex: 1 }}>
-                        <span
-                          className="editorial-stack-name"
-                          style={{
-                            fontFamily: '"Special Gothic", sans-serif',
-                            fontWeight: 700,
-                            fontSize: '17px',
-                            letterSpacing: '-0.01em',
-                            color: 'var(--text-primary)',
-                            borderBottom: isSelected ? '2px solid var(--accent-color)' : '2px solid transparent',
-                            paddingBottom: '1px',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            transition: 'border-color 0.2s ease',
-                          }}
-                        >
-                          {tool.name}
-                          <span
-                            className="editorial-stack-arrow"
-                            style={{
-                              fontSize: '0.75em',
-                              opacity: isSelected ? 1 : 0,
-                              transform: isSelected ? 'translateX(0)' : 'translateX(-4px)',
-                              display: 'inline-block',
-                              color: 'var(--accent-color)',
-                              transition: 'opacity 0.2s ease, transform 0.2s ease',
-                            }}
-                          >
-                            →
-                          </span>
-                        </span>
-                        {isSelected && (
-                          <p style={{ ...BODY, fontSize: '13px', color: 'var(--text-primary)', margin: '6px 0 2px 0', lineHeight: '1.5' }}>
-                            {tool.focus}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    <span style={{ ...META, fontSize: '10px', color: 'var(--text-primary)', flexShrink: 0, marginLeft: '12px', alignSelf: 'flex-start', marginTop: '4px' }}>
-                      {tool.tag}
+              {pillar.tools.map((tool) => (
+                <div
+                  key={tool.name}
+                  className="editorial-stack-row"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'baseline',
+                    padding: '13px 8px',
+                    borderBottom: '1px solid var(--border-color)',
+                    transition: 'background-color 0.2s ease, padding-left 0.2s ease',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', flex: 1, minWidth: 0, flexWrap: 'wrap' }}>
+                    <span
+                      className="editorial-stack-icon"
+                      style={{
+                        width: '18px',
+                        height: '18px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--text-primary)',
+                        flexShrink: 0,
+                        transform: 'translateY(2px)',
+                        transition: 'color 0.2s ease',
+                      }}
+                    >
+                      {TOOL_ICONS[tool.name]}
+                    </span>
+                    <span
+                      className="editorial-stack-name"
+                      style={{
+                        fontFamily: '"Special Gothic", sans-serif',
+                        fontWeight: 700,
+                        fontSize: '16px',
+                        letterSpacing: '-0.01em',
+                        color: 'var(--text-primary)',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {tool.name}
+                    </span>
+                    <span
+                      style={{
+                        ...BODY,
+                        fontSize: '13px',
+                        color: 'var(--text-secondary)',
+                        lineHeight: '1.4',
+                      }}
+                    >
+                      — {tool.focus}
                     </span>
                   </div>
-                );
-              })}
+
+                  <span
+                    style={{
+                      ...META,
+                      fontSize: '10px',
+                      color: 'var(--text-secondary)',
+                      flexShrink: 0,
+                      marginLeft: '16px',
+                      letterSpacing: '0.06em',
+                    }}
+                  >
+                    [{tool.tag}]
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         ))}
