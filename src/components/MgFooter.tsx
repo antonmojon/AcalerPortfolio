@@ -18,26 +18,22 @@ export default function MgFooter() {
           </p>
           <p className="footer-text">
             <span className="text-box">
-              <span className="scroll-in text-indent">
-                {isEs ? 'Siempre dispuesto a conocer' : "I'm always looking to"}
-              </span>
-            </span>
-            <span className="text-box">
-              <span className="scroll-in">
-                {isEs ? 'nuevas personas, colaborar en' : 'meet new people, collaborate'}
-              </span>
-            </span>
-            <span className="text-box">
-              <span className="scroll-in">
-                {isEs ? 'retos ambiciosos de producto y' : 'on new projects, and explore'}
-              </span>
-            </span>
-            <span className="text-box">
-              <span className="scroll-in">
-                {isEs ? 'diseñar interfaces\u00A0limpias. ' : 'new\u00A0ideas. Feel free to '}
-                <Link className="text-link" to="/contact">
-                  {isEs ? 'hablemos.' : 'say\u00A0hello.'}
-                </Link>
+              <span className="scroll-in text-indent" style={{ display: 'block' }}>
+                {isEs ? (
+                  <>
+                    Siempre dispuesto a conocer nuevas personas, colaborar en retos ambiciosos de producto y diseñar interfaces limpias.{' '}
+                    <Link className="text-link" to="/contact">
+                      hablemos.
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    I'm always looking to meet new people, collaborate on exciting projects, and explore new ideas.{' '}
+                    <Link className="text-link" to="/contact">
+                      say hello.
+                    </Link>
+                  </>
+                )}
               </span>
             </span>
           </p>

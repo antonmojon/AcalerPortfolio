@@ -1587,9 +1587,10 @@ header {
 }
 
 .infos-box-text {
-  max-width: 23vw;
+  max-width: clamp(340px, 32vw, 560px);
   font-size: var(--font-size-m);
-  line-height: 120%;
+  line-height: 1.35;
+  text-wrap: pretty;
 }
 
 /* ─── Home Work ─── */
@@ -1774,12 +1775,13 @@ header {
   display: flex;
   flex-direction: column;
   gap: 2vw;
-  max-width: 21vw;
+  max-width: clamp(320px, 30vw, 500px);
 }
 
 .footer-text {
   font-size: var(--font-size-m);
-  line-height: 120%;
+  line-height: 1.35;
+  text-wrap: pretty;
 }
 
 /* ─── Mobile Overrides ─── */
@@ -1943,6 +1945,7 @@ header {
 
   .infos-box-text {
     max-width: 100%;
+    line-height: 1.4;
   }
 
   .home-work {
@@ -1989,6 +1992,11 @@ header {
 
   .footer-box {
     max-width: 100%;
+  }
+
+  .footer-text {
+    max-width: 100%;
+    line-height: 1.4;
   }
 }
 
