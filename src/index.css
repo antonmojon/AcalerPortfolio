@@ -1158,4 +1158,73 @@ body {
   }
 }
 
+/* ─── Horizontal Runway / Galería Lateral Styles ─────────────────────────── */
+.runway-wrapper {
+  background-color: var(--bg-primary);
+  width: 100%;
+}
+
+.runway-track {
+  display: flex;
+}
+
+.runway-slide {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.runway-img-zoom:hover {
+  transform: scale(1.04) !important;
+}
+
+.runway-outro-link:hover .runway-outro-arrow {
+  transform: translateX(12px) !important;
+}
+
+.runway-case-btn:hover {
+  opacity: 0.88;
+  transform: translateX(4px);
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .runway-slide {
+    width: 90vw !important;
+    height: calc(100vh - 46px) !important;
+    scroll-snap-align: start !important;
+    padding: 80px 24px 60px !important;
+  }
+  
+  .runway-slide-hero,
+  .runway-slide-outro {
+    width: 96vw !important;
+    padding: 80px 24px 60px !important;
+  }
+  
+  .runway-hero-grid,
+  .runway-case-body,
+  .runway-manifesto-grid,
+  .runway-archive-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .runway-case-media {
+    max-height: 220px !important;
+  }
+
+  .runway-hud {
+    padding: 0 16px !important;
+  }
+}
+
 
