@@ -2220,6 +2220,15 @@ header {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.project-image--transparent,
+.project-image-transparent-wrap .project-image {
+  border: none !important;
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
 .project-infos {
   position: sticky;
   top: 5.6vw;

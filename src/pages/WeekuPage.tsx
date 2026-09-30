@@ -275,11 +275,11 @@ export default function WeekuPage() {
               {/* Clean Transparent Mockups Lineup */}
               <div className="project-image-transparent-wrap" style={{ padding: '2vw 0', display: 'flex', justifyContent: 'center' }}>
                 <img
-                  className="project-image"
+                  className="project-image project-image--transparent"
                   src="/images/weeku/weeku-lineup-clean.png"
                   alt="Weeku — Mobile Interface Mockups Lineup"
                   loading="lazy"
-                  style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                  style={{ width: '100%', height: 'auto', objectFit: 'contain', border: 'none', background: 'transparent' }}
                 />
               </div>
 
