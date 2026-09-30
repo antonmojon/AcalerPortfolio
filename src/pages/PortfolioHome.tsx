@@ -278,7 +278,7 @@ function StoryCard({ project }: { project: ProjectItemData }) {
 }
 
 function PortfolioNewsGrid() {
-  const { getProjects } = useLanguage();
+  const { t, getProjects } = useLanguage();
   const ref = useReveal();
   const projects = getProjects();
   const rowA = projects.slice(0, 2);
