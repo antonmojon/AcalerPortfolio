@@ -37,116 +37,15 @@ function CustomCursor() {
   return <div ref={dotRef} className="cursor-dot" />;
 }
 
-/* ─── Intro Screen with Seamless Title Transition ─────────── */
-type IntroPhase = 'count' | 'name' | 'animating';
-
+/* ─── Intro Screen: Pure Minimal Counter ─────────────────── */
 function IntroScreen({ onDone }: { onDone: () => void }) {
   const [pct, setPct] = useState(0);
-  const [phase, setPhase] = useState<IntroPhase>('count');
-  const [targetY, setTargetY] = useState<number | null>(null);
-  const [animating, setAnimating] = useState(false);
-  const [overlayOpacity, setOverlayOpacity] = useState(1);
-  const probeRef = useRef<HTMLSpanElement>(null);
-  const [fs, setFs] = useState<number | null>(null);
+  const [closing, setClosing] = useState(false);
 
-  const phaseRef = useRef<IntroPhase>('count');
-  phaseRef.current = phase;
-  const animatingRef = useRef(false);
-  animatingRef.current = animating;
-  const startGlideRef = useRef<() => void>(() => {});
-
-  // 1. Calculate font size to match Home page exactly and never overflow
-  useEffect(() => {
-    let mounted = true;
-    const fit = () => {
-      if (!mounted) return;
-      const isMobile = window.innerWidth <= 768;
-      const horizontalPad = isMobile ? 48 : 160;
-      const available = Math.max(window.innerWidth - horizontalPad, 200);
-
-      const probe = probeRef.current;
-      if (probe) {
-        probe.style.fontSize = '100px';
-        const probeWidth = probe.scrollWidth;
-        if (probeWidth > 0) {
-          const ratio = available / probeWidth;
-          const calculated = Math.floor(100 * ratio);
-          // Match Home page: cap at 118px on large screens, proportionally scale down on smaller screens
-          setFs(Math.min(calculated, 118));
-        }
-      }
-    };
-    fit();
-    if (document.fonts) {
-      document.fonts.ready.then(() => {
-        if (mounted) fit();
-      });
-    }
-    window.addEventListener('resize', fit);
-    return () => {
-      mounted = false;
-      window.removeEventListener('resize', fit);
-    };
-  }, []);
-
-  // 2. Strict scroll lock & global wheel blocker to prevent background scroll
-  useEffect(() => {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    window.scrollTo(0, 0);
-
-    const onWheel = (e: WheelEvent) => {
-      // 100% prevent any scroll from leaking to the background home page
-      e.preventDefault();
-      if (phaseRef.current === 'name' && !animatingRef.current) {
-        if (Math.abs(e.deltaY) > 2 || Math.abs(e.deltaX) > 2) {
-          startGlideRef.current();
-        }
-      }
-    };
-
-    let touchStartY = 0;
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      if (phaseRef.current === 'name' && !animatingRef.current) {
-        if (Math.abs(e.touches[0].clientY - touchStartY) > 6) {
-          startGlideRef.current();
-        }
-      }
-    };
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (['ArrowDown', 'ArrowUp', 'Space', 'Enter', 'PageDown'].includes(e.key)) {
-        e.preventDefault();
-        if (phaseRef.current === 'name' && !animatingRef.current) {
-          startGlideRef.current();
-        }
-      }
-    };
-
-    window.addEventListener('wheel', onWheel, { passive: false });
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-    window.addEventListener('keydown', onKeyDown);
-
-    return () => {
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('keydown', onKeyDown);
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    };
-  }, []);
-
-  // 3. Counter animation 0% -> 100%
   useEffect(() => {
     let start: number | null = null;
     let raf: number;
-    const DURATION = 950;
+    const DURATION = 900;
 
     const tick = (now: number) => {
       if (!start) start = now;
@@ -159,194 +58,49 @@ function IntroScreen({ onDone }: { onDone: () => void }) {
       } else {
         setPct(100);
         setTimeout(() => {
-          setPhase('name');
-        }, 150);
+          setClosing(true);
+          setTimeout(() => {
+            _introShown = true;
+            onDone();
+          }, 600);
+        }, 120);
       }
     };
 
     raf = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  // 4. Glide trigger implementation
-  const startGlide = useCallback(() => {
-    if (animatingRef.current) return;
-    animatingRef.current = true;
-    setAnimating(true);
-    setPhase('animating');
-
-    // Measure target position from actual home masthead title
-    let targetTop = 127;
-    const homeMasthead =
-      document.querySelector('.masthead-pad .scramble-line') ||
-      document.querySelector('.masthead-pad h1') ||
-      document.querySelector('.masthead-pad');
-    if (homeMasthead) {
-      const rect = homeMasthead.getBoundingClientRect();
-      if (rect.top > 0) {
-        targetTop = rect.top;
-      }
-    }
-    setTargetY(targetTop);
-
-    // Fade overlay background smoothly to reveal the rock-solid Home behind it
-    setTimeout(() => {
-      setOverlayOpacity(0);
-    }, 550);
-
-    // Complete transition and unlock scroll
-    setTimeout(() => {
-      _introShown = true;
-      onDone();
-    }, 1250);
+    return () => cancelAnimationFrame(raf);
   }, [onDone]);
-
-  startGlideRef.current = startGlide;
-
-  const titleStyle = {
-    fontFamily: '"Special Gothic Expanded One", sans-serif',
-    fontWeight: 400,
-    fontSize: fs ? `${fs}px` : 'clamp(28px, 6.5vw, 118px)',
-    letterSpacing: '-0.01em',
-    lineHeight: '0.88',
-    color: 'var(--hero-title-color)',
-    display: 'block',
-    whiteSpace: 'nowrap' as const,
-    transition: 'color 0.4s ease',
-  };
 
   return (
     <div
-      onClick={() => {
-        if (phase === 'name' && !animating) {
-          startGlide();
-        }
-      }}
       style={{
         position: 'fixed',
         inset: 0,
         backgroundColor: 'var(--bg-primary)',
-        zIndex: 9000,
-        touchAction: 'none',
-        overscrollBehavior: 'none',
-        opacity: overlayOpacity,
-        transition: animating ? 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-        pointerEvents: animating ? 'none' : 'auto',
-        userSelect: 'none',
-        cursor: phase === 'name' && !animating ? 'pointer' : 'default',
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: closing ? 0 : 1,
+        transition: 'opacity 0.6s cubic-bezier(0.18, 0.66, 0.18, 1)',
+        pointerEvents: closing ? 'none' : 'auto',
       }}
     >
-      {/* Hidden probe for font measurement */}
       <span
-        ref={probeRef}
-        aria-hidden
         style={{
-          fontFamily: '"Special Gothic Expanded One", sans-serif',
-          fontWeight: 400,
-          fontSize: '100px',
-          letterSpacing: '-0.01em',
-          lineHeight: '0.88',
-          position: 'fixed',
-          left: -9999,
-          top: -9999,
-          visibility: 'hidden',
-          whiteSpace: 'nowrap',
-          pointerEvents: 'none',
+          fontFamily: '"Space Mono", monospace',
+          fontSize: '13px',
+          letterSpacing: '0.08em',
+          color: 'var(--text-primary)',
+          fontVariantNumeric: 'tabular-nums',
         }}
       >
-        ANTONIO CALERO
+        {pct}%
       </span>
-
-      {/* Counter */}
-      {phase === 'count' && (
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span
-            style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '11px',
-              letterSpacing: '0.06em',
-              color: 'var(--text-primary)',
-              fontVariantNumeric: 'tabular-nums',
-            }}
-          >
-            {String(pct).padStart(3, ' ')}%
-          </span>
-        </div>
-      )}
-
-      {/* Name: 100% centered horizontally & vertically, then glides to masthead */}
-      {(phase === 'name' || phase === 'animating') && (
-        <div
-          style={{
-            position: 'absolute',
-            top: animating && targetY !== null ? `${targetY}px` : '50%',
-            left: 0,
-            right: 0,
-            transform: animating ? 'translateY(0%)' : 'translateY(-50%)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-            paddingLeft: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
-            paddingRight: animating ? (window.innerWidth <= 768 ? '24px' : '80px') : '24px',
-            paddingTop: 0,
-            paddingBottom: 0,
-            boxSizing: 'border-box',
-            width: '100%',
-            transition: animating
-              ? 'top 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), padding 1.2s cubic-bezier(0.16, 1, 0.3, 1)'
-              : 'none',
-            willChange: 'top, transform',
-          }}
-        >
-          <span
-            style={{
-              ...titleStyle,
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
-            ANTONIO CALERO
-          </span>
-        </div>
-      )}
-
-      {/* Scroll indicator */}
-      {phase === 'name' && !animating && (
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '8vh',
-            left: 0,
-            right: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '8px',
-            animation: 'fadeIn 0.5s ease 0.3s both',
-          }}
-        >
-          <span
-            style={{
-              fontFamily: '"Space Mono", monospace',
-              fontSize: '10px',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: '#AAAAAA',
-            }}
-          >
-            scroll
-          </span>
-          <span className="bounce-arrow" style={{ color: '#AAAAAA', fontSize: '14px' }}>
-            ↓
-          </span>
-        </div>
-      )}
     </div>
   );
 }
+
 
 /* ─── Root ──────────────────────────────────────────────── */
 export default function Root() {
