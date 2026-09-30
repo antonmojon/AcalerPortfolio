@@ -151,14 +151,14 @@ export default function NightShift() {
 
               {/* Next Project Link */}
               <Link
-                to="/agora"
+                to="/weeku"
                 className="cta text-box scroll-in-group desktop-el next-project-link"
               >
                 <div className="scroll-in">
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente:\u00A0Agora' : 'Next:\u00A0Agora'}
+                      {isEs ? 'Siguiente:\u00A0Weeku' : 'Next:\u00A0Weeku'}
                     </span>
                   </div>
                 </div>
@@ -179,14 +179,14 @@ export default function NightShift() {
 
               {/* Mobile Next Project */}
               <Link
-                to="/agora"
+                to="/weeku"
                 className="cta text-box scroll-in-group mobile-el next-project-mobile"
               >
                 <div className="scroll-in">
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente: Agora' : 'Next: Agora'}
+                      {isEs ? 'Siguiente: Weeku' : 'Next: Weeku'}
                     </span>
                   </div>
                 </div>
