@@ -392,35 +392,26 @@ export default function SelvaVivaPage() {
                   </p>
                 </div>
 
-                {/* Studio Display Mockups: Transparent PNGs without borders */}
-                <div className="project-image-transparent-wrap" style={{ padding: '2vw 0', display: 'flex', justifyContent: 'center' }}>
+                {/* Unified 3-Macs Showcase Lineup: 100% transparent PNG */}
+                <div className="project-image-transparent-wrap" style={{ padding: '2vw 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <img
                     className="project-image project-image--transparent"
-                    src="/images/selvaviva/selvaviva-display-hero.png"
-                    alt="SelvaViva — Apple Studio Display Hero Mockup"
+                    src="/images/selvaviva/selvaviva-displays-lineup.png"
+                    alt="SelvaViva — Workstation Lineup: Home Hero, Experiencias y Testimonios"
                     loading="lazy"
                     style={{ width: '100%', height: 'auto', objectFit: 'contain', border: 'none', background: 'transparent' }}
                   />
-                </div>
-
-                <div className="project-image-transparent-wrap" style={{ padding: '1vw 0', display: 'flex', justifyContent: 'center' }}>
-                  <img
-                    className="project-image project-image--transparent"
-                    src="/images/selvaviva/selvaviva-display-experiences.png"
-                    alt="SelvaViva — Catálogo de Experiencias en Apple Studio Display"
-                    loading="lazy"
-                    style={{ width: '100%', height: 'auto', objectFit: 'contain', border: 'none', background: 'transparent' }}
-                  />
-                </div>
-
-                <div className="project-image-transparent-wrap" style={{ padding: '1vw 0', display: 'flex', justifyContent: 'center' }}>
-                  <img
-                    className="project-image project-image--transparent"
-                    src="/images/selvaviva/selvaviva-display-reviews.png"
-                    alt="SelvaViva — Testimonios Reales en Apple Studio Display"
-                    loading="lazy"
-                    style={{ width: '100%', height: 'auto', objectFit: 'contain', border: 'none', background: 'transparent' }}
-                  />
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', width: '100%', gap: '1.5vw', marginTop: '1vw', textAlign: 'center' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.05em' }}>
+                      [ 01 / HOME HERO ]
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.05em' }}>
+                      [ 02 / EXPERIENCIAS ]
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.05em' }}>
+                      [ 03 / TESTIMONIOS ]
+                    </span>
+                  </div>
                 </div>
               </div>
 
