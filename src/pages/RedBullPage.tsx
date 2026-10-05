@@ -6,8 +6,13 @@ import { useLanguage } from '../context/LanguageContext';
 
 export default function RedBullPage() {
   const { language } = useLanguage();
-  const isEs = language === 'es';
   const rootRef = useRef<HTMLDivElement>(null);
+
+  const t = (es: string, en: string, fr: string) => {
+    if (language === 'fr') return fr;
+    if (language === 'en') return en;
+    return es;
+  };
 
   useEffect(() => {
     const root = rootRef.current;
@@ -43,26 +48,18 @@ export default function RedBullPage() {
     return () => observer.disconnect();
   }, []);
 
-  const roles = isEs
-    ? [
-        'Dirección de Arte de Evento',
-        'Branding Espacial & Arquitectura Efímera',
-        'Identidad Visual & Motion Graphics',
-        'Narrativa Inmersiva en Dos Plantas',
-      ]
-    : [
-        'Event Art Direction',
-        'Spatial Branding & Ephemeral Architecture',
-        'Visual Identity & Motion Graphics',
-        'Immersive Two-Floor Narrative',
-      ];
+  const roles = [
+    t('Dirección de Arte de Evento', 'Event Art Direction', 'Direction Artistique d’Événement'),
+    t('Branding Espacial & Escenografía', 'Spatial Branding & Scenography', 'Branding Spatial & Scénographie'),
+    t('Identidad Visual & Key Visual', 'Visual Identity & Key Visual', 'Identité Visuelle & Key Visual'),
+    t('Narrativa en Dos Plantas', 'Two-Floor Narrative Experience', 'Expérience Narrative sur Deux Niveaux'),
+  ];
 
   const colors = [
-    { name: 'Cyber Navy', hex: '#0A1128', usage: isEs ? 'Lienzo nocturno metropolitano' : 'Metropolitan nocturnal canvas' },
-    { name: 'Red Bull Crimson', hex: '#FF0044', usage: isEs ? 'Acento de alta energía' : 'High-voltage energy accent' },
-    { name: 'Electric Cyan', hex: '#00F0FF', usage: isEs ? 'Hotspots y líneas de neón' : 'Hotspots & neon glow lines' },
-    { name: 'Solar Gold', hex: '#FFC700', usage: isEs ? 'Velocidad y aceleración' : 'Velocity & kinetic highlights' },
-    { name: 'Dark Metal', hex: '#141419', usage: isEs ? 'Estructura escénica y soportes' : 'Scenographic metal structures' },
+    { hex: '#0A1128', name: t('Cyber Navy · Noche', 'Cyber Navy · Night', 'Cyber Marine · Nuit') },
+    { hex: '#FF0044', name: t('Energy Crimson · Red Bull', 'Energy Crimson · Red Bull', 'Pourpre Énergie · Red Bull') },
+    { hex: '#00F0FF', name: t('Electric Cyan · Neón', 'Electric Cyan · Neon', 'Cyan Électrique · Néon') },
+    { hex: '#FFC700', name: t('Solar Gold · Aceleración', 'Solar Gold · Acceleration', 'Or Solaire · Vitesse') },
   ];
 
   return (
@@ -80,12 +77,12 @@ export default function RedBullPage() {
 
               <div className="project-infos-box">
                 <h1 className="project-title text-box">
-                  <span className="scroll-in">RED BULL INSIDE 2023: FEARLESS CITY</span>
+                  <span className="scroll-in">RED BULL INSIDE 2023</span>
                 </h1>
 
                 <div className="project-desc-box">
                   <p className="project-date text-box">
-                    <span className="scroll-in">[ 2023 · Event Branding & Dirección de Arte ]</span>
+                    <span className="scroll-in">[ 2023 · Fearless City · Event Branding ]</span>
                   </p>
 
                   <div className="project-details">
@@ -100,23 +97,29 @@ export default function RedBullPage() {
                     <div className="project-desc">
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
-                          {isEs
-                            ? 'Esto no es sólo un evento. No es sólo una activación. Es el gran encuentro anual de Red\u00A0Bull con todos sus partners estratégicos para presentar en primicia sus próximas novedades y visionar el futuro de la marca.'
-                            : 'This is not merely an event, nor a conventional brand activation. It is Red\u00A0Bull’s landmark annual summit bringing together strategic partners to unveil future brand ventures and share tomorrow’s\u00A0vision.'}
+                          {t(
+                            'Esto no es sólo un evento. No es sólo una activación. Es el encuentro anual de Red\u00A0Bull con todos sus partners para presentar sus próximas novedades y visionar el futuro desde la perspectiva de la\u00A0marca.',
+                            'This is not merely an event, nor a conventional activation. It is Red\u00A0Bull’s annual partner summit to unveil upcoming launches and view the future through the brand’s unique\u00A0lens.',
+                            'Ce n’est pas seulement un événement ni une simple activation. C’est le rendez-vous annuel de Red\u00A0Bull avec ses partenaires pour dévoiler les nouveautés et imaginer l’avenir sous l’angle de la\u00A0marque.'
+                          )}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
-                          {isEs
-                            ? 'El proyecto articuló "Fearless City": una metrópolis futurista y audaz recreada a lo largo de dos plantas continuas, integrando todos los hotspots emblemáticos en los que confluye el universo cultural y deportivo de Red\u00A0Bull.'
-                            : 'The experience materialized "Fearless City"—a daring futuristic metropolis built across two continuous floors, hosting every iconic hotspot where Red\u00A0Bull’s cultural, athletic, and lifestyle universe\u00A0unfolds.'}
+                          {t(
+                            'A lo largo de dos plantas se recreó "Fearless City", la ciudad de Red\u00A0Bull Inside 2023, reuniendo todos los hotspots clave en los que se desarrolla la vida de la marca y sus\u00A0partners.',
+                            'Across two expansive floors, "Fearless City" was brought to life: a bespoke metropolis bringing together the key hotspots where the brand and its partners\u00A0collaborate.',
+                            'Déployée sur deux niveaux, "Fearless City" a donné corps à la métropole de Red\u00A0Bull Inside 2023, rassemblant tous les hotspots emblématiques de l’univers de la\u00A0marque.'
+                          )}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
-                          {isEs
-                            ? 'Desde la ilustración panorámica del skyline madrileño reinterpretado con estética cyberpunk hasta la escenografía lumínica, señalética de gran formato y cápsulas audiovisuales sincrónicas para cada\u00A0ambiente.'
-                            : 'From the panoramic illustration of Madrid’s architectural skyline reimagined through a cyberpunk lens to ambient neon scenography, large-format wayfinding, and synchronous audiovisual capsules for each\u00A0district.'}
+                          {t(
+                            'La dirección de arte combinó una ilustración panorámica de la noche madrileña con escenografía de neón, señalética volumétrica y piezas audiovisuales sincrónicas para cada\u00A0ambiente.',
+                            'The art direction paired a panoramic nocturnal illustration of Madrid’s skyline with neon scenography, environmental signage, and synchronized motion pieces for each\u00A0district.',
+                            'La direction artistique a marié une illustration panoramique de la nuit madrilène à une scénographie de néons, signalétique spatiale et capsules vidéo immersives pour chaque\u00A0espace.'
+                          )}
                         </span>
                       </p>
 
@@ -130,7 +133,7 @@ export default function RedBullPage() {
                         <div className="scroll-in">
                           <div className="cta-text">
                             <span className="link-line">
-                              {isEs ? 'Ver proyecto en Behance' : 'View on Behance'}
+                              {t('Ver proyecto en Behance', 'View on Behance', 'Voir sur Behance')}
                             </span>
                             <span className="cta-icon-up">↗</span>
                           </div>
@@ -150,59 +153,82 @@ export default function RedBullPage() {
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente: Fecha de Caducidad' : 'Next: Expiration Date'}
+                      {t('Siguiente: Fecha de Caducidad', 'Next: Expiration Date', 'Suivant : Date de Péremption')}
                     </span>
                   </div>
                 </div>
               </Link>
             </div>
 
-            {/* Right Column: Swiss Editorial Layout */}
+            {/* Right Column: Authentic Editorial Layout */}
             <div className="project-editorial-right el-in">
-              {/* Hero Skyline Artwork */}
+              {/* Cover Artwork */}
               <img
                 className="project-image"
                 src="/images/redbull/redbull-cover.jpg"
-                alt="Red Bull Inside 2023: Fearless City — Panorama Skyline Madrid Cyberpunk"
+                alt="Red Bull Inside 2023: Fearless City — Panorama Skyline Madrid"
                 loading="eager"
               />
 
               {/* Section 01: Concepto & Fearless City */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 01 / CONCEPTO ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'El futuro desde la perspectiva de Red Bull' : 'The future from Red Bull’s perspective'}
-                  </h2>
+                <span className="project-section-meta">[ 01 / CONCEPTO ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t(
+                      'Fearless City: la metrópolis de Red Bull',
+                      'Fearless City: Red Bull’s metropolis',
+                      'Fearless City : la métropole Red Bull'
+                    )}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'Para alejar el encuentro de la convención corporativa tradicional, el espacio se concibió como una ciudad nocturna en la que los invitados interactuaban con los diferentes territorios de la marca: deporte, cultura urbana, música y gaming.',
+                      'Steering away from conventional corporate summits, the venue was envisioned as a nocturnal metropolis where partners actively navigated the brand’s defining cultural territories: sport, urban culture, sound, and gaming.',
+                      'Loin des conventions d’entreprise traditionnelles, le lieu a été conçu comme une ville nocturne vivante où les partenaires découvraient les territoires phares de la marque : sport, culture urbaine, musique et gaming.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'Recrear la energía indomable de Red Bull requería trascender la convención de los salones de convenciones corporativos. "Fearless City" nació como una ciudad viva, con distritos especializados, arquitectura lumínica y recorridos inmersivos que situaban al partner no como un mero espectador, sino como un ciudadano de una metrópolis que late a ritmo de deportes de acción, música urbana y gaming.'
-                      : 'Embodying Red Bull’s relentless ethos demanded transcending traditional corporate convention halls. "Fearless City" was engineered as a living metropolis—featuring distinct districts, kinetic lighting, and experiential corridors where partners transitioned from passive observers into active citizens of an urban sprawl driven by action sports, culture, and gaming.'}
-                  </p>
-
-                  {/* Madrid Skyline Narrative Callout */}
-                  <div
-                    style={{
-                      border: '1px solid var(--border-color)',
-                      padding: '2vw',
-                      marginTop: '2vw',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '1vw',
-                    }}
-                  >
-                    <span style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.08em' }}>
-                      [ ILUSTRACIÓN CLAVE · MADRID CYBERPUNK ]
+                {/* Swiss Spec Table (Authentic Givelet Style) */}
+                <div className="project-spec-table">
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Evento', 'Event', 'Événement')} ]</span>
+                    <span className="project-spec-value">
+                      Red Bull Inside 2023 · Partner Summit & Keynote Anual
                     </span>
-                    <p style={{ margin: 0, fontSize: 'clamp(15px, 1.4vw, 20px)', lineHeight: 1.6 }}>
-                      {isEs
-                        ? 'El key visual reinterpreta hitos icónicos del horizonte madrileño —las Torres KIO inclinadas, la Torre Picasso y la silueta del Pirulí de Torrespaña— bajo una atmósfera nocturna electrificada, donde autopistas elevadas y neones carmesí y cian tejen la arquitectura de Fearless City.'
-                        : 'The master key visual reinterprets Madrid’s defining skyline landmarks—the inclined KIO Towers, Torre Picasso, and Torrespaña’s communications spire—under an electrified nocturnal sky, intertwined with elevated overpasses and blazing crimson-and-cyan neon ribbons.'}
-                    </p>
+                  </div>
+                  <div className="border"></div>
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Concepto', 'Concept', 'Concept')} ]</span>
+                    <span className="project-spec-value">
+                      Fearless City · {t('Metrópolis inmersiva articulada en dos plantas', 'Immersive metropolis designed across two levels', 'Métropole immersive articulée sur deux niveaux')}
+                    </span>
+                  </div>
+                  <div className="border"></div>
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Key Visual', 'Key Visual', 'Visuel Clé')} ]</span>
+                    <span className="project-spec-value">
+                      {t(
+                        'Skyline nocturno de Madrid reinterpretando las Torres KIO, Torre Picasso y Pirulí con neón y vías elevadas.',
+                        'Nocturnal Madrid skyline reinterpreting KIO Towers, Torre Picasso, and Torrespaña with neon highways.',
+                        'Skyline nocturne de Madrid réinterprétant les Tours KIO, la Tour Picasso et le Pirulí sous néons et voies suspendues.'
+                      )}
+                    </span>
+                  </div>
+                  <div className="border"></div>
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Disciplinas', 'Disciplines', 'Disciplines')} ]</span>
+                    <span className="project-spec-value">
+                      {t(
+                        'Dirección de arte, ilustración vectorial, escenografía lumínica, señalética y piezas de motion para pantalla.',
+                        'Art direction, vector illustration, neon scenography, wayfinding, and motion screens.',
+                        'Direction artistique, illustration vectorielle, scénographie lumineuse, signalétique et motion design.'
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -210,197 +236,138 @@ export default function RedBullPage() {
               {/* Section 02: Sistema Cromático */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 02 / IDENTIDAD CROMÁTICA ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'Alto voltaje y contraste nocturno' : 'High voltage & nocturnal contrast'}
-                  </h2>
+                <span className="project-section-meta">[ 02 / CROMÁTICA & NEÓN ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t(
+                      'Paleta nocturna de alto voltaje',
+                      'High-voltage nocturnal palette',
+                      'Palette nocturne à haute tension'
+                    )}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'La gama cromática toma los colores identificativos de Red Bull y los traslada al lenguaje lumínico de la noche: azul noche profundo como base arquitectónica, rojo crimson para puntos focales y cian eléctrico para señalética y pantallas.',
+                      'The chromatic range adapts Red Bull’s signature hues into nocturnal light architecture: deep midnight navy as structural ground, energy crimson for focal points, and electric cyan for screens and wayfinding.',
+                      'La palette transpose les couleurs emblématiques de Red Bull dans le langage de la nuit : bleu marine profond en socle architectural, pourpre énergique en point focal et cyan électrique pour la signalétique lumineuse.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'La paleta de Fearless City combina la oscuridad profunda del azul marino con los tonos característicos de la lata de Red Bull llevados al extremo lumínico: rojo carmesí de máximo impacto, cian eléctrico para la señalética digital y amarillo solar para los focos direccionales.'
-                      : 'The chromatic scheme anchors deep midnight navy with the signature hues of the Red Bull can elevated to high-voltage luminescent intensities: high-impact crimson, electric cyan for digital signage, and solar yellow for directional beams.'}
-                  </p>
-
-                  {/* Swatches Grid */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-                      gap: '1.2vw',
-                      marginTop: '2vw',
-                    }}
-                  >
-                    {colors.map((c) => (
-                      <div
-                        key={c.name}
-                        style={{
-                          border: '1px solid var(--border-color)',
-                          padding: '1vw',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '0.8vw',
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: '100%',
-                            aspectRatio: '1 / 1',
-                            backgroundColor: c.hex,
-                            border: '1px solid rgba(0,0,0,0.1)',
-                          }}
-                        />
-                        <div>
-                          <p style={{ margin: '0 0 0.2vw 0', fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>
-                            {c.name}
-                          </p>
-                          <p style={{ margin: '0 0 0.3vw 0', fontFamily: 'monospace', fontSize: 'var(--font-size-xxs)', opacity: 0.5 }}>
-                            {c.hex}
-                          </p>
-                          <p style={{ margin: 0, fontSize: 'var(--font-size-xxs)', opacity: 0.6, lineHeight: 1.3 }}>
-                            {c.usage}
-                          </p>
-                        </div>
+                {/* Color Squares Grid */}
+                <div className="color-squares-grid">
+                  {colors.map((c) => (
+                    <div key={c.hex} className="color-square-item text-box">
+                      <div className="color-square-box scroll-in" style={{ backgroundColor: c.hex }}></div>
+                      <div className="color-square-meta scroll-in">
+                        <span className="color-square-hex">{c.hex}</span>
+                        <span className="color-square-name">{c.name}</span>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Section 03: Experiencia Audiovisual & Activaciones */}
+              {/* Section 03: Experiencia Audiovisual */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 03 / PRODUCCIÓN AUDIOVISUAL ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'Activaciones de marca y piezas en movimiento' : 'Brand activations & motion capture'}
-                  </h2>
+                <span className="project-section-meta">[ 03 / PRODUCCIÓN AUDIOVISUAL ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t(
+                      'Activaciones y piezas en movimiento',
+                      'Activations & motion capture',
+                      'Activations et motion design'
+                    )}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'El recorrido se acompañó de piezas audiovisuales proyectadas en pantallas panorámicas, sincronizando las presentaciones de producto y la atmósfera de cada hotspot.',
+                      'The guest journey was guided by motion pieces projected on panoramic displays, harmonizing keynote reveals with the ambient soundscapes of each hotspot.',
+                      'Le parcours s’accompagnait de créations audiovisuelles sur écrans panoramiques, synchronisant les annonces clés avec l’atmosphère de chaque zone thématique.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'La atmósfera del evento se articuló a través de contenidos audiovisuales sincrónicos en pantallas de gran formato y mapping volumétrico, sumergiendo a los asistentes en cada uno de los distritos de Fearless City.'
-                      : 'The event’s pulse was driven by synchronized motion pieces across panoramic LED volumes and architectural projection mapping, immersing guests into each specialized district of Fearless City.'}
-                  </p>
-
-                  {/* Video Embed 01: Keynote & City Reveal */}
-                  <div style={{ marginTop: '2.5vw' }}>
-                    <div
-                      style={{
-                        position: 'relative',
-                        paddingBottom: '56.25%',
-                        height: 0,
-                        overflow: 'hidden',
-                        border: '1px solid var(--border-color)',
-                        backgroundColor: '#191919',
-                      }}
-                    >
-                      <iframe
-                        title="Red Bull Fearless City — Keynote & City Reveal"
-                        src="https://www-ccv.adobe.io/v1/player/ccv/2Cr3wiAazDs/embed?api_key=behance1&bgcolor=%23191919"
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          width: '100%',
-                          height: '100%',
-                          border: 'none',
-                        }}
-                        allowFullScreen
-                      />
-                    </div>
-                    <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw', textAlign: 'right' }}>
-                      [ VÍDEO 01 · Presentación Principal & Apertura de Fearless City ]
-                    </p>
+                {/* Video Embeds without clumsy borders */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '3vw', marginTop: '2vw' }}>
+                  <div
+                    style={{
+                      position: 'relative',
+                      paddingBottom: '56.25%',
+                      height: 0,
+                      overflow: 'hidden',
+                      backgroundColor: '#191919',
+                    }}
+                  >
+                    <iframe
+                      title="Red Bull Fearless City — Presentación Principal"
+                      src="https://www-ccv.adobe.io/v1/player/ccv/2Cr3wiAazDs/embed?api_key=behance1&bgcolor=%23191919"
+                      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                      allowFullScreen
+                    />
                   </div>
 
-                  {/* Video Embed 02: Spatial Experience */}
-                  <div style={{ marginTop: '3vw' }}>
-                    <div
-                      style={{
-                        position: 'relative',
-                        paddingBottom: '56.25%',
-                        height: 0,
-                        overflow: 'hidden',
-                        border: '1px solid var(--border-color)',
-                        backgroundColor: '#191919',
-                      }}
-                    >
-                      <iframe
-                        title="Red Bull Fearless City — Espacio y Activación"
-                        src="https://www-ccv.adobe.io/v1/player/ccv/QVXkUdRYp-b/embed?api_key=behance1&bgcolor=%23191919"
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          width: '100%',
-                          height: '100%',
-                          border: 'none',
-                        }}
-                        allowFullScreen
-                      />
-                    </div>
-                    <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw', textAlign: 'right' }}>
-                      [ VÍDEO 02 · Activación Espacial & Ecosistema de Partners ]
-                    </p>
+                  <div
+                    style={{
+                      position: 'relative',
+                      paddingBottom: '56.25%',
+                      height: 0,
+                      overflow: 'hidden',
+                      backgroundColor: '#191919',
+                    }}
+                  >
+                    <iframe
+                      title="Red Bull Fearless City — Experiencia Espacial"
+                      src="https://www-ccv.adobe.io/v1/player/ccv/QVXkUdRYp-b/embed?api_key=behance1&bgcolor=%23191919"
+                      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                      allowFullScreen
+                    />
                   </div>
 
-                  {/* Grid of secondary videos */}
                   <div
                     style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                      gap: '1.5vw',
-                      marginTop: '3vw',
+                      gap: '2vw',
                     }}
                   >
-                    <div>
-                      <div
-                        style={{
-                          position: 'relative',
-                          paddingBottom: '56.25%',
-                          height: 0,
-                          overflow: 'hidden',
-                          border: '1px solid var(--border-color)',
-                          backgroundColor: '#191919',
-                        }}
-                      >
-                        <iframe
-                          title="Red Bull Fearless City — Hotspot 01"
-                          src="https://www-ccv.adobe.io/v1/player/ccv/JHysnLdCM4W/embed?api_key=behance1&bgcolor=%23191919"
-                          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
-                          allowFullScreen
-                        />
-                      </div>
-                      <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw' }}>
-                        [ VÍDEO 03 · Hotspot Gaming & Digital ]
-                      </p>
+                    <div
+                      style={{
+                        position: 'relative',
+                        paddingBottom: '56.25%',
+                        height: 0,
+                        overflow: 'hidden',
+                        backgroundColor: '#191919',
+                      }}
+                    >
+                      <iframe
+                        title="Red Bull Fearless City — Hotspot Digital"
+                        src="https://www-ccv.adobe.io/v1/player/ccv/JHysnLdCM4W/embed?api_key=behance1&bgcolor=%23191919"
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                        allowFullScreen
+                      />
                     </div>
 
-                    <div>
-                      <div
-                        style={{
-                          position: 'relative',
-                          paddingBottom: '56.25%',
-                          height: 0,
-                          overflow: 'hidden',
-                          border: '1px solid var(--border-color)',
-                          backgroundColor: '#191919',
-                        }}
-                      >
-                        <iframe
-                          title="Red Bull Fearless City — Hotspot 02"
-                          src="https://www-ccv.adobe.io/v1/player/ccv/McRFqCIHIdv/embed?api_key=behance1&bgcolor=%23191919"
-                          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
-                          allowFullScreen
-                        />
-                      </div>
-                      <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw' }}>
-                        [ VÍDEO 04 · Cultura Urbana & Escenario ]
-                      </p>
+                    <div
+                      style={{
+                        position: 'relative',
+                        paddingBottom: '56.25%',
+                        height: 0,
+                        overflow: 'hidden',
+                        backgroundColor: '#191919',
+                      }}
+                    >
+                      <iframe
+                        title="Red Bull Fearless City — Escenario & Cultura"
+                        src="https://www-ccv.adobe.io/v1/player/ccv/McRFqCIHIdv/embed?api_key=behance1&bgcolor=%23191919"
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                        allowFullScreen
+                      />
                     </div>
                   </div>
                 </div>
@@ -409,53 +376,48 @@ export default function RedBullPage() {
               {/* Section 04: Distribución Espacial en Dos Plantas */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 04 / ARQUITECTURA EFÍMERA ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'Dos plantas conectadas por la narrativa' : 'Two floors united by brand narrative'}
-                  </h2>
+                <span className="project-section-meta">[ 04 / RECORRIDO ESPACIAL ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t(
+                      'Distribución del espacio en dos plantas',
+                      'Two-level spatial choreography',
+                      'Chorégraphie spatiale sur deux niveaux'
+                    )}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'El espacio se estructuró en dos niveles conectados por la narrativa de marca, permitiendo transitar de la energía pública de las presentaciones a zonas de trabajo y reunión privada.',
+                      'The venue was divided into two interconnected levels, transitioning seamlessly from high-impact collective stages to quiet partner briefing lounges.',
+                      'L’espace s’est structuré sur deux niveaux interconnectés, permettant de passer de l’énergie collective des présentations à des salons de réunion plus intimistes.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'La distribución espacial organizó el venue en dos cotas de experiencia complementarias. En la planta baja, la avenida principal acogió el escenario de keynotes, la zona de experiencias sensoriales y las barras temáticas de producto. En la planta superior, un mirador perimetral albergó las salas de trabajo colaborativo, lounges de networking y áreas de análisis comercial para los partners.'
-                      : 'The spatial choreography structured the venue across two complementary experiential levels. On the ground floor, a broad central avenue hosted the keynote stage, product tasting laboratories, and immersive soundscapes. On the mezzanine level, an elevated perimeter walkway accommodated dedicated partner lounges, collaborative B2B breakout pods, and strategic briefing suites.'}
-                  </p>
-
-                  <div
-                    style={{
-                      border: '1px solid var(--border-color)',
-                      padding: '2vw',
-                      marginTop: '2vw',
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                      gap: '2vw',
-                    }}
-                  >
-                    <div>
-                      <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, margin: '0 0 0.5vw 0', letterSpacing: '0.08em' }}>
-                        [ PLANTA 01 · EXPERIENCIA PÚBLICA ]
-                      </p>
-                      <ul style={{ margin: 0, paddingLeft: '1.2vw', fontSize: 'var(--font-size-xs)', lineHeight: 1.8, opacity: 0.85 }}>
-                        <li>Avenida central y pórtico de acceso neón</li>
-                        <li>Escenario principal con pantalla anamórfica</li>
-                        <li>Hotspots de degustación y coctelería</li>
-                        <li>Simuladores de deportes de motor & gaming</li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, margin: '0 0 0.5vw 0', letterSpacing: '0.08em' }}>
-                        [ PLANTA 02 · PARTNER HUB & B2B ]
-                      </p>
-                      <ul style={{ margin: 0, paddingLeft: '1.2vw', fontSize: 'var(--font-size-xs)', lineHeight: 1.8, opacity: 0.85 }}>
-                        <li>Mirador panorámico sobre la ciudad</li>
-                        <li>Salas privadas de negociación de lanzamientos</li>
-                        <li>Showcase de novedades y packaging 2024</li>
-                        <li>Zona de hospitalidad y networking exclusivo</li>
-                      </ul>
-                    </div>
+                {/* Swiss Spec Table (Authentic Givelet Style, NO bullet lists in border boxes) */}
+                <div className="project-spec-table">
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Planta 01 · Experiencia', 'Floor 01 · Public Experience', 'Niveau 01 · Expérience')} ]</span>
+                    <span className="project-spec-value">
+                      {t(
+                        'Avenida principal con pórtico de neón, escenario para keynotes de producto, barras de degustación y simuladores de deportes de motor.',
+                        'Main avenue with neon gateway, product keynote stage, tasting labs, and motorsports simulators.',
+                        'Avenue principale sous arche de néon, scène des annonces produits, bars de dégustation et simulateurs sportifs.'
+                      )}
+                    </span>
+                  </div>
+                  <div className="border"></div>
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Planta 02 · Partner Hub', 'Floor 02 · Partner Hub', 'Niveau 02 · Espace Partenaires')} ]</span>
+                    <span className="project-spec-value">
+                      {t(
+                        'Mirador perimetral con vistas a la ciudad, showcase exclusivo de lanzamientos 2024 y salas privadas de negociación.',
+                        'Perimeter mezzanine overlooking the city, 2024 launch showcase, and private business negotiation suites.',
+                        'Mezzanine panoramique sur la ville, showcase exclusif des lancements 2024 et salons privés de négociation.'
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -464,7 +426,7 @@ export default function RedBullPage() {
               <div className="project-section-block scroll-in-group" style={{ marginTop: '6vw' }}>
                 <div className="border"></div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', paddingTop: '2vw' }}>
-                  <span className="project-section-meta">[ SIGUIENTE CASO DE ESTUDIO ]</span>
+                  <span className="project-section-meta">[ {t('SIGUIENTE PROYECTO', 'NEXT PROJECT', 'PROJET SUIVANT')} ]</span>
                   <Link to="/agricultores" className="cta text-box">
                     <div className="scroll-in">
                       <div className="cta-text">

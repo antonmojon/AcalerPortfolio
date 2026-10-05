@@ -6,8 +6,13 @@ import { useLanguage } from '../context/LanguageContext';
 
 export default function AlibetopiasPage() {
   const { language } = useLanguage();
-  const isEs = language === 'es';
   const rootRef = useRef<HTMLDivElement>(null);
+
+  const t = (es: string, en: string, fr: string) => {
+    if (language === 'fr') return fr;
+    if (language === 'en') return en;
+    return es;
+  };
 
   useEffect(() => {
     const root = rootRef.current;
@@ -43,26 +48,18 @@ export default function AlibetopiasPage() {
     return () => observer.disconnect();
   }, []);
 
-  const roles = isEs
-    ? [
-        'Dirección de Arte de Evento',
-        'Retícula Modular Geométrica',
-        'Gran Formato, Photocalls & Vinilos',
-        'Agencia: Newlink España',
-      ]
-    : [
-        'Event Art Direction',
-        'Modular Geometric Grid System',
-        'Large-Format Environmental & Vinyls',
-        'Agency: Newlink Spain',
-      ];
+  const roles = [
+    t('Dirección de Arte de Evento', 'Event Art Direction', 'Direction Artistique d’Événement'),
+    t('Retícula Modular Geométrica', 'Modular Geometric Grid', 'Grille Modulaire Géométrique'),
+    t('Gran Formato, Photocalls & Vinilos', 'Large-Format, Photocalls & Vinyls', 'Grand Format, Photocalls & Vinyles'),
+    t('Agencia: Newlink España', 'Agency: Newlink Spain', 'Agence : Newlink Espagne'),
+  ];
 
   const colors = [
-    { name: 'Warm Terracotta', hex: '#E85D3B', usage: isEs ? 'Innovación & pulso alimentario' : 'Agri-food innovation & vitality' },
-    { name: 'Botanical Forest', hex: '#1D4A38', usage: isEs ? 'Sostenibilidad & origen biológico' : 'Sustainability & ecological roots' },
-    { name: 'Warm Sand', hex: '#F3EDE2', usage: isEs ? 'Lienzo orgánico y fondo de piezas' : 'Organic canvas & stationery base' },
-    { name: 'Pure White', hex: '#FFFFFF', usage: isEs ? 'Líneas de retícula y contraste' : 'Grid architecture & contrast' },
-    { name: 'Slate Dark', hex: '#1A1A1A', usage: isEs ? 'Tipografía y datos técnicos' : 'Technical typography & microcopy' },
+    { hex: '#E85D3B', name: t('Terracotta · Primario', 'Terracotta · Primary', 'Terre Cuite · Primaire') },
+    { hex: '#1D4A38', name: t('Forest Green · Botánico', 'Forest Green · Botanical', 'Vert Forêt · Botanique') },
+    { hex: '#F3EDE2', name: t('Warm Sand · Superficie', 'Warm Sand · Surface', 'Sable Chaud · Surface') },
+    { hex: '#1A1A1A', name: t('Slate · Tipografía', 'Slate · Typography', 'Ardoise · Typographie') },
   ];
 
   return (
@@ -100,23 +97,29 @@ export default function AlibetopiasPage() {
                     <div className="project-desc">
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
-                          {isEs
-                            ? 'Alibetopías es el encuentro cumbre del sector agroalimentario en España: una jornada donde convergen los agentes clave de la industria, centros de investigación y organismos públicos para debatir y presentar las tecnologías más transformadoras de la cadena de valor alimentaria.'
-                            : 'Alibetopías stands as Spain’s premier agri-food innovation summit: an annual milestone gathering key industry leaders, foodtech researchers, and public institutions to present frontier technologies transforming the sustainable food value\u00A0chain.'}
+                          {t(
+                            'Alibetopías es el encuentro en el que se reúnen los principales agentes alimentarios, tanto públicos como privados, para dar a conocer las últimas innovaciones del\u00A0sector.',
+                            'Alibetopías is the summit bringing together key agri-food stakeholders, both public and private, to reveal the sector’s latest\u00A0innovations.',
+                            'Alibetopías est le sommet réunissant les principaux acteurs agroalimentaires, publics comme privés, pour présenter les dernières innovations du\u00A0secteur.'
+                          )}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
-                          {isEs
-                            ? 'Desarrollado en Newlink España, el reto consistió en crear una dirección de arte reconocible pero con un tono elevado, contemporáneo y propio, huyendo de los clichés agrícolas convencionales.'
-                            : 'Developed at Newlink Spain, the creative challenge centered on crafting an instantly identifiable visual identity with an elevated, contemporary sophistication, departing from conventional agrarian\u00A0clichés.'}
+                          {t(
+                            'Desarrollado en Newlink España, el reto consistió en diseñar una dirección de arte reconocible pero con un aire elevado y propio, huyendo de los códigos habituales del sector\u00A0agrícola.',
+                            'Developed at Newlink Spain, the challenge was to design an instantly recognizable art direction with an elevated presence, moving away from predictable agricultural\u00A0tropes.',
+                            'Développé chez Newlink Espagne, le défi consistait à concevoir une direction artistique singulière et raffinée, rompant avec les codes conventionnels du secteur\u00A0agricole.'
+                          )}
                         </span>
                       </p>
                       <p className="text-box" style={{ marginBottom: '1.2vw' }}>
                         <span className="scroll-in" style={{ display: 'block' }}>
-                          {isEs
-                            ? 'La solución conceptual se articuló sobre una cuadrícula modular geométrica de proporciones estrictas, permitiendo desplegar de manera coherente y armónica tanto aplicaciones de gran formato (photocalls monumentales, vinilos escénicos y tótems) como piezas de comunicación editorial (invitaciones, acreditaciones y save-the-date).'
-                            : 'The solution was anchored by a strict geometric modular grid, harmoniously unifying large-scale environmental architectural installations (panoramic photocalls, scenic vinyls, directional totems) with refined editorial touchpoints (invitations, badges, and digital announcements).'}
+                          {t(
+                            'La identidad se articuló mediante una cuadrícula modular geométrica capaz de componer con solidez todas las aplicaciones del evento: photocalls, vinilos de gran formato, invitaciones y save the\u00A0date.',
+                            'The identity was structured on a geometric modular grid system, effortlessly scaling across all event touchpoints: photocalls, large-format vinyls, invitations, and save-the-date\u00A0collateral.',
+                            'L’identité visuelle repose sur une grille modulaire géométrique, déclinée sur l’ensemble des supports : photocalls monumentaux, vinyles grand format, invitations et save the\u00A0date.'
+                          )}
                         </span>
                       </p>
 
@@ -130,7 +133,7 @@ export default function AlibetopiasPage() {
                         <div className="scroll-in">
                           <div className="cta-text">
                             <span className="link-line">
-                              {isEs ? 'Ver proyecto en Behance' : 'View on Behance'}
+                              {t('Ver proyecto en Behance', 'View on Behance', 'Voir sur Behance')}
                             </span>
                             <span className="cta-icon-up">↗</span>
                           </div>
@@ -150,83 +153,82 @@ export default function AlibetopiasPage() {
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente: Red Bull Fearless City' : 'Next: Red Bull Fearless City'}
+                      {t('Siguiente: Red Bull Fearless City', 'Next: Red Bull Fearless City', 'Suivant : Red Bull Fearless City')}
                     </span>
                   </div>
                 </div>
               </Link>
             </div>
 
-            {/* Right Column: Swiss Editorial Layout */}
+            {/* Right Column: Authentic Editorial Layout */}
             <div className="project-editorial-right el-in">
               {/* Cover Graphic */}
               <img
                 className="project-image"
                 src="/images/alibetopias/alibetopias-cover.jpg"
-                alt="ALIBETOPIAS 2023 — Identidad Visual y Retícula Modular Geométrica"
+                alt="ALIBETOPIAS 2023 — Identidad Visual y Retícula Modular"
                 loading="eager"
               />
 
               {/* Section 01: Concepto & Retícula Modular */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 01 / CONCEPTO ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'Cuadrícula modular como sistema vertebrador' : 'A modular geometric grid as backbone'}
-                  </h2>
+                <span className="project-section-meta">[ 01 / CONCEPTO ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t(
+                      'Cuadrícula modular geométrica',
+                      'Geometric modular grid system',
+                      'Grille modulaire géométrique'
+                    )}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'Para responder a las necesidades de un evento con múltiples soportes arquitectónicos y editoriales, la identidad se estructura en módulos proporcionales. Esta retícula permite combinar imágenes fotográficas, campos de color plano y datos tipográficos con equilibrio y rigor, manteniendo la coherencia tanto en un tótem exterior de cuatro metros como en una credencial de mano.',
+                      'To address the requirements of an event with diverse architectural and editorial formats, the identity is organized around proportional modules. This grid balances photographic imagery, solid color planes, and typographic metadata with precision, ensuring visual cohesion from a 4-meter outdoor totem down to a handheld badge.',
+                      'Pour répondre aux exigences d’un événement aux formats multiples, tant architecturaux qu’éditoriaux, l’identité est structurée autour de modules proportionnels. Cette grille associe visuels photographiques, aplats colorés et typographie technique avec rigueur, garantissant une cohérence parfaite de l’immense totem au badge individuel.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'Para reflejar la intersección entre tecnología e industria primaria, el lenguaje gráfico parte de módulos geométricos cuadrados y cortes diagonales. Este sistema modular actúa como un alfabeto visual combinatorio: cada celda puede albergar fotografía macro de producto, campos de color plano, datos estadísticos o tipografía técnica, adaptándose con naturalidad a cualquier proporción sin perder consistencia de marca.'
-                      : 'To mirror the convergence of technology and raw agrarian science, the graphic syntax originates from square geometric modules and diagonal facets. This modular matrix behaves as a combinatory visual vocabulary: each cell accommodates macro product photography, solid pigment blocks, metrics, or technical typography, scaling seamlessly across any architectural ratio.'}
-                  </p>
-
-                  {/* Modular Specimen Callout */}
-                  <div
-                    style={{
-                      border: '1px solid var(--border-color)',
-                      padding: '2vw',
-                      marginTop: '2vw',
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                      gap: '1.5vw',
-                    }}
-                  >
-                    <div>
-                      <span style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.08em' }}>
-                        [ 01 · RETÍCULA ORDENADA ]
-                      </span>
-                      <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 1.6, marginTop: '0.5vw', opacity: 0.85 }}>
-                        {isEs
-                          ? 'Estructura matemática de proporciones 1:1 y 1:2 que organiza los bloques de información y genera dinamismo rítmico.'
-                          : 'Mathematical 1:1 and 1:2 matrix organizing content blocks while injecting rhythmic kinetic cadence.'}
-                      </p>
-                    </div>
-
-                    <div>
-                      <span style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.08em' }}>
-                        [ 02 · ESCALABILIDAD TOTAL ]
-                      </span>
-                      <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 1.6, marginTop: '0.5vw', opacity: 0.85 }}>
-                        {isEs
-                          ? 'Desde una acreditación de 8x12 cm hasta un photocall monumental de más de 8 metros lineales en el escenario principal.'
-                          : 'Effortlessly spanning from an 8x12 cm lanyard credential to an 8-meter panoramic stage backdrop.'}
-                      </p>
-                    </div>
-
-                    <div>
-                      <span style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, letterSpacing: '0.08em' }}>
-                        [ 03 · IDENTIDAD ELEVADA ]
-                      </span>
-                      <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 1.6, marginTop: '0.5vw', opacity: 0.85 }}>
-                        {isEs
-                          ? 'Tratamiento cromático sofisticado que posiciona a la cita en la vanguardia de los foros de innovación europeos.'
-                          : 'Sophisticated palette positioning the summit at the forefront of European innovation symposiums.'}
-                      </p>
-                    </div>
+                {/* Swiss Spec Table (Authentic Givelet Style, NO boxed cards) */}
+                <div className="project-spec-table">
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Evento', 'Event', 'Événement')} ]</span>
+                    <span className="project-spec-value">
+                      Alibetopías 2023 · Jornada de Innovación en Alimentación y Bebidas
+                    </span>
+                  </div>
+                  <div className="border"></div>
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Agencia', 'Agency', 'Agence')} ]</span>
+                    <span className="project-spec-value">
+                      Newlink España · {t('Dirección de arte e identidad visual', 'Art direction & visual identity', 'Direction artistique et identité visuelle')}
+                    </span>
+                  </div>
+                  <div className="border"></div>
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Sistema', 'System', 'Système')} ]</span>
+                    <span className="project-spec-value">
+                      {t(
+                        'Retícula modular geométrica basada en módulos cuadrados y subdivisiones diagonales.',
+                        'Geometric modular grid based on square units and diagonal subdivisions.',
+                        'Grille modulaire géométrique basée sur des unités carrées et des découpes diagonales.'
+                      )}
+                    </span>
+                  </div>
+                  <div className="border"></div>
+                  <div className="project-spec-row">
+                    <span className="project-spec-label">[ {t('Aplicaciones', 'Touchpoints', 'Supports')} ]</span>
+                    <span className="project-spec-value">
+                      {t(
+                        'Photocall principal, traseras de escenario, vinilado de salas, señalética, invitaciones y credenciales.',
+                        'Main photocall, stage backdrops, space vinyls, directional wayfinding, invitations, and badges.',
+                        'Photocall principal, fonds de scène, habillage vinyle, signalétique, invitations et badges.'
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -234,110 +236,82 @@ export default function AlibetopiasPage() {
               {/* Section 02: Sistema Cromático */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 02 / SISTEMA CROMÁTICO ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'Tonos tierra cálidos y verde botánico' : 'Warm earth pigments & botanical green'}
-                  </h2>
+                <span className="project-section-meta">[ 02 / SISTEMA CROMÁTICO ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t(
+                      'Paleta de tonos tierra y botánicos',
+                      'Earth pigments & botanical palette',
+                      'Palette de tons terre et botaniques'
+                    )}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'La paleta cromática se apoya en pigmentos orgánicos que evocan el origen natural de la alimentación sin recurrir a verdes sintéticos o convencionales. El terracota cálido y el verde bosque maduro conviven sobre un fondo arena neutro que actúa como soporte editorial reposado.',
+                      'The chromatic palette draws on organic pigments evoking natural food origins without relying on synthetic greens. Warm terracotta and mature forest green coexist against a neutral sand background that provides calm editorial grounding.',
+                      'La palette chromatique puise dans des pigments organiques évoquant l’origine naturelle de l’alimentation, sans tomber dans les verts synthétiques. La terre cuite chaleureuse et le vert forêt profond s’accordent sur un fond sable neutre au repos éditorial maîtrisé.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'La identidad cromática huye de los tonos sintéticos fríos para apoyarse en la calidez de la arcilla y el follaje maduro: terracota cálido como señal de energía e innovación, verde bosque botánico como símbolo de sostenibilidad y fondo arena que otorga reposo editorial a cada composición.'
-                      : 'The chromatic scheme sidesteps sterile tech synthetics, anchoring in raw clay warmth and mature flora: warm terracotta embodying human-scale innovation, botanical forest green evoking biodiversity, and raw sand providing restful editorial breath.'}
-                  </p>
-
-                  {/* Swatches Grid */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-                      gap: '1.2vw',
-                      marginTop: '2vw',
-                    }}
-                  >
-                    {colors.map((c) => (
-                      <div
-                        key={c.name}
-                        style={{
-                          border: '1px solid var(--border-color)',
-                          padding: '1vw',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '0.8vw',
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: '100%',
-                            aspectRatio: '1 / 1',
-                            backgroundColor: c.hex,
-                            border: '1px solid rgba(0,0,0,0.1)',
-                          }}
-                        />
-                        <div>
-                          <p style={{ margin: '0 0 0.2vw 0', fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>
-                            {c.name}
-                          </p>
-                          <p style={{ margin: '0 0 0.3vw 0', fontFamily: 'monospace', fontSize: 'var(--font-size-xxs)', opacity: 0.5 }}>
-                            {c.hex}
-                          </p>
-                          <p style={{ margin: 0, fontSize: 'var(--font-size-xxs)', opacity: 0.6, lineHeight: 1.3 }}>
-                            {c.usage}
-                          </p>
-                        </div>
+                {/* Color Squares Grid (Authentic CSS Component) */}
+                <div className="color-squares-grid">
+                  {colors.map((c) => (
+                    <div key={c.hex} className="color-square-item text-box">
+                      <div className="color-square-box scroll-in" style={{ backgroundColor: c.hex }}></div>
+                      <div className="color-square-meta scroll-in">
+                        <span className="color-square-hex">{c.hex}</span>
+                        <span className="color-square-name">{c.name}</span>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Section 03: Video de Presentación */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 03 / MOTION & DINÁMICA ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'La identidad en movimiento' : 'Identity in motion'}
-                  </h2>
+                <span className="project-section-meta">[ 03 / MOVIMIENTO ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t('La retícula en movimiento', 'Grid in motion', 'La grille en mouvement')}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'En las pantallas del escenario y piezas de cabecera, la retícula cobra vida de forma sobria: las celdas modulares se abren y desplazan para presentar bloques temáticos, ponentes y entregas de premios.',
+                      'Across stage screens and header reels, the grid comes alive with restraint: modular cells slide and unfold to introduce key themes, speakers, and award segments.',
+                      'Sur les écrans de scène et les animations de transition, la grille prend vie avec retenue : les modules se déploient avec fluidité pour introduire thématiques, intervenants et remises de prix.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'La retícula modular cobra vida en las pantallas de cabecera y reels del evento: las cuadrículas se deslizan y despliegan suavemente introduciendo a los ponentes, categorías de premios y casos de estudio.'
-                      : 'The modular grid awakens dynamically across stage LED ribbons and promotional reels: grid facets slide and expand to introduce keynote speakers, award laureates, and scientific case studies.'}
-                  </p>
-
-                  <div style={{ marginTop: '2.5vw' }}>
-                    <div
+                <div style={{ marginTop: '2vw' }}>
+                  <div
+                    style={{
+                      position: 'relative',
+                      paddingBottom: '56.25%',
+                      height: 0,
+                      overflow: 'hidden',
+                      backgroundColor: '#191919',
+                    }}
+                  >
+                    <iframe
+                      title="ALIBETOPIAS 2023 — Reel de Identidad"
+                      src="https://www-ccv.adobe.io/v1/player/ccv/Tcy9-vdzjtI/embed?api_key=behance1&bgcolor=%23191919"
                       style={{
-                        position: 'relative',
-                        paddingBottom: '56.25%',
-                        height: 0,
-                        overflow: 'hidden',
-                        border: '1px solid var(--border-color)',
-                        backgroundColor: '#191919',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        border: 'none',
                       }}
-                    >
-                      <iframe
-                        title="ALIBETOPIAS 2023 — Reel de Identidad de Evento"
-                        src="https://www-ccv.adobe.io/v1/player/ccv/Tcy9-vdzjtI/embed?api_key=behance1&bgcolor=%23191919"
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          width: '100%',
-                          height: '100%',
-                          border: 'none',
-                        }}
-                        allowFullScreen
-                      />
-                    </div>
-                    <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw', textAlign: 'right' }}>
-                      [ VÍDEO OFICIAL · Reel de Marca & Movimiento de Retícula ]
-                    </p>
+                      allowFullScreen
+                    />
                   </div>
                 </div>
               </div>
@@ -345,76 +319,57 @@ export default function AlibetopiasPage() {
               {/* Section 04: Producción & Gran Formato */}
               <div className="project-section-block scroll-in-group">
                 <div className="border"></div>
-                <div className="project-section-header">
-                  <span className="project-section-meta">[ 04 / PRODUCCIÓN & GRAN FORMATO ]</span>
-                  <h2 className="project-section-title">
-                    {isEs ? 'Puesta en escena y arquitectura efímera' : 'Spatial execution & environmental staging'}
-                  </h2>
+                <span className="project-section-meta">[ 04 / GRAN FORMATO ]</span>
+                <h2 className="project-section-title text-box">
+                  <span className="scroll-in">
+                    {t('Puesta en escena y arquitectura efímera', 'Staging & spatial execution', 'Mise en scène et espace')}
+                  </span>
+                </h2>
+                <div className="text-box">
+                  <p className="project-section-lead scroll-in alinea-2">
+                    {t(
+                      'Documentación fotográfica de la jornada: despliegue del sistema gráfico en el photocall monumental de prensa, la trasera de conferencias y la señalética perimetral del auditorio.',
+                      'On-site event photography: deployment of the graphic system across the press photocall, keynote stage backdrops, and environmental auditorium signage.',
+                      'Reportage photographique de l’événement : déploiement de l’identité sur le photocall de presse, les fonds de conférence et la signalétique de l’auditorium.'
+                    )}
+                  </p>
                 </div>
 
-                <div className="project-section-content">
-                  <p className="project-editorial-p alinea-2">
-                    {isEs
-                      ? 'Fotografía in-situ de la jornada: aplicación de la retícula en photocalls principales, traseras de escenario, vinilado de mamparas de cristal y acreditaciones para los más de 400 asistentes del sector.'
-                      : 'On-site documentary photography: deployment of the grid across main media photocalls, stage backdrop architecture, architectural glass vinyl treatments, and personalized lanyards for 400+ industry delegates.'}
-                  </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '3vw', marginTop: '2vw' }}>
+                  <img
+                    className="project-image"
+                    src="/images/alibetopias/alibetopias-event-01.jpg"
+                    alt="Photocall Modular ALIBETOPIAS 2023"
+                    loading="lazy"
+                  />
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2vw', marginTop: '2vw' }}>
-                    <div>
-                      <img
-                        className="project-image"
-                        src="/images/alibetopias/alibetopias-event-01.jpg"
-                        alt="Photocall Modular ALIBETOPIAS 2023"
-                        loading="lazy"
-                      />
-                      <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw', textAlign: 'right' }}>
-                        [ FIG. 01 — Photocall monumental con composición de módulos y marcas colaboradoras ]
-                      </p>
-                    </div>
+                  <img
+                    className="project-image"
+                    src="/images/alibetopias/alibetopias-event-02.jpg"
+                    alt="Escenario Principal ALIBETOPIAS 2023"
+                    loading="lazy"
+                  />
 
-                    <div>
-                      <img
-                        className="project-image"
-                        src="/images/alibetopias/alibetopias-event-02.jpg"
-                        alt="Escenario Principal y Mesa Redonda ALIBETOPIAS 2023"
-                        loading="lazy"
-                      />
-                      <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw', textAlign: 'right' }}>
-                        [ FIG. 02 — Escenario principal de conferencias y mesas de debate ]
-                      </p>
-                    </div>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                      gap: '2vw',
+                    }}
+                  >
+                    <img
+                      className="project-image"
+                      src="/images/alibetopias/alibetopias-event-03.jpg"
+                      alt="Señalética y Vinilos de Acceso"
+                      loading="lazy"
+                    />
 
-                    <div
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr)))',
-                        gap: '1.5vw',
-                      }}
-                    >
-                      <div>
-                        <img
-                          className="project-image"
-                          src="/images/alibetopias/alibetopias-event-03.jpg"
-                          alt="Señalética y Vinilos de Acceso"
-                          loading="lazy"
-                        />
-                        <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw' }}>
-                          [ FIG. 03 — Túnel y vinilos de bienvenida ]
-                        </p>
-                      </div>
-
-                      <div>
-                        <img
-                          className="project-image"
-                          src="/images/alibetopias/alibetopias-event-04.jpg"
-                          alt="Detalle de Acreditaciones y Piezas de Mano"
-                          loading="lazy"
-                        />
-                        <p style={{ fontSize: 'var(--font-size-xxs)', opacity: 0.5, marginTop: '0.6vw' }}>
-                          [ FIG. 04 — Ponencias y entrega de premios ]
-                        </p>
-                      </div>
-                    </div>
+                    <img
+                      className="project-image"
+                      src="/images/alibetopias/alibetopias-event-04.jpg"
+                      alt="Acreditaciones y Ponencias"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
               </div>
@@ -423,7 +378,7 @@ export default function AlibetopiasPage() {
               <div className="project-section-block scroll-in-group" style={{ marginTop: '6vw' }}>
                 <div className="border"></div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', paddingTop: '2vw' }}>
-                  <span className="project-section-meta">[ SIGUIENTE CASO DE ESTUDIO ]</span>
+                  <span className="project-section-meta">[ {t('SIGUIENTE PROYECTO', 'NEXT PROJECT', 'PROJET SUIVANT')} ]</span>
                   <Link to="/red-bull-inside" className="cta text-box">
                     <div className="scroll-in">
                       <div className="cta-text">

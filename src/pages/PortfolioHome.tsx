@@ -41,6 +41,7 @@ const ARCHIVE = [
     name: 'SelvaViva',
     detailEs: 'Ecoturismo & Naturaleza · Branding, Web Design & Design System',
     detailEn: 'Ecotourism & Wilderness · Branding, Web Design & Design System',
+    detailFr: 'Écotourisme & Nature · Branding, Web Design & Design System',
     date: '2025',
     href: '/selvaviva',
     img: '/selvaviva-cover.jpg',
@@ -50,6 +51,7 @@ const ARCHIVE = [
     name: 'Weeku',
     detailEs: 'AI Meal Planning · UI/UX, Research & Design System',
     detailEn: 'AI Meal Planning · UI/UX, Research & Design System',
+    detailFr: 'AI Meal Planning · UI/UX, Recherche & Design System',
     date: '2025',
     href: '/weeku',
     img: '/weeku-cover.jpg',
@@ -59,6 +61,7 @@ const ARCHIVE = [
     name: 'ALIBETOPIAS 2023',
     detailEs: 'Newlink España · Identidad de Evento & Retícula Modular',
     detailEn: 'Newlink Spain · Event Identity & Modular Grid',
+    detailFr: 'Newlink Espagne · Identité d’Événement & Grille Modulaire',
     date: '2023',
     href: '/alibetopias',
     img: '/alibetopias-cover.jpg',
@@ -68,6 +71,7 @@ const ARCHIVE = [
     name: 'Red Bull Inside',
     detailEs: 'Fearless City · Event Branding & Dirección de Arte',
     detailEn: 'Fearless City · Event Branding & Art Direction',
+    detailFr: 'Fearless City · Branding d’Événement & Direction Artistique',
     date: '2023',
     href: '/red-bull-inside',
     img: '/redbull-cover.jpg',
@@ -77,6 +81,7 @@ const ARCHIVE = [
     name: 'Agricultores y Pescadores',
     detailEs: 'Campaña "Fecha de Caducidad" · Dirección de Arte & Cartelería',
     detailEn: '"Expiration Date" Campaign · Art Direction & Posters',
+    detailFr: 'Campagne « Date de Péremption » · Direction Artistique & Affiches',
     date: '2021',
     href: '/agricultores',
     img: '/agri-cover.jpg',
@@ -256,17 +261,17 @@ function MgHero() {
       <div className="home-hero-subtitle-wrapper">
         <h1 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.7s' } as React.CSSProperties}>
-            {isEs ? 'Diseñador de\u00A0producto' : 'Product\u00A0designer'}
+            {language === 'fr' ? 'Designer de\u00A0produit' : isEs ? 'Diseñador de\u00A0producto' : 'Product\u00A0designer'}
           </span>
         </h1>
         <h2 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.78s' } as React.CSSProperties}>
-            {isEs ? '& arquitecto de\u00A0sistemas' : '& systems\u00A0architect'}
+            {language === 'fr' ? '& architecte de\u00A0systèmes' : isEs ? '& arquitecto de\u00A0sistemas' : '& systems\u00A0architect'}
           </span>
         </h2>
         <h2 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.86s' } as React.CSSProperties}>
-            {isEs ? '[\u00A0Bilbao, España\u00A0]' : '[\u00A0Bilbao, Spain\u00A0]'}
+            {language === 'fr' ? '[\u00A0Bilbao, Espagne\u00A0]' : isEs ? '[\u00A0Bilbao, España\u00A0]' : '[\u00A0Bilbao, Spain\u00A0]'}
           </span>
         </h2>
       </div>
@@ -276,14 +281,16 @@ function MgHero() {
         <div className="border"></div>
         <div className="infos-box-left">
           <p className="text-box">
-            <span className="scroll-in">[ {isEs ? 'Enfoque' : 'Approach'} ]</span>
+            <span className="scroll-in">[ {language === 'fr' ? 'Approche' : isEs ? 'Enfoque' : 'Approach'} ]</span>
           </p>
         </div>
         <div className="infos-box-right">
           <p className="infos-box-text">
             <span className="text-box">
               <span className="scroll-in text-indent text-numb" style={{ display: 'block' }}>
-                {isEs
+                {language === 'fr'
+                  ? 'Toujours en quête de solutions simples, réfléchies et solides, parfaitement adaptées au produit.'
+                  : isEs
                   ? 'Busco siempre soluciones simples, meditadas y sólidas que encajen con el producto y se sientan vivas al usarlas.'
                   : 'Always looking for simple, thoughtful solutions that fit the project and feel good to use.'}
               </span>
@@ -292,7 +299,7 @@ function MgHero() {
           <Link className="cta text-box anchor" to="/about">
             <div className="scroll-in">
               <div className="cta-text">
-                <span className="link-line">{isEs ? 'Más sobre\u00A0mí' : 'More about\u00A0me'}</span>
+                <span className="link-line">{language === 'fr' ? 'En savoir\u00A0plus' : isEs ? 'Más sobre\u00A0mí' : 'More about\u00A0me'}</span>
                 <span className="cta-arrow-icon">→</span>
               </div>
             </div>
@@ -312,8 +319,8 @@ function MgSelectedWork() {
     <section id="work" className="home-work">
       <div className="home-work-header scroll-in-group">
         <h3 className="home-work-header-title text-box">
-          <span className="scroll-in">{isEs ? 'Proyectos' : 'Selected'} </span>
-          <span className="scroll-in">{isEs ? 'seleccionados' : 'works'}</span>
+          <span className="scroll-in">{language === 'fr' ? 'Projets' : isEs ? 'Proyectos' : 'Selected'} </span>
+          <span className="scroll-in">{language === 'fr' ? 'sélectionnés' : isEs ? 'seleccionados' : 'works'}</span>
         </h3>
         <a className="cta text-box anchor desktop-el" href="#work">
           <div className="scroll-in">
@@ -377,7 +384,9 @@ function MgArchive() {
             <p className="infos-box-text">
               <span className="text-box">
                 <span className="scroll-in text-indent" style={{ display: 'block' }}>
-                  {isEs
+                  {language === 'fr'
+                    ? 'Une sélection de projets complémentaires et d’explorations visuelles d’interface et d’identité.'
+                    : isEs
                     ? 'Una selección de proyectos adicionales y exploraciones visuales de interfaz e identidad.'
                     : 'A collection of additional work and explorations testing new interface and visual directions.'}
                 </span>
@@ -390,9 +399,9 @@ function MgArchive() {
         </div>
 
         <div className="archive-list-header scroll-in-group desktop-el">
-          <p className="scroll-in">[ {isEs ? 'Nombre' : 'Name'} ]</p>
-          <p className="scroll-in">[ {isEs ? 'Detalle' : 'Detail'} ]</p>
-          <p className="scroll-in list-last-el">[ {isEs ? 'Fecha' : 'Date'} ]</p>
+          <p className="scroll-in">[ {language === 'fr' ? 'Nom' : isEs ? 'Nombre' : 'Name'} ]</p>
+          <p className="scroll-in">[ {language === 'fr' ? 'Détail' : isEs ? 'Detalle' : 'Detail'} ]</p>
+          <p className="scroll-in list-last-el">[ {language === 'fr' ? 'Date' : isEs ? 'Fecha' : 'Date'} ]</p>
         </div>
 
         <div className="archive-list scroll-in-group">
@@ -409,7 +418,9 @@ function MgArchive() {
                       <span style={{ marginLeft: '0.6vw', opacity: 0.5, fontSize: 'var(--font-size-xs)' }}>→</span>
                     )}
                   </p>
-                  <p className="archive-detail">{isEs ? item.detailEs : item.detailEn}</p>
+                  <p className="archive-detail">
+                    {language === 'fr' ? item.detailFr : isEs ? item.detailEs : item.detailEn}
+                  </p>
                   <p className="archive-date list-last-el">{item.date}</p>
                 </div>
 
