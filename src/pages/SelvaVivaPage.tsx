@@ -136,14 +136,14 @@ export default function SelvaVivaPage() {
 
               {/* Next Project Link */}
               <Link
-                to="/weeku"
+                to="/alibetopias"
                 className="cta text-box scroll-in-group desktop-el next-project-link"
               >
                 <div className="scroll-in">
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente:\u00A0Weeku' : 'Next:\u00A0Weeku'}
+                      {isEs ? 'Siguiente:\u00A0ALIBETOPIAS\u00A02023' : 'Next:\u00A0ALIBETOPIAS\u00A02023'}
                     </span>
                   </div>
                 </div>
@@ -535,10 +535,10 @@ export default function SelvaVivaPage() {
                 <div className="border"></div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', paddingTop: '2vw' }}>
                   <span className="project-section-meta">[ SIGUIENTE CASO DE ESTUDIO ]</span>
-                  <Link to="/weeku" className="cta text-box">
+                  <Link to="/alibetopias" className="cta text-box">
                     <div className="scroll-in">
                       <div className="cta-text">
-                        <span className="link-line">Weeku · AI Meal Planning</span>
+                        <span className="link-line">ALIBETOPIAS 2023 · Newlink España</span>
                         <span className="cta-icon-about">→</span>
                       </div>
                     </div>

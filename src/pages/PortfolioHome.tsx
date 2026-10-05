@@ -39,7 +39,8 @@ const ARCHIVE = [
   {
     num: '01',
     name: 'SelvaViva',
-    detail: 'Ecotourism & Wilderness · Branding, Web Design & Design System',
+    detailEs: 'Ecoturismo & Naturaleza · Branding, Web Design & Design System',
+    detailEn: 'Ecotourism & Wilderness · Branding, Web Design & Design System',
     date: '2025',
     href: '/selvaviva',
     img: '/selvaviva-cover.jpg',
@@ -47,24 +48,38 @@ const ARCHIVE = [
   {
     num: '02',
     name: 'Weeku',
-    detail: 'AI Meal Planning · UI/UX, Research & Design System',
+    detailEs: 'AI Meal Planning · UI/UX, Research & Design System',
+    detailEn: 'AI Meal Planning · UI/UX, Research & Design System',
     date: '2025',
     href: '/weeku',
     img: '/weeku-cover.jpg',
   },
   {
     num: '03',
-    name: 'Palomar Studio',
-    detail: 'Visual identity, packaging & typography',
-    date: '2023 - 2024',
-    img: 'https://images.unsplash.com/photo-1658863025658-4a259cc68fc9?w=800&h=600&fit=crop&auto=format',
+    name: 'ALIBETOPIAS 2023',
+    detailEs: 'Newlink España · Identidad de Evento & Retícula Modular',
+    detailEn: 'Newlink Spain · Event Identity & Modular Grid',
+    date: '2023',
+    href: '/alibetopias',
+    img: '/alibetopias-cover.jpg',
   },
   {
     num: '04',
-    name: 'Tipo Libre',
-    detail: 'Specimen publication, variable fonts',
-    date: '2022 - 2023',
-    img: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop&auto=format',
+    name: 'Red Bull Inside',
+    detailEs: 'Fearless City · Event Branding & Dirección de Arte',
+    detailEn: 'Fearless City · Event Branding & Art Direction',
+    date: '2023',
+    href: '/red-bull-inside',
+    img: '/redbull-cover.jpg',
+  },
+  {
+    num: '05',
+    name: 'Agricultores y Pescadores',
+    detailEs: 'Campaña "Fecha de Caducidad" · Dirección de Arte & Cartelería',
+    detailEn: '"Expiration Date" Campaign · Art Direction & Posters',
+    date: '2021',
+    href: '/agricultores',
+    img: '/agri-cover.jpg',
   },
 ];
 
@@ -369,7 +384,7 @@ function MgArchive() {
               </span>
             </p>
             <p className="text-box">
-              <span className="scroll-in">2022 - 2026</span>
+              <span className="scroll-in">2021 - 2026</span>
             </p>
           </div>
         </div>
@@ -394,7 +409,7 @@ function MgArchive() {
                       <span style={{ marginLeft: '0.6vw', opacity: 0.5, fontSize: 'var(--font-size-xs)' }}>→</span>
                     )}
                   </p>
-                  <p className="archive-detail">{item.detail}</p>
+                  <p className="archive-detail">{isEs ? item.detailEs : item.detailEn}</p>
                   <p className="archive-date list-last-el">{item.date}</p>
                 </div>
 
