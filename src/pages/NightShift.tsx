@@ -151,14 +151,14 @@ export default function NightShift() {
 
               {/* Next Project Link */}
               <Link
-                to="/weeku"
+                to="/selvaviva"
                 className="cta text-box scroll-in-group desktop-el next-project-link"
               >
                 <div className="scroll-in">
                   <div className="cta-text">
                     <span className="cta-icon-about">→</span>
                     <span className="link-line">
-                      {isEs ? 'Siguiente:\u00A0Weeku' : 'Next:\u00A0Weeku'}
+                      {isEs ? 'Siguiente:\u00A0SelvaViva' : 'Next:\u00A0SelvaViva'}
                     </span>
                   </div>
                 </div>

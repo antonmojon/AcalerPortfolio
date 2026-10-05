@@ -10,6 +10,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ComingSoonPage = lazy(() => import('./pages/ComingSoonPage'));
 const WeekuPage = lazy(() => import('./pages/WeekuPage'));
+const SelvaVivaPage = lazy(() => import('./pages/SelvaVivaPage'));
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
       { path: 'night-shift', Component: NightShift },
       { path: 'lavanderia-bizkaia', Component: LavanderiaPage },
       { path: 'weeku', Component: WeekuPage },
+      { path: 'selvaviva', Component: SelvaVivaPage },
       { path: 'about', Component: AboutPage },
       { path: 'contact', Component: ContactPage },
       { path: 'proximamente', Component: ComingSoonPage },

@@ -38,18 +38,19 @@ const PROJECTS = [
 const ARCHIVE = [
   {
     num: '01',
+    name: 'SelvaViva',
+    detail: 'Ecotourism & Wilderness · Branding, Web Design & Design System',
+    date: '2025',
+    href: '/selvaviva',
+    img: '/selvaviva-cover.jpg',
+  },
+  {
+    num: '02',
     name: 'Weeku',
     detail: 'AI Meal Planning · UI/UX, Research & Design System',
     date: '2025',
     href: '/weeku',
     img: '/weeku-cover.jpg',
-  },
-  {
-    num: '02',
-    name: 'Módulo App',
-    detail: 'Product design, UI/UX architecture',
-    date: '2024 - 2026',
-    img: 'https://images.unsplash.com/photo-1558655146-6c222b05fce4?w=800&h=600&fit=crop&auto=format',
   },
   {
     num: '03',
