@@ -54,7 +54,7 @@ export default function MgFooter() {
             </span>
             <span className="text-box">
               <span className="scroll-in">
-                Ubicación : Bilbao, Bizkaia ·\u00A0España (UTC+1)
+                {language === 'fr' ? 'Localisation : Madrid, Espagne (UTC+1)' : isEs ? 'Ubicación : Madrid, España (UTC+1)' : 'Location : Madrid, Spain (UTC+1)'}
               </span>
             </span>
             <span className="text-box">

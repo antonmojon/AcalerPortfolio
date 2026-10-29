@@ -271,7 +271,7 @@ function MgHero() {
         </h2>
         <h2 className="home-hero-subtitle">
           <span className="home-hero-subtitle-el text-in" style={{ '--stagger-delay': '0.86s' } as React.CSSProperties}>
-            {language === 'fr' ? '[\u00A0Bilbao, Espagne\u00A0]' : isEs ? '[\u00A0Bilbao, España\u00A0]' : '[\u00A0Bilbao, Spain\u00A0]'}
+            {language === 'fr' ? '[\u00A0Madrid, Espagne\u00A0]' : isEs ? '[\u00A0Madrid, España\u00A0]' : '[\u00A0Madrid, Spain\u00A0]'}
           </span>
         </h2>
       </div>

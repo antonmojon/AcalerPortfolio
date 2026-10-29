@@ -92,21 +92,23 @@ export default function ContactPage() {
 
             <p className="text-box" style={{ marginBottom: '2vw' }}>
               <span className="scroll-in" style={{ display: 'block', fontSize: 'var(--font-size-s)', lineHeight: '1.5' }}>
-                {isEs
-                  ? 'Disponible para proyectos de diseño de producto, sistemas de diseño y consultoría estratégica en remoto o\u00A0presencial.'
-                  : 'Open for product design leadership, design systems, and design engineering consultancy\u00A0worldwide.'}
+                {language === 'fr'
+                  ? 'Disponible pour des projets de design produit, design systems et direction artistique en distanciel ou présentiel.'
+                  : isEs
+                  ? 'Disponible para proyectos de diseño de producto, sistemas de diseño y dirección de arte en remoto o\u00A0presencial.'
+                  : 'Open for product design leadership, design systems, and art direction\u00A0worldwide.'}
               </span>
             </p>
 
             <div style={{ marginTop: '3vw', display: 'flex', flexDirection: 'column', gap: '1.2vw' }}>
               <div className="text-box">
                 <span className="scroll-in" style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--font-size-xs)', opacity: 0.6 }}>
-                  [ {isEs ? 'Ubicación' : 'Location'} ]
+                  [ {language === 'fr' ? 'Localisation' : isEs ? 'Ubicación' : 'Location'} ]
                 </span>
               </div>
               <p className="text-box">
                 <span className="scroll-in" style={{ fontSize: 'var(--font-size-s)' }}>
-                  Bilbao, Bizkaia —\u00A0España (UTC+1)
+                  Madrid, España (UTC+1)
                 </span>
               </p>
 
